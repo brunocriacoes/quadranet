@@ -1,0 +1,22 @@
+[
+    {
+        "text" : "Diario",
+        "id" : 1
+    },
+    {
+        "text" : "3 meses",
+        "id" : 3
+    },
+    {
+        "text" : "6 meses",
+        "id" : 6
+    },
+    {
+        "text" : "9 meses",
+        "id" : 9
+    },
+    {
+        "text" : "12 meses",
+        "id" : 12
+    }
+]

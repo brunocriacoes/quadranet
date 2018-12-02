@@ -1,0 +1,219 @@
+.menu-vertical {
+    display: none;
+}
+.menu-vertical {
+	position: fixed;
+	display: block;
+	width: 70vw;
+	height: 100vh;
+	top: 0;
+	left: -70vw;
+	background: var(--bra);
+	z-index: 999999;
+	transition: all .5s ease .2s;
+}
+.menu-vertical > a {
+	padding-top: 10px;
+	display: inline;
+	text-decoration: none;
+}
+.menu-vertical ul li{
+	text-align: left;
+	font-size: 23px;
+	padding: 10px;
+}
+.menu-vertical a{
+	text-decoration: none;
+	color: var(--vert);
+}
+.menu-vertical li a i{
+	padding: 15px;
+	filter: invert(100%);
+}
+#menu_closer {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: -100vw;
+	width: 100vw;
+	height: 100vh;
+	background: #000D;
+	transition: all .3s ease;
+	z-index: 99;
+}
+#menu_closer label{
+	display: block;
+	position: absolute;
+	top: 20px;
+	right: 26px;
+    color: #fff;
+    font-weight: bold;
+	font-size: 30px;
+	font-family: sans-serif;
+	cursor: pointer;
+}
+#menu:checked ~ .menu-vertical,
+#menu:checked ~ #menu_closer {
+	left: 0;
+}
+.menu-vertical__space {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background-color: var( --blue-2 );
+}
+.menu-vertical__space a {
+    display: block;
+    font-size: 20px;
+    margin: 30px;
+}
+.menu-mobile {
+    display: grid;
+    grid-template-columns: 32px 32px 1fr 32px 32px;
+    align-items: center;
+    grid-gap: 30px;
+    background-color: var( --primary );
+}
+.menu-mobile_link {
+    filter: invert( 100% );
+}
+.menu-mobile_link:nth-child(3) {
+    text-align: center;
+}
+.footer {
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    background-color: var( --secondary );
+}
+.footer__redes-sociais {
+    margin-bottom: 10px;
+}
+.footer__redes-sociais a img {
+    filter: invert( 100% );
+    margin: 10px;
+    margin-right: 20px;
+}
+.footer__dev {
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 6px;
+    background-color: rgba(0, 0, 0, .3);
+}
+.footer__dev a {
+    color: #fff;
+}
+.footer__dev span {
+    display: block;
+}
+
+.card {
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+}
+.details, .details__resume, .hours {
+    margin-top: 20px;
+}
+.details__info__title span {
+    font-weight: bold;
+    margin-top: 10px;
+}
+.details__resume__info h4{
+    margin: 10px;
+}
+.hours__title span {
+    display: block;
+    margin-bottom: 5px;
+}
+.hours__title span:first-child {
+    font-weight: bold;
+}
+.hours__title span:nth-child(2) {
+    color: hsl(0, 0, 45%);
+}
+.hours__schedule {
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    margin-bottom: 10px;
+}
+.hours__schedule_btn {
+    width: 110px;
+    height: 40px;
+}
+.hours__schedule span {
+    margin-top: 10px;
+}
+.menu-vertical__avatar {
+    text-align: center;
+    margin: 20px;
+}
+.menu-vertical__avatar img {
+    border: 3px solid #fff;
+    border-radius: 50%;
+    width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+.box-link-menu {
+    display: none;
+}
+.link-field { display: block; }
+[for="menu"] {
+    display: block;
+}
+.footer-info {
+    grid-template-columns: repeat( 1, 1fr );
+    grid-gap: 10px;
+}
+.footer__dev {
+    display: block;
+    line-height: 30px;
+    background-color: var( --theme );
+    filter: saturate( 50% );
+    color: #fff;
+    font-family: monospace;
+    text-align: center;
+    font-size: 11px;
+}
+.footer__dev a {
+    color: #FFF;
+    text-decoration: none;
+}
+.footer__dev a:hover {
+    text-decoration: underline;
+}
+#contato {
+    grid-template-columns: repeat( 1, 1fr );
+}
+.fields_grid {
+    grid-template-columns: repeat( 1, 1fr );
+}
+.menu-perfil a {
+    display: block;
+    margin-bottom: 7px;
+}
+.box {
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.more-grid {
+    grid-template-columns: repeat( 1, 1fr );
+}
+.carousel__slide_info span {
+    font-size: 17px;
+}
+.carousel__slide_info {
+    top: 20px;
+    margin-left: 20px;
+}
+#vio_logo{
+    margin: 0 auto;
+}
+.btn {
+    padding: 0;
+}

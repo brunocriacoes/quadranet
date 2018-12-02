@@ -1,0 +1,52 @@
+{
+    "title": "Modalidade",
+    "type" : "table",
+    "btn"  : "#tag-novo",
+    "db"   :  "tag",
+    "head" : [
+        {
+            "title"   : "nome",
+            "node"    : "title",
+            "content" : ""
+        },
+        {
+            "title"   : "ações",
+            "node"    : null,
+            "content" : "<a href=\"#tag-novo?ID={{ID}}&_filds=title,ID,color\" class=\"btn-editar\">EDITAR</a><label class=\"btn-deletar\" for=\"\" onclick=\"deletar('{{ID}}')\">DELETAR</label>"
+        }
+    ],
+    "table": [
+        {
+            "ID" : 1,
+            "nome" : "futball"
+        },
+        {
+            "ID" : 2,
+            "nome" : "basquete"
+        },
+        {
+            "ID" : 3,
+            "nome" : "volei"
+        },
+        {
+            "ID" : 4,
+            "nome" : "futsal"
+        },
+        {
+            "ID" : 5,
+            "nome" : "futball"
+        },
+        {
+            "ID" : 6,
+            "nome" : "basquete"
+        },
+        {
+            "ID" : 7,
+            "nome" : "volei"
+        },
+        {
+            "ID" : 8,
+            "nome" : "futsal"
+        }
+    ]
+}

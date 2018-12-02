@@ -1,0 +1,29 @@
+{
+    "title": "Pagamento",
+    "type" : "table",
+    "btn"  : "#pagamento-novo",
+    "db"   :  "pagamento",
+    "head" : [
+        {
+            "title"   : "Data",
+            "node"    : "criado",
+            "content" : ""
+        },
+        {
+            "title"   : "Situação",
+            "node"    : "situacaopagamento",
+            "content" : ""
+        },
+        {
+            "title"   : "Usuario",
+            "node"    : "usuario",
+            "content" : ""
+        },
+        {
+            "title"   : "Acoes",
+            "node"    : null,
+            "content" : "<a href=\"#pagamento-novo?ID={{ID}}&_filds=ID,numero,usuario,situacaopagamento,nota,obs\" class=\"btn-editar\">EDITAR</a><label class=\"btn-deletar\" for=\"\" onclick=\"deletar('{{ID}}')\">DELETAR</label>"
+        }
+    ],
+    "table": []
+}

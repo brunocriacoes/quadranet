@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./disc/css/style.css">
+    <link rel="stylesheet" href="./disc/css/mobile.css" media="( max-width: 760px )">
+    <link rel="shortcut icon" href="./disc/logo/ico-black.png" type="image/x-icon">
+</head>
+
+<body>
+
+    <header id="header">
+        <label for="magico" class="menu-tracinho">
+            <img src="./disc/ico/menu.png">
+        </label>
+        <img src="./disc/logo/logo-header-black.png">
+        <nav>
+            <ul>
+                <li class="more-menu">
+                    <label for="sefechar">
+                       <img src="./disc/ico/more.png">                   
+                    </label>
+                </li>
+                <li class="hidden-mobile">
+                    <label for="pop" onclick="selecDate()">
+                        <img src="./disc/ico/calendar.png">                   
+                    </label>
+                </li>
+                <li class="menudrop hidden-mobile">
+                    <a class="menudrop"><img src="./disc/ico/user.png"></a>
+                    <div id="menu-user" class="menudrop-content"></div>
+                </li>
+                <li class="menudrop hidden-mobile">
+                    <a class="menudrop"><img src="./disc/ico/website.png"></a>
+                    <div id="menu-web" class="menudrop-content"></div>
+                </li>
+                <li class="menudrop hidden-mobile">
+                    <a class="menudrop"><img src="./disc/ico/config.png"></a>
+                    <div id="menu-config" class="menudrop-content"></div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <input type="checkbox" id="sefechar" hidden>
+    <div id="more-menu">
+        <label for="sefechar" class="sefechar">
+            <img src="./disc/ico/x.png">
+        </label>
+        <div>
+            <label for="pop">
+                <img src="./disc/ico/calendar.png"> 
+                <span>18/09/2018</span>
+            </label>
+        </div>
+    </div>
+
+    <input type="checkbox" id="magico" hidden>
+    <label for="magico" id="box-menu">
+        <img src="./disc/ico/x.png">
+    </label>
+    <aside id="aside">
+
+        <div id="header-mobile">
+            <img src="./disc/logo/logo-header-black.png">
+        </div>
+               
+        <span class="nomeQuadra">
+            <a href="#agenda">
+                <label onclick="trocaDominio()" for="pop">
+                    <img src="disc/ico/field.png">
+                </label>
+                <span id="nome-dominio">Tubarão Zinho</span>                
+            </a>
+        </span>        
+
+    </aside>
+
+    <main id="main">
+        <section id="content-router"></section>
+        <footer>&copy; - 2018 Todos os Direitos Reservados</footer>
+    </main>
+
+    <div id="loop">
+        <div>
+            <img src="./disc/logo/logo-box.png">
+            <img src="./disc/ico/load.png" id="load-ico">
+        </div>
+    </div>
+
+    <input type="checkbox" id="pop" hidden>
+    <div id="popup" class="popup">
+        <section>
+            <header>
+                <h6>titulo popup</h6>
+                <label for="pop" class="close-pop"> X </label>
+            </header>
+            <span>conteudo...</span>
+        </section>
+    </div>
+
+    <div id="help" onclick="this.innerHTML = ''"></div>
+
+    <script src="./disc/js/config.js"></script>
+    <script src="./disc/js/router.js"></script>
+    <script src="./disc/js/form.js"></script>
+    <script src="./disc/js/interface.js"></script>
+    <script src="./disc/js/table.js"></script>
+    <script src="./disc/js/api.js"></script>
+    <script src="./disc/js/main.js"></script>
+    <script src="./disc/js/agenda.js"></script>
+
+    <script></script>
+    
+    
+</body>
+
+</html>

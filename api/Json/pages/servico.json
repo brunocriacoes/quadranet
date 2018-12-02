@@ -1,0 +1,47 @@
+{
+    "title": "Serviços",
+    "type" : "form",
+    "db"   :  "servico",
+    "form" : [
+        {
+            "ID"     : "ID",
+            "label"  : "",
+            "value"  : "servico",
+            "type"   : "hidden",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "title",
+            "label"  : "Nome",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        }, 
+        {
+            "ID"     : "resumo",
+            "label"  : "Resumo",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "html",
+            "label"  : "Conteudo",
+            "value"  : "",
+            "type"   : "editor",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "salvar",
+            "label"  : "",
+            "value"  : "salvar",
+            "type"   : "submit",
+            "arr"    : [],
+            "required": true
+        }
+    ]
+}

@@ -1,0 +1,131 @@
+.hidden-mobile {
+    display: none !important;
+}
+#header {
+    grid-template-columns: 50px 1fr 50px;
+}
+#header img {
+    margin: 0 auto;
+}
+.menu-tracinho { display: block; }
+#main > section {
+    width: 90vw;
+    margin-top: 20px;
+}
+.more-menu {
+    display: block !important;
+}
+#aside {
+    left:  calc( var(--aside) * -2 );
+    background: #f0f0f0;
+    z-index: 999999999;
+    padding-top: 0;
+}
+#header-mobile {
+    display: block;
+    background-color: #05f;
+    width: 100%;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+#header-mobile > img {
+    display: block;
+    width: 70%;
+    /* filter: invert(100%); */
+    margin: 0 auto;
+}
+#box-menu {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba( 0, 0, 0, .9 );
+    z-index: 999999;
+    transition: all .5s ease .1s;
+}
+#box-menu > img {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    filter: invert(100%);
+}
+#main {
+    margin-left: 0;
+    width: calc( 100vw - 4px );   
+}
+
+
+#magico:checked ~ #box-menu,
+#magico:checked ~ #aside {
+    left: 0;
+}
+#login {
+    grid-template-columns: 1fr;
+}
+#login > div {
+    width: 100%;
+}
+#more-menu {
+    display: block;
+    position: fixed;
+    right: -300px;
+    top: 0;
+    background: #05f;
+    min-height: 100vh;
+    width: 250px;
+    z-index: 999999;
+    transition: all .3s ease .1s;
+
+}
+#more-menu > div {
+    position: relative;
+    display: block;
+    height: 100vh;
+    width: 250px;
+    z-index: 9999999999;
+    overflow-y: scroll;
+    overflow-x: visible;
+}
+#sefechar:checked ~ #more-menu {
+    right: 0;
+}
+.sefechar {
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    background-color: #05f;
+    left: -27px;
+    top: 27px;
+    border: 3px solid #fff;
+    box-shadow: 0 0 3px rgba( 0, 0, 0, .9 );
+}
+.sefechar > img {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    filter: invert(100%);
+}
+#more-menu > div > label:not([for*=sefechar]),
+#more-menu > div > a {
+    width: calc( 100% - 40px );
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    align-items: center;
+    margin-left: 20px;
+    color: #FFF;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: monospace;
+    height: 48px;
+    border-bottom: 1px solid rgba( 255, 255, 255, .5 );
+}
+#more-menu img {
+    display: block;
+    filter: invert(100%);
+
+}

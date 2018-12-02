@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-br" prefix="og: http://ogp.me/ns#">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Quadra</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="article.article" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <link rel="stylesheet" type="text/css" media="screen" href="disc/css/style.css" />
+    <link rel="stylesheet" type="text/css" media="( max-width: 760px )" href="disc/css/mobile.css" />
+    <link rel="manifest" href="./manifest.json">
+    <link rel="shortcut icon" href="./disc/logo/ico.png" type="image/x-icon">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Weather PWA">
+    <link rel="apple-touch-icon" href="./disc/logo/icon-152x152.png">
+    <meta name="msapplication-TileImage" content="./disc/logo/icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#CC0000">
+    <meta name="theme-color" content="#CC0000">
+    <meta name="application-name" content="PWA solução sites">
+    <link rel="icon" sizes="16x16 32x32 48x48" href="./disc/logo/icon-128x128.png">
+    <link rel="icon" sizes="512x512" href="./disc/logo/icon-512x512.png">
+
+    <script>
+        const debug       = true;
+        const http        = window.location.protocol;
+        const dominio     = window.location.hostname;
+        const base        = `${http}//${dominio}`;
+        const uri_api     = `${http}//${dominio}/api`;
+        const url_api     = `${http}//${dominio}/api/get/${dominio}`;
+        const url_storage = `${http}//${dominio}/api/Data/${dominio}/uploads`;
+    </script>
+
+    <style id="personalizar"></style>
+</head>
+
+<body>
+
+    <input type="checkbox" id="menu" hidden>
+    <div class="menu-vertical">
+        <div class="menu-vertical__space">
+            <div class="menu-vertical__avatar">
+                <img id="vio_logo_2" src="https://placeimg.com/480/480/nature" onerror="img_default( this )">
+                <span id="vio_title">Nome da empresa</span>
+            </div>
+            <a href="#" class="link-menu">Inicio</a>
+            <a href="#quem-somos" class="link-menu">quem somos</a>
+            <a href="#servicos" class="link-menu">serviços</a>
+            <a href="#quadras" class="link-menu">quadras</a>
+            <a href="#contato" class="link-menu">contato</a>
+        </div>
+    </div>
+    <div id="menu_closer"><label for="menu">X</label></div>
+
+    <header class="header">
+        <nav class="menu-mobile">
+            <label class="menu-mobile_link" for="menu">
+                <img src="./disc/ico/menu.png">
+            </label>
+            <a href="#quadras" class="menu-mobile_link link-field">
+                <img src="./disc/ico/soccer-field.png">
+            </a>
+            <a href="#" class="menu-mobile_link">
+                <img id="vio_logo" src="./disc/logo/logo-header-black.png" onerror="img_default( this )">
+            </a>
+            <div class="box-link-menu">
+                <a href="#" class="link-menu">Inicio</a>
+                <a href="#quem-somos" class="link-menu">quem somos</a>
+                <a href="#servicos" class="link-menu">serviços</a>
+                <a href="#quadras" class="link-menu">quadras</a>
+                <a href="#contato" class="link-menu">contato</a>
+            </div>
+            <a href="#perfil" class="menu-mobile_link">
+                <img src="./disc/ico/avatar.png">
+            </a>
+            <a href="#carrinho" class="menu-mobile_link cart_count">
+                <img src="./disc/ico/shopping-cart.png">
+                <span id="vio_itens_count">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <section class="cart box" id="carrinho">
+        <h2 class="text-center gap-top">Carrinho</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><img src="./disc/ico/delete.png" class="trash"></th>
+                    <th>Quadra</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Tipo</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody id="vio_cart"></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" class="text-rigth">Total</td>
+                    <td>R$ <b id="vio_total"></b></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="or">
+            <a href="#quadras" class="btn btn-center gap-top gap-bottom">Continuar com a Compra</a>
+            <a href="#finalizar" class="btn btn-sucess btn-center gap-top gap-bottom">Finalizar a Compra</a>
+        </div>
+    </section>
+
+    <section class="cart box gap" id="finalizar">
+        <h2 class="text-center">Finalizar Compra</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Quadra</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Tipo</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody id="vio_finalizar"></tbody>
+        </table>
+        <h3 class="text-center gap-top"> TOTAL R$: <span id="finalizar_total">00,00</span></h3>
+        <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+        <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post" onsubmit="PagSeguroLightbox(this); return false;">
+            <!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+            <input type="hidden" name="code" value="35F81A298F8F91AFF4B56FAF715DBAFB" />
+            <input type="hidden" name="iot" value="button" />
+            <input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-comprar.gif"
+                name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" style="display: block; margin: 0 auto;" />
+        </form>
+        <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+        <!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+    </section>
+
+    <section class="fields" id="quadras">
+        <h1 class="fields__title">Quadras</h1>
+        <div class="fields_type">
+            <label class="fields_type_label" for="select">Escolha o tipo da Quadra:</label>
+            <select class="fields_type_select" id="fields_type_select" onchange="filtro( this )">
+                <option value="">Todos</option>
+            </select>
+        </div>
+        <div class="fields_grid">
+
+        </div>
+    </section>
+
+    <section class="hours box gap" id="agenda">
+        <div class="hours__title gap-bottom">
+            <h2 id="vio_calendar_name">Nome da Quadra</h2>
+            <span id="vio_calendar_modal">Modalidade</span>
+        </div>
+        <div class="gap-bottom or">
+            <div>
+                <b id="vio_calendar_day">---</b>
+                <span id="vio_calendar_date">--/--/---</span>
+            </div>
+            <div class="text-right">
+                <input type="date" onchange="set_date( this )" value="">
+            </div>
+        </div>
+        <div id="vio_agenda"></div>
+    </section>
+
+    <section id="detalhe" class="box gap more-grid">
+        <article>
+            <h1 id="detalhe__title">Quem Somos</h1>
+            <a id="detalhe_btn" class="btn btn-sucess" href="">Reservar</a>
+            <p id="detalhe__info">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Blanditiis iste sequi eligendi architecto ducimus eius?
+                Accusantium officiis consequuntur sit deserunt nisi placeat,
+                id eius dolorum, harum in esse mollitia quasi.
+            </p>
+            <div class="share">
+                <span>compartilhe com seus amigos</span>
+                <a href="http://www.facebook.com/sharer/sharer.php?u=301&t=301" target="_blank">
+                    <img src="./disc/ico/facebook.png">
+                </a>
+                <a href="http://twitter.com/intent/tweet?text=301" target="_blank">
+                    <img src="./disc/ico/twitter.png">
+                </a>
+            </div>
+        </article>
+        <article class="gap-bottom">
+            <img src="https://placeimg.com/500/500/animals" class="img-responsive" id="galeria-detalhe" onerror=" this.src = './disc/img/default.jpg'">
+            <div class="galeria">
+                <img id="galeria_img-1" src="https://placeimg.com/500/500/animals" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
+                <img id="galeria_img-2" src="https://placeimg.com/500/500/arch" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
+                <img id="galeria_img-3" src="https://placeimg.com/500/500/nature" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
+                <img id="galeria_img-4" src="https://placeimg.com/500/500/tech" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
+                <img id="galeria_img-5" src="https://placeimg.com/500/500/people/grayscale" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
+            </div>
+        </article>
+    </section>
+
+    <section id="quem-somos" class="box gap more-grid">
+        <article>
+            <h1 id="vio_sobre_title">Quem Somos</h1>
+            <div id="vio_sobre_content"></div>
+            <div class="share">
+                <span>compartilhe com seus amigos</span>
+                <a href="http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.quadranet.com.br&t=" target="_blank">
+                    <img src="./disc/ico/facebook.png">
+                </a>
+                <a href="http://twitter.com/intent/tweet?text=http%3A%2F%2Fwww.quadranet.com.br" target="_blank">
+                    <img src="./disc/ico/twitter.png">
+                </a>
+            </div>
+        </article>
+        <article class="gap-bottom">
+            <img src="https://placeimg.com/500/500/animals" class="img-responsive" id="galeria-sobre" onerror="img_default( this )">
+            <div class="galeria">
+                <img id="vio_sobre_foto_1" src="https://placeimg.com/500/500/animals" class="img-responsive"
+                    onmouseover="hover_photo( this, '#galeria-sobre' )" onerror="img_default( this )">
+                <img id="vio_sobre_foto_2" src="https://placeimg.com/500/500/arch" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )"
+                    onerror="img_default( this )">
+                <img id="vio_sobre_foto_3" src="https://placeimg.com/500/500/nature" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )"
+                    onerror="img_default( this )">
+                <img id="vio_sobre_foto_4" src="https://placeimg.com/500/500/tech" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )"
+                    onerror="img_default( this )">
+                <img id="vio_sobre_foto_5" src="https://placeimg.com/500/500/people/grayscale" class="img-responsive"
+                    onmouseover="hover_photo( this, '#galeria-sobre' )" onerror="img_default( this )">
+            </div>
+        </article>
+    </section>
+
+    <section id="servicos" class="box gap">
+        <h1 class="text-center">Serviços</h1>
+        <div id="vio_servico"></div>
+        <div class="share">
+            <span>compartilhe com seus amigos</span>
+            <a href="http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.quadranet.com.br&t=" target="_blank">
+                <img src="./disc/ico/facebook.png">
+            </a>
+            <a href="http://twitter.com/intent/tweet?text=http%3A%2F%2Fwww.quadranet.com.br" target="_blank">
+                <img src="./disc/ico/twitter.png">
+            </a>
+        </div>
+    </section>
+
+    <section id="contato" class="box">
+        <form action="javascript:void(0)" method="POST" class="form" id="send_mail" onsubmit="send_mail()">
+
+            <input type="text" id="nome" name="nome" value="" placeholder="Digite seu nome" required="required" class="field">
+            <input type="text" id="telefone" name="telefone" value="" placeholder="Digite seu telefone" required="required"
+                class="field">
+            <input type="email" id="email" name="email" value="" placeholder="Digite seu email" required="required"
+                class="field">
+            <select id="assunto" name="assunto" required="required" class="field">
+                <option value="">Escolha uma opção</option>
+                <option value="horario">Horário</option>
+                <option value="cobranca">Cobrança</option>
+                <option value="pagamento">Pagamento</option>
+                <option value="fornecedor">Fornecedor</option>
+                <option value="reserva">Reserva</option>
+                <option value="critica">Crítica</option>
+            </select>
+            <textarea name="mensagem" id="mensagem" rows="7" placeholder="Escreva a mensagem" required="required" class="field"></textarea>
+            <input type="submit" id="submit" name="submit" value="ENVIAR MENSAGEM" class="btn btn-sucess">
+            <span id="alert_send_mail" onclick="this.style.display = 'none'" class="alert" style="display: 'none !important'">mensagem
+                enviada com sucesso x </span>
+        </form>
+        <div class="contato-info">
+            <h1>Contato</h1>
+            <p id="vio_contact_text">
+                Para entrar em contato basta preencher os campo abaixo,
+                nos da 123 entraremos em contato com vc assim que possivel.
+            </p>
+            <p class="ico ico-map">
+                das 9:00 a 17:00 todos dias uteis
+            </p>
+            <a href="mailto:" class="ico ico-mail link" id="vio_contact_email">
+                contato@email.com
+            </a> <br>
+            <a href="tel:" class="ico ico-tel link" id="vio_contact_tel">
+                +00 (00) 0 0000-0000
+            </a> <br>
+            <div id="vio_contact_map"></div>
+        </div>
+    </section>
+
+    <section id="recuperar-senha">
+        <form action="javascript:void(0)" method="POST" class="form form-short box" onsubmit="recuperarSenha()" id="formulario_recuperar-senha">
+            <h2 class="text-center">Recuperar Senha</h2>
+            <p>
+                inform seu email de cadastro abaixo
+                enviaremos em 15 minutos para você uma nova senha
+            </p>
+            <input type="email" placeholder="email" name="email" class="field ico ico-mail" required>
+            <input type="submit" value="Enviar" class="btn btn-sucess btn-center">
+            <a href="#entrar" class="link link-small text-center gap-top">entrar</a>
+        </form>
+    </section>
+
+    <section id="entrar">
+        <form action="javascript:void(0)" method="POST" id="form_entrar" onsubmit="entrar()" class="form form-short box">
+            <h2 class="text-center">Entrar</h2>
+            <input type="email" name="email" class="field ico ico-mail" placeholder="email">
+            <input type="password" name="pass" class="field ico ico-pass" placeholder="senha">
+            <input type="submit" value="Entrar" class="btn btn-sucess btn-center">
+            <div class="or">
+                <a href="#me-cadastrar" class="link link-small">me cadastrar</a>
+                <a href="#recuperar-senha" class="link link-small text-rigth">esqueci senha</a>
+            </div>
+        </form>
+    </section>
+
+    <section id="me-cadastrar">
+        <form action="javascript:void(0)" method="POST" class="form form-short box" onsubmit="meCadastrar()" id="formulario_me-cadastrar">
+            <h2 class="text-center">Cadastro</h2>
+            <input type="text" class="field" placeholder="nome" name="title" required>
+            <input type="text" class="field" placeholder="apelido" name="apelido" required>
+            <input type="email" class="field" placeholder="email" name="email" required>
+            <input type="password" class="field" placeholder="senha" name="password" required>
+            <input type="password" class="field" placeholder="confirmar senha" name="pass" required>
+            <input type="tel" class="field" placeholder="whatsapp" required>
+            <input type="submit" value="me cadastrar" class="btn btn-sucess btn-center">
+            <a href="#entrar" class="link link-small text-center gap-top">entrar</a>
+        </form>
+    </section>
+
+    <section id="cadastrado-sucesso" class="box gap">
+        <h2 class="text-center">Cadastrado com Sucesso</h2>
+        <a href="#entrar" class="btn btn-sucess btn-center">Entrar Agora</a>
+    </section>
+
+    <section id="trocar-senha">
+        <div class="menu-perfil">
+            <a href="#perfil">Perfil</a>
+            <a href="#trocar-senha">Mudar Senha</a>
+            <a href="#historico-compras">Histórico</a>
+            <a href="#meu-time">Meu time</a>
+            <a href="#sair">Sair</a>
+        </div>
+        <form action="javascript:void(0)" method="POST" class="form form-short box">
+            <h1 class="text-center">Muda Senha</h1>
+            <input type="password" class="field ico ico-mail" required placeholder="nova senha">
+            <input type="password" class="field ico ico-mail" required placeholder="confirmar nova senha">
+            <input type="submit" class="btn btn-sucess btn-center" value="salvar">
+        </form>
+    </section>
+
+    <section id="historico-compras">
+        <div class="menu-perfil">
+            <a href="#perfil">Perfil</a>
+            <a href="#trocar-senha">Mudar Senha</a>
+            <a href="#historico-compras">Histórico</a>
+            <a href="#meu-time">Meu time</a>
+            <a href="#sair">Sair</a>
+        </div>
+        <div class="form form-short box">
+            <h1 class="text-center">histórico de compras</h1>
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>referencia</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody id="vio_historico"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="meu-time">
+        <div class="menu-perfil">
+            <a href="#perfil">Perfil</a>
+            <a href="#trocar-senha">Mudar Senha</a>
+            <a href="#historico-compras">Histórico</a>
+            <a href="#meu-time">Meu time</a>
+            <a href="#sair">Sair</a>
+        </div>
+        <div class="form-short box">
+            <h2 class="text-center gap-top">Meu Time</h2>
+            <table class="table text-cente">
+                <thead>
+                    <tr>
+                        <th><img src="./disc/ico/delete.png" class="trash"></th>
+                        <th>Nome</th>
+                        <th>Whatsapp</th>
+                        <th>E-mail</th>
+                        <th>Pagou</th>
+                    </tr>
+                </thead>
+                <tbody id="vio_time">
+                    <tr>
+                        <th><img src="./disc/ico/delete.png" class="trash"></th>
+                        <th>Ranheta</th>
+                        <th>+00 (00) 0 0000-0000</th>
+                        <th>contato@gmail.com</th>
+                        <th><input type="checkbox"></th>
+                    </tr>
+                    <tr>
+                        <th><img src="./disc/ico/delete.png" class="trash"></th>
+                        <th>bolinha</th>
+                        <th>+00 (00) 0 0000-0000</th>
+                        <th>contato@gmail.com</th>
+                        <th><input type="checkbox" checked></th>
+                    </tr>
+                </tbody>
+            </table>
+            <form action="javascript:void(0)" method="POST" class="form" onsubmit="add_player()">
+                <input type="text" class="field" id="player_name" placeholder="nome ou apelido">
+                <input type="text" class="field" id="player_tel" placeholder="whatsapp">
+                <input type="text" class="field" id="player_mail" placeholder="email">
+                <input type="submit" class="btn btn-sucess" value="adicionar">
+            </form>
+        </div>
+    </section>
+
+    <section id="sair">
+        <div class="box form form-short">
+            <h1 class="text-center">Deslogado com Sucesso</h1>
+            <a href="#" class="btn btn-sucess btn-center">Continue Navegando</a>
+        </div>
+    </section>
+
+    <section id="nao-encontrado" class="box gap">
+        <h2 class="text-center">404 - Página não encontrada</h2>
+        <a href="#" class="btn btn-sucess btn-center">Homer Page</a>
+    </section>
+
+    <section id="perfil">
+        <div class="menu-perfil">
+            <a href="#perfil">Perfil</a>
+            <a href="#trocar-senha">Mudar Senha</a>
+            <a href="#historico-compras">Histórico</a>
+            <a href="#meu-time">Meu time</a>
+            <a href="#sair">Sair</a>
+        </div>
+        <form action="javascript:void(0)" method="POST" class="form form-short box">
+            <h2 class="text-center">Perfil</h2>
+            <input type="text" class="field" placeholder="nome" id="vio_nome">
+            <input type="text" class="field" placeholder="apelido" id="vio_apelido">
+            <input type="email" class="field" placeholder="email" id="vio_email" value="email@gmail.com" disabled>
+            <input type="tel" class="field" placeholder="whatsapp" id="vio_whatsapp">
+            <input type="submit" value="salvar" class="btn btn-sucess btn-center">
+        </form>
+    </section>
+
+    <section class="carousel">
+        <div class="carousel__gamb">
+            <input type="radio" id="one" name="activator" hidden>
+            <input type="radio" id="two" name="activator" hidden>
+            <input type="radio" id="tree" name="activator" hidden>
+            <div class="carousel__track">
+                <li class="carousel__slide">
+                    <div class="carousel__slide_info">
+                        <span id="vio_text_1">Lorem ipsum, dolor sit amet consectetur adipisicing.</span>
+                        <a href="" id="vio_link_1" class="btn carousel__slide_info_btn">Mais Detalhes</a>
+                    </div>
+                    <img src="https://placeimg.com/1000/480/nature" alt="" id="vio_carrousel_foto_1" onerror="img_default( this )">
+                </li>
+                <li class="carousel__slide">
+                    <div class="carousel__slide_info">
+                        <span id="vio_text_2">Lorem ipsum, dolor sit amet consectetur adipisicing.</span>
+                        <a href="" id="vio_link_2" class="btn carousel__slide_info_btn">Mais Detalhes</a>
+                    </div>
+                    <img src="https://placeimg.com/1000/480/tree" alt="" id="vio_carrousel_foto_2" onerror="img_default( this )">
+                </li>
+                <li class="carousel__slide">
+                    <div class="carousel__slide_info">
+                        <span id="vio_text_3">Lorem ipsum, dolor sit amet consectetur adipisicing.</span>
+                        <a href="" id="vio_link_3" class="btn carousel__slide_info_btn">Mais Detalhes</a>
+                    </div>
+                    <img src="https://placeimg.com/1000/480/animal" alt="" id="vio_carrousel_foto_3" onerror="img_default( this )">
+                </li>
+            </div>
+            <div class="carousel_bullets">
+                <label for="one" class="carousel_bullets_controll"></label>
+                <label for="two" class="carousel_bullets_controll"></label>
+                <label for="tree" class="carousel_bullets_controll"></label>
+            </div>
+        </div>
+    </section>
+
+    <h1 class="card__title">Principais Serviços</h1>
+    <section class="card">
+        <div class="card__services">
+            <img src="disc/ico/info.png">
+            <h2>Serviços</h2>
+            <p id="card__services__paragrafo">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio corrupti rem consectetur!
+            </p>
+            <a href="#servicos" class="btn btn-sucess">Mais Detalhes</a>
+        </div>
+        <div class="card__services">
+            <img src="disc/ico/soccer-field.png">
+            <h2>Quadras</h2>
+            <p>
+                Veja as nossas quadras, certamente você encontrará uma que te agranda, click no link abaixo e confira.
+            </p>
+            <a href="#quadras" class="btn btn-sucess">Mais Detalhes</a>
+        </div>
+        <div class="card__services">
+            <img src="disc/ico/avatar.png">
+            <h2>Cadastro</h2>
+            <p>
+                Faça seu cadastro, para poder alocar um horario, cadastrar uma lista com os contato dos seu amigos.
+            </p>
+            <a href="#me-cadastrar" class="btn btn-sucess">Mais Detalhes</a>
+        </div>
+    </section>
+
+    <div id="alerta_sucesso">
+        <span class="alerta_close" onclick="closeAlerta()">&times;</span>
+        <strong>Enviado com Sucesso!</strong>
+    </div>
+
+    <footer class="footer">
+        <div class="footer__redes-sociais">
+            <a href="" target="_blank" id="facebook"><img src="disc/ico/facebook.png"></a>
+            <a href="" target="_blank" id="twitter"><img src="disc/ico/twitter.png"></a>
+            <a href="" target="_blank" id="youtube"><img src="disc/ico/youtube.png"></a>
+        </div>
+        <div class="container footer-info">
+            <div class="footer__about">
+                <h2>Quem Somos?</h2>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, dicta illum?
+                    Consequuntur officia sequi harum laudantium reiciendis! Ut, neque minima?
+                </p>
+            </div>
+            <div class="footer__adress">
+                <div class="footer__adress__item">
+                    <h2>Endereço</h2>
+                    <a href="">
+                        <img src="disc/ico/map.png">
+                        <span>Rua Whatever, Bairro Nevermind, Cidade Aí Dentro</span>
+                    </a>
+                </div>
+                <div class="footer__adress__item">
+                    <a href="">
+                        <img src="disc/ico/whatsapp.png">
+                        <span>(21) 9 9999-9999</span>
+                    </a>
+                </div>
+                <div class="footer__adress__item">
+                    <a href="">
+                        <img src="disc/ico/phone-call.png">
+                        <span>999-999</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="footer__dev">
+            <span>2018 Todos os Direitos Reservados a Dev</span>
+            <span>Desenvolvido por <a href="">quadranet.com.br</a></span>
+        </div>
+    </footer>
+
+    <script src="./disc/js/help.js"></script>
+    <script src="./disc/js/auth.js"></script>
+    <script src="./disc/js/interface.js"></script>
+    <script src="./disc/js/todo.js"></script>
+    <script src="./disc/js/cart.js"></script>
+    <script src="./disc/js/main.js"></script>
+    <script>
+        if (navigator.serviceWorker) {
+            // navigator.serviceWorker.register( './disc/js/sw.js' );
+        }
+    </script>
+
+</body>
+
+</html>

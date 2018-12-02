@@ -1,0 +1,151 @@
+{
+    "title": "Informações do site",
+    "type" : "form",
+    "db"   :  "theme",
+    "form" : [
+        {
+            "ID"     : "ID",
+            "label"  : "",
+            "value"  : "theme",
+            "type"   : "hidden",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "title",
+            "label"  : "titulo",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        }, 
+        {
+            "ID"     : "keyword",
+            "label"  : "palavra chave (google)",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "description",
+            "label"  : "descrição google (google)",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "email",
+            "label"  : "email ( formulario )",
+            "value"  : "",
+            "type"   : "email",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "tel",
+            "label"  : "telefone",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "cor",
+            "label"  : "cor do site",
+            "value"  : "",
+            "type"   : "color",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "foto",
+            "label"  : "logo",
+            "value"  : "",
+            "type"   : "file",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "expediente",
+            "label"  : "dados sobre horario de funcionamento",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "contato",
+            "label"  : "texto pagina contato",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "facebook",
+            "label"  : "facebook",
+            "value"  : "",
+            "type"   : "link",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "instagram",
+            "label"  : "instagram",
+            "value"  : "",
+            "type"   : "link",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "youtube",
+            "label"  : "youtube",
+            "value"  : "",
+            "type"   : "link",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "googleplus",
+            "label"  : "googleplus",
+            "value"  : "",
+            "type"   : "link",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "twitter",
+            "label"  : "twitter",
+            "value"  : "",
+            "type"   : "link",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "video",
+            "label"  : "codigo video youtube",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "map",
+            "label"  : "codigo google map",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "salvar",
+            "label"  : "",
+            "value"  : "salvar",
+            "type"   : "submit",
+            "arr"    : [],
+            "required": true
+        }
+    ]
+}

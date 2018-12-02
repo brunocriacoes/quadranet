@@ -1,0 +1,39 @@
+{
+    "title": "Modalidade",
+    "type" : "form",
+    "db"   :  "tag",
+    "form" : [
+        {
+            "ID"     : "ID",
+            "label"  : "",
+            "value"  : "",
+            "type"   : "hidden",
+            "arr"    : [],
+            "required": true
+        },       
+        {
+            "ID"     : "title",
+            "label"  : "Nome",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },       
+        {
+            "ID"     : "color",
+            "label"  : "Cor",
+            "value"  : "",
+            "type"   : "color",
+            "arr"    : [],
+            "required": true
+        },       
+        {
+            "ID"     : "salvar",
+            "label"  : "",
+            "value"  : "salvar",
+            "type"   : "submit",
+            "arr"    : [],
+            "required": true
+        }
+    ]
+}

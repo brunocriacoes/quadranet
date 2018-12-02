@@ -1,0 +1,31 @@
+{
+    "title": "Minha Conta",
+    "type": "form",
+    "db"   :  "user",
+    "form": [
+        {
+            "ID"     : "pass",
+            "label"  : "Senha",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "password",
+            "label"  : "Confirmar Senha",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "salvar",
+            "label"  : "",
+            "value"  : "salvar",
+            "type"   : "submit",
+            "arr"    : [],
+            "required": true
+        }
+    ]
+}

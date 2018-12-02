@@ -1,0 +1,5 @@
+[
+    { "id" : "",  "text" : "Escolha o tipo de banner" },
+    { "id" : "1", "text" : "Image" },
+    { "id" : "2", "text" : "Script" }
+]

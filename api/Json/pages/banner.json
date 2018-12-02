@@ -1,0 +1,19 @@
+{
+    "title": "Banner",
+    "type" : "table",
+    "btn"  : "#banner-novo",
+    "db"   :  "banner",
+    "head" : [
+        {
+            "title"   : "titulo",
+            "node"    : "title",
+            "content" : ""
+        },
+        {
+            "title"   : "Ações",
+            "node"    : null,
+            "content" : "<a href=\"#banner-novo?ID={{ID}}&_filds=ID,title,url,tipoBanner,regiaoSite,script,foto,foto1,foto2\" class=\"btn-editar\">EDITAR</a><label class=\"btn-deletar\" for=\"\" onclick=\"deletar('{{ID}}')\">DELETAR</label>"
+        }
+    ],
+    "table": []
+}

@@ -1,0 +1,39 @@
+{
+    "title": "Pagseguro",
+    "type" : "form",
+    "db"   : "pagseguro",
+    "form" : [
+        {
+            "ID"     : "ID",
+            "label"  : "",
+            "value"  : "pagseguro",
+            "type"   : "hidden",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "token",
+            "label"  : "Token",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "email",
+            "label"  : "Email Principal",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "salvar",
+            "label"  : "",
+            "value"  : "salvar",
+            "type"   : "submit",
+            "arr"    : [],
+            "required": true
+        }
+    ]
+}

@@ -1,0 +1,63 @@
+{
+    "title": "Pagamento",
+    "type" : "form",
+    "db"   :  "pagamento",
+    "form" : [
+        {
+            "ID"     : "ID",
+            "label"  : "",
+            "value"  : "",
+            "type"   : "hidden",
+            "arr"    : [],
+            "required": false
+        },
+        {
+            "ID"     : "numero",
+            "label"  : "Numero",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "usuario",
+            "label"  : "Usuário",
+            "value"  : "",
+            "type"   : "select",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "situacaopagamento",
+            "label"  : "Situação",
+            "value"  : "",
+            "type"   : "select",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "nota",
+            "label"  : "Nota",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "obs",
+            "label"  : "Obs",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "salvar",
+            "label"  : "",
+            "value"  : "salvar",
+            "type"   : "submit",
+            "arr"    : [],
+            "required": true
+        }
+    ]
+}

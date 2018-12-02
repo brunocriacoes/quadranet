@@ -1,0 +1,24 @@
+{
+    "title": "Capitão",
+    "type" : "table",
+    "btn"  : "#usuario-novo",
+    "db"   :  "usuario",
+    "head" : [
+        {
+            "title"   : "Nome",
+            "node"    : "title",
+            "content" : ""
+        },
+        {
+            "title"   : "Email",
+            "node"    : "email",
+            "content" : ""
+        },
+        {
+            "title"   : "Ações",
+            "node"    : null,
+            "content" : "<a href=\"#usuario-novo?ID={{ID}}&_filds=ID,title,sobrenome,email,password,genero,status,cep,avrua,cidade,estado,historico\" class=\"btn-editar\">EDITAR</a><label class=\"btn-deletar\" for=\"\" onclick=\"deletar('{{ID}}')\">DELETAR</label>"
+        }
+    ],
+    "table": []
+}

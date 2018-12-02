@@ -1,0 +1,200 @@
+{
+    "title": "Configuracoes do site",
+    "type" : "form",
+    "db"   :  "info",
+    "ID"   : "configuracoes",
+    "form" : [
+        {
+            "ID"     : "ID",
+            "label"  : "ID",
+            "value"  : "configuracoes",
+            "type"   : "hidden",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "title",
+            "label"  : "Titulo",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "email1",
+            "label"  : "Email Principal",
+            "value"  : "",
+            "type"   : "email",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "email2",
+            "label"  : "Email Secundario",
+            "value"  : "",
+            "type"   : "email",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "telefone",
+            "label"  : "Telefone",
+            "value"  : "",
+            "type"   : "tel",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "telefone2",
+            "label"  : "Telefone (secundario)",
+            "value"  : "",
+            "type"   : "tel",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "rede_facebook",
+            "label"  : "Fabook",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "rede_instagran",
+            "label"  : "Instagran",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "rede_twitter",
+            "label"  : "Twitter",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "rede_youtube",
+            "label"  : "Youtube",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "rede_blogger",
+            "label"  : "Blogger",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "rede_whatsapp",
+            "label"  : "Whatsapp",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "mapa",
+            "label"  : "Mapa Link ( codigo de embed )",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "video_apresentacao",
+            "label"  : "Video( embed do video )",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "logo",
+            "label"  : "Logo",
+            "value"  : "",
+            "type"   : "file",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "icone",
+            "label"  : "Icone",
+            "value"  : "",
+            "type"   : "file",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "keyword",
+            "label"  : "Palavra Chave ( google )",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "description",
+            "label"  : "Descricao ( google )",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "cep",
+            "label"  : "Cep",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "av-rua",
+            "label"  : "Avenida / Rua / Nº",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "cidade",
+            "label"  : "Cidade",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "estado",
+            "label"  : "Estado",
+            "value"  : "",
+            "type"   : "select",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "expediente",
+            "label"  : "Expediente",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : "",
+            "required": true
+        },
+        {
+            "ID"     : "salvar",
+            "label"  : "",
+            "value"  : "salvar",
+            "type"   : "submit",
+            "arr"    : [],
+            "required": true
+        }
+    ]
+}

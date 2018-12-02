@@ -1,0 +1,14 @@
+[
+    {
+        "id": "1",
+        "text": "ativo"
+    },
+    {
+        "id": "0",
+        "text": "inativo"
+    },
+    {
+        "id" : "2",
+        "text": "excluido"
+    }
+]

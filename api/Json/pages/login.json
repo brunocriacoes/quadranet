@@ -1,0 +1,26 @@
+[
+    {
+        "ID"     : "email",
+        "label"  : "email",
+        "value"  : "",
+        "type"   : "email",
+        "arr"    : [],
+        "required": true
+    }, 
+    {
+        "ID"     : "password",
+        "label"  : "senha",
+        "value"  : "",
+        "type"   : "password",
+        "arr"    : [],
+        "required": true
+    },
+    {
+        "ID"     : "submit",
+        "label"  : "",
+        "value"  : "entrar",
+        "type"   : "submit",
+        "arr"    : [],
+        "required": false
+    }
+]

@@ -1,0 +1,47 @@
+{
+    "title": "Horario",
+    "type" : "form",
+    "db"   :  "horario",
+    "form" : [
+        {
+            "ID"     : "ID",
+            "label"  : "",
+            "value"  : "",
+            "type"   : "hidden",
+            "arr"    : [],
+            "required": false
+        },
+        {
+            "ID"     : "quadra",
+            "label"  : "",
+            "value"  : "",
+            "type"   : "hidden",
+            "arr"    :  [],
+            "required": true
+        },
+        {
+            "ID"     : "inicio",
+            "label"  : "Horário Inicio",
+            "value"  : "",
+            "type"   : "time",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "final",
+            "label"  : "Horário Final",
+            "value"  : "",
+            "type"   : "time",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "salvar",
+            "label"  : "",
+            "value"  : "salvar",
+            "type"   : "submit",
+            "arr"    : [],
+            "required": true
+        }
+    ]
+}

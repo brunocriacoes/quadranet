@@ -1,0 +1,127 @@
+{
+    "title": "Capitão",
+    "type" : "form",
+    "db"   :  "usuario",
+    "form" : [
+        {
+            "ID"     : "ID",
+            "label"  : "",
+            "value"  : "",
+            "type"   : "hidden",
+            "arr"    : [],
+            "required": false
+        },
+        {
+            "ID"     : "title",
+            "label"  : "nome",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "sobrenome",
+            "label"  : "Sobrenome",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "email",
+            "label"  : "email",
+            "value"  : "",
+            "type"   : "email",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "telefone",
+            "label"  : "Telefone",
+            "value"  : "",
+            "type"   : "tel",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "whatsapp",
+            "label"  : "WhatsApp",
+            "value"  : "",
+            "type"   : "tel",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "password",
+            "label"  : "password",
+            "value"  : "",
+            "type"   : "password",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "genero",
+            "label"  : "Genero",
+            "value"  : "",
+            "type"   : "select",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "status",
+            "label"  : "Status",
+            "value"  : "",
+            "type"   : "select",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "cep",
+            "label"  : "Cep",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "avrua",
+            "label"  : "Avenida / Rua / Nº",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "cidade",
+            "label"  : "Cidade",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "estado",
+            "label"  : "Estado",
+            "value"  : "",
+            "type"   : "select",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "historico",
+            "label"  : "historico",
+            "value"  : "#historico",
+            "type"   : "btn",
+            "arr"    : [],
+            "required": true
+        },       
+        {
+            "ID"     : "salvar",
+            "label"  : "",
+            "value"  : "salvar",
+            "type"   : "submit",
+            "arr"    : [],
+            "required": true
+        }
+    ]
+}

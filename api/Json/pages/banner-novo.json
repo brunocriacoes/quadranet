@@ -1,0 +1,47 @@
+{
+    "title": "Banner",
+    "type" : "form",
+    "db"   :  "banner",
+    "form" : [
+        {
+            "ID"     : "ID",
+            "label"  : "",
+            "value"  : "",
+            "type"   : "hidden",
+            "arr"    : [],
+            "required": false
+        },
+        {
+            "ID"     : "title",
+            "label"  : "Titulo",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "url",
+            "label"  : "Link",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "foto",
+            "label"  : "logo ( altura 50px )",
+            "value"  : "Subir Foto Banner",
+            "type"   : "file",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "salvar",
+            "label"  : "",
+            "value"  : "Salvar",
+            "type"   : "submit",
+            "arr"    : [],
+            "required": true
+        }
+    ]
+}

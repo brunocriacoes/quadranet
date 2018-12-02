@@ -1,0 +1,87 @@
+{
+    "title": "Quem Somos",
+    "type" : "form",
+    "db"   :  "quem",
+    "form" : [
+        {
+            "ID"     : "ID",
+            "label"  : "",
+            "value"  : "quem",
+            "type"   : "hidden",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "title",
+            "label"  : "Nome",
+            "value"  : "",
+            "type"   : "text",
+            "arr"    : [],
+            "required": true
+        }, 
+        {
+            "ID"     : "resumo",
+            "label"  : "Resumo",
+            "value"  : "",
+            "type"   : "textarea",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "html",
+            "label"  : "Conteudo",
+            "value"  : "",
+            "type"   : "editor",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "foto",
+            "label"  : "Foto Principal",
+            "value"  : "Foto Principal",
+            "type"   : "file",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "foto1",
+            "label"  : "foto 1",
+            "value"  : "",
+            "type"   : "file",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "foto2",
+            "label"  : "foto 2",
+            "value"  : "",
+            "type"   : "file",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "foto3",
+            "label"  : "foto 3",
+            "value"  : "",
+            "type"   : "file",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "foto4",
+            "label"  : "foto 4",
+            "value"  : "",
+            "type"   : "file",
+            "arr"    : [],
+            "required": true
+        },
+        {
+            "ID"     : "salvar",
+            "label"  : "",
+            "value"  : "salvar",
+            "type"   : "submit",
+            "arr"    : [],
+            "required": true
+        }
+    ]
+}

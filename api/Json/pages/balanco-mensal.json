@@ -1,0 +1,6 @@
+{
+    "title": "Relatorio do Mes",
+    "type": "page",
+    "db"   :  "balanco",
+    "page": "<p>Aqui Fica o Relatorio do mes</p>"
+}
