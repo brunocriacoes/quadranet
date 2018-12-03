@@ -80,8 +80,12 @@ function abled_form( ID )
 function img_default( e ) { e.src = "./disc/img/default.jpg"; }
 function restrito() 
 {
-    [ "perfil", "trocar-senha", "historico-compras", "meu-time", "finalizar"]
-    .map( x => { router( x,  y => { private(); } ); } );    
+    let pages = [ "perfil", "trocar-senha", "historico-compras", "meu-time", "finalizar"];
+    pages.map( x => { 
+        router( x,  y => {
+            privado(); 
+        } ); 
+    } );    
    
 }
 restrito();
@@ -125,7 +129,7 @@ function date() {
 
 function reserva() {
     let para = parametros();
-    fetch( `${uri_api}/reservas?_dominio=quadranet.com.br&quadra=${para.id}` )
+    fetch( `${uri_api}/reservas?_dominio=quadranet.com.br&quadra=${para.id}${trol}` )
     .then(x => x.json())
     .then(y => {
         let indisponivel = y.map( p => p.ID.substr( 0, 16 ) );
@@ -184,7 +188,7 @@ function send_mail()
 function recuperarSenha() {
     let form = get_form( '#formulario_recuperar-senha' );
     disabled_form( '#formulario_recuperar-senha' );
-    let url = `${uri_api}/profile/?recovery-pass=${form.email || '17'}`;
+    let url = `${uri_api}/profile/?recovery-pass=${form.email || '17'}${trol}`;
     fetch( url )
     .then( j => j.json() )
     .then( x => {
@@ -198,7 +202,7 @@ function meCadastrar() {
     let form = get_form( '#formulario_me-cadastrar' );
     let uri = objToUrl( form );
     disabled_form( '#formulario_me-cadastrar' );
-    let url = `${uri_api}/profile/?cadastrar=true&${uri}`;
+    let url = `${uri_api}/profile/?cadastrar=true&${uri}${trol}`;
     fetch( url )
     .then( j => j.json() )
     .then( x => {

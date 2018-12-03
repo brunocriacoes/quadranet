@@ -5,7 +5,7 @@ if( localStorage.profile === undefined ) {
     localStorage.setItem( 'profile', '' );
 }
 var _profile = {};
-function private()
+function privado()
 {
     fetch( `${uri_api}/auth2?token=${ localStorage.token || '' }` )
     .then( j => j.json() )

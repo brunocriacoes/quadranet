@@ -1,5 +1,79 @@
 <?php
 
+    if( ! empty( $_REQUEST['player-buy'] ) AND ! empty( $_REQUEST['usuario'] ) ):
+        $email     = $_REQUEST['usuario'] ?? '';
+        $emai      = sha1( $emai );
+        $id_user   = $_REQUEST['player-buy'];
+
+        $user_file = __DIR__ . "/../Data/" . dominio . "/{$email}.json";
+        $valida    = file_exists( $user_file );
+        if( $valida ):
+            $json             = file_get_contents( $user_file ); 
+            $json             = json_decode( $json );
+            $json->history    = array_map( function( $play ) use ( $id_user ) {
+                if( $id_user == $play->id ):
+                    $play->status = ! $play->status;
+                    return $play;
+                else:
+                    return $play;
+                endif;
+            }, $json->history );
+            file_put_contents( $user_file, json_encode( $json ) );
+        endif;
+        echo json_encode( [
+            "error" => ! $valida,
+            "data"  => $_REQUEST,
+        ] );
+        die();
+    endif;
+
+    if( ! empty( $_REQUEST['add-player'] ) ):
+        $email     = $_REQUEST['add-player'] ?? '';
+        $emai      = sha1( $emai );
+        $name      = $_REQUEST['name']      ?? '';
+        $tel       = $_REQUEST['tel']       ?? '';
+        $mail      = $_REQUEST['mail']      ?? '';
+        $id        = uniqid();
+        $user_file = __DIR__ . "/../Data/" . dominio . "/{$email}.json";
+        $valida    = file_exists( $user_file );
+        if( $valida ):
+            $json             = file_get_contents( $user_file ); 
+            $json             = json_decode( $json );
+            $json->history[]  = [
+                "id"    => $id,
+                "name"  => $name,
+                "tel"   => $tel,
+                "mail"  => $mail,
+                "staus" => false,
+            ];            
+            file_put_contents( $user_file, json_encode( $json ) );
+        endif;
+        echo json_encode( [
+            "error" => ! $valida,
+            "data"  => $_REQUEST,
+        ] );
+        die();
+    endif;
+
+    if( ! empty( $_REQUEST['atualizar'] ) ):
+        $email     = $_REQUEST['atualizar'] ?? '';
+        $user_file = __DIR__ . "/../Data/" . dominio . "/{$email}.json";
+        $valida    = file_exists( $user_file );
+        if( $valida ):
+            $json           = file_get_contents( $user_file ); 
+            $json           = json_decode( $json );
+            $json->title    = $_REQUEST['title']    ?? '';
+            $json->apelido  = $_REQUEST['apelido']  ?? '';
+            $json->whatsapp = $_REQUEST['whatsapp'] ?? '';
+            file_put_contents( $user_file, json_encode( $json ) );
+        endif;
+        echo json_encode( [
+            "error" => ! $valida,
+            "data"  => $_REQUEST,
+        ] );
+        die();
+    endif;
+
     if( ! empty( $_REQUEST['cadastrar'] ) ):
         $_REQUEST['error'] = false;
         $dirs = [
@@ -34,46 +108,52 @@
             $json = json_decode( $json );
             $valida = $json->status ?? false;
         endif;
+        $user_id   = $json->usuario ?? '';
+        $user_file = __DIR__ . "/../Data/" . dominio . "/usuario/{$user_id}.json";
+        $valida    = file_exists( $user_file );
         if( $valida ):
+            $json    = file_get_contents( $user_file );
+            $json    = json_decode( $json );
+            $dir_buy = __DIR__ . "/../Data/" . dominio . "/buy/";
+            if( file_exists( $dir_buy ) ):
+                $loop   = glob( "{$dir_buy}*.json*" );
+                $hitory = array_map( function( $iten ) {
+                    $j  = file_get_contents( $iten );
+                    $j  = json_decode( $j );
+                    return $j;
+                }, $loop );
+                $hitory = array_filter( $hitory, function( $item ) use ( $user_id ) { return $item->usuario == $user_id; } );
+                $hitory = array_values( $hitory );
+            endif;
             echo json_encode( [
-                "id"     => "12QDSW234DASD231SD",
-                "name"     => "Bolinha",
-                "nickname" => "Ranheta",
-                "email"    => "teste@gmail.com",
-                "whatsapp"    => "+0 (00) 0 0000-0000",
+                "id"          => $json->id        ?? "12QDSW234DASD231SD",
+                "name"        => $json->title      ?? "name",
+                "nickname"    => $json->apelido  ?? "nickname",
+                "email"       => $json->email     ?? "email@gmail.com",
+                "whatsapp"    => $json->whatsapp  ?? "+0 (00) 0 0000-0000",
                 "history" => [ 
-                    [
-                        
-                        "id" => "QWF1SAD123ASD123",
-                        "status" => 1,
-                        "day" => "2018-11-09-09-00",
-                        "price" => "200",
-                        "cart" => [
-                            [
-                                "name" => "tubarão",
-                                "id_quadra" => "QWF1SAD123ASD123",
-                                "avulso" => "",
-                                "init" => "",
-                                "end" => "",
-                                "mensak" => "",
-                                "type" => 1
-                            ]
-                        ],
-                        
-                    ],
+                    $hitory ?? []
+                    // [                        
+                    //     "id"           => "QWF1SAD123ASD123",
+                    //     "transaction"  => "1ASDASQQC678J",
+                    //     "usuario"      => "1ASDASQQC678aasddfhh",
+                    //     "status"       => 1,
+                    //     "day"          => "2018-11-09-09-00",
+                    //     "price"        => "200",
+                    //     "cart"         => [
+                    //         [
+                    //             "name"      => "tubarão",
+                    //             "id_quadra" => "QWF1SAD123ASD123",
+                    //             "avulso"    => "",
+                    //             "init"      => "",
+                    //             "end"       => "",
+                    //             "mensak"    => "",
+                    //             "type"      => 1
+                    //         ]
+                    //     ],                        
+                    // ],
                  ],
-                "tean" => [
-                    [
-                        "name" => "Ranheta",
-                        "tel" => "",
-                        "mail" => "",
-                    ],
-                    [
-                        "name" => "Dudud",
-                        "tel" => "",
-                        "mail" => "",
-                    ],
-                ],
+                "tean"     => $json->tean ?? [], // [ [ "name" => "Ranheta", "tel" => "", "mail" => "", ] ],
                 "error"    => (boolean) $valida,
                 "mensage"  => $valida ? "token valido" : "token invalido"
             ] );
@@ -86,12 +166,19 @@
         die();
     endif;
 
-    if( ! empty( $_REQUEST['alter-pass'] ) ):
-        $email = $_REQUEST['alter-pass'];
-        $valid = $_REQUEST['alter-pass'] === "teste@gmail.com";
+    if( ! empty( $_REQUEST['alter-pass'] ) AND ! empty( $_REQUEST['pass'] ) ):
+        $email     = $_REQUEST['alter-pass'] ?? '';
+        $user_file = __DIR__ . "/../Data/" . dominio . "/{$email}.json";
+        $valida    = file_exists( $user_file );
+        if( $valida ):
+            $json           = file_get_contents( $user_file ); 
+            $json           = json_decode( $json );
+            $json->pass     = sha1( $_REQUEST['pass'] );
+            file_put_contents( $user_file, json_encode( $json ) );
+        endif;
         echo json_encode( [
-            "error"   => (boolean) $valida,
-            "mensage" => $valida ? "nova senha gerada" : "email não existe"
+            "error"   => ! $valida,
+            "mensage" => $valida ? "senha atualizada com sucesso" : "erro ao atualizar senha"
         ] );
         die();
     endif;

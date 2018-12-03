@@ -68,6 +68,7 @@
         $valida    = file_exists( $token_dir );
         if( $valida ):
             $json = file_get_contents( $token_dir );
+            $json = json_decode( $json );
             $json->status = false;
             file_put_contents( $token_dir, json_decode( $json ) );
         endif;

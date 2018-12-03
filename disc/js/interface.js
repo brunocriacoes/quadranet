@@ -37,20 +37,19 @@ var vio  = {
     get keywords() { return _vio.keywords },
     set time( el )
     {
-        // el.id = Date.now();
-        // _vio.time.push( ...el );
-        // query( '#vio_time' ).innerHTML = _vio.time.reduce( (acc , iten ) => {
-        //     acc.push( `
-        //     <tr>
-        //         <th><img src="./disc/ico/delete.png" class="trash"></th>
-        //         <th>${ iten.name || '...' }</th>
-        //         <th>${ iten.tel || '...' }</th>
-        //         <th>${ iten.mail || '...' }</th>
-        //         <th><input type="checkbox"></th>
-        //     </tr>
-        //     `);
-        //     return acc;
-        // }, [] ).join('');
+        _vio.time.push( ...el );
+        query( '#vio_time' ).innerHTML = _vio.time.reduce( (acc , iten ) => {
+            acc.push( `
+            <tr>
+                <th><img src="./disc/ico/delete.png" class="trash"></th>
+                <th>${ iten.name || '...' }</th>
+                <th>${ iten.tel || '...' }</th>
+                <th>${ iten.mail || '...' }</th>
+                <th><input type="checkbox"></th>
+            </tr>
+            `);
+            return acc;
+        }, [] ).join('');
     },
     get time() { return _vio.time; },
     set agenda( el )
