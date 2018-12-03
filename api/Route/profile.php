@@ -22,8 +22,18 @@
     endif;
 
     if( ! empty( $_REQUEST['token'] ) ):
-        $token = $_REQUEST['token'];
-        $valida = $token === '123' ? 1 : 0;
+        $token     = $_REQUEST['token'];
+        $dir_token = __DIR__ . "/../Data/" . dominio . "/token/";
+        if( ! file_exists( $dir_token ) ):
+            mkdir( $dir_token );
+        endif;
+        $token_dir = "{$dir_token}{$token}.json";
+        $valida    = file_exists( $token_dir );
+        if( $valida ):
+            $json = file_get_contents( $token_dir );
+            $json = json_decode( $json );
+            $valida = $json->status ?? false;
+        endif;
         if( $valida ):
             echo json_encode( [
                 "id"     => "12QDSW234DASD231SD",

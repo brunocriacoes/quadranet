@@ -10,6 +10,7 @@
         $valida    = file_exists( $token_dir );
         if( $valida ):
             $json = file_get_contents( $token_dir );
+            $json = json_decode( $json );
             $valida = $json->status ?? false;
         endif;
         echo json_encode( [
@@ -30,14 +31,15 @@
         $token    = null;
         if( $valid ):
             $json = file_get_contents( $dir_user );
-            if( $json->password == $pass ):
+            $json = json_decode( $json );
+            if( $json->pass == $pass ):
                 $token = uniqid();
                 $dir_token = __DIR__ . "/../Data/" . dominio . "/token/";
                 if( ! file_exists( $dir_token ) ):
                     mkdir( $dir_token );
                 endif;
                 file_put_contents( "{$dir_token}{$token}.json", json_encode( [
-                    "ID"      => $dir_token,
+                    "ID"      => $token,
                     "usuario" => $id,
                     "status"  => true,
                 ] ) );

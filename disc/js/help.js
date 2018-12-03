@@ -31,12 +31,13 @@ function router(pag, HOF) {
     }
 }
 
-function alerta() {
-    query( '#alerta_sucesso' ).style.display = 'block';
+function alerta( str ) {
+    query( '#alerta' ).style.display = 'block';
+    query( '#alerta' ).innerHTML = str;
 }
 
 function closeAlerta() {
-    query( '#alerta_sucesso' ).style.display = 'none';
+    query( '#alerta' ).style.display = 'none';
 }
 
 function hover_photo(EL, ID) {
@@ -189,7 +190,7 @@ function recuperarSenha() {
     .then( x => {
         abled_form( '#formulario_recuperar-senha' );
         query( '#formulario_recuperar-senha' ).reset;
-        alerta()
+        alerta( 'Nova Senha Enviada' );
     } );
 }
 
@@ -204,6 +205,6 @@ function meCadastrar() {
         abled_form( '#formulario_me-cadastrar' );
         query( '#formulario_me-cadastrar' ).reset;
         window.location.href = '#entrar';
-        alerta()
+        alerta( 'Cadastrado Com Sucesso' );
     } );
 }

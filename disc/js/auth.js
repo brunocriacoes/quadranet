@@ -31,6 +31,7 @@ function login( MAIL, PASS, HOF )
             localStorage.profile = "";
             _profile = {};
             window.location.href = "#entrar";
+            alerta( 'Senha ou E-mail Incorretos' );
         } else {
             localStorage.token = x.token;
             window.location.href = "#perfil";
