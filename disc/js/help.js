@@ -59,6 +59,20 @@ function get_form( ID )
     }
     return obj;
 }
+
+function get_form_vio( ID )
+{
+    let form = query( ID );
+    let obj  = {};
+    for( let i = 0; i < form.length; i++ )
+    {
+        let tmp_name = form[i].id || form[i].name || 'default';
+        tmp_name = tmp_name.replace( 'vio_', '' );
+        obj[ tmp_name ] = form[i].value || form[i].innerHTML || '';
+    }
+    return obj;
+}
+
 function disabled_form( ID )
 {
     let form = query( ID );
@@ -211,4 +225,15 @@ function meCadastrar() {
         window.location.href = '#entrar';
         alerta( 'Cadastrado Com Sucesso' );
     } );
+}
+
+function  atualizarPerfil() {
+    let form = get_form_vio( '#atualizar_perfil' );
+    let uri = objToUrl( form );
+    let url = `${uri_api}/profile/?atualizar=${form.email}&${uri}${trol}`;
+    fetch( url )
+    .then( j => j.json() )
+    .then( x => {
+        log(x);
+    });
 }
