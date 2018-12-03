@@ -20,8 +20,8 @@
             "required": true
         },
         {
-            "ID"     : "sobrenome",
-            "label"  : "Sobrenome",
+            "ID"     : "apelido",
+            "label"  : "apelido",
             "value"  : "",
             "type"   : "text",
             "arr"    : [],
@@ -36,74 +36,10 @@
             "required": true
         },
         {
-            "ID"     : "telefone",
-            "label"  : "Telefone",
-            "value"  : "",
-            "type"   : "tel",
-            "arr"    : [],
-            "required": true
-        },
-        {
             "ID"     : "whatsapp",
             "label"  : "WhatsApp",
             "value"  : "",
             "type"   : "tel",
-            "arr"    : [],
-            "required": true
-        },
-        {
-            "ID"     : "password",
-            "label"  : "password",
-            "value"  : "",
-            "type"   : "password",
-            "arr"    : [],
-            "required": true
-        },
-        {
-            "ID"     : "genero",
-            "label"  : "Genero",
-            "value"  : "",
-            "type"   : "select",
-            "arr"    : [],
-            "required": true
-        },
-        {
-            "ID"     : "status",
-            "label"  : "Status",
-            "value"  : "",
-            "type"   : "select",
-            "arr"    : [],
-            "required": true
-        },
-        {
-            "ID"     : "cep",
-            "label"  : "Cep",
-            "value"  : "",
-            "type"   : "text",
-            "arr"    : [],
-            "required": true
-        },
-        {
-            "ID"     : "avrua",
-            "label"  : "Avenida / Rua / Nº",
-            "value"  : "",
-            "type"   : "text",
-            "arr"    : [],
-            "required": true
-        },
-        {
-            "ID"     : "cidade",
-            "label"  : "Cidade",
-            "value"  : "",
-            "type"   : "text",
-            "arr"    : [],
-            "required": true
-        },
-        {
-            "ID"     : "estado",
-            "label"  : "Estado",
-            "value"  : "",
-            "type"   : "select",
             "arr"    : [],
             "required": true
         },

@@ -57,6 +57,7 @@
 
     if( ! empty( $_REQUEST['atualizar'] ) ):
         $email     = $_REQUEST['atualizar'] ?? '';
+        $email     = sha1( $email );
         $user_file = __DIR__ . "/../Data/" . dominio . "/{$email}.json";
         $valida    = file_exists( $user_file );
         if( $valida ):
@@ -85,11 +86,18 @@
                 mkdir( $dir );
             endif;
         }, $dirs );
+        $index = __DIR__ . "/../Data/" . dominio . '/usuario/index.json';
+        if( ! file_exists( $index ) ):
+            file_put_contents( $index, '{}' );
+        endif;
+        $index_json = json_decode( file_get_contents( $index ) );
         $id = sha1( $_REQUEST['email'] ?? '123' );
         $id_dir = __DIR__ . "/../Data/" . dominio . "/usuario/{$id}.json";
         if( ! file_exists( $id_dir ) ):
             $_REQUEST['ID'] = $id;
             file_put_contents( $id_dir, json_encode( $_REQUEST ) );
+            $index_json->{$id} = true;
+            file_put_contents( $index, json_encode( $index_json ) );
         endif;
         echo json_encode( $_REQUEST );
         die();

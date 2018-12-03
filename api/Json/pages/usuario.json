@@ -17,7 +17,7 @@
         {
             "title"   : "Ações",
             "node"    : null,
-            "content" : "<a href=\"#usuario-novo?ID={{ID}}&_filds=ID,title,sobrenome,email,password,genero,status,cep,avrua,cidade,estado,historico\" class=\"btn-editar\">EDITAR</a><label class=\"btn-deletar\" for=\"\" onclick=\"deletar('{{ID}}')\">DELETAR</label>"
+            "content" : "<a href=\"#usuario-novo?ID={{ID}}&_filds=ID,title,apelido,email,whatsapp\" class=\"btn-editar\">EDITAR</a><label class=\"btn-deletar\" for=\"\" onclick=\"deletar('{{ID}}')\">DELETAR</label>"
         }
     ],
     "table": []
