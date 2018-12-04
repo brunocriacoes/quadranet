@@ -45,7 +45,7 @@ var vio  = {
                 <th>${ iten.name || '...' }</th>
                 <th>${ iten.tel || '...' }</th>
                 <th>${ iten.mail || '...' }</th>
-                <th><input type="checkbox"></th>
+                <th><input type="checkbox" ${ iten.status ? 'checked' : ''} onclick="join_payment( '${_profile.email || '301' }', '${iten.id || '42'}' )"></th>
             </tr>
             `);
             return acc;

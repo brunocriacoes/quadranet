@@ -56,5 +56,12 @@ function profile()
         localStorage.profile = JSON.stringify( x );
         localStorage.profile = JSON.stringify( x );
         _profile = x;
+        vio.time  = _profile.tean; //[{name tel mail}]
+        vio.perfil = {
+            nome     : _profile.name || '',
+            apelido  : _profile.nickname || '',
+            email    : _profile.email || '',
+            whatsapp : _profile.whatsapp || '',
+        };
     } );
 }

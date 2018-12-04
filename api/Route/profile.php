@@ -1,50 +1,49 @@
 <?php
 
     if( ! empty( $_REQUEST['player-buy'] ) AND ! empty( $_REQUEST['usuario'] ) ):
-        $email     = $_REQUEST['usuario'] ?? '';
-        $emai      = sha1( $emai );
-        $id_user   = $_REQUEST['player-buy'];
-
-        $user_file = __DIR__ . "/../Data/" . dominio . "/{$email}.json";
+        $email     = $_REQUEST['player-buy'] ?? '';
+        $email     = sha1( $email );
+        $id_user   = $_REQUEST['usuario'];
+        $user_file = __DIR__ . "/../Data/" . dominio . "/usuario/{$email}.json";
         $valida    = file_exists( $user_file );
         if( $valida ):
             $json             = file_get_contents( $user_file ); 
             $json             = json_decode( $json );
-            $json->history    = array_map( function( $play ) use ( $id_user ) {
+            $json->tean    = array_map( function( $play ) use ( $id_user ) {
                 if( $id_user == $play->id ):
                     $play->status = ! $play->status;
                     return $play;
                 else:
                     return $play;
                 endif;
-            }, $json->history );
+            }, $json->tean );
             file_put_contents( $user_file, json_encode( $json ) );
         endif;
         echo json_encode( [
             "error" => ! $valida,
-            "data"  => $_REQUEST,
+            "data"  => $json->tean,
         ] );
         die();
     endif;
 
     if( ! empty( $_REQUEST['add-player'] ) ):
         $email     = $_REQUEST['add-player'] ?? '';
-        $emai      = sha1( $emai );
-        $name      = $_REQUEST['name']      ?? '';
-        $tel       = $_REQUEST['tel']       ?? '';
-        $mail      = $_REQUEST['mail']      ?? '';
+        $email     = sha1( $email );
+        $name      = $_REQUEST['name']       ?? '';
+        $tel       = $_REQUEST['tel']        ?? '';
+        $mail      = $_REQUEST['mail']       ?? '';
         $id        = uniqid();
-        $user_file = __DIR__ . "/../Data/" . dominio . "/{$email}.json";
+        $user_file = __DIR__ . "/../Data/" . dominio . "/usuario/{$email}.json";
         $valida    = file_exists( $user_file );
         if( $valida ):
             $json             = file_get_contents( $user_file ); 
             $json             = json_decode( $json );
-            $json->history[]  = [
-                "id"    => $id,
-                "name"  => $name,
-                "tel"   => $tel,
-                "mail"  => $mail,
-                "staus" => false,
+            $json->tean[]     = [
+                "id"      => $id,
+                "name"    => $name,
+                "tel"     => $tel,
+                "mail"    => $mail,
+                "status"  => false,
             ];            
             file_put_contents( $user_file, json_encode( $json ) );
         endif;
@@ -58,12 +57,12 @@
     if( ! empty( $_REQUEST['atualizar'] ) ):
         $email     = $_REQUEST['atualizar'] ?? '';
         $email     = sha1( $email );
-        $user_file = __DIR__ . "/../Data/" . dominio . "/{$email}.json";
+        $user_file = __DIR__ . "/../Data/" . dominio . "/usuario/{$email}.json";
         $valida    = file_exists( $user_file );
         if( $valida ):
             $json           = file_get_contents( $user_file ); 
             $json           = json_decode( $json );
-            $json->title    = $_REQUEST['title']    ?? '';
+            $json->title    = $_REQUEST['nome']    ?? '';
             $json->apelido  = $_REQUEST['apelido']  ?? '';
             $json->whatsapp = $_REQUEST['whatsapp'] ?? '';
             file_put_contents( $user_file, json_encode( $json ) );
@@ -176,12 +175,13 @@
 
     if( ! empty( $_REQUEST['alter-pass'] ) AND ! empty( $_REQUEST['pass'] ) ):
         $email     = $_REQUEST['alter-pass'] ?? '';
-        $user_file = __DIR__ . "/../Data/" . dominio . "/{$email}.json";
+        $email     = sha1( $email );
+        $user_file = __DIR__ . "/../Data/" . dominio . "/usuario/{$email}.json";
         $valida    = file_exists( $user_file );
         if( $valida ):
             $json           = file_get_contents( $user_file ); 
             $json           = json_decode( $json );
-            $json->pass     = sha1( $_REQUEST['pass'] );
+            $json->pass     = $_REQUEST['pass'];
             file_put_contents( $user_file, json_encode( $json ) );
         endif;
         echo json_encode( [

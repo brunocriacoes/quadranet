@@ -37,7 +37,7 @@ function alerta( str ) {
 }
 
 function closeAlerta() {
-    query( '#alerta' ).style.display = 'none';
+    query( '.alerta_close' ).style.display = 'none';
 }
 
 function hover_photo(EL, ID) {
@@ -116,6 +116,13 @@ function img_default(e) { e.src = "./disc/img/default.jpg"; }
 
 function day() {
     let semana = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+    let data = new Date();
+    let day = semana[data.getDay()];
+    return day;
+}
+
+function newDay() {
+    let semana = ["1", "2", "3", "4", "5", "6", "7"];
     let data = new Date();
     let day = semana[data.getDay()];
     return day;
@@ -234,9 +241,38 @@ function  atualizarPerfil() {
     fetch( url )
     .then( j => j.json() )
     .then( x => {
-        log(x);
+
     });
 }
+
+function mudarSenha() {
+    let form = get_form( '#mudar_senha' );
+    let url = `${uri_api}/profile/?alter-pass=${_profile.email}&pass=${form.pass}${trol}`;
+    fetch( url )
+    .then( j => j.json() )
+    .then( x => {
+        alerta( 'Senha Alterada com Sucesso' );
+    } );
+}
+
+function addJogador() {
+    let form = get_form( '#add-jogador' );
+    let url  = `${uri_api}/profile/?add-player=${_profile.email}&name=${form.player_name}&tel=${form.player_tel}&mail=${form.player_mail}${trol}`;
+    fetch( url )
+    .then( j => j.json() )
+    .then( x => {
+        alerta( 'Jogador adicionado com sucesso!' );
+    } );
+}
+
+function join_payment( emailCapitao, idJogador ) {
+    let url  = `${uri_api}/profile/?player-buy=${emailCapitao}&usuario=${idJogador}${trol}`;
+    fetch( url )
+    .then( j => j.json() )
+    .then( x => {
+    } );
+}
+
 async function buy()
 {
     let id   = new Date().getTime();
@@ -267,13 +303,13 @@ async function buy()
         fetch( path )
         .then( x => x.json() )
         .then( x => {
-            log( x );
+
         } );
     } );
     let path = `${uri_api}/buy/?register=${id}&cart=${cart}${trol}`;
     fetch( path )
     .then( x => x.json() )
     .then( x => {
-        log( x );
+
     } );
 }

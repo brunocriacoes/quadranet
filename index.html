@@ -343,11 +343,11 @@
             <a href="#meu-time">Meu time</a>
             <a href="#sair">Sair</a>
         </div>
-        <form action="javascript:void(0)" method="POST" class="form form-short box">
+        <form action="javascript:void(0)" method="POST" class="form form-short box" id="mudar_senha">
             <h1 class="text-center">Muda Senha</h1>
-            <input type="password" class="field ico ico-mail" required placeholder="nova senha">
-            <input type="password" class="field ico ico-mail" required placeholder="confirmar nova senha">
-            <input type="submit" class="btn btn-sucess btn-center" value="salvar">
+            <input type="password" class="field ico ico-mail" name="password" required placeholder="nova senha">
+            <input type="password" class="field ico ico-mail" name="pass" required placeholder="confirmar nova senha">
+            <input onclick="mudarSenha()" type="submit" class="btn btn-sucess btn-center" value="salvar">
         </form>
     </section>
 
@@ -398,13 +398,6 @@
                 <tbody id="vio_time">
                     <tr>
                         <th><img src="./disc/ico/delete.png" class="trash"></th>
-                        <th>Ranheta</th>
-                        <th>+00 (00) 0 0000-0000</th>
-                        <th>contato@gmail.com</th>
-                        <th><input type="checkbox"></th>
-                    </tr>
-                    <tr>
-                        <th><img src="./disc/ico/delete.png" class="trash"></th>
                         <th>bolinha</th>
                         <th>+00 (00) 0 0000-0000</th>
                         <th>contato@gmail.com</th>
@@ -412,11 +405,11 @@
                     </tr>
                 </tbody>
             </table>
-            <form action="javascript:void(0)" method="POST" class="form" onsubmit="add_player()">
+            <form action="javascript:void(0)" method="POST" class="form" id="add-jogador" onsubmit="add_player()">
                 <input type="text" class="field" id="player_name" placeholder="nome ou apelido">
                 <input type="text" class="field" id="player_tel" placeholder="whatsapp">
                 <input type="text" class="field" id="player_mail" placeholder="email">
-                <input type="submit" class="btn btn-sucess" value="adicionar">
+                <input onclick="addJogador()" type="submit" class="btn btn-sucess" value="adicionar">
             </form>
         </div>
     </section>

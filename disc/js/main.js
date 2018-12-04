@@ -1,8 +1,8 @@
 'use strict';
-let bug = debug ? '?bug=true' : '';
+let bug  = debug ? '?bug=true' : '';
 fetch( url_api + bug )
     .then(x => x.json())
-    .then(y => {
+    .then(y => {        
         if( y.length == 0 ) {
             window.location.href = './manutencao.html';
         }
@@ -89,8 +89,9 @@ fetch( url_api + bug )
                 let conj        = Object.values(agendas.results);
                 let para        = parametros();
                 let quadra      = conjunto.find(p => p.ID == para.id);
-                vio.agenda      = conj.map(y => ({ ID: quadra.ID, name: quadra.title, init: y.inicio, end: y.final, mensal: quadra.mensal, avulso: quadra.avulso, idAgenda: date().split('/').reverse().join('-') + '-' + y.inicio.replace(':', '-') }));
-                let comp        = Object.values(tag);
+                vio.agenda      = conj.map(y => ({ ID: quadra.ID, name: quadra.title, init: y.inicio, end: y.final, mensal: quadra.mensal, avulso: quadra.avulso, idAgenda: date().split('/').reverse().join('-') + '-' + y.inicio.replace(':', '-') + '-' + newDay() }));
+                let category    = y.tag.results;
+                let comp        = Object.values(category);
                 let tags        = comp.find(p => p.ID == quadra.tag);
                 let data        = date();
                 let dia         = day();
