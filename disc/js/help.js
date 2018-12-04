@@ -237,3 +237,43 @@ function  atualizarPerfil() {
         log(x);
     });
 }
+async function buy()
+{
+    let id   = new Date().getTime();
+    let cart = {
+        usuario  : _profile.id       || '',
+        title    : _profile.name     || '',
+        email    : _profile.email    || '',
+        whatsapp : _profile.whatsapp || '',
+        cart     : _vio.cart         || [],
+        status   : 1,
+        payment  : 1
+    };
+    cart = JSON.stringify( cart );
+    cart = encodeURI( cart );
+    _vio.cart.forEach( x => {
+        let obj = {
+            _dominio: dominio,
+            _method: 'POST',
+            ID: x.idAgenda,
+            usuario: _profile.id,
+            quadra: x.id,
+            tipocontratacao: x.status,
+            final: x.init,
+            _token: null,
+        };
+        let uri = objToUrl( obj );
+        let path = `${uri_api}/reserva/?${uri}${trol}`;
+        fetch( path )
+        .then( x => x.json() )
+        .then( x => {
+            log( x );
+        } );
+    } );
+    let path = `${uri_api}/buy/?register=${id}&cart=${cart}${trol}`;
+    fetch( path )
+    .then( x => x.json() )
+    .then( x => {
+        log( x );
+    } );
+}

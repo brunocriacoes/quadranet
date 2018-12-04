@@ -50,7 +50,7 @@ function logout()
 }
 function profile()
 {
-    fetch( `${uri_api}/profile?token=${localStorage.token }` )
+    fetch( `${uri_api}/profile?token=${localStorage.token }${trol}` )
     .then( j => j.json() )
     .then( x => {
         localStorage.profile = JSON.stringify( x );

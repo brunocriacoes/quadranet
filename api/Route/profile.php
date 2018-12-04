@@ -130,8 +130,8 @@
                     $j  = json_decode( $j );
                     return $j;
                 }, $loop );
-                $hitory = array_filter( $hitory, function( $item ) use ( $user_id ) { return $item->usuario == $user_id; } );
-                $hitory = array_values( $hitory );
+                @$hitory = array_filter( $hitory, function( $item ) use ( $user_id ) { return $item->usuario == $user_id; } );
+                @$hitory = array_values( $hitory );
             endif;
             echo json_encode( [
                 "id"          => $json->id        ?? "12QDSW234DASD231SD",
