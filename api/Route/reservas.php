@@ -19,13 +19,15 @@
         $quadra  =  $_REQUEST['quadra'] ?? '';
         $file    = __DIR__ . "/../Data/{$dominio}usuario/{$ID}.json";
         if ( file_exists( $file ) ):
-            $json = json_decode( file_get_contents( $file ) );
+            $json       = json_decode( file_get_contents( $file ) );
+            @$json->tean = (array) $json->tean ?? [];
+            @$json->tean = array_values( $json->tean );
             return [
                 "title" =>  $json->title ?? 'usuário',
                 "tel"   =>  $json->zap ?? '(00) 0 0000-0000',
                 "email" =>  $json->email ?? 'usuario@gmail.com',
-                "team"  =>  $json->team ?? [ [ "name" => "usuário", "tel" => "(00) 0 0000-0000", "email" => "usuario@gmail.com" ], [ "name" => "usuário", "tel" => "(00) 0 0000-0000", "email" => "usuario@gmail.com" ], [ "name" => "usuário", "tel" => "(00) 0 0000-0000", "email" => "usuario@gmail.com" ] ],
-                "numberTeam" => count( $json->team ?? [] )
+                "team"  =>  $json->tean ?? [ [ "name" => "usuário", "tel" => "(00) 0 0000-0000", "email" => "usuario@gmail.com" ], [ "name" => "usuário", "tel" => "(00) 0 0000-0000", "email" => "usuario@gmail.com" ], [ "name" => "usuário", "tel" => "(00) 0 0000-0000", "email" => "usuario@gmail.com" ] ],
+                "numberTeam" => @count( $json->tean ?? [] )
             ];
         endif;
         return [];

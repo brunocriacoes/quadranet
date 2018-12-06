@@ -207,9 +207,9 @@ function mostrarDetalhes( OBJ, ID, usuario ) {
     let result = OBJ.team.reduce( (a,x) => {
         a += 
         `
-        <span>${x.name}</span>
-        <span>${x.tel}</span>
-        <span>${x.email}</span>
+        <span>${x.name  || '---'}</span>
+        <span>${x.tel   || '---'}</span>
+        <span>${x.email || '---'} ${ ( x.status ) ? 'pago' : 'em aberto' } </span>
         `;
         return a;
     }, '' );
@@ -231,6 +231,7 @@ function mostrarDetalhes( OBJ, ID, usuario ) {
         <span>Código</span>
         <span>Status</span>
         <span>Data</span>
+        
         <label class="fecharhistorico" for="visualizar">Fechar</label>
     </div>
     ` );
