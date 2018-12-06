@@ -133,3 +133,11 @@ router('detalhe', z => {
             vio.detalhe = { title: conjquadra.title, text: conjquadra.resumo, img_1: conjquadra.foto, img_2: conjquadra.foto1, img_3: conjquadra.foto2, img_4: conjquadra.foto3, img_5: conjquadra.foto4, ID: conjquadra.ID };
         });
 });
+
+router( 'historico-compras', p => {
+    let profile = localStorage.profile;
+    profile = JSON.parse(profile);
+    log(profile);
+    let historico = profile.history.map( x => ({ id: x.transacao || '', status: x.payment || '', day: x.data || '', price: x.price || '11'}) );
+    vio.historico = historico
+} );

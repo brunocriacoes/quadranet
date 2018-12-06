@@ -13,11 +13,14 @@
         $id                         = $_REQUEST['register'] ?? '';
         $cart                       = urldecode( $_REQUEST['cart'] ?? '{}' );
         $cart                       = str_replace( '\\', '', $cart );
-        $file_cart                  = __DIR__ . "/../Data/" . dominio . "/buy/{$id}.json";
+        $cart                       = json_decode($cart);
         $transaction                = $_REQUEST['register'] ?? sha1( uniqid() );
+        $cart->data = Date('d/m/y');
+        $cart->transacao = $transaction;
+        $file_cart                  = __DIR__ . "/../Data/" . dominio . "/buy/{$id}.json";
         $index_json->{$transaction} = true;
         file_put_contents( $index, json_encode( $index_json ) );
-        file_put_contents( $file_cart, $cart );        
+        file_put_contents( $file_cart, json_encode( $cart ) ); 
     endif;
     echo json_encode( [
         "error"   => false,
