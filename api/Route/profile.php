@@ -1,5 +1,30 @@
 <?php
 
+    if( ! empty( $_REQUEST['player-del'] ) AND ! empty( $_REQUEST['jogador'] ) ):
+        $email     = $_REQUEST['player-del'] ?? '';
+        $email     = sha1( $email );
+        $id_user   = $_REQUEST['jogador'];
+        $user_file = __DIR__ . "/../Data/" . dominio . "/usuario/{$email}.json";
+        $valida    = file_exists( $user_file );
+        if( $valida ):
+            $json             = file_get_contents( $user_file ); 
+            $json             = json_decode( $json );
+            $json->tean       = array_filter(
+                $json->tean,
+                function( $item ) use ( $id_user )
+                {
+                    return $item->id != $id_user;
+                }
+            );
+            file_put_contents( $user_file, json_encode( $json ) );
+        endif;
+        echo json_encode( [
+            "error" => ! $valida,
+            "data"  => $json->tean,
+        ] );
+        die();
+    endif;
+
     if( ! empty( $_REQUEST['player-buy'] ) AND ! empty( $_REQUEST['usuario'] ) ):
         $email     = $_REQUEST['player-buy'] ?? '';
         $email     = sha1( $email );
@@ -123,46 +148,25 @@
             $json    = json_decode( $json );
             $dir_buy = __DIR__ . "/../Data/" . dominio . "/buy/";
             if( file_exists( $dir_buy ) ):
-                $loop   = glob( "{$dir_buy}*.json*" );
+                $loop   = glob( "{$dir_buy}*.json*" );                
                 $hitory = array_map( function( $iten ) {
                     $j  = file_get_contents( $iten );
                     $j  = json_decode( $j );
                     return $j;
                 }, $loop );
-                @$hitory = array_filter( $hitory, function( $item ) use ( $user_id ) { return $item->usuario == $user_id; } );
+                @$hitory = array_filter( $hitory, function( $item ) use ( $user_id ) { return sha1( $item->email ) == $user_id; } );
                 @$hitory = array_values( $hitory );
             endif;
             echo json_encode( [
                 "id"          => $json->id        ?? "12QDSW234DASD231SD",
-                "name"        => $json->title      ?? "name",
-                "nickname"    => $json->apelido  ?? "nickname",
+                "name"        => $json->title     ?? "name",
+                "nickname"    => $json->apelido   ?? "nickname",
                 "email"       => $json->email     ?? "email@gmail.com",
                 "whatsapp"    => $json->whatsapp  ?? "+0 (00) 0 0000-0000",
-                "history" => [ 
-                    $hitory ?? []
-                    // [                        
-                    //     "id"           => "QWF1SAD123ASD123",
-                    //     "transaction"  => "1ASDASQQC678J",
-                    //     "usuario"      => "1ASDASQQC678aasddfhh",
-                    //     "status"       => 1,
-                    //     "day"          => "2018-11-09-09-00",
-                    //     "price"        => "200",
-                    //     "cart"         => [
-                    //         [
-                    //             "name"      => "tubarão",
-                    //             "id_quadra" => "QWF1SAD123ASD123",
-                    //             "avulso"    => "",
-                    //             "init"      => "",
-                    //             "end"       => "",
-                    //             "mensak"    => "",
-                    //             "type"      => 1
-                    //         ]
-                    //     ],                        
-                    // ],
-                 ],
-                "tean"     => $json->tean ?? [], // [ [ "name" => "Ranheta", "tel" => "", "mail" => "", ] ],
-                "error"    => (boolean) $valida,
-                "mensage"  => $valida ? "token valido" : "token invalido"
+                "history"     => $hitory          ?? [],
+                "tean"        => $json->tean      ?? [], 
+                "error"       => (boolean) $valida,
+                "mensage"     => $valida ? "token valido" : "token invalido"
             ] );
         else:
             echo json_encode( [
