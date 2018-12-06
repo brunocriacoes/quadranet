@@ -38,8 +38,6 @@ var vio  = {
     set time( el )
     {
         _vio.time.push( ...el );
-        log(el);
-        log(vio.time);
         query( '#vio_time' ).innerHTML = _vio.time.reduce( (acc , iten ) => {
             acc.push( `
             <tr id="vio_player_${iten.id}">
@@ -75,7 +73,7 @@ var vio  = {
             return `
             <tr>
                 <td>${ x.id || '---' }</td>
-                <td>${ x.status || '---' }</td>
+                <td>${ (x.status ) ? 'Aguardando Pagamento' : 'Pago' }</td>
                 <td>${ x.day || '--/--/----' }</td>
                 <td>R$ ${ x.price || '00,00' }</td>
             </tr>

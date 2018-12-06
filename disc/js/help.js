@@ -121,7 +121,7 @@ function day() {
     return day;
 }
 
-function newDay() {
+function newDay( now ) {
     let semana = ["1", "2", "3", "4", "5", "6", "7"];
     let data = new Date();
     let day = semana[data.getDay()];
@@ -134,7 +134,9 @@ function set_date( now ) {
     let semana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
     let newdate = new Date( dia );
     let day = semana[newdate.getDay()];
-    let agendaUp = vio.agenda.map( x => ({ ...x,idAgenda: dia + '-' + x.init.replace( ':', '-' ) }) );
+    let newSemana = ["1", "2", "3", "4", "5", "6", "7"];
+    let novodia = newSemana[newdate.getDay()];
+    let agendaUp = vio.agenda.map( x => ({ ...x,idAgenda: dia + '-' + x.init.replace( ':', '-' ) + '-' + novodia }) );
     
     vio.agenda_info = { ..._vio.agenda_info, day: day, date: data };
     vio.agenda = [ ...agendaUp ];
@@ -262,6 +264,7 @@ function addJogador() {
     .then( j => j.json() )
     .then( x => {
         alerta( 'Jogador adicionado com sucesso!' );
+        query('#add-jogador').reset();
     } );
 }
 
