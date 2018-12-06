@@ -812,7 +812,7 @@ p {
     z-index: 999;
 }
 
-.alerta {
+#alerta_close {
     margin-left: 15px;
     float: right;
     color: white;

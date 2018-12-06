@@ -33,11 +33,11 @@ function router(pag, HOF) {
 
 function alerta( str ) {
     query( '#alerta' ).style.display = 'block';
-    query( '#alerta' ).innerHTML = str;
+    query( '#alerta_msg' ).innerHTML = str;
 }
 
 function closeAlerta() {
-    query( '.alerta_close' ).style.display = 'none';
+    query( '#alerta' ).style.display = 'none';
 }
 
 function hover_photo(EL, ID) {
@@ -313,3 +313,12 @@ async function buy()
 
     } );
 }
+
+function removePlayer( emailCapitao, idJogador ) {
+    query( `#vio_player_${idJogador}` ).style.display = 'none';
+    let url  = `${uri_api}/profile?player-del=${emailCapitao}&jogador=${idJogador}${trol}`;
+    fetch( url )
+    .then( j => j.json() )
+    .then( x => {
+    } );
+} 

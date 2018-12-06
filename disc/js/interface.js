@@ -38,10 +38,12 @@ var vio  = {
     set time( el )
     {
         _vio.time.push( ...el );
+        log(el);
+        log(vio.time);
         query( '#vio_time' ).innerHTML = _vio.time.reduce( (acc , iten ) => {
             acc.push( `
-            <tr>
-                <th><img src="./disc/ico/delete.png" class="trash"></th>
+            <tr id="vio_player_${iten.id}">
+                <th onclick="removePlayer( '${_profile.email || '301' }', '${iten.id || '42'}' )"><img src="./disc/ico/delete.png" class="trash"></th>
                 <th>${ iten.name || '...' }</th>
                 <th>${ iten.tel || '...' }</th>
                 <th>${ iten.mail || '...' }</th>
