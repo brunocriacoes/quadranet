@@ -203,7 +203,8 @@ function deletareserva( id,usuario ) {
     } );
 }
 
-function mostrarDetalhes( OBJ, ID, usuario ) {
+function mostrarDetalhes( OBJ, ID, usuario ) 
+{
     let result = OBJ.team.reduce( (a,x) => {
         a += 
         `
@@ -213,7 +214,11 @@ function mostrarDetalhes( OBJ, ID, usuario ) {
         `;
         return a;
     }, '' );
-
+    let history = OBJ.history.map( x => `
+        <span>${x.transacao || '...'}</span>
+        <span>${( x.payment ) ? 'aguardando pagamento' : 'pago' }</span>
+        <span>${x.data || '--/--/----'}</span>
+    ` ).join('');
     drawPop( 'Detalhes do jogador', 
     `
     <b>Nome: </b>${OBJ.title}</br>
@@ -231,11 +236,12 @@ function mostrarDetalhes( OBJ, ID, usuario ) {
         <span>Código</span>
         <span>Status</span>
         <span>Data</span>
-        
+        ${history || '' }
         <label class="fecharhistorico" for="visualizar">Fechar</label>
     </div>
     ` );
 }
+
 function toMinutes( time = '00:00' )
 {
     time = time.split( ':' );
