@@ -121,10 +121,9 @@ function day() {
     return day;
 }
 
-function newDay( now ) {
-    let semana = ["1", "2", "3", "4", "5", "6", "7"];
+function newDay() {
     let data = new Date();
-    let day = semana[data.getDay()];
+    let day = data.getDay();
     return day;
 }
 
