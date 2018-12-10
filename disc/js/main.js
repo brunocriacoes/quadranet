@@ -2,7 +2,7 @@
 let bug  = debug ? '?bug=true' : '';
 fetch( url_api + bug )
     .then(x => x.json())
-    .then(y => {        
+    .then(y => {
         if( y.length == 0 ) {
             window.location.href = './manutencao.html';
         }
@@ -99,6 +99,16 @@ fetch( url_api + bug )
                 reserva();
             }
         });
+
+        if( y.visual !== undefined ) 
+        {
+            let visual = y.visual;
+            let sobre = Object.values(visual.results)
+            .map( x => {
+                query('#adress').innerHTML = `${x.contato}`;
+                query('#whatsapp').innerHTML = `${x.tel}`;                
+            } );
+        }
 
         let items = localStorage.cart;
         items     = JSON.parse(items);
