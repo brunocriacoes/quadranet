@@ -1,6 +1,6 @@
 'use strict';
 let bug  = debug ? '?bug=true' : '';
-fetch( url_api + bug )
+fetch( url_api + bug + chache )
     .then(x => x.json())
     .then(y => {        
         if( y.length == 0 ) {

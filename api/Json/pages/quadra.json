@@ -12,7 +12,7 @@
         {
             "title"   : "Ações",
             "node"    : null,
-            "content" : "<a href=\"#quadra-novo?ID={{ID}}&_filds=ID,title,tag,resumo,descricao,foto,foto1,foto2,foto3,foto4\" class=\"btn-editar\">EDITAR</a><label class=\"btn-deletar\" for=\"\" onclick=\"deletar('{{ID}}')\">DELETAR</label>"
+            "content" : "<a href=\"#quadra-novo?ID={{ID}}&_filds=ID,title,tag,resumo,descricao,foto,foto1,foto2,foto3,foto4,mensal,resumo\" class=\"btn-editar\">EDITAR</a><label class=\"btn-deletar\" for=\"\" onclick=\"deletar('{{ID}}')\">DELETAR</label>"
         }
     ],
     "table": []

@@ -39,7 +39,9 @@
     if ( empty( $_REQUEST['status'] ) ) $_REQUEST['status']       = 1;
     if ( !empty( $_REQUEST['status'] ) ) $_REQUEST['status']      = (int) $_REQUEST['status'];
     if ( !empty( $_REQUEST['cep'] ) ) $_REQUEST['cep']            = str_replace( ['-',' '], ['',''], $_REQUEST['cep'] );
-    
+    if( !empty( $_REQUEST['pass'] ) OR !empty( $_REQUEST['password'] ) ):
+        $_REQUEST['ID'] = sha1( $_REQUEST['email'] ?? uniqid() );
+    endif;
     $_REQUEST['origin'] = $_SERVER['HTTP_REFERER'] ?? "não definido";    
     
     if( !empty( $_REQUEST['uri'] ) ):

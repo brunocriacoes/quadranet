@@ -191,7 +191,7 @@
             $pass_valid = false; 
             if ( $user_exist ):
                 $user_tmp   = json_decode( file_get_contents( $user_file ) );
-                $pass_valid = $user_tmp->password === $senha ;
+                $pass_valid = $user_tmp->password ?? $user_tmp->pass  === $senha ;
             endif;
 
             if ( $user_exist AND $pass_valid ):

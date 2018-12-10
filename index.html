@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br" prefix="og: http://ogp.me/ns#">
-
 <head>
+    <!-- ?token4768ASD6544656ASD55 -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Quadra</title>
@@ -12,8 +12,8 @@
     <meta property="og:type" content="article.article" />
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
-    <link rel="stylesheet" type="text/css" media="screen" href="disc/css/style.css" />
-    <link rel="stylesheet" type="text/css" media="( max-width: 760px )" href="disc/css/mobile.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="disc/css/style.css?token4768ASD6544656ASD55" />
+    <link rel="stylesheet" type="text/css" media="( max-width: 760px )" href="disc/css/mobile.css?token4768ASD6544656ASD55" />
     <link rel="manifest" href="./manifest.json">
     <link rel="shortcut icon" href="./disc/logo/ico.png" type="image/x-icon">
 
@@ -30,6 +30,7 @@
 
     <script>
         const debug       = true;
+        const chache      = '&cache=' + new Date().getTime();
         const trol        = debug ? '&bug=true' : '';
         const http        = window.location.protocol;
         const dominio     = window.location.hostname;
@@ -40,6 +41,7 @@
     </script>
 
     <style id="personalizar"></style>
+    <link rel="stylesheet" href="./api/css">
 </head>
 
 <body>
@@ -560,12 +562,12 @@
         </div>
     </footer>
 
-    <script src="./disc/js/auth.js"></script>
-    <script src="./disc/js/help.js"></script>
-    <script src="./disc/js/interface.js"></script>
-    <script src="./disc/js/todo.js"></script>
-    <script src="./disc/js/cart.js"></script>
-    <script src="./disc/js/main.js"></script>
+    <script src="./disc/js/auth.js?token4768ASD6544656ASD55"></script>
+    <script src="./disc/js/help.js?token4768ASD6544656ASD55"></script>
+    <script src="./disc/js/interface.js?token4768ASD6544656ASD55"></script>
+    <script src="./disc/js/todo.js?token4768ASD6544656ASD55"></script>
+    <script src="./disc/js/cart.js?token4768ASD6544656ASD55"></script>
+    <script src="./disc/js/main.js?token4768ASD6544656ASD55"></script>
     <script>
         if (navigator.serviceWorker) {
             // navigator.serviceWorker.register( './disc/js/sw.js' );
