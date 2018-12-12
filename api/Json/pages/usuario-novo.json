@@ -2,6 +2,7 @@
     "title": "Capitão",
     "type" : "form",
     "db"   :  "usuario",
+    "to"    : "dash.html#usuario",
     "form" : [
         {
             "ID"     : "ID",

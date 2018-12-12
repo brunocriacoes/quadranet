@@ -2,6 +2,7 @@
     "title": "Modalidade",
     "type" : "form",
     "db"   :  "tag",
+    "to"    : "dash.html#tag",
     "form" : [
         {
             "ID"     : "ID",

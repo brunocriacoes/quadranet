@@ -2,6 +2,7 @@
     "title": "Serviços",
     "type" : "form",
     "db"   :  "servico",
+    "to"    : "dash.html#servico?ID=servico&_filds=ID,title,resumo,html",
     "form" : [
         {
             "ID"     : "ID",
@@ -9,7 +10,7 @@
             "value"  : "servico",
             "type"   : "hidden",
             "arr"    : [],
-            "required": true
+            "required": false
         },
         {
             "ID"     : "title",
@@ -17,7 +18,7 @@
             "value"  : "",
             "type"   : "text",
             "arr"    : [],
-            "required": true
+            "required": false
         }, 
         {
             "ID"     : "resumo",
@@ -25,7 +26,7 @@
             "value"  : "",
             "type"   : "textarea",
             "arr"    : [],
-            "required": true
+            "required": false
         },
         {
             "ID"     : "html",
@@ -33,7 +34,7 @@
             "value"  : "",
             "type"   : "editor",
             "arr"    : [],
-            "required": true
+            "required": false
         },
         {
             "ID"     : "salvar",
@@ -41,7 +42,7 @@
             "value"  : "salvar",
             "type"   : "submit",
             "arr"    : [],
-            "required": true
+            "required": false
         }
     ]
 }

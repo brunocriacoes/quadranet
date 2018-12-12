@@ -2,6 +2,7 @@
     "title": "Quem Somos",
     "type" : "form",
     "db"   :  "quem",
+    "to"    : "dash.html#quem-somos?ID=quem&_filds=ID,title,resumo,html,foto,foto1,foto2,foto3,foto4",
     "form" : [
         {
             "ID"     : "ID",

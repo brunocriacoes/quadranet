@@ -52,7 +52,7 @@
         "ID"   : 8,
         "nome" : "seviço",
         "ico"  : "working",
-        "url"  : "#servico?ID=servico&_filds=ID,title,resumo,html,foto,foto1,foto2,foto3,foto4",
+        "url"  : "#servico?ID=servico&_filds=ID,title,resumo,html",
         "box"  : 1
     },
     {

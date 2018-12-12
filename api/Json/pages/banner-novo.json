@@ -2,6 +2,7 @@
     "title": "Banner",
     "type" : "form",
     "db"   :  "banner",
+    "to"    : "dash.html#banner",
     "form" : [
         {
             "ID"     : "ID",
@@ -25,7 +26,7 @@
             "value"  : "",
             "type"   : "text",
             "arr"    : [],
-            "required": true
+            "required": false
         },
         {
             "ID"     : "foto",
@@ -41,7 +42,7 @@
             "value"  : "Salvar",
             "type"   : "submit",
             "arr"    : [],
-            "required": true
+            "required": false
         }
     ]
 }

@@ -14,6 +14,8 @@
     const api   = new Api( uri_api, uri_admin );
     api.privado();
 
+    var pikachu;
+
     api.send( 'fixos/user', '', x => { 
         let inter = new Interface(x);
         let config = query('#menu-user');           
@@ -74,14 +76,19 @@
             }
         }, 1000 );
     });
-
+   
     const router = new Router();
     const palco  = document.querySelector( '#content-router' );
     const rum = () => {
         let page = router.page();
+        if( page == 'sair' ) {
+            window.location.href = "index.html";        
+            localStorage.clear();
+        }
         api.send( `pages/${page}`, `_dominio=${localStorage.dominio}`, x => {
             document.querySelector( 'title' ).innerHTML = x.title || 'ADMIN';
             palco.innerHTML = '';
+            pikachu = x.to || '';
             switch ( x.type ) 
             {
                 case 'table':
@@ -114,6 +121,7 @@
                     palco.innerHTML += x.html;
                     printAgenda();                    
                 break;
+               
                 default:
                     printHome();
                 break;
@@ -126,6 +134,7 @@
     async function sendApi( x ) {
         let rota = new Router();
         let page = rota.page().split( '-' )[0];
+        
         let metodo = 'POST';
         let parametros = router.params();
         let apifoto = `${uri_api}uploads/?_dominio=${localStorage.dominio}`;
@@ -191,7 +200,11 @@
         api.send( page, `${ x }&_method=${metodo}&_dominio=${localStorage.dominio || ''}&${nomefotos}` , z => {
             FILES = [];
             POS = [];
-            window.history.go( -1 );
+            if (  pikachu == '' ) {
+                window.history.go( -1 );
+            }else {
+                window.location.href = pikachu;
+            }
         } );
     }
     
@@ -233,11 +246,7 @@
         } );
     }
 
-    let  paginaatual = router.page();
-    if( paginaatual == 'sair' ) {
-        window.location.href = "";
-        localStorage.clear();
-    }
+    
 
     if( localStorage.dominio != '' ) {
         query('#nome-dominio').innerHTML = localStorage.dominio;
@@ -265,6 +274,7 @@
 
     function drawQuadra() {
         api.send( 'tag', `_dominio=${localStorage.dominio}&_filds=title,color,ID`, y => {
+           
             var tipo = y.reduce( (a,x) => {
                 a[x.ID] = {
                     text: x.title,
@@ -320,7 +330,6 @@
 
     async function printHome() {
         api.send( 'quadra', `_method=GET&_dominio=${localStorage.dominio}&_filds=title`, x => {
-            log(x);
             if(x.length) {
                 window.location.href=`dash.html#agenda?ID=${x[0].ID}&title=${x[0].title}`;
             } else {

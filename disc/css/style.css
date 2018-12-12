@@ -31,13 +31,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 .header {
     align-items: center;
-    width: 100%;
-    position: absolute;
+    width: 100vw;
+    position: fixed;
     top: 0;
     left: 0;
     height: 50px;
     background: var(--theme);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    z-index: 999;
 }
 .menu-mobile {
     display: grid;

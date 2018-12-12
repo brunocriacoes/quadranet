@@ -2,6 +2,7 @@
     "title": "Quadra",
     "type" : "form",
     "db"   :  "quadra",
+    "to"    : "dash.html#quadra",
     "form" : [
         {
             "ID"     : "ID",
@@ -21,7 +22,7 @@
         },
         {
             "ID"     : "tag",
-            "label"  : "Categoria",
+            "label"  : "Modalidade",
             "value"  : "",
             "type"   : "select",
             "arr"    : [],

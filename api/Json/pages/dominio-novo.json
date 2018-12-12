@@ -2,6 +2,7 @@
     "title": "Dominio",
     "type" : "form",
     "db"   :  "dominio",
+    "to"    : "dash.html#dominio",
     "form" : [
         {
             "ID"     : "ID",

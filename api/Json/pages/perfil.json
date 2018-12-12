@@ -2,6 +2,7 @@
     "title": "Minha Conta",
     "type": "form",
     "db"   :  "user",
+    "to"    : "dash.html#user",
     "form": [
         {
             "ID"     : "ID",

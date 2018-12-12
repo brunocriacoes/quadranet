@@ -39,7 +39,7 @@
 	height: 100vh;
 	background: #000D;
 	transition: all .3s ease;
-	z-index: 99;
+	z-index: 9999;
 }
 #menu_closer label{
 	display: block;
@@ -69,11 +69,16 @@
     margin: 30px;
 }
 .menu-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
     display: grid;
     grid-template-columns: 32px 32px 1fr 32px 32px;
     align-items: center;
     grid-gap: 30px;
     background-color: var( --primary );
+    z-index: 999;
 }
 .menu-mobile_link {
     filter: invert( 100% );
@@ -151,8 +156,6 @@
     margin: 20px;
 }
 .menu-vertical__avatar img {
-    border: 3px solid #fff;
-    border-radius: 50%;
     width: 150px;
     display: block;
     margin-left: auto;

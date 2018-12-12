@@ -89,12 +89,12 @@ const drawRow = y => {
 }
 const ano = JSON.parse( localStorage.calendario );
 const mes = ano.find( x => x.ID == localStorage.data.split( '-' )[1] );
-
+var tipo_gluglu;
 function reservar( ID, tipo, final ) {
     api.send( 'selects/usuario', `_dominio=${localStorage.dominio}`, x => {
         let option = x.map( EL => `<option value="${EL.id}">${EL.text}</option>` ).join( '' );
         drawPop( 'Cadastre um horário', 
-        `<form class="form" method="post" action="javascript:void(0)" onsubmit="gravareserva( '${ID}','${localStorage.dominio}','${tipo}', '${final}' )">
+        `<form class="form" method="post" action="javascript:void(0)" onsubmit="gravareserva( '${ID}','${localStorage.dominio}','${tipo_gluglu}', '${final}' )">
             <label for="usuario">Buscar Capitão:</label>
             <input type="search" id="usuario" name="usuario" list="listauser" onchange="setUser( this.value )">
             <datalist name="listauser" id="listauser" >
@@ -111,7 +111,8 @@ function reservar( ID, tipo, final ) {
             <label class="novo-capitao" for="password">Senha</label>
             <input class="novo-capitao" type="password" id="password" name="password">
             <label for="contratacao">Selecione um Tipo de Contratação:</label>
-            <select name="contratacao" id="contratacao">
+            <select name="contratacao" id="contratacao" onchange=" tipo_gluglu = this.value " required>
+                <option value="">Escolha o tipo de Contratação</option>
                 <option value="1">Avulso</option>
                 <option value="2">Mensal</option>
             </select>       
@@ -130,7 +131,7 @@ function gravareserva( id,dominio,tipo, final ) {
     let rota = new Router();
     let parametros = router.params();
     if( USER != '1' ) {
-        api.send( 'reserva', `_dominio=${dominio}&_method=POST&ID=${id}&usuario=${USER}&quadra=${parametros.ID}&tipocontratacao=${tipo}&final={$final || '00:00'}`, x=> {
+        api.send( 'reserva', `_dominio=${dominio}&_method=POST&ID=${id}&usuario=${USER}&quadra=${parametros.ID}&tipocontratacao=${tipo_gluglu}&final={$final || '00:00'}`, x=> {
             atualizarpagina();
         } );       
     }else{

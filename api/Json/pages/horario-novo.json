@@ -2,6 +2,7 @@
     "title": "Horario",
     "type" : "form",
     "db"   :  "horario",
+    "to"    : "dash.html#agenda",
     "form" : [
         {
             "ID"     : "ID",

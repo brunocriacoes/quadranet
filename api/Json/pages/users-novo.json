@@ -2,6 +2,7 @@
     "title": "Administrador",
     "type" : "form",
     "db"   :  "users",
+    "to"    : "dash.html#users",
     "form" : [
         {
             "ID"     : "ID",
