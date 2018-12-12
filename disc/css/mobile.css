@@ -41,6 +41,7 @@
 	transition: all .3s ease;
 	z-index: 9999;
 }
+
 #menu_closer label{
 	display: block;
 	position: absolute;

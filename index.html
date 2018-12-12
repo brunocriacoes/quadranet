@@ -33,11 +33,12 @@
         const chache      = '&cache=' + new Date().getTime();
         const trol        = debug ? '&bug=true' : '';
         const http        = window.location.protocol;
-        const dominio     = window.location.hostname;
+        const dominio     = window.location.hostname.replace( 'www.', '' );
         const base        = `${http}//${dominio}`;
         const uri_api     = `${http}//${dominio}/api`;
         const url_api     = `${http}//${dominio}/api/get/${dominio}`;
         const url_storage = `${http}//${dominio}/api/Data/${dominio}/uploads`;
+        const menu_2      = document.querySelector( '#menu' );
     </script>
 
     <style id="personalizar"></style>
@@ -53,11 +54,11 @@
                 <img id="vio_logo_2" src="./disc/img/default.jpg" onerror="img_default( this )">
                 <span id="vio_title">Nome da empresa</span>
             </div>
-            <a href="#" class="link-menu">Inicio</a>
-            <a href="#quem-somos" class="link-menu">quem somos</a>
-            <a href="#servicos" class="link-menu">serviços</a>
-            <a href="#quadras" class="link-menu">quadras</a>
-            <a href="#contato" class="link-menu">contato</a>
+            <a href="#" onclick="menu.click()" class="link-menu">Inicio</a>
+            <a href="#quem-somos" onclick="menu.click()" class="link-menu">Quem somos</a>
+            <a href="#servicos" onclick="menu.click()" class="link-menu">Serviços</a>
+            <a href="#quadras" onclick="menu.click()" class="link-menu">Quadras</a>
+            <a href="#contato" onclick="menu.click()" class="link-menu">Contato</a>
         </div>
     </div>
     <div id="menu_closer"><label for="menu">X</label></div>
@@ -200,7 +201,7 @@
                 <img id="galeria_img-1" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
                 <img id="galeria_img-2" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
                 <img id="galeria_img-3" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
-                <img id="galeria_img-4" src="./disc/img/default.jp class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
+                <img id="galeria_img-4" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
                 <img id="galeria_img-5" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
             </div>
         </article>

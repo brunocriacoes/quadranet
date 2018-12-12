@@ -32,7 +32,7 @@ fetch( url_api + bug + chache )
             };
         }
 
-        if( y.service !== undefined ) 
+        if( y.servico !== undefined ) 
         {
             let service = y.servico;
             let resume = service.results.servico;
@@ -128,7 +128,7 @@ window.onpopstate = function()
     };
     vio.historico = _profile.history || []; //[ { id:, status:, day:, price: } ];
     _vio.time = []; 
-    vio.time  = _profile.tean; //[{name tel mail}]
+    vio.time  = _profile.tean || []; //[{name tel mail}]
 };
 
 router('detalhe', z => {
