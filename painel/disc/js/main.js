@@ -201,10 +201,11 @@
             FILES = [];
             POS = [];
             if (  pikachu == '' ) {
-                window.history.go( -1 );
+                window.location.href = '';
             }else {
                 window.location.href = pikachu;
             }
+            document.querySelector( '#help' ).innerHTML = 'Operação realizada com sucesso!';
         } );
     }
     

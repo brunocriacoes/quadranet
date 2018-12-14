@@ -92,6 +92,7 @@ function abled_form( ID )
     return null;
 }
 function img_default( e ) { e.src = "./disc/img/default.jpg"; }
+function img_default_banner( e ) { e.src = "./disc/img/banner.png"; }
 function restrito() 
 {
     let pages = [ "perfil", "trocar-senha", "historico-compras", "meu-time", "finalizar"];
