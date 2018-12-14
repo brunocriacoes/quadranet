@@ -940,3 +940,14 @@ li.menudrop {
     position: relative;  
     background: #f7f7f7;
 }
+[status] {
+    display: inline-block;
+    border: none;
+    padding: 12px;
+}
+[status="1"]::after {
+    content: 'aguardando pagamento';
+} 
+[status="2"]::after {
+    content: 'pago';
+} 

@@ -215,7 +215,7 @@ function mostrarDetalhes( OBJ, ID, usuario )
         `;
         return a;
     }, '' );
-    let history = OBJ.history.map( x => `
+    let history = OBJ.history.reverse().slice(0, 3).map( x => `
         <span>${x.transacao || '...'}</span>
         <span>${( x.payment ) ? 'aguardando pagamento' : 'pago' }</span>
         <span>${x.data || '--/--/----'}</span>

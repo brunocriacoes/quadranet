@@ -11,8 +11,8 @@
         },
         {
             "title"   : "Situação",
-            "node"    : "payment",
-            "content" : ""
+            "node"    : null,
+            "content" : "<button status=\"{{status}}\"></button>"
         },
         {
             "title"   : "Usuario",
