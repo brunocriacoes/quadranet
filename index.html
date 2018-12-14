@@ -133,16 +133,14 @@
             <tbody id="vio_finalizar"></tbody>
         </table>
         <h3 class="text-center gap-top"> TOTAL R$: <span id="finalizar_total">00,00</span></h3>
-        <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+        <div class="text-center">
+            <img src="./disc/img/comprar.gif" onclick="buy()">
+        </div>
         <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post" onsubmit="PagSeguroLightbox(this); return false;">
-            <!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
-            <input type="hidden" name="code" value="35F81A298F8F91AFF4B56FAF715DBAFB" />
-            <input type="hidden" name="iot" value="button" />
-            <input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-comprar.gif"
-                name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" style="display: block; margin: 0 auto;" onclick="buy()" />
+            <input type="hidden" id="pag-code" name="code" value="" />
+            <input id="pag-send" hidden type="submit" />
         </form>
         <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
-        <!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
     </section>
 
     <section class="fields" id="quadras">

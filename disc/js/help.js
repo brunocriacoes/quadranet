@@ -279,6 +279,10 @@ function join_payment( emailCapitao, idJogador ) {
 async function buy()
 {
     let id   = new Date().getTime();
+    let code = query( '#pag-code' );
+    let btn  = query( '#pag-send' );
+    
+
     let cart = {
         usuario  : _profile.id       || '',
         title    : _profile.name     || '',
@@ -313,7 +317,9 @@ async function buy()
     fetch( path )
     .then( x => x.json() )
     .then( x => {
-
+        code.value = x.code;
+        // window.location.href = `https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${x.code}`;
+        btn.click();
     } );
 }
 

@@ -2,6 +2,7 @@
     "title": "Pagseguro",
     "type" : "form",
     "db"   : "pagseguro",
+    "to"    : "dash.html#pagseguro?ID=pagseguro&_filds=ID,token,email",
     "form" : [
         {
             "ID"     : "ID",
