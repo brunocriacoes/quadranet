@@ -320,7 +320,13 @@ async function buy()
         code.value = x.code;
         // window.location.href = `https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${x.code}`;
         btn.click();
+        query( '#img_pague' ).style.display = 'none'; 
+        query( '.pague' ).style.display = 'none';
     } );
+    query( '.pague' ).innerHTML = `
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    `;
+    
 }
 
 function removePlayer( emailCapitao, idJogador ) {
