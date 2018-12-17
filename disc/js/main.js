@@ -151,3 +151,13 @@ router( 'historico-compras', p => {
     let historico = profile.history.map( x => ({ id: x.transacao || '', status: x.payment || '', day: x.data || '', price: x.price || '11'}) );
     vio.historico = historico
 } );
+
+query( '.share' ).innerHTML = `
+<span>compartilhe com seus amigos</span>
+<a href="http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F${window.location.hostname}&t=" target="_blank">
+    <img src="./disc/ico/facebook.png">
+</a>
+<a href="http://twitter.com/intent/tweet?text=http%3A%2F%2F${window.location.hostname}" target="_blank">
+    <img src="./disc/ico/twitter.png">
+</a>
+`;

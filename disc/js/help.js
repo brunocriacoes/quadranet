@@ -319,14 +319,13 @@ async function buy()
     .then( x => {
         code.value = x.code;
         // window.location.href = `https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${x.code}`;
-        btn.click();
-        query( '#img_pague' ).style.display = 'none'; 
-        query( '.pague' ).style.display = 'none';
+        btn.click();         
+        query( '#lds-ring' ).style.display = 'none';
+        localStorage.setItem('cart', '[]');
+        query( '.btn-finalizar' ).style.display = 'block';
     } );
-    query( '.pague' ).innerHTML = `
-    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-    `;
-    
+    query( '#img_pague' ).style.display = 'none';
+    query( '#lds-ring' ).style.display = 'inline-block';
 }
 
 function removePlayer( emailCapitao, idJogador ) {

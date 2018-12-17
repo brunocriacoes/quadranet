@@ -23,6 +23,9 @@ function addCart( ID, name, status, price, init, end, data, idAgenda ) {
 
     localStorage.cart = JSON.stringify(items);
     vio.cart = items;
+
+    window.location.href = '#carrinho';
+    alerta( 'Item adicionado ao Carrinho' );
 }
 
 function removeItem( idAgenda ) {

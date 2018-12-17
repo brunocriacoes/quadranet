@@ -135,6 +135,8 @@
         <h3 class="text-center gap-top"> TOTAL R$: <span id="finalizar_total">00,00</span></h3>
         <div class="text-center pague">
             <img id="img_pague" src="./disc/img/comprar.gif" onclick="buy()">
+            <div id="lds-ring"><div></div><div></div><div></div><div></div></div>
+            <a class="btn btn-finalizar" href="#quadras">Ir para página de Quadras</a>
         </div>
         <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post" onsubmit="PagSeguroLightbox(this); return false;">
             <input type="hidden" id="pag-code" name="code" value="" />
@@ -181,13 +183,7 @@
                
             </p>
             <div class="share">
-                <span>compartilhe com seus amigos</span>
-                <a href="http://www.facebook.com/sharer/sharer.php?u=301&t=301" target="_blank">
-                    <img src="./disc/ico/facebook.png">
-                </a>
-                <a href="http://twitter.com/intent/tweet?text=301" target="_blank">
-                    <img src="./disc/ico/twitter.png">
-                </a>
+                
             </div>
         </article>
         <article class="gap-bottom">
@@ -207,13 +203,7 @@
             <h1 id="vio_sobre_title">Quem Somos</h1>
             <div id="vio_sobre_content"></div>
             <div class="share">
-                <span>compartilhe com seus amigos</span>
-                <a href="http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.quadranet.com.br&t=" target="_blank">
-                    <img src="./disc/ico/facebook.png">
-                </a>
-                <a href="http://twitter.com/intent/tweet?text=http%3A%2F%2Fwww.quadranet.com.br" target="_blank">
-                    <img src="./disc/ico/twitter.png">
-                </a>
+                
             </div>
         </article>
         <article class="gap-bottom">
@@ -232,13 +222,7 @@
         <h1 class="text-center">Serviços</h1>
         <div id="vio_servico"></div>
         <div class="share">
-            <span>compartilhe com seus amigos</span>
-            <a href="http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.quadranet.com.br&t=" target="_blank">
-                <img src="./disc/ico/facebook.png">
-            </a>
-            <a href="http://twitter.com/intent/tweet?text=http%3A%2F%2Fwww.quadranet.com.br" target="_blank">
-                <img src="./disc/ico/twitter.png">
-            </a>
+            
         </div>
     </section>
 

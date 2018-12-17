@@ -562,12 +562,17 @@ h1, h2, h3, h4, h5, h6 {
 .btn-center {
     margin: 0 auto;
 }
-.btn-sucess {
+.btn-sucess, .btn-finalizar {
     background: var(--theme);
     color: #FFF;
     text-shadow: 1px 1px 0px #000;
     text-transform: uppercase;
 }
+
+.btn-finalizar {
+    display: none;
+}
+
 .box {
     background: #FFF;
     border-radius: 4px;
@@ -823,13 +828,14 @@ p {
     cursor: pointer;
 }
 
-.lds-ring {
-    display: inline-block;
+#lds-ring {
+    display: none;
     position: relative;
     width: 64px;
     height: 64px;
 }
-.lds-ring div {
+
+#lds-ring div {
     box-sizing: border-box;
     position: absolute;
     width: 51px;
@@ -840,13 +846,13 @@ p {
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: #000 transparent transparent transparent;
 }
-  .lds-ring div:nth-child(1) {
+  #lds-ring div:nth-child(1) {
     animation-delay: -0.45s;
   }
-  .lds-ring div:nth-child(2) {
+  #lds-ring div:nth-child(2) {
     animation-delay: -0.3s;
   }
-  .lds-ring div:nth-child(3) {
+  #lds-ring div:nth-child(3) {
     animation-delay: -0.15s;
   }
   @keyframes lds-ring {
