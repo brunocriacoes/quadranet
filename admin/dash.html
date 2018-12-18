@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Painel</title>
+        <link rel="stylesheet" href="./disc/css/style.css">
+        <link rel="stylesheet" href="./disc/css/mobile.css" media="(max-width: 750px)">
+    </head>
+    <body>
+        <header id="header" class="grid-3 grid-center">
+            <a href="#agenda" class="descktop">
+                <img src="./disc/logo/logo-header-black.png" class="logo">
+            </a>
+            <div class="text-center">
+                <select name="" id="" class="set-domain">
+                    <option value="">Sistema Quadra</option>
+                </select>
+            </div>
+            <div class="text-right text-mobol-center">
+                <label for="menu_quadra" class="ico ico-quadra invert"></label>
+                <label for="menu_theme" class="ico ico-theme invert"></label>
+                <label for="menu_sistema" class="ico ico-sistema invert"></label>
+                <label for="menu_user" class="ico ico-user invert"></label>
+            </div>
+        </header>
+        <nav id="nav" class="text-center gap">
+            <input type="radio" name="sub_menus" id="menu_quadra" checked hidden>
+            <input type="radio" name="sub_menus" id="menu_theme" hidden>
+            <input type="radio" name="sub_menus" id="menu_sistema" hidden>
+            <input type="radio" name="sub_menus" id="menu_user" hidden>
+            <div class="menu_quadra">
+                <a href="#modalidade" class="link_menu">Modalidade</a>
+                <a href="#quadra" class="link_menu">Quadra</a>
+                <a href="#horario" class="link_menu">Horário</a>
+                <a href="#capitao" class="link_menu">Capitão</a>
+                <a href="#jogadores" class="link_menu">Jogadores</a>
+                <a href="#historico" class="link_menu">Histórico de pagamento</a>
+            </div>
+            <div class="menu_theme">
+                <a href="#visual" class="link_menu">Visual</a>
+                <a href="#quem-somos" class="link_menu">Quem somos</a>
+                <a href="#servicos" class="link_menu">Serviços</a>
+                <a href="#banner" class="link_menu">banner</a>
+            </div>
+            <div class="menu_sistema">
+                <a href="#dominio" class="link_menu">Dóminio</a>
+                <a href="#usuario" class="link_menu">Usuário do sistema</a>
+                <a href="#registro-problemas" class="link_menu">Registro de problema</a>
+            </div>
+            <div class="menu_user">
+                <a href="#perfil" class="link_menu">Perfil</a>
+                <a href="#mudar-senha" class="link_menu">Mudar senha</a>
+                <a href="#relar-problema" class="link_menu">Relatar Problema</a>
+                <a href="#sair" class="link_menu">Sair</a>
+            </div>
+        </nav>
+        <aside id="aside" class="gap descktop">
+            <div class="box gap gap-bottom text-center">
+                <svg class="quadrasvg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;margin: 20px;" xml:space="preserve">
+                    <g>
+                        <g>
+                            <path fill="#05f" d="M482,91.03H30c-16.542,0-30,13.458-30,30v269.94c0,16.542,13.458,30,30,30h452c16.542,0,30-13.458,30-30V121.03
+                                C512,104.488,498.542,91.03,482,91.03z M482.013,308.958h-45.191V203.042h45.184L482.013,308.958z M271,218.896
+                                c14.772,5.926,25.229,20.319,25.229,37.104c0,16.785-10.457,31.179-25.229,37.104V218.896z M30,203.042h45.178v105.916H30V203.042
+                                z M241,293.104c-14.772-5.926-25.229-20.319-25.229-37.104c0-16.785,10.457-31.179,25.229-37.104V293.104z M241,187.624
+                                c-31.539,6.869-55.229,34.91-55.229,68.376s23.69,61.507,55.229,68.376v66.594H30v-52.012h60.178c8.284,0,15-6.716,15-15V188.042
+                                c0-8.284-6.716-15-15-15H30V121.03h211V187.624z M482,390.97H271v-66.594c31.539-6.869,55.229-34.91,55.229-68.376
+                                s-23.69-61.507-55.229-68.376V121.03h211l0.004,52.012h-60.181c-8.284,0-15,6.716-15,15v135.916c0,8.284,6.716,15,15,15h60.193
+                                l0.003,52.011C482.019,390.969,482.013,390.97,482,390.97z"/>
+                        </g>
+                    </g>
+                </svg>
+                <h6>Nome</h6>
+                <small class="gray-text">Categoria</small>
+            </div>
+            <div class="box gap gap-bottom text-center grid-1">
+                <a href="#quadra-nova" class="ico ico-plus center theme circle"></a>
+                <small class="gray-text">Adicionar Quadra</small>
+            </div>
+        </aside>
+        <main id="main" class="gap">
+            <section id="sair" class="gap box">
+                <header class="gap-bottom"> 
+                    <h5>Sair do sistema</h5>
+                </header>
+                <img src="./disc/ico/load.png" class="load">
+            </section>
+            <section id="perfil" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Meu perfil</h5>
+                </header>
+                <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <label for="" class="input-label">Nome</label>
+                    <input type="text" class="input-field" name="name" required>
+                    <label for="" class="input-label">Email</label>
+                    <input type="email" class="input-field" name="email" disabled>
+                    <label for="" class="input-label">Telefone</label>
+                    <input type="text" class="input-field" name="telephone" required>
+                    <label for="" class="input-label">Dominio</label>
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+            </section>
+            <section id="mudar-senha" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Mudar minha senha</h5>
+                </header>
+                <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <label for="" class="input-label">Nova senha</label>
+                    <input type="password" class="input-field" name="pass" required>
+                    <label for="" class="input-label">Confirmar nova senha</label>
+                    <input type="password" class="input-field" name="password" required>           
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+            </section>
+            <section id="relar-problema" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Relatar problema ou dica</h5>
+                </header>
+                <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <label for="" class="input-label">Tipo de erro</label>
+                    <select name="type_error" class="input-field">
+                        <option value="1">Dica</option>
+                        <option value="2">Relatar error</option>
+                        <option value="3">Duvida</option>
+                        <option value="4">Suporte</option>
+                    </select>
+                    <label for="" class="input-label">Descrição</label>
+                    <textarea name="description" rows="6" class="input-field"></textarea>     
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+            </section>
+            <section id="dominio" class="gap box">
+                 <header class="gap-bottom grid-2"> 
+                    <h5>Lista de dóminio</h5>
+                    <div class="text-right">
+                        <a href="#dominio-novo" class="ico ico-plus theme circle"></a>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="30"></th>
+                            <th>nome</th>
+                            <th width="50">status</th>
+                            <th width="30"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+                            <td>texto</td>
+                            <td>ATIVO</td>
+                            <td>
+                                <img src="./disc/ico/edit.png" class="ico-table">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="detalhe-locacao" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Detalhes de Locação</h5>
+                </header>
+                <table class="table gap-bottom">
+                    <thead>
+                        <tr>
+                            <th>Usuário</th>
+                            <th width="50"></th>
+                            <th width="120">Data compra</th>
+                            <th width="250">Status de Compras</th>
+                            <th width="250">Códico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> Bolinha </td>
+                            <td>
+                                <a href="#capitao-novo">
+                                    <img src="./disc/ico/eye.png" class="ico-table">
+                                </a>
+                            </td>
+                            <td>00/00/0000</td>
+                            <td>Aguardando pagamento</td>
+                            <td>QTYWEHIO678QWE98Q8WUEY</td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+                <h3>Carrinho</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Quadra</th>
+                            <th width="70">Data</th>
+                            <th width="70">Preço</th>
+                            <th width="200">Tipo locação</th>
+                            <th width="70">Horário inicial</th>
+                            <th width="70">Horário final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tubarão</td>
+                            <td>00/00/000</td>
+                            <td>50,00</td>
+                            <td>Diaria</td>
+                            <td>00:00</td>
+                            <td>00:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="dominio-novo" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Adicionar novo dóminio</h5>
+                </header>
+                <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <label for="" class="input-label">Nome</label>
+                    <input type="text" class="input-field" name="name" required>
+                    <label for="" class="input-label">Dominio</label>
+                    <input type="text" class="input-field" name="domain" required>                    
+                    <select name="status" class="input-field">
+                        <option value="1">Ativo</option>
+                        <option value="0">Inativo</option>
+                    </select>
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+            </section>
+            <section id="usuario" class="gap box">
+                 <header class="gap-bottom grid-2"> 
+                    <h5>Lista de usuário</h5>
+                    <div class="text-right">
+                        <a href="#usuario-novo" class="ico ico-plus theme circle"></a>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="30"></th>
+                            <th>nome</th>
+                            <th width="200">telefone</th>
+                            <th width="50">status</th>
+                            <th width="30"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+                            <td>texto</td>
+                            <td>+55 (00) 0 0000-0000</td>
+                            <td>ATIVO</td>
+                            <td>
+                                <img src="./disc/ico/edit.png" class="ico-table">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="usuario-novo" class="gap box">
+                 <header> 
+                    <h5>Adicionar novo usuário</h5>
+                </header>
+                <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <label for="" class="input-label">Nome</label>
+                    <input type="text" class="input-field" name="name" required>
+                    <label for="" class="input-label">Email</label>
+                    <input type="email" class="input-field" name="email" disabled>
+                    <label for="" class="input-label">Telefone</label>
+                    <input type="text" class="input-field" name="telephone" required>
+                    <label for="" class="input-label">Dominio</label>
+                    <select name="domain" class="input-field">
+                        <option value="">Selecione Dominio</option>
+                    </select>
+                    <label for="" class="input-label">Nivel Acesso</label>
+                    <select name="admin" class="input-field">
+                        <option value="1">Usuário</option>
+                        <option value="2">Administrador</option>
+                    </select>
+                    <label for="" class="input-label">Status</label>
+                    <select name="status" class="input-field">
+                        <option value="1">Ativo</option>
+                        <option value="0">Inativo</option>
+                    </select>
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+            </section>
+            <section id="registro-problemas" class="gap box">
+                 <header> 
+                    <h5>Lista de Relatos de problemas ou de dicas</h5>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="30"></th>
+                            <th width="200">dominio</th>
+                            <th>nome</th>
+                            <th width="200">telefone</th>
+                            <th width="250">descrição</th>
+                            <th>tipo</th>
+                            <th width="30"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+                            <td>quadra.con</td>
+                            <td>bruno</td>
+                            <td>+55 (00) 0 0000-0000</td>
+                            <td>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate rem ipsa, 
+                                nihil ab aperiam dolorum reprehenderit amet esse, commodi quae cumque harum 
+                                repudiandae. Beatae recusandae quaerat laboriosam nobis animi facere.
+                            </td>
+                            <td>dica</td>
+                            <td>
+                                <img src="./disc/ico/edit.png" class="ico-table">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="visual" class="gap box">
+                 <header> 
+                    <h5>Informações do site </h5>
+                </header>
+                <div class="text-center gap-bottom">
+                    <label for="m-site" class="link_menu">Site</label>
+                    <label for="m-rede-social" class="link_menu">Rede Social</label>
+                    <label for="m-info" class="link_menu">Infomaçõe de contato</label>
+                    <label for="m-pagseguro" class="link_menu">Pagseguro</label>
+                </div>
+                <input type="radio" name="menu-visual" id="m-site" checked hidden>
+                <input type="radio" name="menu-visual" id="m-rede-social" hidden>
+                <input type="radio" name="menu-visual" id="m-info" hidden>
+                <input type="radio" name="menu-visual" id="m-pagseguro" hidden>
+                <div class="m-inicial m-site">
+                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                        <label for="" class="input-label">Titulo</label>
+                        <input type="text" name="title" class="input-field">
+                        <label for="" class="input-label">Palavra chave (google)</label>
+                        <input type="text" name="description" class="input-field">
+                        <label for="" class="input-label">Descrição (google)</label>
+                        <textarea name="description" rows="3" class="input-field"></textarea>
+                        <label for="" class="input-label">Cor site</label>
+                        <input type="color" name="color" class="input-field">
+                        <label for="" class="input-label">Logo</label>
+                        <input type="file" name="logo" class="input-field">  
+                        <input type="submit" value="salvar" class="btn btn-sucess">
+                    </form>
+                </div>
+                <div class="m-inicial m-rede-social">
+                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                        <label for="" class="input-label">Facebook</label>
+                        <input type="url" name="facebook" class="input-field">
+                        <label for="" class="input-label">Instagram</label>
+                        <input type="url" name="instagram" class="input-field">
+                        <label for="" class="input-label">Twitter</label>
+                        <input type="url" name="twitter" class="input-field">
+                        <label for="" class="input-label">Youtube</label>
+                        <input type="url" name="Youtube" class="input-field">
+                        <input type="submit" value="salvar" class="btn btn-sucess">
+                    </form>
+                </div>
+                <div class="m-inicial m-info">
+                    <form action="javascript:void(0)" onsubmit="" method="POST" class="grid-2 grid-gap">
+                        <div>
+                            <label for="" class="input-label">Email</label>
+                            <input type="email" name="email" class="input-field">
+                        </div>
+                        <div>
+                            <label for="" class="input-label">Telefone</label>
+                            <input type="tel" name="telephone" class="input-field">
+                        </div>
+                        <div>
+                            <label for="" class="input-label">WhatsApp</label>
+                            <input type="tel" name="whatsapp" class="input-field">
+                        </div>
+                        <div>
+                            <label for="" class="input-label">Cep</label>
+                            <input type="text" name="zipcode" class="input-field">
+                        </div>
+                        <div>
+                            <label for="" class="input-label">Rua</label>
+                            <input type="text" name="stret" class="input-field">
+                        </div>
+                        <div>
+                            <label for="" class="input-label">Número</label>
+                            <input type="text" name="number" class="input-field">
+                        </div>
+                        <div>
+                            <label for="" class="input-label">Bairro</label>
+                            <input type="text" name="bairro" class="input-field">
+                        </div>
+                        <div>
+                            <label for="" class="input-label">Cidade</label>
+                            <input type="text" name="city" class="input-field">
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Estado</label>
+                            <select name="state" class="input-field">
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará </option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="" class="input-label">Codigo embed google maps</label>
+                            <textarea name="map" rows="3" class="input-field"></textarea>
+                        </div>
+                        <div>
+                            <input type="submit" value="salvar" class="btn btn-sucess">
+                        </div>
+                    </form>
+                </div>
+                <div class="m-inicial m-pagseguro">
+                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                        <label for="" class="input-label">Email</label>
+                        <input type="url" name="email" class="input-field">
+                        <label for="" class="input-label">Token</label>
+                        <input type="url" name="token" class="input-field">
+                        <input type="submit" value="salvar" class="btn btn-sucess">
+                    </form>
+                </div>
+            </section>
+            <section id="quem-somos" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Página quem somos</h5>
+                </header>
+                <div class="grid-2 grid-gap">
+                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                        <label for="" class="input-label">Titulo</label>
+                        <input type="text" name="title" class="input-field">
+                        <div class="editor-box gap-bottom">
+                            <div class="editor-nav">
+                                <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
+                                <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
+                                <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
+                                <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
+                                <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
+                                <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
+                                <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
+                                <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
+                            </div>
+                            <div contenteditable="true" id="editor-content" onkeyup="" class="editor-local"></div>
+                            <textarea name="html" hidden></textarea>
+                        </div>     
+                        <input type="submit" value="salvar" class="btn btn-sucess">
+                    </form>
+                    <div>
+                        <label for="">
+                            <img src="./disc/img/default.jpg" class="responsive img-galery">
+                        </label>
+                        <div class="grid-5">
+                            <label for="">
+                                <img src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                            <label for="">
+                                <img src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                            <label for="">
+                                <img src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                            <label for="">
+                                <img src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                            <label for="">
+                                <img src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="servicos" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Página serviços</h5>
+                </header>
+                <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <label for="" class="input-label">Titulo</label>
+                    <input type="text" name="title" class="input-field">
+                    <div class="editor-box gap-bottom">
+                        <div class="editor-nav">
+                            <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
+                            <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
+                            <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
+                            <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
+                            <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
+                            <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
+                            <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
+                            <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
+                        </div>
+                        <div contenteditable="true" id="editor-content" onkeyup="" class="editor-local"></div>
+                        <textarea name="html" hidden></textarea>
+                    </div>    
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+            </section>
+            <section id="modalidade" class="gap box">
+                 <header class="gap-bottom grid-2"> 
+                    <h5>Lista de modalidades</h5>
+                    <div class="text-right">
+                        <a href="#modalidade-nova" class="ico ico-plus theme circle"></a>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="30"></th>
+                            <th>nome</th>
+                            <th width="30"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+                            <td>texto</td>
+                            <td>
+                                <img src="./disc/ico/edit.png" class="ico-table">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="modalidade-nova" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Adicionar nova modalidade</h5>
+                </header>
+                <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <label for="" class="input-label">Nome</label>
+                    <input type="text" name="name" class="input-field">
+                    <label for="" class="input-label">Cor</label>
+                    <input type="color" name="color" class="input-field">
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+            </section>
+            <section id="quadra" class="gap box">
+                 <header class="gap-bottom grid-2"> 
+                    <h5>Lista de quadras</h5>
+                    <div class="text-right">
+                        <a href="#quadra-nova" class="ico ico-plus theme circle"></a>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="30"></th>
+                            <th>nome</th>
+                            <th width="150">valor mensalidade</th>
+                            <th width="150">valor diaria</th>
+                            <th width="100"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+                            <td>texto</td>
+                            <td>150,00</td>
+                            <td>45,00</td>
+                            <td>
+                                <img src="./disc/ico/field.png" class="ico-table">
+                                <img src="./disc/ico/edit.png" class="ico-table">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="quadra-nova" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Adicionar nova quadra</h5>
+                </header>
+                <div class="grid-2 grid-gap">
+                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                        <label for="" class="input-label">Modalidade</label>
+                        <select name="modalidade" class="input-field">
+                            <option value="1">Escolha Modalidade</option>
+                        </select>
+                        <label for="" class="input-label">Nome</label>
+                        <input type="text" class="input-field" name="name" required>
+                        <label for="" class="input-label">Valor diaria</label>
+                        <input type="text" class="input-field" name="price_day" required>
+                        <label for="" class="input-label">Valor mensalidade</label>
+                        <input type="text" class="input-field" name="price_month" required>
+                        <label for="" class="input-label">Status</label>
+                        <select name="status" class="input-field">
+                            <option value="1">Ativo</option>
+                            <option value="0">Inativo</option>
+                        </select>
+                        <div class="editor-box gap-bottom">
+                            <div class="editor-nav">
+                                <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
+                                <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
+                                <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
+                                <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
+                                <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
+                                <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
+                                <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
+                                <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
+                            </div>
+                            <div contenteditable="true" id="editor-content" onkeyup="" class="editor-local"></div>
+                            <textarea name="html" hidden></textarea>
+                        </div>
+                        <input type="submit" value="salvar" class="btn btn-sucess">
+                    </form>
+                    <div>
+                        <label for="">
+                            <img src="./disc/img/default.jpg" class="responsive img-galery">
+                        </label>
+                        <div class="grid-5">
+                            <label for="">
+                                <img src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                            <label for="">
+                                <img src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                            <label for="">
+                                <img src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                            <label for="">
+                                <img src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                            <label for="">
+                                <img src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="horario" class="gap box">
+                 <header class="gap-bottom grid-2"> 
+                    <h5>Lista de Horários</h5>
+                    <div class="text-right">
+                        <a href="#horario-novo" class="ico ico-plus theme circle"></a>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="30"></th>
+                            <th>quadra</th>
+                            <th width="150">horário inicial</th>
+                            <th width="150">horário final</th>
+                            <th width="30"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+                            <td>texto</td>
+                            <td>00:00</td>
+                            <td>00:00</td>
+                            <td>
+                                <img src="./disc/ico/edit.png" class="ico-table">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="horario-novo" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Adicionar um novo Horário</h5>
+                </header>
+                <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <label for="" class="input-label">quadra</label>
+                    <select name="quadra" class="input-field" required>
+                        <option value="">Escolha uma quadra</option>
+                    </select>
+                    <label for="" class="input-label">Inicio</label>
+                    <input type="time" class="input-field" name="init" required>
+                    <label for="" class="input-label">final</label>
+                    <input type="time" class="input-field" name="end" required>
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+            </section>
+            <section id="capitao" class="gap box">
+                 <header class="gap-bottom grid-2"> 
+                    <h5>lista de captões</h5>
+                    <div class="text-right">
+                        <a href="#capitao-novo" class="ico ico-plus theme circle"></a>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="30"></th>
+                            <th>nome</th>
+                            <th width="200">Telefone</th>
+                            <th width="30"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+                            <td>texto</td>
+                            <td>+55 (00) 0 0000-0000</td>
+                            <td>
+                                <img src="./disc/ico/edit.png" class="ico-table">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="capitao-novo" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Adicionar um novo capitão</h5>
+                </header>
+                <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <label for="" class="input-label">Nome</label>
+                    <input type="text" class="input-field" name="name" required>
+                    <label for="" class="input-label">Apelido</label>
+                    <input type="text" class="input-field" name="nickname" required>
+                    <label for="" class="input-label">Telefone</label>
+                    <input type="text" class="input-field" name="telephone" required>
+                    <label for="" class="input-label">Email</label>
+                    <input type="email" class="input-field" name="email" required>
+                    <label for="" class="input-label">Senha</label>
+                    <input type="password" class="input-field" name="pass" required>  
+                    <label for="" class="input-label">Status</label>
+                    <select name="status" class="input-field">
+                        <option value="1">Ativo</option>
+                        <option value="0">Inativo</option>
+                    </select>
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+                <h4 class="gap-top gap-bottom">Time</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>nome</th>
+                            <th>apelido</th>
+                            <th width="200">telefone</th>
+                            <th width="200">email</th>
+                            <th width="100">pago</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Gabriel</td>
+                            <td>Bolinha</td>
+                            <td>+55 (00) 0 0000-00000</td>
+                            <td>user@gmail.com</td>
+                            <td><input type="checkbox" checked disabled></td>
+                        </tr>
+                    </tbody>
+                </table>               
+            </section>
+            <section id="banner" class="gap box">
+                 <header class="gap-bottom grid-2"> 
+                    <h5>lista de banners</h5>
+                    <div class="text-right">
+                        <a href="#banner-novo" class="ico ico-plus theme circle"></a>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="30"></th>
+                            <th>nome</th>
+                            <th width="30"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+                            <td>texto</td>
+                            <td>
+                                <img src="./disc/ico/edit.png" class="ico-table">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="banner-novo" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Adicionar um novo banner</h5>
+                </header>
+                <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <label for="" class="input-label">Nome</label>
+                    <input type="text" class="input-field" name="name" required>
+                    <label for="" class="input-label">link</label>
+                    <input type="url" class="input-field" name="link" required>
+                    <label for="" class="input-label">Texto</label>
+                    <textarea name="text" rows="3" class="input-field" required></textarea>                    
+                    <label for="" class="input-label">foto</label>
+                    <input type="file" class="input-field" name="photo" required>
+                    <label for="" class="input-label">Status</label>
+                    <select name="status" class="input-field">
+                        <option value="1">Ativo</option>
+                        <option value="0">Inativo</option>
+                    </select>
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+            </section>
+            <section id="jogadores" class="gap box">
+                <header class="grid-2 gap-bottom">
+                    <h5>Lista de jogadores</h5>
+                    <div class="text-right">
+                        <form action="javascript:void(0)" method="POST" onsubmit="" class="search">
+                            <input type="search" name="s" required>
+                            <label for="busca-jogadores">
+                                <img src="./disc/ico/search.png">
+                            </label>
+                            <input type="submit" id="busca-jogadores" hidden>
+                        </form>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>nome</th>
+                            <th>apelido</th>
+                            <th>telefone</th>
+                            <th>email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Gabriel</td>
+                            <td>Bolinha</td>
+                            <td>+55 (00) 0 0000-00000</td>
+                            <td>user@gmail.com</td>
+                        </tr>
+                    </tbody>
+                </table>                
+            </section>
+            <section id="historico" class="gap box">
+                <header class="grid-2 gap-bottom">
+                    <h5>Histórico de pagamentos</h5>
+                    <div class="text-right">
+                        <form action="javascript:void(0)" method="POST" onsubmit="" class="search">
+                            <input type="search" name="s" required>
+                            <label for="busca-capitão">
+                                <img src="./disc/ico/search.png">
+                            </label>
+                            <input type="submit" id="busca-capitão" hidden>
+                        </form>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="100">código</th>
+                            <th width="150">data</th>
+                            <th>nome</th>
+                            <th width="200">telefone</th>
+                            <th width="150">valor total</th>
+                            <th width="200">status</th>
+                            <th width="50"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>123DQWDAOIKY7896ASDH</td>
+                            <td>00/00/0000</td>
+                            <td>bolinha de azevedo</td>
+                            <td>+55 (00) 0 0000-00000</td>
+                            <td>200,00</td>
+                            <td>aguardando pagamento</td>
+                            <td>
+                                <a href="#detalhe-locacao">
+                                    <img src="./disc/ico/eye.png" class="ico-table">
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>                
+            </section>
+            <section id="agenda" class="gap box">
+                <header class="grid-agenda gap-bottom">
+                    <h5 class="title"> Nome quadra <small>futebol</small></h5>
+                    <div class="grid-elements-agenda">
+                        <label for="set-date">
+                            <img src="./disc/ico/calendar.png">
+                        </label>
+                        <input type="date" id="set-date">
+                    </div>
+                    <div class="grid-elements-agenda">
+                        <img src="./disc/ico/time.png">
+                        <div>00:00 mm</div>
+                    </div>
+                </header>
+                <div class="calendario-grid agenda-header">
+                    <div class="agenda-hoje">
+                        <span class="descktop">Horários</span>
+                        <span class="mobile">HS</span>
+                    </div>
+                    <div>
+                        <span class="descktop">Segunda</span>
+                        <span class="mobile">SE</span>
+                    </div>
+                    <div>
+                        <span class="descktop">Terça</span>
+                        <span class="mobile">TE</span>
+                    </div>
+                    <div>
+                        <span class="descktop">Quarta</span>
+                        <span class="mobile">QU</span>
+                    </div>
+                    <div>
+                        <span class="descktop">Quinta</span>
+                        <span class="mobile">QI</span>
+                    </div>
+                    <div>
+                        <span class="descktop">Sexta</span>
+                        <span class="mobile">SX</span>
+                    </div>
+                    <div>
+                        <span class="descktop">Sábado</span>
+                        <span class="mobile">SA</span>
+                    </div>
+                    <div>
+                        <span class="descktop">Domingo</span>
+                        <span class="mobile">DO</span>
+                    </div>
+                </div>
+                <div class="calendario-grid agenda-body">
+                    <div> 00:00 <b class="descktop">às 00:00</b> </div>
+                    <label for="pop-agenda-livre"> 
+                        <span class="descktop">LIVRE +</span> 
+                    </label>
+                    <label for="pop-agenda-livre"> 
+                        <span class="descktop">LIVRE +</span> 
+                    </label>
+                    <label for="pop-agenda-livre"> 
+                        <span class="descktop">LIVRE +</span> 
+                    </label>
+                    <label for="pop-agenda-livre"> 
+                        <span class="descktop">LIVRE +</span> 
+                    </label>
+                    <label for="pop-agenda-livre"> 
+                        <span class="descktop">LIVRE +</span> 
+                    </label>
+                    <label for="pop-agenda-ocupado" class="agenda-ocupado"> 
+                        <span class="descktop">
+                            <b>Nome</b>
+                            <i>Mensal</i>
+                        </span> 
+                    </label>
+                    <label for="pop-agenda-ocupado" class="agenda-jogando"> 
+                        <span class="descktop">
+                            <b>Nome</b>
+                            <i>Avulso</i>
+                        </span> 
+                    </label>
+                </div>
+                <div class="legendas gap-top ">
+                    <div></div>
+                    <div></div>
+                    <div class="text-right"> jogando agora </div> <span class="legenda lg-now"></span>
+                    <div class="text-right">livre</div>  <span class="legenda lg-livre"></span>
+                    <div class="text-right">ocupado</div>  <span class="legenda lg-ocupado"></span>
+                </div>
+            </section>
+        </main>
+        <input type="checkbox" id="show-alerta" hidden>
+        <div id="alerta">
+            <span></span>
+            <label for="show-alerta">
+                <img src="./disc/ico/x.png">
+            </label>
+        </div>
+        <input type="checkbox" id="pop-agenda-livre" hidden>
+        <div class="pop-box pop-agenda-livre">
+            <label for="pop-agenda-livre" class="pop-close">
+                <img src="./disc/ico/x.png">
+            </label>
+            <div>
+                <h4 class="gap-bottom">Criar locação</h4>
+                <input type="radio" name="escolha-cad" id="cad-change" checked hidden>
+                <input type="radio" name="escolha-cad" id="cad-search" hidden>
+                <input type="radio" name="escolha-cad" id="cad-finalizar" hidden>
+                <input type="radio" name="escolha-cad" id="cad-create" hidden>
+                <span class="cad cad-change">
+                    <span class="grid-2 grid-gap">
+                        <label for="cad-create" class="btn text-center">Cadastrar capitão</label>
+                        <label for="cad-search" class="btn btn-sucess text-center">Buscar capitão</label>
+                    </span>
+                </span>
+                <span class="cad cad-create">
+                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                        <label for="" class="input-label">Nome</label>
+                        <input type="text" class="input-field" name="name" required>
+                        <label for="" class="input-label">Telefone</label>
+                        <input type="text" class="input-field" name="telephone" required>
+                        <label for="" class="input-label">Email</label>
+                        <input type="email" class="input-field" name="email" required>
+                        <label for="" class="input-label">Senha</label>
+                        <input type="password" class="input-field" name="pass" required>  
+                        <label for="cad-finalizar" class="btn btn-sucess text-center">Cadastrar</label>
+                    </form>
+                </span>
+                <span class="cad cad-search" >
+                    <form action="javascript:void(0)" method="POST" onsubmit="" class="search">
+                        <input type="search" name="s" required>
+                        <label for="busca-jogadores">
+                            <img src="./disc/ico/search.png">
+                        </label>
+                        <input type="submit" id="busca-jogadores" hidden>
+                    </form>                  
+                    <table class="table" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th width="150">Telefone</th>
+                                <th width="50"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bolinha</td>
+                                <td>+55 (00) 0 0000-0000 </td>
+                                <td>
+                                    <label for="cad-finalizar">
+                                        <img src="./disc/ico/check.png" class="ico-table">
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </span>
+                <form action="javascript:void(0)" method="POST" class="cad cad-finalizar">
+                    <label for="" class="input-label">Buscar capitão</label>
+                    <input type="text" name="capitain" class="input-field" required>
+                    <label for="" class="input-label">Tipo locação</label>
+                    <select name="" class="input-field">
+                        <option value="">Diaria</option>
+                        <option value="">Mensal</option>
+                    </select>
+                    <input type="submit" value="criar reserva" class="btn btn-sucess">
+                </form>
+            </div>
+        </div>
+        <input type="checkbox" id="pop-agenda-ocupado" hidden>
+        <div class="pop-box pop-agenda-ocupado">
+            <label for="pop-agenda-ocupado" class="pop-close">
+                <img src="./disc/ico/x.png">
+            </label>
+            <div>
+                <p><b>Nome</b>: Bolinha</p>
+                <p><b>Telefone</b>: +55 (00) 0 0000-0000</p>
+                <p><b>Tipo</b>: diaria</p>
+                <table class="table" width="100%">
+                    <thead>
+                        <tr>
+                            <th width="150">data</th>
+                            <th width="200">status</th>
+                            <th width="40"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>00/00/0000</td>
+                            <td>aguardando pagamento</td>
+                            <td>
+                                <a href="#detalhe-locacao">
+                                    <img src="./disc/ico/eye.png" class="ico-table">
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>00/00/0000</td>
+                            <td>aguardando pagamento</td>
+                            <td>
+                                <a href="#detalhe-locacao">
+                                    <img src="./disc/ico/eye.png" class="ico-table">
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>00/00/0000</td>
+                            <td>aguardando pagamento</td>
+                            <td>
+                                <a href="#detalhe-locacao">
+                                    <img src="./disc/ico/eye.png" class="ico-table">
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>                
+                <button class="btn gap-top">Cancelar Locação</button>
+            </div>
+        </div>
+    </body>
+</html>
