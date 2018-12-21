@@ -58,10 +58,10 @@ var vio  = {
         query( '#vio_agenda' ).innerHTML = el.map( x => {
             let data = x.idAgenda.substr( 0, 10 ).split( '-' ).reverse().join( '/' );
             return `
-            <div class="hours__schedule gap-bottom" id="${x.idAgenda}">
-                <button class="btn hours__schedule_btn hours__schedule_btn_avulso avulso_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 0, '${x.avulso || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}' )">Avulso R$ ${ x.avulso || '00,00' }</button>
-                <span>${ x.init || '--:--' } às ${ x.end || '--:--' }</span>
-                <button class="btn hours__schedule_btn hours__schedule_btn_mensal mensal_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 1, '${x.mensal || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}' )">Mensal R$ ${ x.mensal || '00,00' }</button>
+            <div class="hours__schedule" id="${x.idAgenda}">
+                <span>${ x.init || '--:--' }hrs às ${ x.end || '--:--' }hrs</span>
+                <button class="btn hours__schedule_btn hours__schedule_btn_avulso avulso_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 0, '${x.avulso || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}' )">Reservar Avulso R$ ${ x.avulso || '00,00' },00</button>
+                <button class="btn hours__schedule_btn hours__schedule_btn_mensal mensal_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 1, '${x.mensal || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}' )">Reservar Mensal R$ ${ x.mensal || '00,00' },00</button>
             </div>
             `;
         } ).join('');

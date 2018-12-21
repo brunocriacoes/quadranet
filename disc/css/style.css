@@ -510,12 +510,24 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 12px;
     color: #fff;
 }
+#vio_calendar_name {
+    display: inline;
+    margin-bottom: 0 !important;
+}
 .cart__service__fields_total, .details__info__title {
     display: grid;
     grid-template-columns: 1fr 150px;
 }
-.hours__schedule_btn_avulso:hover {
-    text-decoration: underline;
+.hours__schedule {
+    border-bottom: 2px solid #999;
+    display: block;
+    margin: 15px;
+}
+.hours__schedule_btn_avulso {
+    border: 2px solid var( --theme ) !important;
+    margin-left: 60px;
+    margin-right: 20px;
+    margin-bottom: 15px;
 }
 .btn_fields__card_details, .hours__schedule_btn_avulso {
     border: 2px solid var( --blue-1 );
@@ -635,7 +647,7 @@ p {
 }
 .or {
     display: grid !important;
-    grid-template-columns: repeat( 2, 1fr ) !important;
+    grid-template-columns: repeat( 3, 1fr ) !important;
     grid-gap: 20px;
     padding: 10px 0;
 }

@@ -160,15 +160,21 @@
 
     <section class="hours box gap" id="agenda">
         <div class="hours__title gap-bottom">
-            <h2 id="vio_calendar_name">Nome da Quadra</h2>
-            <span id="vio_calendar_modal">Modalidade</span>
+            <h1>Reserva de Horários</h1>
+            <h4 id="vio_calendar_name"></h4> -
+            <small id="vio_calendar_modal"></small>
         </div>
         <div class="gap-bottom or">
             <div>
-                <b id="vio_calendar_day">---</b>
+                <label>Dia da Semana:</label>
+                <span id="vio_calendar_day">---</span>
+            </div>
+            <div>
+                <label>Data Atual:</label>
                 <span id="vio_calendar_date">--/--/---</span>
             </div>
             <div class="text-right">
+                <label for="date">Agendar uma data:</label>
                 <input type="date" onchange="set_date( this )" value="">
             </div>
         </div>

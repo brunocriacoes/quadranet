@@ -80,8 +80,7 @@ fetch( url_api + bug + chache )
                 });
             query('#fields_type_select').innerHTML += tipo;
         }
-
-
+        
         router('agenda', x => {
             if( y.agenda !== undefined )
             {
