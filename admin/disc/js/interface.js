@@ -18,6 +18,38 @@ var beta = {
     },
     get modalidade() { return _beta.modalidade },
 
+    set admin(cont) {
+        _beta.admin = cont;
+        if(cont) {
+            query('#selecionar-dominio').removeAttribute('disabled');            
+        } else {
+            query('#selecionar-dominio').setAttribute('disabled', 'disabled');
+        }
+    },
+    get admin() { return _beta.admin; },
+
+    set sistema(cont) {
+        _beta.sistema = cont;
+        if(cont) {
+            query( '#aside-sistema' ).style.display       = 'none';
+            query( '[for="menu_quadra"]' ).style.display  = 'none';
+            query( '[for="menu_theme"]' ).style.display   = 'none';
+            query( '[for="menu_user"]' ).style.display    = 'none';
+            query( '[for="menu_sistema"]' ).style.display = 'inline-block';
+            query('#menu_sistema').setAttribute('checked', "true");
+            to('#dominio');
+        } else {
+            query( '#aside-sistema' ).style.display       = 'block';
+            query( '[for="menu_quadra"]' ).style.display  = 'inline-block';
+            query( '[for="menu_theme"]' ).style.display   = 'inline-block';
+            query( '[for="menu_user"]' ).style.display    = 'inline-block';
+            query( '[for="menu_sistema"]' ).style.display = 'none';
+            query('#menu_quadra').setAttribute('checked', "true");
+            to('#agenda');
+        }
+    },
+    get sistema() { return _beta.sistema; },
+
     set modalidade_nova(cont) {
         _beta.modalidade_nova = cont;
         query('#modalidade__form_input_nome').innerHTML = cont.name;
@@ -308,7 +340,7 @@ var beta = {
 
     set estaticos_pagina(cont) {
         _beta.estaticos_pagina = cont;
-        query('#selecionar-dominio').innerHTML = cont.sistema.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
+        query('#selecionar-dominio').innerHTML = cont.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
     },
     get estaticos_pagina() { return _beta.estaticos_pagina },
 
@@ -354,4 +386,7 @@ var beta = {
     get mudar_senha() { return _beta.mudar_senha },
 }
 
-beta.agenda = [{ name: 'sadasdasd', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 213123, nickname: 'uhuu', email: 'qqq@qq.com', init: 878, end: 1212, telephone: 111111 }, { name: 'nbvmvbm', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 9789, nickname: 'fdfd', email: 'dasd@qq.com', init: 878, end: 1212, telephone:222222 }, { name: 'g456', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 45689, nickname: 'mnm', email: 'ioio@qq.com', init: 878, end: 1212, telephone: 333333 }];
+beta.agenda = [
+    { modalidade: 'teste', name: 'sadasdasd', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 213123, nickname: 'uhuu', email: 'qqq@qq.com', init: 878, end: 1212, telephone: 111111 }, 
+    { modalidade: 'teste', name: 'nbvmvbm', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 9789, nickname: 'fdfd', email: 'dasd@qq.com', init: 878, end: 1212, telephone:222222 }, 
+    { modalidade: 'teste', name: 'g456', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 45689, nickname: 'mnm', email: 'ioio@qq.com', init: 878, end: 1212, telephone: 333333 }];

@@ -7,15 +7,18 @@
         <title>Painel</title>
         <link rel="stylesheet" href="./disc/css/style.css">
         <link rel="stylesheet" href="./disc/css/mobile.css" media="(max-width: 750px)">
+        <link rel="shortcut icon" href="./disc/logo/ico.png" type="image/x-icon">
     </head>
-    <body>
+    <body id="pisca">
         <header id="header" class="grid-3 grid-center">
             <a href="#agenda" class="descktop">
                 <img src="./disc/logo/logo-header-black.png" class="logo">
             </a>
             <div class="text-center">
-                <select id="selecionar-dominio" name="sistema" class="set-domain">
+                <select id="selecionar-dominio" name="sistema" class="set-domain" onchange="set_domain( this )">
+                    <option value="">Escolha</option>
                     <option value="">Sistema Quadra</option>
+                    <option value="quadranet.con">quadranet</option>
                 </select>
             </div>
             <div class="text-right text-mobol-center">
@@ -57,11 +60,15 @@
             </div>
         </nav>
         <aside id="aside" class="gap descktop">
-            
-            </div>
-            <div class="box gap gap-bottom text-center grid-1">
-                <a href="#quadra-nova" class="ico ico-plus center theme circle"></a>
-                <small class="gray-text">Adicionar Quadra</small>
+            <div id="aside-sistema">
+                <div>
+
+                </div>
+
+                <div class="box gap gap-bottom text-center grid-1">
+                    <a href="#quadra-nova" class="ico ico-plus center theme circle"></a>
+                    <small class="gray-text">Adicionar Quadra</small>
+                </div>
             </div>
         </aside>
         <main id="main" class="gap">
@@ -74,16 +81,16 @@
             <section id="perfil" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Meu perfil</h5>
-                </header>
+                </header>                
                 <form action="javascript:void(0)" onsubmit="" method="POST">
                     <label for="" class="input-label">Nome</label>
-                    <input type="text" class="input-field" name="name" required>
+                    <input type="text" class="input-field" name="name" id="perfil__form_nome" required>
                     <label for="" class="input-label">Email</label>
-                    <input type="email" class="input-field" name="email" disabled>
+                    <input type="email" class="input-field" name="email" id="perfil__form_email" disabled>
                     <label for="" class="input-label">Telefone</label>
-                    <input type="text" class="input-field" name="telephone" required>
+                    <input type="text" class="input-field" name="telephone" id="perfil__form_tel" required>
                     <label for="" class="input-label">Domínio</label>
-                    <select id="usuario-novo__form_dominio" name="domain" class="input-field">
+                    <select name="domain" id="perfil__form_dominio" class="input-field">
                         <option value="">Selecione Domínio</option>
                     </select>
                     <input type="submit" value="salvar" class="btn btn-sucess">
@@ -796,7 +803,10 @@
             </section>
             <section id="agenda" class="gap box">
                 <header class="grid-agenda gap-bottom">
-                    <h5 id="agenda__tile" class="title"> Nome quadra <small id="agenda__modalidade">futebol</small></h5>
+                    <h5  class="title"> 
+                        <span id="agenda__tile"> Nome quadra </span>  
+                        <small id="agenda__modalidade"> futebol </small>
+                    </h5>
                     <div class="grid-elements-agenda">
                         <label for="set-date">
                             <img src="./disc/ico/calendar.png">
@@ -843,11 +853,11 @@
                     </div>
                 </div>
                 <div class="calendario-grid agenda-body">
-                    <div> 00:00 <b class="descktop">às 00:00</b> </div>
+                    <div> <i>00</i><i class="descktop">:00 às 00:00</i> </div>
                     <label for="pop-agenda-livre"> 
                         <span id="agenda__dia-semana" class="descktop">LIVRE +</span> 
                     </label>
-                    <!-- <label for="pop-agenda-ocupado" class="agenda-ocupado"> 
+                    <label for="pop-agenda-ocupado" class="agenda-ocupado"> 
                         <span class="descktop">
                             <b>Nome</b>
                             <i>Mensal</i>
@@ -858,7 +868,7 @@
                             <b>Nome</b>
                             <i>Avulso</i>
                         </span> 
-                    </label> -->
+                    </label>
                 </div>
                 <div class="legendas gap-top ">
                     <div></div>
@@ -909,10 +919,10 @@
                 <span class="cad cad-search" >
                     <form action="javascript:void(0)" method="POST" onsubmit="" class="search">
                         <input type="search" name="s" required>
-                        <label for="busca-jogadores">
+                        <label for="pop-busca-jogadores">
                             <img src="./disc/ico/search.png">
                         </label>
-                        <input type="submit" id="busca-jogadores" hidden>
+                        <input type="submit" id="pop-busca-jogadores" hidden>
                     </form>                  
                     <table class="table" width="100%">
                         <thead>
@@ -997,11 +1007,15 @@
                 <button class="btn gap-top">Cancelar Locação</button>
             </div>
         </div>
-
         <script src="./disc/js/config.js"></script>
         <script src="./disc/js/functions.js"></script>
         <script src="./disc/js/interface.js"></script>
+        <script src="./disc/js/javascript.js"></script>
         <script src="./disc/js/main.js"></script>
-
+        <script src="./disc/js/agenda.js"></script>
+        <script defer >
+            privado();
+            query('#pisca').style.display = 'grid';
+        </script>
     </body>
 </html>

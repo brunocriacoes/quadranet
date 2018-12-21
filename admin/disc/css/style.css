@@ -222,7 +222,7 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: var(--vermelhor);
+    background-color: var(--vermelho);
     color: #FFF;
     font-family: monospace;
     padding-left: 16px;
@@ -398,11 +398,12 @@ body {
 .calendario-grid {
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: 150px repeat( 7, 1fr );
+    grid-template-columns: 160px repeat( 7, 1fr );
     font-family: monospace;
 }
 .calendario-grid div {
-    display: grid;
+    display: flex;
+    justify-content: center;
     border: 1px solid #DDD;
     border-radius: 8px;
     line-height: 40px;
@@ -555,3 +556,7 @@ body {
     0%, 99% { display: block !important; }
     100% { display: none !important; }
 }
+.set-domain option{
+    color: #111 !important;
+}
+#pisca { display: none; }
