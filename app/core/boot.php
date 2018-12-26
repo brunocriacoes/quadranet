@@ -5,7 +5,7 @@
     date_default_timezone_set('America/Sao_Paulo');
 
     if( ! isset( $_REQUEST['bug'] ) ):
-        // header('Content-type:application/json');
+        header('Content-type:application/json');
     endif;
 
     require __DIR__ . "/help.php";

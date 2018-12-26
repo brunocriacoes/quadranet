@@ -1,3 +1,4 @@
+"use strict";
 const log      = console.log;
 const query    = x => document.querySelector(x);
 const queryAll = x => document.querySelectorAll(x);
@@ -39,11 +40,8 @@ function get( URL, DATA, HOF )
     let data       = obj_to_url( DATA );
     let url_base   = encodeURI( `${api}/${URL}?${data}` );
     fetch( url_base )
-    .then( x => x.json() )
+    .then( y => y.json() )
     .then( x => {
-        HOF( x );
-    } )
-    .catch( x => {
         HOF( x );
     } );
 }
@@ -54,11 +52,8 @@ function post( URL, DATA, HOF )
     options.method = 'POST';
     options.body   = obj_to_url( DATA );
     fetch( url_base, options )
-    .then( x => x.json() )
+    .then( y => y.json() )
     .then( x => {
-        HOF( x );
-    } )
-    .catch( x => {
         HOF( x );
     } );
 }
@@ -72,7 +67,7 @@ function form_data( ID )
         {
             let name  = form[i].name || form[i].id || '';
             let value = form[i].value || form[i].innerHTML || '';
-            if( name !=  '' ) {
+            if( name !=  '' && value != '' ) {
                 data[ name ] = value || '';
             }
         }
@@ -119,14 +114,19 @@ function publico() {
         let token = x.token || false;
         if( token ) {
             to( `${http}//${dominio}/${name_panel}/dash` );
+        } else {
+            query('#pisca').style.display = 'grid';
         }
     } );
 }
+
 function privado() {
     get( 'auth', { token }, x => {
         let token = x.token || false;
         if( ! token ) {
             to( `${http}//${dominio}/${name_panel}/` );
+        } else {
+            query('#pisca').style.display = 'grid';
         }
     } );
 }
@@ -136,7 +136,6 @@ function login( ID ) {
     let parametro = { login: `${data.mail},${data.pass}` }
     post( 'auth', parametro, x => {
         let valid = x.login || false;
-        log(x);
         if( valid ) {
             localStorage.jwt_token = x.token;
             to( `${http}//${dominio}/${name_panel}/dash` );
@@ -144,4 +143,87 @@ function login( ID ) {
             alerta( 'Usuário ou senha estão errados' );
         }
     } );
+}
+
+function create_dominio( ID )
+{
+    let data       = form_data( ID );
+    data['domain'] = data.domain.replace('www.','');
+    post( 'dominio', data, x => {
+        get( 'dominio', '', x => {
+            beta.dominio = x;
+            beta.usuario_novo = { domain: x };
+            beta.dominio_novo = { id: ''};
+            query( ID ).reset();
+            to('#dominio');
+        } );
+    } );
+}
+
+function delete_dominio( ID )
+{
+    let data       = { id: ID, status: 0 };
+    post( 'dominio', data, x => {
+        get( 'dominio', '', x => {
+            beta.dominio = x;
+            beta.usuario_novo = { domain: x };
+            to('#dominio');
+        } );
+    } );
+}
+
+function edite_dominio( ID )
+{
+    let edit = beta.dominio.find( x =>  x.id == ID  );
+    beta.dominio_novo = edit;
+}
+
+function create_usuario( ID ) {
+    let data = form_data( ID );
+    data = { ...data, create: `${data.mail},${data.pass}`};
+    query('#usuario-novo__label_pass').style.display =  'block';
+    query('#usuario-novo__form_pass').style.display =  'block';
+    post( 'auth', data, x => {
+        get( 'auth', '', x => {
+            beta.usuario = x; 
+            query( ID ).reset();
+        } );
+        to('#usuario');
+    } );
+}
+
+function edit_usuario( ID ) {
+    get( 'auth', '', x => {
+        query('#usuario-novo__label_pass').style.display =  'none';
+        query('#usuario-novo__form_pass').style.display =  'none';
+        beta.usuario_novo =  x.find( x => x.id == ID );
+    } );
+}
+function delete_usuario( ID ) {
+    post( 'auth', { status: 0, mail: ID, create: 1 }, x => {
+        get( 'auth', '', x => {
+            beta.usuario = x; 
+        } );
+    } );
+}
+
+function save_perfil( ID ) {
+    let data = form_data( ID );
+    post( 'auth', { ...data, create: 1 }, x => {
+        alerta('atualizado com sucesso');
+    } );
+}
+
+function alter_pass( ID ) {
+    let data = form_data( ID );
+    post( 'auth', { ...data, mail: beta.perfil.mail, create: 1 }, x => {
+        query( ID ).reset();
+        alerta('senha aalterada com sucesso');
+    } );
+}
+
+function logout()
+{
+    localStorage.jwt_token = '';
+    to( `${http}//${dominio}/${name_panel}` );
 }

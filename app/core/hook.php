@@ -7,14 +7,18 @@
         return $iten;
     }, $_REQUEST ?? [] );
 
+    if(  empty( $_REQUEST['id'] ) ) unset( $_REQUEST['id'] );
     $_REQUEST['id']           = $_REQUEST['id']  ?? date( 'YmdNHisu' ) . uniqid();
-    $_REQUEST['status']       = $_REQUEST['status']  ?? true;
+    $_REQUEST['status']       =  $_REQUEST['status']  ?? true;
 
     if( ! empty( $_REQUEST['pass'] ) ):
         $_REQUEST['pass'] = sha1( $_REQUEST['pass'] );
     endif;
     if( ! empty( $_REQUEST['password'] ) ):
         $_REQUEST['password'] = sha1( $_REQUEST['password'] );
+    endif;
+    if( ! empty( $_REQUEST['status'] ) ):
+        $_REQUEST['status'] = ( $_REQUEST['status'] == '1' ) ? true : false;
     endif;
 
     define( 'dominio', str_replace( 'www.','', $_SERVER['SERVER_NAME'] ) ) ;

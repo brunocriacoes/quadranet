@@ -1,3 +1,4 @@
+"use strict";
 var _beta = {
 
 };
@@ -34,15 +35,15 @@ var beta = {
             query( '#aside-sistema' ).style.display       = 'none';
             query( '[for="menu_quadra"]' ).style.display  = 'none';
             query( '[for="menu_theme"]' ).style.display   = 'none';
-            query( '[for="menu_user"]' ).style.display    = 'none';
-            query( '[for="menu_sistema"]' ).style.display = 'inline-block';
+            query( '[for="menu_theme"]' ).style.display   = 'none';
+            query( '[href="#relar-problema"]' ).style.display = 'none';
             query('#menu_sistema').setAttribute('checked', "true");
             to('#dominio');
         } else {
             query( '#aside-sistema' ).style.display       = 'block';
+            query( '[href="#relar-problema"]' ).style.display = 'inline-block';
             query( '[for="menu_quadra"]' ).style.display  = 'inline-block';
             query( '[for="menu_theme"]' ).style.display   = 'inline-block';
-            query( '[for="menu_user"]' ).style.display    = 'inline-block';
             query( '[for="menu_sistema"]' ).style.display = 'none';
             query('#menu_quadra').setAttribute('checked', "true");
             to('#agenda');
@@ -256,25 +257,25 @@ var beta = {
 
     set dominio(cont) {
         _beta.dominio = cont;
-        query('#dominio__table_body').innerHTML = cont
-            .map( x => `
+        query('#dominio__table_body').innerHTML = cont.map( x => `
                 <tr>
-                    <td><img src="./disc/ico/trash.png" class="ico-table"></td>
-                    <td>${x.name}</td>
-                    <td>${x.status}</td>
+                    <td><img onclick="delete_dominio( '${x.id}' )" src="./disc/ico/trash.png" class="ico-table"></td>
+                    <td>${x.name || ''}</td>
+                    <td>${( x.ativo || '' === '1' ) ? 'sim' : 'não'}</td>
                     <td>
-                        <img onclick="to( '?id=${x.id}#dominio-novo' )" src="./disc/ico/edit.png" class="ico-table">
+                        <img onclick="to( '#dominio-novo' ); edite_dominio('${x.id}')" src="./disc/ico/edit.png" class="ico-table">
                     </td>
                 </tr>
             ` ).join( '' );
     },
-    get dominio() { return _beta.dominio },
+    get dominio() { return _beta.dominio; },
 
     set dominio_novo(cont) {
         _beta.dominio_novo = cont;
-        query('#dominio-novo__form_nome').innerHTML = cont.name;
-        query('#dominio-novo__form_dominio').innerHTML = cont.domain;
-        query('#dominio-novo__form_status').innerHTML = cont.status;
+        query('#dominio-novo__form_id').value = cont.id || '';
+        query('#dominio-novo__form_nome').value = cont.name || '';
+        query('#dominio-novo__form_dominio').value = cont.domain || '';
+        query(`#dominio-novo__form_status option[value='${cont.ativo || '1'}']`).setAttribute('selected','');
     },
     get dominio_novo() { return _beta.dominio_novo },
 
@@ -283,12 +284,12 @@ var beta = {
         query('#usuario__table_body').innerHTML = cont
             .map( x => `
                 <tr>
-                    <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+                    <td><img onclick="delete_usuario('${x.mail}')" src="./disc/ico/trash.png" class="ico-table"></td>
                     <td>${x.name}</td>
                     <td>${x.telephone}</td>
-                    <td>${x.status}</td>
+                    <td>${( x.ativo == 1 ) ? 'sim' : 'não'}</td>
                     <td>
-                        <img onclick="to( '?id=${x.id}#usuario-novo' )" src="./disc/ico/edit.png" class="ico-table">
+                        <img onclick="to( '#usuario-novo' ); edit_usuario('${x.id}')" src="./disc/ico/edit.png" class="ico-table">
                     </td>
                 </tr>
             ` ).join( '' );
@@ -297,12 +298,17 @@ var beta = {
 
     set usuario_novo(cont) {
         _beta.usuario_novo = cont;
-        query('#usuario-novo__form_nome').innerHTML = cont.name;
-        query('#usuario-novo__form_email').innerHTML = cont.email;
-        query('#usuario-novo__form_tel').innerHTML = cont.telephone;
-        query('#usuario-novo__form_dominio').innerHTML = cont.domain.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
-        query('#usuario-novo__form_nivel').innerHTML = cont.admin;
-        query('#usuario-novo__form_status').innerHTML = cont.status;
+        query('#usuario-novo__form_id').value = cont.id || '';
+        query('#usuario-novo__form_nome').value = cont.name || '';
+        query('#usuario-novo__form_email').value = cont.mail || '';
+        query('#usuario-novo__form_tel').value = cont.telephone || '';
+        if ( typeof cont.domain === 'string' ) {
+            query(`#usuario-novo__form_dominio option[value="${cont.domain || ''}"]`).setAttribute('selected', 'true');
+        } else {
+            query('#usuario-novo__form_dominio').innerHTML = cont.domain.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
+        }
+        query(`#usuario-novo__form_nivel option[value="${cont.admin || '1'}"]`).setAttribute('selected', 'true');
+        query(`#usuario-novo__form_status option[value="${cont.ativo || ''}"]`).setAttribute('selected', 'true');
     },
     get usuario_novo() { return _beta.usuario_novo },
 
@@ -324,10 +330,9 @@ var beta = {
 
     set perfil(cont) {
         _beta.perfil = cont;
-        query('#perfil__form_nome').innerHTML = cont.name;
-        query('#perfil__form_email').innerHTML = cont.email;
-        query('#perfil__form_tel').innerHTML = cont.telephone;
-        query('#perfil__form_dominio').innerHTML = cont.cont.domain.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
+        query('#perfil__form_nome').value = cont.name;
+        query('#perfil__form_email').value = cont.mail;
+        query('#perfil__form_tel').value = cont.telephone;
     },
     get perfil() { return _beta.perfil },
 

@@ -56,7 +56,7 @@
                 <a href="#perfil" class="link_menu">Perfil</a>
                 <a href="#mudar-senha" class="link_menu">Mudar senha</a>
                 <a href="#relar-problema" class="link_menu">Relatar Problema</a>
-                <a href="#sair" class="link_menu">Sair</a>
+                <a href="#sair" class="link_menu" onclick="logout()">Sair</a>
             </div>
         </nav>
         <aside id="aside" class="gap descktop">
@@ -82,17 +82,13 @@
                  <header class="gap-bottom"> 
                     <h5>Meu perfil</h5>
                 </header>                
-                <form action="javascript:void(0)" onsubmit="" method="POST">
+                <form action="javascript:void(0)" id="form-perfil" onsubmit="save_perfil('#form-perfil')" method="POST">
                     <label for="" class="input-label">Nome</label>
                     <input type="text" class="input-field" name="name" id="perfil__form_nome" required>
                     <label for="" class="input-label">Email</label>
-                    <input type="email" class="input-field" name="email" id="perfil__form_email" disabled>
+                    <input type="email" class="input-field" name="mail" id="perfil__form_email" disabled>
                     <label for="" class="input-label">Telefone</label>
                     <input type="text" class="input-field" name="telephone" id="perfil__form_tel" required>
-                    <label for="" class="input-label">Domínio</label>
-                    <select name="domain" id="perfil__form_dominio" class="input-field">
-                        <option value="">Selecione Domínio</option>
-                    </select>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
@@ -100,7 +96,7 @@
                  <header class="gap-bottom"> 
                     <h5>Mudar minha senha</h5>
                 </header>
-                <form action="javascript:void(0)" onsubmit="" method="POST">
+                <form action="javascript:void(0)" id="form-mudar" onsubmit="alter_pass('#form-mudar')" method="POST">
                     <label for="" class="input-label">Nova senha</label>
                     <input id="mudar-senha_password" type="password" class="input-field" name="pass" required>
                     <label for="" class="input-label">Confirmar nova senha</label>
@@ -124,27 +120,6 @@
                     <textarea id="relar-problema__descriocao" name="description" rows="6" class="input-field"></textarea>     
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
-            </section>
-            <section id="dominio" class="gap box">
-                 <header class="gap-bottom grid-2"> 
-                    <h5>Lista de domínio</h5>
-                    <div class="text-right">
-                        <a href="#dominio-novo" class="ico ico-plus theme circle"></a>
-                    </div>
-                </header>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th width="30"></th>
-                            <th>Nome</th>
-                            <th width="50">Status</th>
-                            <th width="30"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="dominio__table_body">
-                        
-                    </tbody>
-                </table>
             </section>
             <section id="detalhe-locacao" class="gap box">
                  <header class="gap-bottom"> 
@@ -199,18 +174,39 @@
                     </tbody>
                 </table>
             </section>
+            <section id="dominio" class="gap box">
+                <header class="gap-bottom grid-2"> 
+                    <h5>Lista de domínio</h5>
+                    <div class="text-right">
+                        <a href="#dominio-novo" class="ico ico-plus theme circle"></a>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="30"></th>
+                            <th>Nome</th>
+                            <th width="50">Ativo</th>
+                            <th width="30"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="dominio__table_body"></tbody>
+                </table>
+            </section>
             <section id="dominio-novo" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Adicionar novo domínio</h5>
                 </header>
-                <form action="javascript:void(0)" onsubmit="" method="POST">
+                <form action="javascript:void(0)" id="form-dominio-novo" onsubmit="create_dominio( '#form-dominio-novo' )" method="POST">
+                    <input id="dominio-novo__form_id" type="hidden" class="input-field" name="id">
                     <label for="" class="input-label">Nome</label>
                     <input id="dominio-novo__form_nome" type="text" class="input-field" name="name" required>
                     <label for="" class="input-label">Dominio</label>
-                    <input id="dominio-novo__form_dominio" type="text" class="input-field" name="domain" required>                    
-                    <select id="dominio-novo__form_status" name="status" class="input-field">
-                        <option value="1">Ativo</option>
-                        <option value="0">Inativo</option>
+                    <input id="dominio-novo__form_dominio" type="text" class="input-field" name="domain" required>
+                    <label for="" class="input-label">Ativo</label>                  
+                    <select id="dominio-novo__form_status" name="ativo" class="input-field">
+                        <option value="1">Sim</option>
+                        <option value="0">Não</option>
                     </select>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
@@ -228,7 +224,7 @@
                             <th width="30"></th>
                             <th>Nome</th>
                             <th width="200">Telefone</th>
-                            <th width="50">Status</th>
+                            <th width="50">Ativo</th>
                             <th width="30"></th>
                         </tr>
                     </thead>
@@ -241,15 +237,18 @@
                  <header> 
                     <h5>Adicionar novo usuário</h5>
                 </header>
-                <form action="javascript:void(0)" onsubmit="" method="POST">
+                <form action="javascript:void(0)" onsubmit="create_usuario( '#form-usuaario' )" id="form-usuaario" method="POST">
+                    <input type="hidden" name="id" id="usuario-novo__form_id">
                     <label for="" class="input-label">Nome</label>
                     <input id="usuario-novo__form_nome" type="text" class="input-field" name="name" required>
                     <label for="" class="input-label">Email</label>
-                    <input id="usuario-novo__form_email" type="email" class="input-field" name="email" disabled>
+                    <input id="usuario-novo__form_email" type="email" class="input-field" name="mail" required>
+                    <label for="" class="input-label" id="usuario-novo__label_pass">Senha</label>
+                    <input id="usuario-novo__form_pass" type="password" class="input-field" name="pass">
                     <label for="" class="input-label">Telefone</label>
-                    <input id="usuario-novo__form_tel" type="text" class="input-field" name="telephone" required>
+                    <input id="usuario-novo__form_tel" type="text" class="input-field" name="telephone">
                     <label for="" class="input-label">Domínio</label>
-                    <select id="usuario-novo__form_dominio" name="domain" class="input-field">
+                    <select id="usuario-novo__form_dominio" name="domain" class="input-field" required>
                         <option value="">Selecione Domínio</option>
                     </select>
                     <label for="" class="input-label">Nivel Acesso</label>
@@ -257,10 +256,10 @@
                         <option value="1">Usuário</option>
                         <option value="2">Administrador</option>
                     </select>
-                    <label for="" class="input-label">Status</label>
-                    <select id="usuario-novo__form_status" name="status" class="input-field">
-                        <option value="1">Ativo</option>
-                        <option value="0">Inativo</option>
+                    <label for="" class="input-label">Ativo</label>
+                    <select id="usuario-novo__form_status" name="ativo" class="input-field">
+                        <option value="1">sim</option>
+                        <option value="0">não</option>
                     </select>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
@@ -1010,12 +1009,11 @@
         <script src="./disc/js/config.js"></script>
         <script src="./disc/js/functions.js"></script>
         <script src="./disc/js/interface.js"></script>
-        <script src="./disc/js/javascript.js"></script>
+        <script async src="./disc/js/javascript.js"></script>
         <script src="./disc/js/main.js"></script>
         <script src="./disc/js/agenda.js"></script>
         <script defer >
             privado();
-            query('#pisca').style.display = 'grid';
         </script>
     </body>
 </html>
