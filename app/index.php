@@ -8,7 +8,7 @@
     $dominio_dir = __DIR__ . "/data/" . dominio . "/";
     maker_dir( $dominio_dir );
 
-    $file_name = urls[0] ?? '';
+    $file_name = urls[1] ?? '';
     $file_dir  = __DIR__ . "/route/{$file_name}.php";
     if( file_exists( $file_dir ) ):
         require $file_dir;

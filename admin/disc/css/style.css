@@ -273,18 +273,18 @@ body {
     counter-reset: #666;
 }
 .table td, .table th { padding: 12px; }
-.table thead{}
-.table thead tr{}
+.table thead,
+.table thead tr,
 .table thead tr th{
     text-align: left;
     border-bottom: 2px solid #666;
     text-transform: uppercase;
 }
-.table tbody{}
+.table tbody,
 .table tbody tr:nth-child(2n+1){
     background-color: #EEE;
 }
-.table tbody tr {}
+.table tbody tr,
 .table tbody tr:hover { background: #CCC; }
 .table tbody tr td{
     border-bottom: 1px solid #DDD;
