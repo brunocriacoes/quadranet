@@ -77,13 +77,13 @@
                 </header>
                 <form action="javascript:void(0)" onsubmit="" method="POST">
                     <label for="" class="input-label">Nome</label>
-                    <input type="text" class="input-field" name="name" required>
+                    <input id="perfil__form_nome" type="text" class="input-field" name="name" required>
                     <label for="" class="input-label">Email</label>
-                    <input type="email" class="input-field" name="email" disabled>
+                    <input id="perfil__form_email" type="email" class="input-field" name="email" disabled>
                     <label for="" class="input-label">Telefone</label>
-                    <input type="text" class="input-field" name="telephone" required>
+                    <input id="perfil__form_tel" type="text" class="input-field" name="telephone" required>
                     <label for="" class="input-label">Domínio</label>
-                    <select id="usuario-novo__form_dominio" name="domain" class="input-field">
+                    <select id="perfil__form_dominio" name="domain" class="input-field">
                         <option value="">Selecione Domínio</option>
                     </select>
                     <input type="submit" value="salvar" class="btn btn-sucess">
@@ -796,7 +796,7 @@
             </section>
             <section id="agenda" class="gap box">
                 <header class="grid-agenda gap-bottom">
-                    <h5 id="agenda__tile" class="title"> Nome quadra <small id="agenda__modalidade">futebol</small></h5>
+                    <h5 class="title"> <span id="agenda__title">Nome quadra</span> <small id="agenda__modalidade">futebol</small></h5>
                     <div class="grid-elements-agenda">
                         <label for="set-date">
                             <img src="./disc/ico/calendar.png">
@@ -909,10 +909,10 @@
                 <span class="cad cad-search" >
                     <form action="javascript:void(0)" method="POST" onsubmit="" class="search">
                         <input type="search" name="s" required>
-                        <label for="busca-jogadores">
+                        <label for="pop-busca-jogadores">
                             <img src="./disc/ico/search.png">
                         </label>
-                        <input type="submit" id="busca-jogadores" hidden>
+                        <input type="submit" id="pop-busca-jogadores" hidden>
                     </form>                  
                     <table class="table" width="100%">
                         <thead>

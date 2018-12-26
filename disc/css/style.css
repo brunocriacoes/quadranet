@@ -519,7 +519,6 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr 150px;
 }
 .hours__schedule {
-    border-bottom: 2px solid #999;
     display: block;
     margin: 15px;
 }
@@ -527,7 +526,6 @@ h1, h2, h3, h4, h5, h6 {
     border: 2px solid var( --theme ) !important;
     margin-left: 60px;
     margin-right: 20px;
-    margin-bottom: 15px;
 }
 .btn_fields__card_details, .hours__schedule_btn_avulso {
     border: 2px solid var( --blue-1 );

@@ -339,7 +339,7 @@ var beta = {
 
     set agenda(cont) {
         _beta.agenda = cont;
-        query('#agenda__tile').innerHTML = cont.name;
+        query('#agenda__title').innerHTML = cont.name;
         query('#agenda__modalidade').innerHTML = cont.modalidade;
         query('#agenda__data').innerHTML = cont.date;
         query('#agenda__dia-semana').innerHTML = cont.day;
@@ -354,4 +354,4 @@ var beta = {
     get mudar_senha() { return _beta.mudar_senha },
 }
 
-beta.agenda = [{ name: 'sadasdasd', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 213123, nickname: 'uhuu', email: 'qqq@qq.com', init: 878, end: 1212, telephone: 111111 }, { name: 'nbvmvbm', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 9789, nickname: 'fdfd', email: 'dasd@qq.com', init: 878, end: 1212, telephone:222222 }, { name: 'g456', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 45689, nickname: 'mnm', email: 'ioio@qq.com', init: 878, end: 1212, telephone: 333333 }];
+beta.agenda = [{ name: 'sadasdasd', code: 11111, modalidade: 'teste', date: 11/22/33, price_total: 12121, status: 21212, id: 213123, nickname: 'uhuu', email: 'qqq@qq.com', init: 878, end: 1212, telephone: 111111 }, { name: 'nbvmvbm', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 9789, nickname: 'fdfd', email: 'dasd@qq.com', init: 878, end: 1212, telephone:222222 }, { name: 'g456', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 45689, nickname: 'mnm', email: 'ioio@qq.com', init: 878, end: 1212, telephone: 333333 }];
