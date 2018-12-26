@@ -376,7 +376,7 @@ var beta = {
 
     set agenda(cont) {
         _beta.agenda = cont;
-        query('#agenda__tile').innerHTML = cont.name;
+        query('#agenda__title').innerHTML = cont.name;
         query('#agenda__modalidade').innerHTML = cont.modalidade;
         query('#agenda__data').innerHTML = cont.date;
         query('#agenda__dia-semana').innerHTML = cont.day;
