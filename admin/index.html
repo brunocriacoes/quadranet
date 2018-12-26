@@ -35,12 +35,12 @@
             <div class="login__info__right">
                 <img src="./disc/logo/logo.png">
                 <span>Bem-vindo ao Sistema QuadraNet</span>
-                <form action="javascript:void(0)" method="POST">
+                <form action="javascript:void(0)" method="POST" id="form_login">
                     <input type="email" name="mail" placeholder="Email" class="input-field ico ico-mail ico-field"
                         required>
                     <input type="password" name="pass" placeholder="Senha" class="input-field ico ico-pass ico-field"
                         required>
-                    <input type="submit" value="ENTRAR" class="btn btn-sucess">
+                    <input onclick="login('#form_login')"type="submit" value="ENTRAR" class="btn btn-sucess">
                 </form>
             </div>
         </div>
