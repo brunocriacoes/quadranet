@@ -27,14 +27,13 @@ body {
 }
 
 .login__info {
-    top: 100px; left: 40px; bottom: 100px; right: 40px;
     width: 80%;
     height: auto;
     display: block;
 }
 
 .login__info__left {
-    height: 120px;
+    height: 140px;
     position: relative;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
