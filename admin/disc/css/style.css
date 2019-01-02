@@ -377,7 +377,6 @@ body {
 }
 .title {
     display: flex;
-    font-weight: bold;
     color: #111;
     font-size: 30px;
     text-transform: uppercase
