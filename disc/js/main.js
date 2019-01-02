@@ -88,7 +88,7 @@ fetch( url_api + bug + chache )
                 let conj        = Object.values(agendas.results);
                 let para        = parametros();
                 let quadra      = conjunto.find(p => p.ID == para.id);
-                vio.agenda      = conj.map(y => ({ ID: quadra.ID, name: quadra.title, init: y.inicio, end: y.final, mensal: quadra.mensal, avulso: quadra.avulso, idAgenda: date().split('/').reverse().join('-') + '-' + y.inicio.replace(':', '-') + '-' + newDay() }));
+                vio.agenda      = conj.map(y => ({ ID: quadra.ID, foto: quadra.foto, name: quadra.title, init: y.inicio, end: y.final, mensal: quadra.mensal, avulso: quadra.avulso, idAgenda: date().split('/').reverse().join('-') + '-' + y.inicio.replace(':', '-') + '-' + newDay() }));
                 let category    = y.tag.results;
                 let comp        = Object.values(category);
                 let tags        = comp.find(p => p.ID == quadra.tag);

@@ -2,7 +2,7 @@ if( localStorage.cart == undefined ) {
     localStorage.setItem('cart', '[]');
 }
 
-function addCart( ID, name, status, price, init, end, data, idAgenda ) {
+function addCart( ID, name, status, price, init, end, data, idAgenda, foto ) {
     let item = [{
         'id': ID,
         'name': name,
@@ -11,7 +11,8 @@ function addCart( ID, name, status, price, init, end, data, idAgenda ) {
         'init': init,
         'end': end,
         'day': data,
-        'idAgenda': idAgenda
+        'idAgenda': idAgenda,
+        'foto': foto
     }];
 
     let items = localStorage.cart;

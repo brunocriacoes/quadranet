@@ -60,8 +60,8 @@ var vio  = {
             return `
             <div class="hours__schedule" id="${x.idAgenda}">
                 <span>${ x.init || '--:--' }hrs às ${ x.end || '--:--' }hrs</span>
-                <button class="btn hours__schedule_btn hours__schedule_btn_avulso avulso_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 0, '${x.avulso || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}' )">Reservar Avulso R$ ${ x.avulso || '00,00' },00</button>
-                <button class="btn hours__schedule_btn hours__schedule_btn_mensal mensal_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 1, '${x.mensal || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}' )">Reservar Mensal R$ ${ x.mensal || '00,00' },00</button>
+                <button class="btn hours__schedule_btn hours__schedule_btn_avulso avulso_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 0, '${x.avulso || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}', '${x.foto}' )">Reservar Avulso R$ ${ x.avulso || '00,00' },00</button>
+                <button class="btn hours__schedule_btn hours__schedule_btn_mensal mensal_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 1, '${x.mensal || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}', '${x.foto}' )">Reservar Mensal R$ ${ x.mensal || '00,00' },00</button>
             </div>
             `;
         } ).join('');
@@ -93,12 +93,13 @@ var vio  = {
         query( '#vio_cart' ).innerHTML = el.map( x => {
             return `
                 <tr>
-                    <td onclick="removeItem( '${x.idAgenda}' )"><img src="./disc/ico/delete.png" class="trash"></td>
-                    <td>${ x.name || '---' }</td>
-                    <td>${ x.day || '--/--/----' }</td>
-                    <td>${ x.init || '--:--' } ás ${ x.end || '--:--' }</td>
-                    <td>${ ( x.status || true ) ? 'por um dia' : 'por mês'  }</td>
-                    <td>R$ ${ x.price || '00,00' } </td>
+                <td><img src="${url_storage}/${x.foto}" class="cart__img"></td>
+                <td>${ x.name || '---' }</td>
+                <td>${ x.day || '--/--/----' }</td>
+                <td>${ x.init || '--:--' } ás ${ x.end || '--:--' }</td>
+                <td>${ ( x.status || true ) ? 'por um dia' : 'por mês'  }</td>
+                <td>R$ ${ x.price || '00,00' } </td>
+                <td onclick="removeItem( '${x.idAgenda}' )"><img src="./disc/ico/delete.png" class="trash"></td>
                 </tr>
             `;
         } ).join('');
@@ -124,7 +125,7 @@ var vio  = {
                 <span class="fields__card_name">${z.title || '---'}</span>
                 <div class="fields__card_info">
                     <a href="?id=${ z.ID || 42 }#detalhe" class="btn btn_fields__card_details">Detalhes</a>
-                    <a href="?id=${ z.ID || 42 }#agenda" class="btn btn_fields__card_hours">Reservar</a>
+                    <a href="?id=${ z.ID || 42 }#agenda" onclick="setReserva( '${z.ID}' )" class="btn btn_fields__card_hours">Reservar</a>
                 </div>
             </div>
             `;

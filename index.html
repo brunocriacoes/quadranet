@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br" prefix="og: http://ogp.me/ns#">
+
 <head>
     <!-- ?CACHE01 -->
     <meta charset="utf-8" />
@@ -27,18 +28,19 @@
     <meta name="application-name" content="PWA solução sites">
     <link rel="icon" sizes="16x16 32x32 48x48" href="./disc/logo/ico.png">
     <link rel="icon" sizes="512x512" href="./disc/logo/ico.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <script>
-        const debug       = true;
-        const chache      = '&cache=' + new Date().getTime();
-        const trol        = debug ? '&bug=true' : '';
-        const http        = window.location.protocol;
-        const dominio     = window.location.hostname.replace( 'www.', '' );
-        const base        = `${http}//${dominio}`;
-        const uri_api     = `${http}//${dominio}/api`;
-        const url_api     = `${http}//${dominio}/api/get/${dominio}`;
+        const debug = true;
+        const chache = '&cache=' + new Date().getTime();
+        const trol = debug ? '&bug=true' : '';
+        const http = window.location.protocol;
+        const dominio = window.location.hostname.replace('www.', '');
+        const base = `${http}//${dominio}`;
+        const uri_api = `${http}//${dominio}/api`;
+        const url_api = `${http}//${dominio}/api/get/${dominio}`;
         const url_storage = `${http}//${dominio}/api/Data/${dominio}/uploads`;
-        const menu_2      = document.querySelector( '#menu' );
+        const menu_2 = document.querySelector('#menu');
     </script>
 
     <style id="personalizar"></style>
@@ -96,7 +98,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th><img src="./disc/ico/delete.png" class="trash"></th>
+                    <th></th>
                     <th>Quadra</th>
                     <th>Data</th>
                     <th>Horário</th>
@@ -107,13 +109,13 @@
             <tbody id="vio_cart"></tbody>
             <tfoot>
                 <tr>
-                    <td colspan="5" class="text-rigth">Total</td>
-                    <td>R$ <b id="vio_total"></b></td>
+                    <td colspan="5" class="text-rigth">Total: </td>
+                    <td><b id="vio_total"></b></td>
                 </tr>
             </tfoot>
         </table>
         <div class="or">
-            <a href="#quadras" class="btn btn-center gap-top gap-bottom">Continuar com a Compra</a>
+            <a href="#quadras" class="btn btn-center gap-top gap-bottom">Continuar comprando</a>
             <a href="#finalizar" class="btn btn-sucess btn-center gap-top gap-bottom">Finalizar a Compra</a>
         </div>
     </section>
@@ -132,10 +134,15 @@
             </thead>
             <tbody id="vio_finalizar"></tbody>
         </table>
-        <h3 class="text-center gap-top"> TOTAL R$: <span id="finalizar_total">00,00</span></h3>
+        <h3 class="text-center gap-top"> TOTAL: <span id="finalizar_total">00,00</span></h3>
         <div class="text-center pague">
             <img id="img_pague" src="./disc/img/comprar.gif" onclick="buy()">
-            <div id="lds-ring"><div></div><div></div><div></div><div></div></div>
+            <div id="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
             <a class="btn btn-finalizar" href="#quadras">Ir para página de Quadras</a>
         </div>
         <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post" onsubmit="PagSeguroLightbox(this); return false;">
@@ -145,7 +152,7 @@
         <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
     </section>
 
-    <section class="fields" id="quadras">
+    <section class="fields box gap" id="quadras">
         <h1 class="fields__title">Quadras</h1>
         <div class="fields_type">
             <label class="fields_type_label" for="select">Escolha o tipo da Quadra:</label>
@@ -164,7 +171,7 @@
             <h4 id="vio_calendar_name"></h4> -
             <small id="vio_calendar_modal"></small>
         </div>
-        <div class="gap-bottom or">
+        <div class="gap-bottom tree">
             <div>
                 <label>Dia da Semana:</label>
                 <span id="vio_calendar_day">---</span>
@@ -186,20 +193,25 @@
             <h1 id="detalhe__title">Quem Somos</h1>
             <a id="detalhe_btn" class="btn btn-sucess" href="">Reservar</a>
             <p id="detalhe__info">
-               
+
             </p>
             <div class="share">
-                
+
             </div>
         </article>
         <article class="gap-bottom">
             <img src="./disc/img/default.jpg" class="img-responsive" id="galeria-detalhe" onerror=" this.src = './disc/img/default.jpg'">
             <div class="galeria">
-                <img id="galeria_img-1" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
-                <img id="galeria_img-2" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
-                <img id="galeria_img-3" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
-                <img id="galeria_img-4" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
-                <img id="galeria_img-5" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )" onerror=" this.src = './disc/img/default.jpg'">
+                <img id="galeria_img-1" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )"
+                    onerror=" this.src = './disc/img/default.jpg'">
+                <img id="galeria_img-2" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )"
+                    onerror=" this.src = './disc/img/default.jpg'">
+                <img id="galeria_img-3" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )"
+                    onerror=" this.src = './disc/img/default.jpg'">
+                <img id="galeria_img-4" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )"
+                    onerror=" this.src = './disc/img/default.jpg'">
+                <img id="galeria_img-5" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-detalhe' )"
+                    onerror=" this.src = './disc/img/default.jpg'">
             </div>
         </article>
     </section>
@@ -209,17 +221,22 @@
             <h1 id="vio_sobre_title">Quem Somos</h1>
             <div id="vio_sobre_content"></div>
             <div class="share">
-                
+
             </div>
         </article>
         <article class="gap-bottom">
             <img src="./disc/img/default.jpg" class="img-responsive" id="galeria-sobre" onerror="img_default( this )">
             <div class="galeria">
-                <img id="vio_sobre_foto_1" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )" onerror="img_default( this )">
-                <img id="vio_sobre_foto_2" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )"onerror="img_default( this )">
-                <img id="vio_sobre_foto_3" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )"onerror="img_default( this )">
-                <img id="vio_sobre_foto_4" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )"onerror="img_default( this )">
-                <img id="vio_sobre_foto_5" src="./disc/img/default.jpg" class="img-responsive"onmouseover="hover_photo( this, '#galeria-sobre' )" onerror="img_default( this )">
+                <img id="vio_sobre_foto_1" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )"
+                    onerror="img_default( this )">
+                <img id="vio_sobre_foto_2" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )"
+                    onerror="img_default( this )">
+                <img id="vio_sobre_foto_3" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )"
+                    onerror="img_default( this )">
+                <img id="vio_sobre_foto_4" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )"
+                    onerror="img_default( this )">
+                <img id="vio_sobre_foto_5" src="./disc/img/default.jpg" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )"
+                    onerror="img_default( this )">
             </div>
         </article>
     </section>
@@ -228,7 +245,7 @@
         <h1 class="text-center">Serviços</h1>
         <div id="vio_servico"></div>
         <div class="share">
-            
+
         </div>
     </section>
 
@@ -257,16 +274,16 @@
         <div class="contato-info">
             <h1>Contato</h1>
             <p id="vio_contact_text">
-               
+
             </p>
             <p class="ico ico-map">
-                
+
             </p>
             <a href="mailto:" class="ico ico-mail link" id="vio_contact_email">
-                
+
             </a> <br>
             <a href="tel:" class="ico ico-tel link" id="vio_contact_tel">
-                
+
             </a> <br>
             <div id="vio_contact_map"></div>
         </div>
@@ -292,8 +309,8 @@
             <input type="password" name="pass" class="field ico ico-pass" placeholder="senha">
             <input type="submit" value="Entrar" class="btn btn-sucess btn-center">
             <div class="or">
-                <a href="#me-cadastrar" class="link link-small">Me Cadastrar</a>
-                <a href="#recuperar-senha" class="link link-small text-rigth">Esqueci Senha</a>
+                <a href="#me-cadastrar" class="link link-small">Não tem cadastro? cadastre-se</a>
+                <a href="#recuperar-senha" class="link link-small text-rigth">Esqueceu a senha?</a>
             </div>
         </form>
     </section>
@@ -378,7 +395,7 @@
                     </tr>
                 </thead>
                 <tbody id="vio_time">
-                    
+
                 </tbody>
             </table>
             <form action="javascript:void(0)" method="POST" class="form" id="add-jogador" onsubmit="add_player()">
@@ -421,37 +438,50 @@
     </section>
 
     <section class="carousel">
-        <div class="carousel__gamb">
-            <input type="radio" id="one" name="activator" hidden>
-            <input type="radio" id="two" name="activator" hidden>
-            <input type="radio" id="tree" name="activator" hidden>
-            <div class="carousel__track">
-                <li class="carousel__slide">
+        <div class="carousel">
+            <div class="carousel-inner">
+                <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden=""
+                    checked="checked">
+                <div class="carousel-item">
                     <div class="carousel__slide_info">
                         <span id="vio_text_1"></span>
                         <a href="" id="vio_link_1" class="btn carousel__slide_info_btn">Mais Detalhes</a>
                     </div>
                     <img src="./disc/img/banner.png" alt="" id="vio_carrousel_foto_1" onerror="img_default_banner( this )">
-                </li>
-                <li class="carousel__slide">
+                </div>
+                <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
+                <div class="carousel-item">
                     <div class="carousel__slide_info">
                         <span id="vio_text_2"></span>
                         <a href="" id="vio_link_2" class="btn carousel__slide_info_btn">Mais Detalhes</a>
                     </div>
                     <img src="./disc/img/banner.png" alt="" id="vio_carrousel_foto_2" onerror="img_default_banner( this )">
-                </li>
-                <li class="carousel__slide">
+                </div>
+                <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
+                <div class="carousel-item">
                     <div class="carousel__slide_info">
                         <span id="vio_text_3"></span>
                         <a href="" id="vio_link_3" class="btn carousel__slide_info_btn">Mais Detalhes</a>
                     </div>
                     <img src="./disc/img/banner.png" alt="" id="vio_carrousel_foto_3" onerror="img_default_banner( this )">
-                </li>
-            </div>
-            <div class="carousel_bullets">
-                <label for="one" class="carousel_bullets_controll"></label>
-                <label for="two" class="carousel_bullets_controll"></label>
-                <label for="tree" class="carousel_bullets_controll"></label>
+                </div>
+                <label for="carousel-3" class="carousel-control prev control-1">‹</label>
+                <label for="carousel-2" class="carousel-control next control-1">›</label>
+                <label for="carousel-1" class="carousel-control prev control-2">‹</label>
+                <label for="carousel-3" class="carousel-control next control-2">›</label>
+                <label for="carousel-2" class="carousel-control prev control-3">‹</label>
+                <label for="carousel-1" class="carousel-control next control-3">›</label>
+                <ol class="carousel-indicators">
+                    <li>
+                        <label for="carousel-1" class="carousel-bullet">•</label>
+                    </li>
+                    <li>
+                        <label for="carousel-2" class="carousel-bullet">•</label>
+                    </li>
+                    <li>
+                        <label for="carousel-3" class="carousel-bullet">•</label>
+                    </li>
+                </ol>
             </div>
         </div>
     </section>
@@ -462,7 +492,7 @@
             <img src="disc/ico/info.png">
             <h2>Serviços</h2>
             <p id="card__services__paragrafo">
-                
+
             </p>
             <a href="#servicos" class="btn btn-sucess">Mais Detalhes</a>
         </div>
@@ -499,7 +529,7 @@
             <div class="footer__about">
                 <h2>Quem Somos?</h2>
                 <p>
-                    
+
                 </p>
             </div>
             <div class="footer__adress">
@@ -521,7 +551,7 @@
         </div>
         <div class="footer__dev">
             <span>2018 Todos os Direitos Reservados a Dev</span>
-            <span>Desenvolvido por 
+            <span>Desenvolvido por
                 <a href="http://www.sistemaquadralocacao.com.br/" target="_blank">
                     quadranet.com.br
                 </a>
