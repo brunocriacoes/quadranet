@@ -81,10 +81,8 @@
         $json               = json_decode( file_get_contents( $profile_token ) );
         $user               = json_decode( file_get_contents(  $user_dir . $json->user . ".json"  ) );
         unset( $user->pass );
-        unset( $user->admin );
         unset( $user->ativo );
         unset( $user->status );
-        unset( $user->domain );
         echo json_encode( $user );
         die;
     endif;

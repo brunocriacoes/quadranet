@@ -23,8 +23,10 @@ var beta = {
         _beta.admin = cont;
         if(cont) {
             query('#selecionar-dominio').removeAttribute('disabled');            
+            query('#selecionar-dominio').classList.remove('no-admin');            
         } else {
             query('#selecionar-dominio').setAttribute('disabled', 'disabled');
+            query('#selecionar-dominio').classList.add('no-admin');            
         }
     },
     get admin() { return _beta.admin; },
@@ -37,6 +39,7 @@ var beta = {
             query( '[for="menu_theme"]' ).style.display   = 'none';
             query( '[for="menu_theme"]' ).style.display   = 'none';
             query( '[href="#relar-problema"]' ).style.display = 'none';
+            query( '[for="menu_sistema"]' ).style.display = 'inline-block';
             query('#menu_sistema').setAttribute('checked', "true");
             to('#dominio');
         } else {
@@ -308,7 +311,7 @@ var beta = {
             query('#usuario-novo__form_dominio').innerHTML = cont.domain.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
         }
         query(`#usuario-novo__form_nivel option[value="${cont.admin || '1'}"]`).setAttribute('selected', 'true');
-        query(`#usuario-novo__form_status option[value="${cont.ativo || ''}"]`).setAttribute('selected', 'true');
+        query(`#usuario-novo__form_status option[value="${cont.ativo || '1'}"]`).setAttribute('selected', 'true');
     },
     get usuario_novo() { return _beta.usuario_novo },
 
@@ -376,6 +379,7 @@ var beta = {
 
     set agenda(cont) {
         _beta.agenda = cont;
+        log( cont );
         query('#agenda__title').innerHTML = cont.name;
         query('#agenda__modalidade').innerHTML = cont.modalidade;
         query('#agenda__data').innerHTML = cont.date;
@@ -390,8 +394,3 @@ var beta = {
     },
     get mudar_senha() { return _beta.mudar_senha },
 }
-
-beta.agenda = [
-    { modalidade: 'teste', name: 'sadasdasd', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 213123, nickname: 'uhuu', email: 'qqq@qq.com', init: 878, end: 1212, telephone: 111111 }, 
-    { modalidade: 'teste', name: 'nbvmvbm', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 9789, nickname: 'fdfd', email: 'dasd@qq.com', init: 878, end: 1212, telephone:222222 }, 
-    { modalidade: 'teste', name: 'g456', code: 11111, date: 11/22/33, price_total: 12121, status: 21212, id: 45689, nickname: 'mnm', email: 'ioio@qq.com', init: 878, end: 1212, telephone: 333333 }];

@@ -25,13 +25,11 @@ body {
 .login {
     grid-template-columns: 1fr;
 }
-
 .login__info {
     width: 80%;
     height: auto;
     display: block;
 }
-
 .login__info__left {
     height: 140px;
     position: relative;
@@ -39,22 +37,24 @@ body {
     border-top-right-radius: 12px;
     border-bottom-left-radius: 0;
 }
-
 .login main h6 {
     font-size: 16px;
 }
-
 .item-1, 
 .item-2, 
 .item-3 {
     top: 20px;
 }
-
 .login__info__left a {
     margin-top: 10px;
     font-size: 12px;
 }
-
 .login__info__right input {
     width: 70%;
+}
+.link_menu { 
+    padding: 0px 20px !important;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px;
 }

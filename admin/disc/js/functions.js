@@ -1,5 +1,6 @@
 "use strict";
 const log      = console.log;
+const table    = console.table;
 const query    = x => document.querySelector(x);
 const queryAll = x => document.querySelectorAll(x);
 const to       = url => { window.location.href = url; };
@@ -102,10 +103,11 @@ function getFile( ID, ID_PREVIEW )
 
 function set_domain( THIS ) {
     let value = THIS.value || '';
-    if( value == '' ) {
-        beta.sistema = true;
-    } else {    
+    localStorage.sistema = value;
+    if( value != '' ) {
         to( `${http}//${value}/${name_panel}/dash` );
+    }else {
+        beta.sistema = true;
     }
 }
 
@@ -136,6 +138,7 @@ function login( ID ) {
     let parametro = { login: `${data.mail},${data.pass}` }
     post( 'auth', parametro, x => {
         let valid = x.login || false;
+        log( x );
         if( valid ) {
             localStorage.jwt_token = x.token;
             to( `${http}//${dominio}/${name_panel}/dash` );

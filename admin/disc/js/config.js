@@ -9,6 +9,9 @@ const url_storage = `${http}//${dominio}/api/storage`;
 if( localStorage.jwt_token == undefined ){
     localStorage.setItem('jwt_token','');
 }
+if( localStorage.sistema == undefined ){
+    localStorage.setItem('sistema','');
+}
 const token       = localStorage.jwt_token;
 var   day         = '';
 var   files       = {};
