@@ -11,12 +11,12 @@ function parametros() {
     return uri;
 }
 
-function objToUrl( OBJ ) {
-    let url = Object.keys(OBJ).map( x => {
+function objToUrl(OBJ) {
+    let url = Object.keys(OBJ).map(x => {
         return `${x}=${OBJ[x]}`;
-    } ).join('&');
+    }).join('&');
 
-    return encodeURI( url );
+    return encodeURI(url);
 }
 
 function page() {
@@ -31,13 +31,13 @@ function router(pag, HOF) {
     }
 }
 
-function alerta( str ) {
-    query( '#alerta' ).style.display = 'block';
-    query( '#alerta_msg' ).innerHTML = str;
+function alerta(str) {
+    query('#alerta').style.display = 'block';
+    query('#alerta_msg').innerHTML = str;
 }
 
 function closeAlerta() {
-    query( '#alerta' ).style.display = 'none';
+    query('#alerta').style.display = 'none';
 }
 
 function hover_photo(EL, ID) {
@@ -48,69 +48,59 @@ function to_float(str) {
     str = str.replace('.', '').replace(',', '.');
     return +str;
 }
-function get_form( ID )
-{
-    let form = query( ID );
-    let obj  = {};
-    for( let i = 0; i < form.length; i++ )
-    {
+function get_form(ID) {
+    let form = query(ID);
+    let obj = {};
+    for (let i = 0; i < form.length; i++) {
         let tmp_name = form[i].id || form[i].name || 'default';
-        obj[ tmp_name ] = form[i].value || form[i].innerHTML || '';
+        obj[tmp_name] = form[i].value || form[i].innerHTML || '';
     }
     return obj;
 }
 
-function get_form_vio( ID )
-{
-    let form = query( ID );
-    let obj  = {};
-    for( let i = 0; i < form.length; i++ )
-    {
+function get_form_vio(ID) {
+    let form = query(ID);
+    let obj = {};
+    for (let i = 0; i < form.length; i++) {
         let tmp_name = form[i].id || form[i].name || 'default';
-        tmp_name = tmp_name.replace( 'vio_', '' );
-        obj[ tmp_name ] = form[i].value || form[i].innerHTML || '';
+        tmp_name = tmp_name.replace('vio_', '');
+        obj[tmp_name] = form[i].value || form[i].innerHTML || '';
     }
     return obj;
 }
 
-function disabled_form( ID )
-{
-    let form = query( ID );
-    for( let i = 0; i < form.length; i++ )
-    {
-        form[i].setAttribute( 'disabled', 'disabled' );
+function disabled_form(ID) {
+    let form = query(ID);
+    for (let i = 0; i < form.length; i++) {
+        form[i].setAttribute('disabled', 'disabled');
     }
     return null;
 }
-function abled_form( ID )
-{
-    let form = query( ID );
-    for( let i = 0; i < form.length; i++ )
-    {
-        form[i].removeAttribute( 'disabled'  );
+function abled_form(ID) {
+    let form = query(ID);
+    for (let i = 0; i < form.length; i++) {
+        form[i].removeAttribute('disabled');
     }
     return null;
 }
-function img_default( e ) { e.src = "./disc/img/default.jpg"; }
-function img_default_banner( e ) { e.src = "./disc/img/banner.png"; }
-function restrito() 
-{
-    let pages = [ "perfil", "trocar-senha", "historico-compras", "meu-time", "finalizar"];
-    pages.map( x => { 
-        router( x,  y => {
-            privado(); 
-        } ); 
-    } );    
-   
+function img_default(e) { e.src = "./disc/img/default.jpg"; }
+function img_default_banner(e) { e.src = "./disc/img/banner.png"; }
+function restrito() {
+    let pages = ["perfil", "trocar-senha", "historico-compras", "meu-time", "finalizar"];
+    pages.map(x => {
+        router(x, y => {
+            privado();
+        });
+    });
+
 }
 restrito();
-function entrar()
-{
-    let form = get_form( '#form_entrar' );
-    disabled_form( '#form_entrar' );
-    login( form.email || '', form.pass || '', x => {
-        abled_form( '#form_entrar' );
-    } );    
+function entrar() {
+    let form = get_form('#form_entrar');
+    disabled_form('#form_entrar');
+    login(form.email || '', form.pass || '', x => {
+        abled_form('#form_entrar');
+    });
 }
 
 function img_default(e) { e.src = "./disc/img/default.jpg"; }
@@ -128,18 +118,18 @@ function newDay() {
     return day;
 }
 
-function set_date( now ) {
+function set_date(now) {
     let dia = now.value;
-    let data = dia.split( '-' ).reverse().join( '/' );
+    let data = dia.split('-').reverse().join('/');
     let semana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
-    let newdate = new Date( dia );
+    let newdate = new Date(dia);
     let day = semana[newdate.getDay()];
     let newSemana = ["1", "2", "3", "4", "5", "6", "7"];
     let novodia = newSemana[newdate.getDay()];
-    let agendaUp = vio.agenda.map( x => ({ ...x,idAgenda: dia + '-' + x.init.replace( ':', '-' ) + '-' + novodia }) );
-    
+    let agendaUp = vio.agenda.map(x => ({ ...x, idAgenda: dia + '-' + x.init.replace(':', '-') + '-' + novodia }));
+
     vio.agenda_info = { ..._vio.agenda_info, day: day, date: data };
-    vio.agenda = [ ...agendaUp ];
+    vio.agenda = [...agendaUp];
 
     reserva();
 }
@@ -152,23 +142,23 @@ function date() {
 
 function reserva() {
     let para = parametros();
-    fetch( `${uri_api}/reservas?_dominio=quadranet.com.br&quadra=${para.id}${trol}` )
-    .then(x => x.json())
-    .then(y => {
-        let indisponivel = y.map( p => p.ID.substr( 0, 16 ) );
-        indisponivel.forEach(x => {
-            if( query( `.avulso_${x}` ) ) {
-                query( `.avulso_${x}`).innerHTML = 'Indisponivel';
-                query( `.avulso_${x}`).classList.add("indisponivel");
-                query( `.avulso_${x}`).removeAttribute( 'onclick' );
-            }
-            if( query( `.mensal_${x}` ) ) {
-                query( `.mensal_${x}`).innerHTML = 'Indisponivel';
-                query( `.mensal_${x}`).classList.add("indisponivel");
-                query( `.mensal_${x}`).removeAttribute( 'onclick' );
-            }
+    fetch(`${uri_api}/reservas?_dominio=quadranet.com.br&quadra=${para.id}${trol}`)
+        .then(x => x.json())
+        .then(y => {
+            let indisponivel = y.map(p => p.ID.substr(0, 16));
+            indisponivel.forEach(x => {
+                if (query(`.avulso_${x}`)) {
+                    query(`.avulso_${x}`).innerHTML = 'Indisponivel';
+                    query(`.avulso_${x}`).classList.add("indisponivel");
+                    query(`.avulso_${x}`).removeAttribute('onclick');
+                }
+                if (query(`.mensal_${x}`)) {
+                    query(`.mensal_${x}`).innerHTML = 'Indisponivel';
+                    query(`.mensal_${x}`).classList.add("indisponivel");
+                    query(`.mensal_${x}`).removeAttribute('onclick');
+                }
+            });
         });
-    });
 }
 
 function filtro(select) {
@@ -179,7 +169,7 @@ function filtro(select) {
             let conjunto = Object.values(quadra.results);
             if (select.value !== '') {
                 conjunto = Object.values(quadra.results).filter(p => p.tag == select.value);
-                }
+            }
             let quadras = conjunto;
             vio.quadra = quadras;
         });
@@ -193,108 +183,106 @@ function add_player() {
     }];
 }
 
-function send_mail()
-{
-    let form = get_form( '#send_mail' );
-    let url  = `${uri_api}/mail/contato@quadranet.com.br/${form.email}/${form.assunto}/${form.mensagem} telefone: ${form.telefone}`;
-    url      = encodeURI( url );
-    disabled_form( '#send_mail' );
-    fetch( url )
-    .then( j => j.json() )
-    .then( x => {
-        abled_form( '#send_mail' );
-        query( '#alert_send_mail' ).style.display = 'block';
-        query( '#send_mail' ).reset();
-    } );
+function send_mail() {
+    let form = get_form('#send_mail');
+    let url = `${uri_api}/mail/contato@quadranet.com.br/${form.email}/${form.assunto}/${form.mensagem} telefone: ${form.telefone}`;
+    url = encodeURI(url);
+    disabled_form('#send_mail');
+    fetch(url)
+        .then(j => j.json())
+        .then(x => {
+            abled_form('#send_mail');
+            query('#alert_send_mail').style.display = 'block';
+            query('#send_mail').reset();
+        });
 }
 
 function recuperarSenha() {
-    let form = get_form( '#formulario_recuperar-senha' );
-    disabled_form( '#formulario_recuperar-senha' );
+    let form = get_form('#formulario_recuperar-senha');
+    disabled_form('#formulario_recuperar-senha');
     let url = `${uri_api}/profile/?recovery-pass=${form.email || '17'}${trol}`;
-    fetch( url )
-    .then( j => j.json() )
-    .then( x => {
-        abled_form( '#formulario_recuperar-senha' );
-        query( '#formulario_recuperar-senha' ).reset;
-        alerta( 'Nova Senha Enviada' );
-    } );
+    fetch(url)
+        .then(j => j.json())
+        .then(x => {
+            abled_form('#formulario_recuperar-senha');
+            query('#formulario_recuperar-senha').reset;
+            alerta('Nova Senha Enviada');
+        });
 }
 
 function meCadastrar() {
-    let form = get_form( '#formulario_me-cadastrar' );
-    let uri = objToUrl( form );
-    disabled_form( '#formulario_me-cadastrar' );
+    let form = get_form('#formulario_me-cadastrar');
+    let uri = objToUrl(form);
+    disabled_form('#formulario_me-cadastrar');
     let url = `${uri_api}/profile/?cadastrar=true&${uri}${trol}`;
-    fetch( url )
-    .then( j => j.json() )
-    .then( x => {
-        abled_form( '#formulario_me-cadastrar' );
-        query( '#formulario_me-cadastrar' ).reset;
-        window.location.href = '#entrar';
-        alerta( 'Cadastrado Com Sucesso' );
-    } );
+    fetch(url)
+        .then(j => j.json())
+        .then(x => {
+            abled_form('#formulario_me-cadastrar');
+            query('#formulario_me-cadastrar').reset;
+            window.location.href = '#entrar';
+            alerta('Cadastrado Com Sucesso');
+        });
 }
 
-function  atualizarPerfil() {
-    let form = get_form_vio( '#atualizar_perfil' );
-    let uri = objToUrl( form );
+function atualizarPerfil() {
+    let form = get_form_vio('#atualizar_perfil');
+    let uri = objToUrl(form);
     let url = `${uri_api}/profile/?atualizar=${form.email}&${uri}${trol}`;
-    fetch( url )
-    .then( j => j.json() )
-    .then( x => {
+    fetch(url)
+        .then(j => j.json())
+        .then(x => {
 
-    });
+        });
 }
 
 function mudarSenha() {
-    let form = get_form( '#mudar_senha' );
+    let form = get_form('#mudar_senha');
     let url = `${uri_api}/profile/?alter-pass=${_profile.email}&pass=${form.pass}${trol}`;
-    fetch( url )
-    .then( j => j.json() )
-    .then( x => {
-        alerta( 'Senha Alterada com Sucesso' );
-    } );
+    fetch(url)
+        .then(j => j.json())
+        .then(x => {
+            alerta('Senha Alterada com Sucesso');
+        });
 }
 
 function addJogador() {
-    let form = get_form( '#add-jogador' );
-    let url  = `${uri_api}/profile/?add-player=${_profile.email}&name=${form.player_name}&tel=${form.player_tel}&mail=${form.player_mail}${trol}`;
-    fetch( url )
-    .then( j => j.json() )
-    .then( x => {
-        alerta( 'Jogador adicionado com sucesso!' );
-        query('#add-jogador').reset();
-    } );
+    let form = get_form('#add-jogador');
+    let url = `${uri_api}/profile/?add-player=${_profile.email}&name=${form.player_name}&tel=${form.player_tel}&mail=${form.player_mail}${trol}`;
+    fetch(url)
+        .then(j => j.json())
+        .then(x => {
+            alerta('Jogador adicionado com sucesso!');
+            query('#add-jogador').reset();
+        });
 }
 
-function join_payment( emailCapitao, idJogador ) {
-    let url  = `${uri_api}/profile/?player-buy=${emailCapitao}&usuario=${idJogador}${trol}`;
-    fetch( url )
-    .then( j => j.json() )
-    .then( x => {
-    } );
+function join_payment(emailCapitao, idJogador) {
+    let url = `${uri_api}/profile/?player-buy=${emailCapitao}&usuario=${idJogador}${trol}`;
+    fetch(url)
+        .then(j => j.json())
+        .then(x => {
+        });
 }
 
-async function buy()
-{
-    let id   = new Date().getTime();
-    let code = query( '#pag-code' );
-    let btn  = query( '#pag-send' );
-    
+async function buy() {
+    let id = new Date().getTime();
+    let code = query('#pag-code');
+    let btn = query('#pag-send');
+
 
     let cart = {
-        usuario  : _profile.id       || '',
-        title    : _profile.name     || '',
-        email    : _profile.email    || '',
-        whatsapp : _profile.whatsapp || '',
-        cart     : _vio.cart         || [],
-        status   : 1,
-        payment  : 1
+        usuario: _profile.id || '',
+        title: _profile.name || '',
+        email: _profile.email || '',
+        whatsapp: _profile.whatsapp || '',
+        cart: _vio.cart || [],
+        status: 1,
+        payment: 1
     };
-    cart = JSON.stringify( cart );
-    cart = encodeURI( cart );
-    _vio.cart.forEach( x => {
+    cart = JSON.stringify(cart);
+    cart = encodeURI(cart);
+    _vio.cart.forEach(x => {
         let obj = {
             _dominio: dominio,
             _method: 'POST',
@@ -305,34 +293,48 @@ async function buy()
             final: x.init,
             _token: null,
         };
-        let uri = objToUrl( obj );
+        let uri = objToUrl(obj);
         let path = `${uri_api}/reserva/?${uri}${trol}`;
-        fetch( path )
-        .then( x => x.json() )
-        .then( x => {
+        fetch(path)
+            .then(x => x.json())
+            .then(x => {
 
-        } );
-    } );
+            });
+    });
     let path = `${uri_api}/buy/?register=${id}&cart=${cart}${trol}`;
-    fetch( path )
-    .then( x => x.json() )
-    .then( x => {
-        code.value = x.code;
-        // window.location.href = `https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${x.code}`;
-        btn.click();         
-        query( '#lds-ring' ).style.display = 'none';
-        localStorage.setItem('cart', '[]');
-        query( '.btn-finalizar' ).style.display = 'block';
-    } );
-    query( '#img_pague' ).style.display = 'none';
-    query( '#lds-ring' ).style.display = 'inline-block';
+    fetch(path)
+        .then(x => x.json())
+        .then(x => {
+            code.value = x.code;
+            // window.location.href = `https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${x.code}`;
+            btn.click();
+            query('#lds-ring').style.display = 'none';
+            localStorage.setItem('cart', '[]');
+            query('.btn-finalizar').style.display = 'block';
+        });
+    query('#img_pague').style.display = 'none';
+    query('#lds-ring').style.display = 'inline-block';
 }
 
-function removePlayer( emailCapitao, idJogador ) {
-    query( `#vio_player_${idJogador}` ).style.display = 'none';
-    let url  = `${uri_api}/profile?player-del=${emailCapitao}&jogador=${idJogador}${trol}`;
-    fetch( url )
-    .then( j => j.json() )
-    .then( x => {
-    } );
-} 
+function removePlayer(emailCapitao, idJogador) {
+    query(`#vio_player_${idJogador}`).style.display = 'none';
+    let url = `${uri_api}/profile?player-del=${emailCapitao}&jogador=${idJogador}${trol}`;
+    fetch(url)
+        .then(j => j.json())
+        .then(x => {
+        });
+}
+
+function setReserva(ID) {
+    fetch(url_api + bug + chache)
+        .then(x => x.json())
+        .then(y => {
+            log(y);
+            let q = Object.values(y.quadra.results);
+            let quadra = q.find(p => p.ID == ID);
+            vio.agenda = Object.values(y.agenda.results).filter(x => x.quadra == ID).map(x => ({ ...x, ID: quadra.ID, foto: quadra.foto, name: quadra.title, init: x.inicio, end: x.final, mensal: quadra.mensal, avulso: quadra.avulso, idAgenda: date().split('/').reverse().join('-') + '-' + x.inicio.replace(':', '-') + '-' + newDay() }));
+            let data = date();
+            let dia = day();
+            vio.agenda_info = { name: quadra.title, modal: tags.title, day: dia, date: data };
+        });
+}

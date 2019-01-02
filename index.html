@@ -98,7 +98,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th><img src="./disc/ico/delete.png" class="trash"></th>
+                    <th></th>
                     <th>Quadra</th>
                     <th>Data</th>
                     <th>Horário</th>
@@ -109,13 +109,13 @@
             <tbody id="vio_cart"></tbody>
             <tfoot>
                 <tr>
-                    <td colspan="5" class="text-rigth">Total</td>
-                    <td>R$ <b id="vio_total"></b></td>
+                    <td colspan="5" class="text-rigth">Total: </td>
+                    <td><b id="vio_total"></b></td>
                 </tr>
             </tfoot>
         </table>
         <div class="or">
-            <a href="#quadras" class="btn btn-center gap-top gap-bottom">Continuar com a Compra</a>
+            <a href="#quadras" class="btn btn-center gap-top gap-bottom">Continuar comprando</a>
             <a href="#finalizar" class="btn btn-sucess btn-center gap-top gap-bottom">Finalizar a Compra</a>
         </div>
     </section>
@@ -134,7 +134,7 @@
             </thead>
             <tbody id="vio_finalizar"></tbody>
         </table>
-        <h3 class="text-center gap-top"> TOTAL R$: <span id="finalizar_total">00,00</span></h3>
+        <h3 class="text-center gap-top"> TOTAL: <span id="finalizar_total">00,00</span></h3>
         <div class="text-center pague">
             <img id="img_pague" src="./disc/img/comprar.gif" onclick="buy()">
             <div id="lds-ring">
@@ -171,7 +171,7 @@
             <h4 id="vio_calendar_name"></h4> -
             <small id="vio_calendar_modal"></small>
         </div>
-        <div class="gap-bottom or">
+        <div class="gap-bottom tree">
             <div>
                 <label>Dia da Semana:</label>
                 <span id="vio_calendar_day">---</span>
@@ -309,8 +309,8 @@
             <input type="password" name="pass" class="field ico ico-pass" placeholder="senha">
             <input type="submit" value="Entrar" class="btn btn-sucess btn-center">
             <div class="or">
-                <a href="#me-cadastrar" class="link link-small">Me Cadastrar</a>
-                <a href="#recuperar-senha" class="link link-small text-rigth">Esqueci Senha</a>
+                <a href="#me-cadastrar" class="link link-small">Não tem cadastro? cadastre-se</a>
+                <a href="#recuperar-senha" class="link link-small text-rigth">Esqueceu a senha?</a>
             </div>
         </form>
     </section>
