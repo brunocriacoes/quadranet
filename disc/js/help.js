@@ -257,7 +257,7 @@ function addJogador() {
         });
 }
 
-function join_payment(emailCapitao, idJogador) {
+function join_payment( emailCapitao, idJogador ) {
     let url = `${uri_api}/profile/?player-buy=${emailCapitao}&usuario=${idJogador}${trol}`;
     fetch(url)
         .then(j => j.json())
@@ -269,7 +269,6 @@ async function buy() {
     let id = new Date().getTime();
     let code = query('#pag-code');
     let btn = query('#pag-send');
-
 
     let cart = {
         usuario: _profile.id || '',
@@ -329,7 +328,6 @@ function setReserva(ID) {
     fetch(url_api + bug + chache)
         .then(x => x.json())
         .then(y => {
-            log(y);
             let q = Object.values(y.quadra.results);
             let quadra = q.find(p => p.ID == ID);
             vio.agenda = Object.values(y.agenda.results).filter(x => x.quadra == ID).map(x => ({ ...x, ID: quadra.ID, foto: quadra.foto, name: quadra.title, init: x.inicio, end: x.final, mensal: quadra.mensal, avulso: quadra.avulso, idAgenda: date().split('/').reverse().join('-') + '-' + x.inicio.replace(':', '-') + '-' + newDay() }));

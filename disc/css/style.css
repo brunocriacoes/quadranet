@@ -147,11 +147,12 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
     grid-gap: 30px;
 }
-.card__title, .cart__title, .fields__title {
-    margin-top: 22px;
+.card__title, .cart__title, .fields__title, .servico_title {
+    margin-top: 12px;
     margin-bottom: 15px;
     text-align: center;
     text-transform: uppercase;
+    border-bottom: 4px solid #ECEFF1;
 }
 
 .card__services {
@@ -703,14 +704,14 @@ p {
 }
 .menu-perfil {
     display: block;
-    border: 1px solid #CCC;
     margin: 0 auto;
-    width: 500px;
+    height: 39px;
     max-width: 90vw;
     text-align: center;
     border-radius: 4px;
     background: #FFF;
     margin-top: 30px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .menu-perfil a {
     display: inline-block;
@@ -719,14 +720,12 @@ p {
     color: var(--theme);
     cursor: pointer;
     font-weight: lighter;
-    border-radius: 4px;
-    border: 1px solid var(--theme);
     margin: 4px;
-    font-size: 13px;
+    font-size: 15px;
 }
 .menu-perfil a:hover {
-    background-color: var(--theme);
-    color: #FFF;
+    border-bottom: 3px solid var(--theme);
+    color: var(--theme);
 }
 .table {    
     display: table;
@@ -748,6 +747,7 @@ p {
 .table tbody tr:nth-child(2n+1) {
     background: #ECEFF1;
 }
+
 .table tbody tr:hover {
     background: #CCC;
 }
@@ -758,6 +758,7 @@ p {
     display: block;
     height: 16px;
     cursor: pointer;
+    margin: 10px;
 }
 .trash:hover {
     filter: brightness(450%);
@@ -907,4 +908,8 @@ p {
 
 .cart__img {
     max-width: 100px;
+}
+
+#carrinho table tfoot {
+    margin-top: 100px !important;
 }
