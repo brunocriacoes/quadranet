@@ -192,6 +192,7 @@ var vio  = {
     get logo() { return _vio.logo; },
     set agenda_info( e ) {
         _vio.agenda_info = e;
+        query( "#vio_calendar_img" ).src   = url_storage + '/' + e.foto;
         query( "#vio_calendar_name" ).innerHTML  = e.name || '---';
         query( "#vio_calendar_modal" ).innerHTML = e.modal || '---';
         query( "#vio_calendar_day" ).innerHTML   = e.day || '---';

@@ -94,7 +94,7 @@ fetch( url_api + bug + chache )
                 let tags        = comp.find(p => p.ID == quadra.tag);
                 let data        = date();
                 let dia         = day();
-                vio.agenda_info = { name: quadra.title, modal: tags.title, day: dia, date: data };
+                vio.agenda_info = { name: quadra.title, foto: quadra.foto, modal: tags.title, day: dia, date: data };
                 reserva();
             }
         });
