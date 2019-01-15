@@ -94,12 +94,13 @@
     </header>
 
     <section class="cart box" id="carrinho">
-        <h2 class="text-center gap-top">Carrinho</h2>
+        <h2 class="title__carrinho">Meus Horários Reservados</h2>
         <table class="table">
             <thead>
                 <tr>
                     <th></th>
-                    <th>Quadra</th>
+                    <th>Nome</th>
+                    <th>Modalidade</th>
                     <th>Data</th>
                     <th>Horário</th>
                     <th>Tipo</th>
@@ -107,9 +108,9 @@
                 </tr>
             </thead>
             <tbody id="vio_cart"></tbody>
-            <tfoot>
+            <tfoot class="table__tfoot">
                 <tr>
-                    <td colspan="5" class="text-rigth">Total: </td>
+                    <td colspan="6" class="text-rigth">Total: </td>
                     <td><b id="vio_total"></b></td>
                 </tr>
             </tfoot>
@@ -155,7 +156,7 @@
     <section class="fields box gap" id="quadras">
         <h1 class="fields__title">Quadras</h1>
         <div class="fields_type">
-            <label class="fields_type_label" for="select">Escolha o tipo da Quadra:</label>
+            <label class="fields_type_label" for="select">Escolha o tipo da Modalidade:</label>
             <select class="fields_type_select" id="fields_type_select" onchange="filtro( this )">
                 <option value="">Todos</option>
             </select>
@@ -181,7 +182,7 @@
             </div>
             <div class="text-right">
                 <label for="date">Agendar uma data:</label>
-                <input type="date" onchange="set_date( this )" value="">
+                <input id="data__atual" type="date" onchange="set_date( this )" value="">
             </div>
         </div>
         <div id="vio_agenda"></div>
@@ -301,7 +302,7 @@
 
     <section id="entrar">
         <form action="javascript:void(0)" method="POST" id="form_entrar" onsubmit="entrar()" class="form form-short box">
-            <h2 class="text-center">Entrar</h2>
+            <h2 class="text-center">Autenticação de Acesso</h2>
             <input type="email" name="email" class="field ico ico-mail" placeholder="email">
             <input type="password" name="pass" class="field ico ico-pass" placeholder="senha">
             <input type="submit" value="Entrar" class="btn btn-sucess btn-center">

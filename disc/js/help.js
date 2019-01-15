@@ -83,6 +83,7 @@ function abled_form(ID) {
     }
     return null;
 }
+
 function img_default(e) { e.src = "./disc/img/default.jpg"; }
 function img_default_banner(e) { e.src = "./disc/img/banner.png"; }
 function restrito() {
@@ -95,6 +96,7 @@ function restrito() {
 
 }
 restrito();
+
 function entrar() {
     let form = get_form('#form_entrar');
     disabled_form('#form_entrar');
@@ -134,9 +136,13 @@ function set_date(now) {
     reserva();
 }
 
+function menorNove( numero ) {
+    return ( numero < 10 ) ? `0${numero}` : numero;
+}
+
 function date() {
     let data = new Date();
-    let dataAtual = data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear();
+    let dataAtual = menorNove(data.getDate()) + '/' + menorNove((data.getMonth() + 1)) + '/' + data.getFullYear();
     return dataAtual;
 }
 
@@ -335,4 +341,16 @@ function setReserva(ID) {
             let dia = day();
             vio.agenda_info = { name: quadra.title, modal: tags.title, day: dia, date: data };
         });
+}
+
+function marcar() {
+    let array = document.querySelectorAll( `section a` );
+    for (let index = 0; index < array.length; index++) {
+        array[index].classList.remove( 'active' );
+    }   
+    let hash = window.location.hash;
+    let arr = document.querySelectorAll( `section [href="${hash}"]` );
+    for (let index = 0; index < arr.length; index++) {
+        arr[index].classList.add( 'active' );
+    }
 }

@@ -87,11 +87,11 @@ fetch( url_api + bug + chache )
                 let agendas     = y.agenda;
                 let conj        = Object.values(agendas.results);
                 let para        = parametros();
-                let quadra      = conjunto.find(p => p.ID == para.id);
-                vio.agenda      = conj.map(y => ({ ID: quadra.ID, foto: quadra.foto, name: quadra.title, init: y.inicio, end: y.final, mensal: quadra.mensal, avulso: quadra.avulso, idAgenda: date().split('/').reverse().join('-') + '-' + y.inicio.replace(':', '-') + '-' + newDay() }));
                 let category    = y.tag.results;
+                let quadra      = conjunto.find(p => p.ID == para.id);
                 let comp        = Object.values(category);
                 let tags        = comp.find(p => p.ID == quadra.tag);
+                vio.agenda      = conj.map(y => ({ ID: quadra.ID, foto: quadra.foto, name: quadra.title, modal: tags.title, init: y.inicio, end: y.final, mensal: quadra.mensal, avulso: quadra.avulso, idAgenda: date().split('/').reverse().join('-') + '-' + y.inicio.replace(':', '-') + '-' + newDay() }));
                 let data        = date();
                 let dia         = day();
                 vio.agenda_info = { name: quadra.title, foto: quadra.foto, modal: tags.title, day: dia, date: data };
@@ -128,7 +128,11 @@ window.onpopstate = function()
     vio.historico = _profile.history || []; //[ { id:, status:, day:, price: } ];
     _vio.time = []; 
     vio.time  = _profile.tean || []; //[{name tel mail}]
+
+    marcar();
 };
+
+marcar();
 
 router('detalhe', z => {
     fetch(url_api)
@@ -138,7 +142,6 @@ router('detalhe', z => {
             let para = parametros();
             let conjunto = Object.values(quadra.results);
             let conjquadra = conjunto.find(p => p.ID == para.id);
-            log(conjquadra);
             vio.detalhe = { title: conjquadra.title, text: conjquadra.resumo, img_1: conjquadra.foto, img_2: conjquadra.foto1, img_3: conjquadra.foto2, img_4: conjquadra.foto3, img_5: conjquadra.foto4, ID: conjquadra.ID };
         });
 });
@@ -146,7 +149,6 @@ router('detalhe', z => {
 router( 'historico-compras', p => {
     let profile = localStorage.profile;
     profile = JSON.parse(profile);
-    log(profile);
     let historico = profile.history.map( x => ({ id: x.transacao || '', status: x.payment || '', day: x.data || '', price: x.price || '11'}) );
     vio.historico = historico
 } );
@@ -160,3 +162,5 @@ query( '.share' ).innerHTML = `
     <img src="./disc/ico/twitter.png">
 </a>
 `;
+
+query( '#data__atual' ).value = date().split( '/' ).reverse().join( '-' );

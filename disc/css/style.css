@@ -147,7 +147,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
     grid-gap: 30px;
 }
-.card__title, .cart__title, .fields__title, .servico_title {
+.card__title, .cart__title, .fields__title, .servico_title, .title__carrinho {
     margin-top: 12px;
     margin-bottom: 15px;
     text-align: center;
@@ -577,7 +577,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .fields_type_select {
     width: 100px;
-    border: 2px solid #fff;
+    border: 2px solid #ccc;
+    border-radius: 4px; 
     outline: none;
 }
 .btn_fields__card_details,
@@ -723,7 +724,7 @@ p {
     margin: 4px;
     font-size: 15px;
 }
-.menu-perfil a:hover {
+.menu-perfil a:hover, .active {
     border-bottom: 3px solid var(--theme);
     color: var(--theme);
 }
@@ -731,6 +732,7 @@ p {
     display: table;
     width: 100%;
     border-spacing: 0px;
+    text-align: center;
 }
 .table tr {
     width: 100%;
@@ -746,6 +748,10 @@ p {
 
 .table tbody tr:nth-child(2n+1) {
     background: #ECEFF1;
+}
+
+.table tbody tr td:first-child {
+    text-align: left !important;
 }
 
 .table tbody tr:hover {
@@ -910,8 +916,8 @@ p {
     max-width: 100px;
 }
 
-#carrinho table tfoot {
-    margin-top: 100px !important;
+.table__tfoot tr td {
+    padding: 10px;
 }
 
 #vio_calendar_img {
@@ -920,4 +926,8 @@ p {
     margin-left: auto;
     margin-right: auto;
     max-width: 200px;
+}
+
+.table__span {
+    display: block;
 }

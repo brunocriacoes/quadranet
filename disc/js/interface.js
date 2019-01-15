@@ -56,12 +56,13 @@ var vio  = {
     {
         _vio.agenda = el;
         query( '#vio_agenda' ).innerHTML = el.map( x => {
-            let data = x.idAgenda.substr( 0, 10 ).split( '-' ).reverse().join( '/' );
+            log(x.idAgenda);
+            let data = x.idAgenda.substr( 0, 9 ).split( '-' ).reverse().join( '/' );
             return `
             <div class="hours__schedule" id="${x.idAgenda}">
                 <span>${ x.init || '--:--' }hrs às ${ x.end || '--:--' }hrs</span>
-                <button class="btn hours__schedule_btn hours__schedule_btn_avulso avulso_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 0, '${x.avulso || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}', '${x.foto}' )">Reservar Avulso R$ ${ x.avulso || '00,00' },00</button>
-                <button class="btn hours__schedule_btn hours__schedule_btn_mensal mensal_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 1, '${x.mensal || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}', '${x.foto}' )">Reservar Mensal R$ ${ x.mensal || '00,00' },00</button>
+                <button class="btn hours__schedule_btn hours__schedule_btn_avulso avulso_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 0, '${x.avulso || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}', '${x.foto}', '${x.modal}' )">Reservar Avulso R$ ${ x.avulso || '00,00' },00</button>
+                <button class="btn hours__schedule_btn hours__schedule_btn_mensal mensal_${x.idAgenda}" onclick="addCart( '${x.ID || ''}', '${x.name || ''}', 1, '${x.mensal || ''}', '${x.init || ''}', '${x.end || ''}', '${data}', '${x.idAgenda}', '${x.foto}', '${x.modal}' )">Reservar Mensal R$ ${ x.mensal || '00,00' },00</button>
             </div>
             `;
         } ).join('');
@@ -95,8 +96,9 @@ var vio  = {
                 <tr>
                 <td><img src="${url_storage}/${x.foto}" class="cart__img"></td>
                 <td>${ x.name || '---' }</td>
+                <td>${ x.modal || '---' }</td>
                 <td>${ x.day || '--/--/----' }</td>
-                <td>${ x.init || '--:--' } ás ${ x.end || '--:--' }</td>
+                <td>${ x.init || '--:--' } <span class="table__span">ás</span> ${ x.end || '--:--' }</td>
                 <td>${ ( x.status || true ) ? 'por um dia' : 'por mês'  }</td>
                 <td>R$ ${ x.price || '00,00' } </td>
                 <td onclick="removeItem( '${x.idAgenda}' )"><img src="./disc/ico/delete.png" class="trash"></td>
