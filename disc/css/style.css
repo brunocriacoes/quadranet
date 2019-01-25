@@ -311,7 +311,7 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
     background-color: var( --primary );
     padding: 12px;
-    color: #fff;
+    color: #fff !important;
 }
 .box-link-menu {
     display: inline-block;
@@ -758,7 +758,7 @@ p {
     background: #CCC;
 }
 .cart {
-    width: 700px !important;
+    width: 800px !important;
 }
 .trash {
     display: block;
@@ -830,6 +830,7 @@ p {
 #vio_logo{
     filter: inherit !important;
     display: block;
+    height: 50px;
     margin: 0;
 }
 [disabled] {

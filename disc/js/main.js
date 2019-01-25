@@ -119,11 +119,17 @@ window.onpopstate = function()
 {
     restrito();
     router( 'sair', () => { logout(); } );
+    log(_profile);
     vio.perfil = {
-        nome     : _profile.name || '',
-        apelido  : _profile.nickname || '',
-        email    : _profile.email || '',
-        whatsapp : _profile.whatsapp || '',
+        nome      : _profile.name || '',
+        apelido   : _profile.nickname || '',
+        email     : _profile.email || '',
+        cpf       : _profile.cpf || '',
+        cep       : _profile.cep || '',
+        estado    : _profile.estado || '',
+        cidade    : _profile.cidade || '',
+        endereco  : _profile.endereco || '',
+        whatsapp  : _profile.whatsapp || '',
     };
     vio.historico = _profile.history || []; //[ { id:, status:, day:, price: } ];
     _vio.time = []; 

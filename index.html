@@ -99,7 +99,7 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>Nome</th>
+                    <th>Quadra</th>
                     <th>Modalidade</th>
                     <th>Data</th>
                     <th>Horário</th>
@@ -342,8 +342,8 @@
         </div>
         <form action="javascript:void(0)" method="POST" class="form form-short box" id="mudar_senha">
             <h1 class="text-center">Muda Senha</h1>
-            <input type="password" class="field ico ico-mail" name="password" required placeholder="nova senha">
-            <input type="password" class="field ico ico-mail" name="pass" required placeholder="confirmar nova senha">
+            <input type="password" class="field ico ico-pass" name="password" required placeholder="Nova Senha">
+            <input type="password" class="field ico ico-pass" name="pass" required placeholder="Confirmar Nova Senha">
             <input onclick="mudarSenha()" type="submit" class="btn btn-sucess btn-center" value="salvar">
         </form>
     </section>
@@ -357,11 +357,11 @@
             <a href="#sair">Sair</a>
         </div>
         <div class="form form-short box">
-            <h1 class="text-center">histórico de compras</h1>
+            <h1 class="text-center">Histórico de Compras</h1>
             <table class="table text-center">
                 <thead>
                     <tr>
-                        <th>referencia</th>
+                        <th>Referências</th>
                         <th>Status</th>
                         <th>Data</th>
                         <th>Preço</th>
@@ -385,11 +385,11 @@
             <table class="table text-cente">
                 <thead>
                     <tr>
-                        <th><img src="./disc/ico/delete.png" class="trash"></th>
                         <th>Nome</th>
                         <th>Whatsapp</th>
                         <th>E-mail</th>
                         <th>Pagou</th>
+                        <th><img src="./disc/ico/delete.png" class="trash"></th>
                     </tr>
                 </thead>
                 <tbody id="vio_time">
@@ -397,10 +397,10 @@
                 </tbody>
             </table>
             <form action="javascript:void(0)" method="POST" class="form" id="add-jogador" onsubmit="add_player()">
-                <input type="text" class="field" id="player_name" placeholder="nome ou apelido">
-                <input type="text" class="field" id="player_tel" placeholder="whatsapp">
-                <input type="text" class="field" id="player_mail" placeholder="email">
-                <input onclick="addJogador()" type="submit" class="btn btn-sucess" value="adicionar">
+                <input type="text" class="field" id="player_name" placeholder="Nome ou Apelido">
+                <input type="text" class="field" id="player_tel" placeholder="Whatsapp">
+                <input type="text" class="field" id="player_mail" placeholder="E-mail">
+                <input onclick="addJogador()" type="submit" class="btn btn-sucess" value="adicionar jogador">
             </form>
         </div>
     </section>
@@ -427,10 +427,15 @@
         </div>
         <form action="javascript:void(0)" method="POST" class="form form-short box" id="atualizar_perfil">
             <h2 class="text-center">Perfil</h2>
-            <input type="text" class="field" placeholder="nome" id="vio_nome">
-            <input type="text" class="field" placeholder="apelido" id="vio_apelido">
+            <input type="text" class="field" placeholder="Nome" id="vio_nome">
+            <input type="text" class="field" placeholder="Digite um Apelido" id="vio_apelido">
             <input type="email" class="field" placeholder="email" id="vio_email" value="email@gmail.com" disabled>
-            <input type="tel" class="field" placeholder="whatsapp" id="vio_whatsapp">
+            <input type="text" class="field" placeholder="CPF" id="vio_cpf">
+            <input type="text" class="field" placeholder="Cep" id="vio_cep">
+            <input type="text" class="field" placeholder="Estado" id="vio_estado">
+            <input type="text" class="field" placeholder="Cidade" id="vio_cidade">
+            <input type="text" class="field" placeholder="Endereço" id="vio_endereco">
+            <input type="tel" class="field" placeholder="Whatsapp" id="vio_whatsapp">
             <input onclick="atualizarPerfil()" type="submit" value="salvar" class="btn btn-sucess btn-center">
         </form>
     </section>

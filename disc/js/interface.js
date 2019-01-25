@@ -41,11 +41,11 @@ var vio  = {
         query( '#vio_time' ).innerHTML = _vio.time.reduce( (acc , iten ) => {
             acc.push( `
             <tr id="vio_player_${iten.id}">
-                <th onclick="removePlayer( '${_profile.email || '301' }', '${iten.id || '42'}' )"><img src="./disc/ico/delete.png" class="trash"></th>
                 <th>${ iten.name || '...' }</th>
                 <th>${ iten.tel || '...' }</th>
                 <th>${ iten.mail || '...' }</th>
                 <th><input type="checkbox" ${ iten.status ? 'checked' : ''} onclick="join_payment( '${_profile.email || '301' }', '${iten.id || '42'}' )"></th>
+                <th onclick="removePlayer( '${_profile.email || '301' }', '${iten.id || '42'}' )"><img src="./disc/ico/delete.png" class="trash"></th>
             </tr>
             `);
             return acc;
@@ -56,8 +56,7 @@ var vio  = {
     {
         _vio.agenda = el;
         query( '#vio_agenda' ).innerHTML = el.map( x => {
-            log(x.idAgenda);
-            let data = x.idAgenda.substr( 0, 9 ).split( '-' ).reverse().join( '/' );
+            let data = x.idAgenda.substr( 0, 10 ).split( '-' ).reverse().join( '/' );
             return `
             <div class="hours__schedule" id="${x.idAgenda}">
                 <span>${ x.init || '--:--' }hrs às ${ x.end || '--:--' }hrs</span>
@@ -98,8 +97,8 @@ var vio  = {
                 <td>${ x.name || '---' }</td>
                 <td>${ x.modal || '---' }</td>
                 <td>${ x.day || '--/--/----' }</td>
-                <td>${ x.init || '--:--' } <span class="table__span">ás</span> ${ x.end || '--:--' }</td>
-                <td>${ ( x.status || true ) ? 'por um dia' : 'por mês'  }</td>
+                <td>${ x.init || '--:--' } ás ${ x.end || '--:--' }</td>
+                <td>${ ( x.status || true ) ? 'Diária' : 'Mensal'  }</td>
                 <td>R$ ${ x.price || '00,00' } </td>
                 <td onclick="removeItem( '${x.idAgenda}' )"><img src="./disc/ico/delete.png" class="trash"></td>
                 </tr>
@@ -136,7 +135,7 @@ var vio  = {
     get quadra() { return _vio.quadra; },
     set perfil( el ) {
         _vio.perfil = el;
-        [ "vio_nome", "vio_apelido", "vio_email", "vio_whatsapp" ].forEach( x => {
+        [ "vio_nome", "vio_apelido", "vio_email", "vio_cpf", "vio_cep", "vio_estado", "vio_cidade", "vio_endereco", "vio_whatsapp" ].forEach( x => {
             query( `#${x}` ).value = el[ x.substr( 4 ) ] || '';
         } );
     },

@@ -89,6 +89,11 @@
             $json           = json_decode( $json );
             $json->title    = $_REQUEST['nome']    ?? '';
             $json->apelido  = $_REQUEST['apelido']  ?? '';
+            $json->cpf      = $_REQUEST['cpf'] ?? '';
+            $json->cep      = $_REQUEST['cep'] ?? '';
+            $json->estado   = $_REQUEST['estado'] ?? '';
+            $json->cidade   = $_REQUEST['cidade'] ?? '';
+            $json->endereco = $_REQUEST['endereco'] ?? '';
             $json->whatsapp = $_REQUEST['whatsapp'] ?? '';
             file_put_contents( $user_file, json_encode( $json ) );
         endif;
@@ -162,6 +167,11 @@
                 "name"        => $json->title     ?? "name",
                 "nickname"    => $json->apelido   ?? "nickname",
                 "email"       => $json->email     ?? "email@gmail.com",
+                "cpf"         => $json->cpf       ?? "000.000.000-00",
+                "cep"         => $json->cep       ?? "00000-000",
+                "estado"      => $json->estado    ?? "",
+                "cidade"      => $json->cidade    ?? "",
+                "endereco"    => $json->endereco  ?? "",
                 "whatsapp"    => $json->whatsapp  ?? "+0 (00) 0 0000-0000",
                 "history"     => $hitory          ?? [],
                 "tean"        => $json->tean      ?? [], 

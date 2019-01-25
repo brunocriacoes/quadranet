@@ -233,6 +233,7 @@ function meCadastrar() {
 
 function atualizarPerfil() {
     let form = get_form_vio('#atualizar_perfil');
+    log(form);
     let uri = objToUrl(form);
     let url = `${uri_api}/profile/?atualizar=${form.email}&${uri}${trol}`;
     fetch(url)
