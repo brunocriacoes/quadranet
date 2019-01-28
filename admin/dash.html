@@ -417,7 +417,7 @@
                     <h5>Página quem somos</h5>
                 </header>
                 <div class="grid-2 grid-gap">
-                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <form action="javascript:void(0)" id="servicos_form__quem-somos" onsubmit="gravarDados('#servicos_form__quem-somos', 'quem-somos', '#quem-somos')" method="POST">
                         <label for="" class="input-label">Titulo</label>
                         <input id="quem-somos__form_title" type="text" name="title" class="input-field">
                         <div class="editor-box gap-bottom">
@@ -433,27 +433,32 @@
                             </div>
                             <div contenteditable="true" id="editor-content" onkeyup="" class="editor-local"></div>
                             <textarea id="quem-somos__form_text-area" name="html" hidden></textarea>
+                            <input id="quem_somos__foto_1" type="file" onchange="getFile( '#quem_somos__foto_1', '#quem-somos__form_1-grande', '#quem-somos__form_1' )" hidden>
+                            <input id="quem_somos__foto_2" type="file" onchange="getFile( '#quem_somos__foto_2', '#quem-somos__form_2' )" hidden>
+                            <input id="quem_somos__foto_3" type="file" onchange="getFile( '#quem_somos__foto_3', '#quem-somos__form_3' )" hidden>
+                            <input id="quem_somos__foto_4" type="file" onchange="getFile( '#quem_somos__foto_4', '#quem-somos__form_4' )" hidden>
+                            <input id="quem_somos__foto_5" type="file" onchange="getFile( '#quem_somos__foto_5', '#quem-somos__form_5' )" hidden>
                         </div>     
                         <input type="submit" value="salvar" class="btn btn-sucess">
                     </form>
                     <div>
-                        <label for="">
+                        <label for="quem_somos__foto_1">
                             <img id="quem-somos__form_1-grande" src="./disc/img/default.jpg" class="responsive img-galery">
                         </label>
                         <div class="grid-5">
-                            <label for="">
+                            <label for="quem_somos__foto_1">
                                 <img id="quem-somos__form_1" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="">
+                            <label for="quem_somos__foto_2">
                                 <img id="quem-somos__form_2" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="">
+                            <label for="quem_somos__foto_3">
                                 <img id="quem-somos__form_3" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="">
+                            <label for="quem_somos__foto_4">
                                 <img id="quem-somos__form_4" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="">
+                            <label for="quem_somos__foto_5">
                                 <img id="quem-somos__form_5" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
                         </div>
@@ -464,9 +469,10 @@
                  <header class="gap-bottom"> 
                     <h5>Página serviços</h5>
                 </header>
-                <form action="javascript:void(0)" onsubmit="" method="POST">
+                <form action="javascript:void(0)" id="servicos_form" onsubmit="gravarDados('#servicos_form', 'servicos', 'servicos')" method="POST">
                     <label for="" class="input-label">Titulo</label>
                     <input id="servicos__form_title" type="text" name="title" class="input-field">
+                    <input type="text" name="id" value="servico" hidden>
                     <div class="editor-box gap-bottom">
                         <div class="editor-nav">
                             <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
@@ -478,7 +484,7 @@
                             <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
                             <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
                         </div>
-                        <div contenteditable="true" id="editor-content" onkeyup="" class="editor-local"></div>
+                        <div contenteditable="true" id="editor-content-servicos__form_text-area" onkeyup="duplicar( 'servicos__form_text-area' )" class="editor-local"></div>
                         <textarea id="servicos__form_text-area" name="html" hidden></textarea>
                     </div>    
                     <input type="submit" value="salvar" class="btn btn-sucess">
@@ -726,7 +732,7 @@
                  <header class="gap-bottom"> 
                     <h5>Adicionar um novo banner</h5>
                 </header>
-                <form action="javascript:void(0)" onsubmit="" method="POST">
+                <form action="javascript:void(0)" id="servicos_form__banner-novo" onsubmit="gravarDados('#servicos_form__banner-novo', 'banner-novo', '#banner')" method="POST">
                     <label for="" class="input-label">Nome</label>
                     <input id="banner-novo__form_nome" type="text" class="input-field" name="name" required>
                     <label for="" class="input-label">link</label>

@@ -4,10 +4,10 @@
     maker_dir( $upload_dir ); 
     
     if( method === 'POST' AND ! empty( request['file'] ) ):
-        $file = request['file'] ?? '';
-        $name = request['name'] ?? request['id'] ?? uniqid() . ".jpg";  
+        $file  = request['file'] ?? '';
+        $name  = !empty( request['name'] ) ? request['name'] : uniqid() . ".jpg";  
         $file  = base64_decode( $file  ); 
-        $file  = explode(',', $file  ); 
+        $file  = explode( ',', $file  );
         $file  = $file[1] ?? '';
         $file  = base64_decode( $file );
         file_put_contents ( "{$upload_dir}{$name}", $file );

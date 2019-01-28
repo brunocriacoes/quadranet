@@ -228,8 +228,8 @@ var beta = {
 
     set servicos(cont) {
         _beta.servicos = cont;
-        query('#servicos__form_title').innerHTML = cont.title;
-        query('#servicos__form_text-area').innerHTML = cont.html;
+        query('#servicos__form_title').value = cont.title;
+        query('#servicos__form_text-area').value = cont.html;
     },
     get servicos() { return _beta.servicos },
 

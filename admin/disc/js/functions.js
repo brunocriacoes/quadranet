@@ -1,4 +1,5 @@
 "use strict";
+
 const log      = console.log;
 const table    = console.table;
 const query    = x => document.querySelector(x);
@@ -84,7 +85,7 @@ function desable( ID )
 function abilite( ID )
 {}
 
-function getFile( ID, ID_PREVIEW )
+function getFile( ID, ID_PREVIEW, ID_PREVIEW_2 = null )
 {
     let name_temp = ID.replace( '#', '' );
     let input     = query( ID ); 
@@ -96,9 +97,12 @@ function getFile( ID, ID_PREVIEW )
             let img          = e.srcElement.result;
             files[name_temp] = window.btoa(img)
             preview.src      = img;
+            if( ID_PREVIEW_2 != null ) {
+                query( ID_PREVIEW_2 ).src = img;
+            }
         };           
         reader.readAsDataURL(input.files[0]);
-    }        
+    }
 }
 
 function set_domain( THIS ) {
@@ -229,4 +233,23 @@ function logout()
 {
     localStorage.jwt_token = '';
     to( `${http}//${dominio}/${name_panel}` );
+}
+
+function duplicar( ID ) {
+    let edit =  query( `#editor-content-${ID}` ).innerHTML;
+    query( `#${ID}` ).innerHTML = edit;
+}
+
+function gravarDados( ID, URL, redirect ) {
+    let dados = form_data( ID );
+    post( `${URL}`, dados, x => {
+        let info = obj_to_url( x );
+        to(`${redirect}`);
+    } );
+}
+
+async function sendImage( path ) {
+    post( 'storage', { file: window.btoa(img) }, x => {
+        
+    } );
 }
