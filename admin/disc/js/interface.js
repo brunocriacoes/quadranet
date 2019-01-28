@@ -139,7 +139,7 @@ var beta = {
 
     set capitao_novo(cont) {
         _beta.capitao_novo = cont;
-        query('#capitao-novo__form_nome').innerHTML = cont.name;
+        query('#capitao-novo__form_nome').value = cont.name;
         query('#capitao-novo__form_apelido').innerHTML = cont.nickname;
         query('#capitao-novo__form_tel').innerHTML = cont.telephone;
         query('#capitao-novo__form_email').innerHTML = cont.mail;

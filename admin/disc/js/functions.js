@@ -119,7 +119,7 @@ function publico() {
     get( 'auth', { token }, x => {
         let token = x.token || false;
         if( token ) {
-            to( `${http}//${dominio}/${name_panel}/dash` );
+            to( `${http}//${dominio}/${name_panel}/dash.html` );
         } else {
             query('#pisca').style.display = 'grid';
         }
@@ -145,7 +145,7 @@ function login( ID ) {
         log( x );
         if( valid ) {
             localStorage.jwt_token = x.token;
-            to( `${http}//${dominio}/${name_panel}/dash` );
+            to( `${http}//${dominio}/${name_panel}/dash.html` );
         } else {
             alerta( 'Usuário ou senha estão errados' );
         }
