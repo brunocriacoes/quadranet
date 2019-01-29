@@ -300,7 +300,7 @@
                 <input type="radio" name="menu-visual" id="m-info" hidden>
                 <input type="radio" name="menu-visual" id="m-pagseguro" hidden>
                 <div class="m-inicial m-site">
-                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <form action="javascript:void(0)" id="visual__form__info" onsubmit="gravarDados('#visual__form__info', 'visual', '#visual')" method="POST">
                         <label for="" class="input-label">Titulo</label>
                         <input id="visual_form_title" type="text" name="title" class="input-field">
                         <label for="" class="input-label">Palavra chave (google)</label>
@@ -315,7 +315,7 @@
                     </form>
                 </div>
                 <div class="m-inicial m-rede-social">
-                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <form action="javascript:void(0)" id="visual__form__social" onsubmit="gravarDados('#visual__form__social', 'visual', '#visual')" method="POST">
                         <label for="" class="input-label">Facebook</label>
                         <input id="visual_form_facebook" type="url" name="facebook" class="input-field">
                         <label for="" class="input-label">Instagram</label>
@@ -328,7 +328,7 @@
                     </form>
                 </div>
                 <div class="m-inicial m-info">
-                    <form action="javascript:void(0)" onsubmit="" method="POST" class="grid-2 grid-gap">
+                    <form action="javascript:void(0)" id="visual__form__contato" onsubmit="gravarDados('#visual__form__contato', 'visual', '#visual')" method="POST" class="grid-2 grid-gap">
                         <div>
                             <label for="" class="input-label">Email</label>
                             <input id="visual__form_email" type="email" name="email" class="input-field">
@@ -403,7 +403,7 @@
                     </form>
                 </div>
                 <div class="m-inicial m-pagseguro">
-                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <form action="javascript:void(0)" id="visual__form__pag" onsubmit="gravarDados('#visual__form__pag', 'visual', '#visual')" method="POST">
                         <label for="" class="input-label">Email</label>
                         <input id="visual_form_email-pagseguro" type="url" name="email" class="input-field">
                         <label for="" class="input-label">Token</label>
@@ -431,14 +431,14 @@
                                 <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
                                 <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
                             </div>
-                            <div contenteditable="true" id="editor-content" onkeyup="" class="editor-local"></div>
-                            <textarea id="quem-somos__form_text-area" name="html" hidden></textarea>
+                            <div contenteditable="true" id="editor-content-quem-somos__form_text-area" onkeyup="duplicar( 'quem-somos__form_text-area' )" class="editor-local"></div>
                             <input id="quem_somos__foto_1" type="file" onchange="getFile( '#quem_somos__foto_1', '#quem-somos__form_1-grande', '#quem-somos__form_1' )" hidden>
                             <input id="quem_somos__foto_2" type="file" onchange="getFile( '#quem_somos__foto_2', '#quem-somos__form_2' )" hidden>
                             <input id="quem_somos__foto_3" type="file" onchange="getFile( '#quem_somos__foto_3', '#quem-somos__form_3' )" hidden>
                             <input id="quem_somos__foto_4" type="file" onchange="getFile( '#quem_somos__foto_4', '#quem-somos__form_4' )" hidden>
                             <input id="quem_somos__foto_5" type="file" onchange="getFile( '#quem_somos__foto_5', '#quem-somos__form_5' )" hidden>
                         </div>     
+                        <textarea id="quem-somos__form_text-area" name="html" hidden></textarea>
                         <input type="submit" value="salvar" class="btn btn-sucess">
                     </form>
                     <div>
@@ -514,7 +514,7 @@
                  <header class="gap-bottom"> 
                     <h5>Adicionar nova modalidade</h5>
                 </header>
-                <form action="javascript:void(0)" onsubmit="" method="POST">
+                <form action="javascript:void(0)" id="modalidade_novo_form" onsubmit="gravarDados('#modalidade_novo_form', 'modalidade-nova', '#modalidade')" method="POST">
                     <label for="" class="input-label">Nome</label>
                     <input id="modalidade__form_input_nome" type="text" name="name" class="input-field">
                     <label for="" class="input-label">Cor</label>
@@ -549,7 +549,7 @@
                     <h5>Adicionar nova quadra</h5>
                 </header>
                 <div class="grid-2 grid-gap">
-                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <form action="javascript:void(0)" id="quadra_nova__form" onsubmit="gravarDados('#quadra_nova__form', 'quadra-novo', '#quadra')" method="POST">
                         <label for="" class="input-label">Modalidade</label>
                         <select id="quadra-nova__form_select-modalidade" name="modalidade" class="input-field">
                             <option value="1">Escolha Modalidade</option>
@@ -576,29 +576,34 @@
                                 <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
                                 <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
                             </div>
-                            <div contenteditable="true" id="editor-content" onkeyup="" class="editor-local"></div>
-                            <textarea id="quadra-nova__form_text-area" name="html" hidden></textarea>
+                            <div contenteditable="true" id="editor-content-quadra-nova__form_text-area" onkeyup="duplicar( 'quadra-nova__form_text-area' )" class="editor-local"></div>
+                            <input id="quadra__foto_1" type="file" onchange="getFile( '#quadra__foto_1', '#quadra-nova__form_1-grande', '#quadra-nova__form_1' )" hidden>
+                            <input id="quadra__foto_2" type="file" onchange="getFile( '#quadra__foto_2', '#quadra-nova__form_2' )" hidden>
+                            <input id="quadra__foto_3" type="file" onchange="getFile( '#quadra__foto_3', '#quadra-nova__form_3' )" hidden>
+                            <input id="quadra__foto_4" type="file" onchange="getFile( '#quadra__foto_4', '#quadra-nova__form_4' )" hidden>
+                            <input id="quadra__foto_5" type="file" onchange="getFile( '#quadra__foto_5', '#quadra-nova__form_5' )" hidden>
                         </div>
+                        <textarea id="quadra-nova__form_text-area" name="html" hidden></textarea>
                         <input type="submit" value="salvar" class="btn btn-sucess">
                     </form>
                     <div>
-                        <label for="">
+                        <label for="quadra__foto_1">
                             <img id="quadra-nova__form_1-grande" src="./disc/img/default.jpg" class="responsive img-galery">
                         </label>
                         <div class="grid-5">
-                            <label for="">
+                            <label for="quadra__foto_1">
                                 <img id="quadra-nova__form_1" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="">
+                            <label for="quadra__foto_2">
                                 <img id="quadra-nova__form_2" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="">
+                            <label for="quadra__foto_3">
                                 <img id="quadra-nova__form_3" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="">
+                            <label for="quadra__foto_4">
                                 <img id="quadra-nova__form4" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="">
+                            <label for="quadra__foto_5">
                                 <img id="quadra-nova__form_5" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
                         </div>
@@ -631,7 +636,7 @@
                  <header class="gap-bottom"> 
                     <h5>Adicionar um novo Horário</h5>
                 </header>
-                <form action="javascript:void(0)" onsubmit="" method="POST">
+                <form action="javascript:void(0)" id="horario_nova__form" onsubmit="gravarDados('#horario_nova__form', 'horario-novo', '#horario')" method="POST">
                     <label for="" class="input-label">Quadra</label>
                     <select id="horario-novo__form_quadra" name="quadra" class="input-field" required>
                         <option value="">Escolha uma quadra</option>
@@ -668,7 +673,7 @@
                  <header class="gap-bottom"> 
                     <h5>Adicionar um novo capitão</h5>
                 </header>
-                <form action="javascript:void(0)" onsubmit="" method="POST">
+                <form action="javascript:void(0)" id="capitao_nova__form" onsubmit="gravarDados('#capitao_nova__form', 'capitao-novo', '#capitao')" method="POST">
                     <label for="" class="input-label">Nome</label>
                     <input id="capitao-novo__form_nome" type="text" class="input-field" name="name" required>
                     <label for="" class="input-label">Apelido</label>

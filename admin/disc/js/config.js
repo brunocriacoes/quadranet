@@ -4,7 +4,7 @@ const http        = window.location.protocol;
 const dominio     = window.location.hostname.replace( 'www.', '' );
 const base        = `${http}//${dominio}/${name_panel}`;
 const api         = `${http}//${dominio}/app`;
-const url_storage = `${http}//${dominio}/api/storage`;
+const url_storage = `${http}//${dominio}/app/storage`;
 
 if( localStorage.jwt_token == undefined ){
     localStorage.setItem('jwt_token','');

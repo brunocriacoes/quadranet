@@ -142,7 +142,6 @@ function login( ID ) {
     let parametro = { login: `${data.mail},${data.pass}` }
     post( 'auth', parametro, x => {
         let valid = x.login || false;
-        log( x );
         if( valid ) {
             localStorage.jwt_token = x.token;
             to( `${http}//${dominio}/${name_panel}/dash.html` );
@@ -240,16 +239,28 @@ function duplicar( ID ) {
     query( `#${ID}` ).innerHTML = edit;
 }
 
-function gravarDados( ID, URL, redirect ) {
+async function gravarDados( ID, URL, redirect ) {
     let dados = form_data( ID );
-    post( `${URL}`, dados, x => {
+    let send  = await sendImage();
+    let all = {...dados, ...send};
+    post( `${URL}`, all, x => {
         let info = obj_to_url( x );
         to(`${redirect}`);
     } );
 }
 
-async function sendImage( path ) {
-    post( 'storage', { file: window.btoa(img) }, x => {
-        
-    } );
+async function sendImage() {
+    var obj = {};
+    if ( files.length !== 0 ) {
+        let arqui = Object.keys(files);
+        for (let index = 0; index < arqui.length; index++) {
+            options.body = encodeURI(`file=${files[arqui[index]]}`);
+            var foto = await fetch( url_storage, options )
+            .then( j => j.json() )
+            .then( x => {
+                obj[arqui[index].split( '__' )[1]] = x.name;
+            } );
+        }
+    }
+    return obj;
 }

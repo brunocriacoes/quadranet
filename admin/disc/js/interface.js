@@ -6,7 +6,7 @@ var _beta = {
 var beta = {
     set modalidade(cont) {
         _beta.modalidade = cont;
-        query('#modalidade__table_title').innerHTML = cont
+        query('#modalidade__table_title').value = cont
             .map(x => `
                 <tr>
                     <td><img src="./disc/ico/trash.png" class="ico-table"></td>
@@ -82,17 +82,17 @@ var beta = {
     set quadra_nova(cont) {
         _beta.quadra_nova = cont;
         query('#quadra-nova__form_select-modalidade').innerHTML = cont.modalidade.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
-        query('#quadra-nova__form_nome').innerHTML = cont.name;
-        query('#quadra-nova__form_avulso').innerHTML = cont.price_day;
-        query('#quadra-nova__form_mensal').innerHTML = cont.price_mounth;
+        query('#quadra-nova__form_nome').value = cont.name;
+        query('#quadra-nova__form_avulso').value = cont.price_day;
+        query('#quadra-nova__form_mensal').value = cont.price_mounth;
         query('#quadra-nova__form_select-status').innerHTML = cont.status;
         query('#quadra-nova__form_text-areas').innerHTML = cont.html;
-        query('#quadra-nova__form_1-grande').innerHTML = cont.img1_grande;
-        query('#quadra-nova__form_1').innerHTML = cont.img1;
-        query('#quadra-nova__form_3').innerHTML = cont.img2;
-        query('#quadra-nova__form_4').innerHTML = cont.img3;
-        query('#quadra-nova__form_5').innerHTML = cont.img4;
-        query('#quadra-nova__form_6').innerHTML = cont.img5;
+        query('#quadra-nova__form_1-grande').src = cont.img1_grande;
+        query('#quadra-nova__form_1').src = cont.img1;
+        query('#quadra-nova__form_2').src = cont.img2;
+        query('#quadra-nova__form_3').src = cont.img3;
+        query('#quadra-nova__form_4').src = cont.img4;
+        query('#quadra-nova__form_5').src = cont.img5;
     },
     get quadra_nova() { return _beta.quadra_nova },
 
@@ -116,8 +116,8 @@ var beta = {
     set horario_novo(cont) {
         _beta.horario_novo = cont;
         query('#horario-novo__form_quadra').innerHTML = cont.quadra.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
-        query('#horario-novo__form_inicial').innerHTML = cont.init;
-        query('#horario-novo__form_final').innerHTML = cont.end;
+        query('#horario-novo__form_inicial').value = cont.init;
+        query('#horario-novo__form_final').value = cont.end;
     },
     get horario_novo() { return _beta.horario_novo },
 
@@ -140,15 +140,15 @@ var beta = {
     set capitao_novo(cont) {
         _beta.capitao_novo = cont;
         query('#capitao-novo__form_nome').value = cont.name;
-        query('#capitao-novo__form_apelido').innerHTML = cont.nickname;
-        query('#capitao-novo__form_tel').innerHTML = cont.telephone;
-        query('#capitao-novo__form_email').innerHTML = cont.mail;
-        query('#capitao-novo__form_senha').innerHTML = cont.pass;
+        query('#capitao-novo__form_apelido').value = cont.nickname;
+        query('#capitao-novo__form_tel').value = cont.telephone;
+        query('#capitao-novo__form_email').value = cont.mail;
+        query('#capitao-novo__form_senha').value = cont.pass;
         query('#capitao-novo__form_select-status').innerHTML = cont.status;
-        query('#capitao-novo__table__time_nome').innerHTML = cont.nome;
-        query('#capitao-novo__table__time_apelido').innerHTML = cont.nickname;
-        query('#capitao-novo__table__time_tel').innerHTML = cont.telephone;
-        query('#capitao-novo__table__time_email').innerHTML = cont.mail;
+        query('#capitao-novo__table__time_nome').value = cont.nome;
+        query('#capitao-novo__table__time_apelido').value = cont.nickname;
+        query('#capitao-novo__table__time_tel').value = cont.telephone;
+        query('#capitao-novo__table__time_email').value = cont.mail;
     },
     get capitao_novo() { return _beta.capitao_novo },
 
@@ -189,23 +189,23 @@ var beta = {
 
     set visual(cont) {
         _beta.visual = cont;
-        query('#visual_form_title').innerHTML = cont.title;
-        query('#visual_form_google').innerHTML = cont.description;
+        query('#visual_form_title').value = cont.title;
+        query('#visual_form_google').value = cont.description;
         query('#visual_form_descricao').innerHTML = cont.description;
         query('#visual_form_cor').innerHTML = cont.color;
-        query('#visual_form_logo').innerHTML = cont.logo;
-        query('#visual_form_facebook').innerHTML = cont.facebook;
-        query('#visual_form_instagram').innerHTML = cont.instagram;
-        query('#visual_form_twitter').innerHTML = cont.twitter;
-        query('#visual_form_Youtube').innerHTML = cont.youtube;
-        query('#visual__form_email').innerHTML = cont.email;
-        query('#visual__form_tel').innerHTML = cont.telephone;
-        query('#visual__form_whatsapp').innerHTML = cont.whatsapp;
-        query('#visual__form_cep').innerHTML = cont.zipcode;
-        query('#visual__form_rua').innerHTML = cont.street;
-        query('#visual__form_numero').innerHTML = cont.number;
-        query('#visual__form_bairro').innerHTML = cont.bairro;
-        query('#visual__form_cidade').innerHTML = cont.city;
+        query('#visual_form_logo').src = cont.logo;
+        query('#visual_form_facebook').value = cont.facebook;
+        query('#visual_form_instagram').value = cont.instagram;
+        query('#visual_form_twitter').value = cont.twitter;
+        query('#visual_form_Youtube').value = cont.youtube;
+        query('#visual__form_email').value = cont.email;
+        query('#visual__form_tel').value = cont.telephone;
+        query('#visual__form_whatsapp').value = cont.whatsapp;
+        query('#visual__form_cep').value = cont.zipcode;
+        query('#visual__form_rua').value = cont.street;
+        query('#visual__form_numero').value = cont.number;
+        query('#visual__form_bairro').value = cont.bairro;
+        query('#visual__form_cidade').value = cont.city;
         query('#visual__form_estado').innerHTML = cont.state;
         query('#visual__form_map').innerHTML = cont.map;
         query('#visual_form_email-pagseguro').innerHTML = cont.email;

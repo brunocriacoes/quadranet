@@ -80,7 +80,7 @@ class Formulario
 
     static ER( INJECT, URL )
     {  
-        INJECT( URL ); 
+        INJECT( URL );
     }
 
     static sendForm( ID, INJECT )
