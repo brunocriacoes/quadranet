@@ -1,13 +1,4 @@
 "use strict";
-<<<<<<< HEAD
-=======
-
-const log      = console.log;
-const table    = console.table;
-const query    = x => document.querySelector(x);
-const queryAll = x => document.querySelectorAll(x);
-const to       = url => { window.location.href = url; };
->>>>>>> 7daf1e79e99ff9684109f5374bb1ae176365ccbf
 
 const query      = x => document.querySelector(x);
 const queryAll   = x => document.querySelectorAll(x);
@@ -115,7 +106,6 @@ function preencher( seletor, objeto )
 
 const hidden = seletor => { query( seletor ).setAttribute( 'hidden', '' ) };
 
-<<<<<<< HEAD
 function dowload_csv( seletor, array_de_array, file_name )
 {
     let elemento      = document.querySelector( seletor );
@@ -125,29 +115,6 @@ function dowload_csv( seletor, array_de_array, file_name )
     elemento.href     = content_type + data; 
     elemento.download = file_name;
     elemento.click();
-=======
-function abilite( ID )
-{}
-
-function getFile( ID, ID_PREVIEW, ID_PREVIEW_2 = null )
-{
-    let name_temp = ID.replace( '#', '' );
-    let input     = query( ID ); 
-    let preview   = query( ID_PREVIEW );
-    if (input.files && input.files[0])
-    {
-        let reader           = new FileReader();
-        reader.onload        = ( e ) =>  {
-            let img          = e.srcElement.result;
-            files[name_temp] = window.btoa(img)
-            preview.src      = img;
-            if( ID_PREVIEW_2 != null ) {
-                query( ID_PREVIEW_2 ).src = img;
-            }
-        };           
-        reader.readAsDataURL(input.files[0]);
-    }
->>>>>>> 7daf1e79e99ff9684109f5374bb1ae176365ccbf
 }
 
 function baixar_inscritos()
