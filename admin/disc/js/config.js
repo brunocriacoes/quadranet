@@ -1,23 +1,24 @@
-const name_panel  = 'admin';
-const nowTime     = new Date().getTime();
-const http        = window.location.protocol;
-const dominio     = window.location.hostname.replace( 'www.', '' );
-const base        = `${http}//${dominio}/${name_panel}`;
-const api         = `${http}//${dominio}/app`;
-const url_storage = `${http}//${dominio}/api/storage`;
+"use strict";
 
-if( localStorage.jwt_token == undefined ){
-    localStorage.setItem('jwt_token','');
-}
-if( localStorage.sistema == undefined ){
-    localStorage.setItem('sistema','');
-}
-const token       = localStorage.jwt_token;
-var   day         = '';
-var   files       = {};
-var   page        = window.location.hash.replace('#', '');
-var   search      = {};
-var   options     = {
+const http    = window.location.protocol;
+const dominio = window.location.hostname.replace( 'www.', '' );
+const uri     = `${http}//${dominio}`;
+const app     = `${uri}/app`;
+const fnc     = `${app}/fnc`;
+const admin   = `${uri}/admin`;
+const storage = `${uri}/app/storage`;
+const tag     = window.location.hash;
+const request = window.location.search.replace('?','').split('&')
+.reduce( ( acc, item ) => {
+    let data  = item.split('=');
+    let valor =  data[1] || '';
+    if( valor.length > 0  ) {
+        acc[data[0]] = decodeURI( valor );
+    }
+    return acc;
+}, {} );
+var options = 
+{
     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
     credentials: "same-origin",
     method: 'POST',
@@ -25,3 +26,5 @@ var   options     = {
     cache: 'default',
     body: null
 };
+var files = {};
+var day   = '';

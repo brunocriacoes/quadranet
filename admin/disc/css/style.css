@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 * { box-sizing: border-box; outline: none; }
 :root {
     --theme: #05f;
@@ -98,27 +99,32 @@ h1, h2, h3, h4, h5, h6 {
 .gray-text { color: #757575; }
 .input-field {
     display: block;
-    background-color: #eee;
-    border-radius: 26px;
+    background-color: #FFF;
+    border-radius: 0px;
     padding: 0 12px;
     line-height: 40px;
     min-height: 40px;
     margin-bottom: var(--gap);
-    color: #666;
+    color: #333;
     width: 100%;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
-    border: 1px solid transparent;
+    border: 1px solid #FFF;
+    border-bottom: 2px solid #CCC;
+    font-weight: bold;
 }
-.input-field:invalid {
-    border: 1px solid #C00;
+.input-field:focus {
+    border-bottom: 2px solid var(--theme);
+    
 }
 .input-field:disabled {
+    background-color: #CCC;
+    filter: opacity(.5);
     cursor: not-allowed;
 }
 .input-label {
     display: block;
     line-height: 20px;
-    color: #444;
+    color: #999;
+    font-size: 12px;
 }
 .btn {
     display: inline-block;
@@ -129,11 +135,11 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #DDDD;
     border-radius: 4px;
     cursor: pointer;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    filter: saturate(70%);
 }
 
 .btn:hover {
-    filter: saturate(70%);
+    filter: saturate(100%);
 }
 .btn-sucess {
     background: var(--theme);
@@ -533,11 +539,12 @@ option {
 }
 .login__info {
     position: absolute;
-    width: 70%;
+    width: 700px;
+    max-width: 90vw;
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     display: grid;
-    grid-template-columns: 35% 65%;
+    grid-template-columns: 40% 60%;
     background: rgba(255, 255, 255, 1);
 }
 .login__info img {
@@ -596,6 +603,7 @@ option {
     box-shadow: inset 0 0 7px rgba(125, 125, 126, .3);
     text-decoration: none;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 .item-1, 

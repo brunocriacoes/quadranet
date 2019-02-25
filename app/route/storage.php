@@ -4,8 +4,8 @@
     maker_dir( $upload_dir ); 
     
     if( method === 'POST' AND ! empty( request['file'] ) ):
-        $file = request['file'] ?? '';
-        $name = request['name'] ?? request['id'] ?? uniqid() . ".jpg";  
+        $file  = request['file'] ?? '';
+        $name  = ! empty( request['name'] ) ? request['id'] : uniqid() . ".jpg";  
         $file  = base64_decode( $file  ); 
         $file  = explode(',', $file  ); 
         $file  = $file[1] ?? '';
@@ -17,7 +17,7 @@
 
     if( method === 'GET' ):
         header('Content-type: image/png');
-        $name_foto = urls[1] ?? '';
+        $name_foto = urls[1] ?? 'default';
         $dir_foto  = $upload_dir . $name_foto;
         if( file_exists( $dir_foto ) ):
             echo file_get_contents( $dir_foto );

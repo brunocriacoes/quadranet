@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="./disc/css/style.css">
         <link rel="stylesheet" href="./disc/css/mobile.css" media="(max-width: 750px)">
         <link rel="shortcut icon" href="./disc/logo/ico.png" type="image/x-icon">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
     </head>
     <body id="pisca">
         <header id="header" class="grid-3 grid-center">
@@ -16,10 +15,7 @@
                 <img src="./disc/logo/logo-header-black.png" class="logo">
             </a>
             <div class="text-center select_domain">
-                <select id="selecionar-dominio" name="sistema" class="set-domain" onchange="set_domain( this )">
-                    <option value="">Sistema Quadra</option>
-                    <option value="quadranet.con">QuadraNET</option>
-                </select>
+                <select id="selecionar-dominio" name="dominio" class="set-domain" onchange="set_domain( this )"></select>
             </div>
             <div class="text-right text-mobol-center">
                 <label for="menu_quadra" class="ico ico-quadra invert"></label>
@@ -56,7 +52,7 @@
                 <a href="#perfil" class="link_menu">Perfil</a>
                 <a href="#mudar-senha" class="link_menu">Mudar senha</a>
                 <a href="#relar-problema" class="link_menu">Relatar Problema</a>
-                <a href="#sair" class="link_menu" onclick="logout()">Sair</a>
+                <a href="./" class="link_menu" onclick="logout()">Sair</a>
             </div>
         </nav>
         <aside id="aside" class="gap descktop">
@@ -72,23 +68,19 @@
             </div>
         </aside>
         <main id="main" class="gap">
-            <section id="sair" class="gap box">
-                <header class="gap-bottom"> 
-                    <h5>Sair do sistema</h5>
-                </header>
-                <img src="./disc/ico/load.png" class="load">
-            </section>
             <section id="perfil" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Meu perfil</h5>
                 </header>                
-                <form action="javascript:void(0)" id="form-perfil" onsubmit="save_perfil('#form-perfil')" method="POST">
+                <form action="javascript:void(0)" id="form-perfil" onsubmit="post_api_form( 'auth', 'form-perfil', 'dash.html#perfil', 1 )" method="POST">
+                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="update" value="">
                     <label for="" class="input-label">Nome</label>
-                    <input type="text" class="input-field" name="name" id="perfil__form_nome" required>
+                    <input type="text" class="input-field" name="nome" required>
                     <label for="" class="input-label">Email</label>
-                    <input type="email" class="input-field" name="mail" id="perfil__form_email" disabled>
+                    <input type="email" class="input-field" name="email" disabled>
                     <label for="" class="input-label">Telefone</label>
-                    <input type="text" class="input-field" name="telephone" id="perfil__form_tel" required>
+                    <input type="text" class="input-field" name="telephone" required>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
@@ -96,11 +88,14 @@
                  <header class="gap-bottom"> 
                     <h5>Mudar minha senha</h5>
                 </header>
-                <form action="javascript:void(0)" id="form-mudar" onsubmit="alter_pass('#form-mudar')" method="POST">
+                <form action="javascript:void(0)" id="form-mudar" onsubmit="post_api_form( 'auth', 'form-mudar', 'dash.html#mudar-senha')" method="POST">
+                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="update" value="">
+                    <input type="hidden" name="email" value="">
                     <label for="" class="input-label">Nova senha</label>
-                    <input id="mudar-senha_password" type="password" class="input-field" name="pass" required>
+                    <input type="password" class="input-field" name="pass" required>
                     <label for="" class="input-label">Confirmar nova senha</label>
-                    <input id="mudar-senha_new-password" type="password" class="input-field" name="password" required>           
+                    <input type="password" class="input-field" name="password" required>           
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
@@ -108,16 +103,11 @@
                  <header class="gap-bottom"> 
                     <h5>Relatar problema ou dica</h5>
                 </header>
-                <form action="javascript:void(0)" onsubmit="" method="POST">
+                <form action="javascript:void(0)" id="form-error" onsubmit="post_api_form( 'error', 'form-error', 'dash.html#relar-problema')" method="POST">
                     <label for="" class="input-label">Tipo de erro</label>
-                    <select id="relar-problema__select" name="type_error" class="input-field">
-                        <option value="1">Dica</option>
-                        <option value="2">Relatar error</option>
-                        <option value="3">Dúvida</option>
-                        <option value="4">Suporte</option>
-                    </select>
+                    <select name="tipo_error" class="input-field"></select>
                     <label for="" class="input-label">Descrição</label>
-                    <textarea id="relar-problema__descriocao" name="description" rows="6" class="input-field"></textarea>     
+                    <textarea  name="description" rows="6" class="input-field"></textarea>     
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
@@ -197,17 +187,13 @@
                  <header class="gap-bottom"> 
                     <h5>Adicionar novo domínio</h5>
                 </header>
-                <form action="javascript:void(0)" id="form-dominio-novo" onsubmit="create_dominio( '#form-dominio-novo' )" method="POST">
-                    <input id="dominio-novo__form_id" type="hidden" class="input-field" name="id">
+                <form onsubmit="post_api_form( 'dominio', 'form-dominio-novo', 'dash.html#dominio' )" id="form-dominio-novo" action="javascript:void(0)"  method="POST">
                     <label for="" class="input-label">Nome</label>
-                    <input id="dominio-novo__form_nome" type="text" class="input-field" name="name" required>
+                    <input  type="text" class="input-field" name="nome" required>
                     <label for="" class="input-label">Dominio</label>
-                    <input id="dominio-novo__form_dominio" type="text" class="input-field" name="domain" required>
+                    <input type="text" class="input-field" name="id" required>
                     <label for="" class="input-label">Ativo</label>                  
-                    <select id="dominio-novo__form_status" name="ativo" class="input-field">
-                        <option value="1">Sim</option>
-                        <option value="0">Não</option>
-                    </select>
+                    <select name="ativo" class="input-field"></select>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
@@ -238,29 +224,21 @@
                     <h5>Adicionar novo usuário</h5>
                 </header>
                 <form action="javascript:void(0)" onsubmit="create_usuario( '#form-usuaario' )" id="form-usuaario" method="POST">
-                    <input type="hidden" name="id" id="usuario-novo__form_id">
+                    <input type="hidden" name="id">
                     <label for="" class="input-label">Nome</label>
-                    <input id="usuario-novo__form_nome" type="text" class="input-field" name="name" required>
+                    <input type="text" class="input-field" name="nome" required>
                     <label for="" class="input-label">Email</label>
-                    <input id="usuario-novo__form_email" type="email" class="input-field" name="mail" required>
-                    <label for="" class="input-label" id="usuario-novo__label_pass">Senha</label>
-                    <input id="usuario-novo__form_pass" type="password" class="input-field" name="pass">
+                    <input type="email" class="input-field" name="mail" required>
+                    <label for="" class="input-label">Senha</label>
+                    <input type="password" class="input-field" name="pass">
                     <label for="" class="input-label">Telefone</label>
-                    <input id="usuario-novo__form_tel" type="text" class="input-field" name="telephone">
+                    <input type="text" class="input-field" name="telephone">
                     <label for="" class="input-label">Domínio</label>
-                    <select id="usuario-novo__form_dominio" name="domain" class="input-field" required>
-                        <option value="">Selecione Domínio</option>
-                    </select>
+                    <select name="dominio" class="input-field" required></select>
                     <label for="" class="input-label">Nivel Acesso</label>
-                    <select id="usuario-novo__form_nivel" name="admin" class="input-field">
-                        <option value="1">Usuário</option>
-                        <option value="2">Administrador</option>
-                    </select>
+                    <select name="admin" class="input-field"></select>
                     <label for="" class="input-label">Ativo</label>
-                    <select id="usuario-novo__form_status" name="ativo" class="input-field">
-                        <option value="1">sim</option>
-                        <option value="0">não</option>
-                    </select>
+                    <select name="ativo" class="input-field"></select>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
@@ -1009,7 +987,6 @@
         <script src="./disc/js/config.js"></script>
         <script src="./disc/js/functions.js"></script>
         <script src="./disc/js/interface.js"></script>
-        <script async src="./disc/js/javascript.js"></script>
         <script src="./disc/js/main.js"></script>
         <script src="./disc/js/agenda.js"></script>
         <script defer >

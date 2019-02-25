@@ -8,7 +8,8 @@
     $dominio_dir = __DIR__ . "/data/" . dominio . "/";
     maker_dir( $dominio_dir );
 
-    $file_name = urls[1] ?? '';
+    $file_name = urls[0] ?? '';
+
     $file_dir  = __DIR__ . "/route/{$file_name}.php";
     if( file_exists( $file_dir ) ):
         require $file_dir;
@@ -57,6 +58,7 @@
         echo $json_print;
         die;
     endif;
+
     
     $lista_dir = scandir( $dominio_dir );
     $lista_dir = array_slice( $lista_dir, 2 );
@@ -65,10 +67,14 @@
         $list = glob( __DIR__ . "/data/" . dominio . "/". $dir ."/*.json*" );
         $list = array_map( function( $DIR ) { return json_decode( file_get_contents( $DIR ) ); }, $list );
         $list = array_filter( $list, function( $EL ) { return $EL->status ?? false; } );
+        $list = array_values( $list );
         $acc[$dir] = $list;
         return $acc;
     } , [] );
+
+    unset( $lista_dir['auth'] );
+    unset( $lista_dir['auth2'] );
     unset( $lista_dir['upload'] );
-    unset( $lista_dir['_user'] );
+    // unset( $lista_dir['_user'] );
     unset( $lista_dir['pagseguro'] );
     echo json_encode( $lista_dir );

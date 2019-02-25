@@ -35,10 +35,10 @@
     endif;
 
     if( ! empty ( request['login'] ) ):
-        $data      = explode( ',', request['login'] );
-        $email     = sha1( $data[0] ?? '' );
-        $pass      = sha1( $data[1] ?? '' );
-        $user_file = $user_dir . $email . ".json";
+        $email     = request['mail'];
+        $pass      = request['pass'];
+        $id        = sha1( request['mail'] );
+        $user_file = $user_dir . $id . ".json";
         if( file_exists( $user_file ) ):
             $json         = json_decode( file_get_contents( $user_file ) );
             $valid_status = $json->status ?? false;
@@ -56,20 +56,31 @@
     endif;
 
     if( ! empty ( request['create'] ) ):
-        $data      = explode( ',', request['create'] );
-        $email     = sha1( $data[0] ?? '' );
-        $pass      = sha1( $data[1] ?? '' );
-        $user_file = $user_dir . $email . ".json";
-        if( ! file_exists( $user_file ) ):
-            file_put_contents( $user_file, json_encode( [
-                "pass"   => $pass,
-                "mail"   => $data[0] ?? '',
-                "id"     => $email,
-                "status" => true
-            ] ) );
-            $valid = true; 
+        $id        = sha1( request['email'] );
+        $file      = $user_dir . $id . ".json";
+        if( ! file_exists( $file ) ) :
+            file_put_contents( $file, '{}' );
         endif;
-        echo json_encode( [ "create" => $valid ?? false ] );
+        $json = json_decode( file_get_contents( $file ) );
+        foreach( request as $k => $v ):
+            @$json->{$k} = $v;
+        endforeach;
+        file_put_contents( $file, json_encode( $json  ) );
+        echo json_encode( $json );
+        die;
+    endif;
+
+    if( ! empty ( request['profile'] ) ):
+        $id                 = request['profile'];
+        $profile_token      = $token_dir . $id . ".json";      
+        $json               = json_decode( file_get_contents( $profile_token ) );
+        $user               = json_decode( file_get_contents(  $user_dir . sha1( $json->user ) . ".json"  ) );
+        unset( $user->pass );
+        unset( $user->admin );
+        unset( $user->ativo );
+        unset( $user->status );
+        unset( $user->domain );
+        echo json_encode( $user );
         die;
     endif;
 
@@ -87,4 +98,17 @@
         echo json_encode( [ "alter-pass" => $valid ?? false ] );
         die;
     endif;
-    
+
+    if( ! empty ( request['recuperar-senha'] ) ):
+        
+    endif;
+
+    $lista = glob( "{$user_dir}*.json*" );
+    $lista = array_map( function( $e ) {
+        $json = json_decode( file_get_contents( $e ) );
+        unset( $json->pass );
+        return $json;
+    }, $lista );
+    $lista = array_filter( $lista, function( $e ) { return $e->status ?? false; } );
+    $lista = array_values( $lista );
+    echo json_encode( $lista );

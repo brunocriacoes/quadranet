@@ -1,7 +1,0 @@
-{
-    "title": "Agenda",
-    "type" : "page",
-    "db"   :  "agenda",
-    "btn"  : "",
-    "html" : "<div id=\"agenda\">aqui fica a agenda <div>"
-}

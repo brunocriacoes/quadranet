@@ -7,16 +7,29 @@
     maker_dir( $token_dir );
 
     file_put_contents( $user_dir . sha1( 'user@gmail.com' ) . ".json", json_encode( [
-        "name"        => 'usuario',
+        "nome"        => 'usuario',
         "telephone"   => '+55 (00) 0 0000-0000',
         "pass"        => sha1( '123' ),
-        "mail"        => 'user@gmail.com',
+        "email"        => 'user@gmail.com',
         "id"          => sha1( 'user@gmail.com' ),
         "admin"       => 1,
         "domain"      => 1,
         "ativo"       => 1,
         "status"      => true,
     ] ) );
+
+    if( ! empty( request['update'] ) ):
+        $id        = sha1( request['email'] );
+        $user_file = "{$user_dir}{$id}.json";
+        $user      = json_decode( file_get_contents( $user_file ) );
+        foreach( request as $k => $v ):
+            $user->{$k} = $v;
+        endforeach;
+        $user      = json_encode( $user );
+        file_put_contents( $user_file, $user );
+        echo $user;
+        die;
+    endif;
     
     if( ! empty ( request['token'] ) ):
         $token_file = $token_dir . request['token'] . ".json";
@@ -40,10 +53,10 @@
     endif;
 
     if( ! empty ( request['login'] ) ):
-        $data      = explode( ',', request['login'] );
-        $email     = sha1( $data[0] ?? '' );
-        $pass      = sha1( $data[1] ?? '' );
-        $user_file = $user_dir . $email . ".json";
+        $email     = request['mail'];
+        $pass      = request['pass'];
+        $id        = sha1( request['mail'] );
+        $user_file = $user_dir . $id . ".json";
         if( file_exists( $user_file ) ):
             $json         = json_decode( file_get_contents( $user_file ) );
             $valid_status = $json->status ?? false;
@@ -61,7 +74,7 @@
     endif;
 
     if( ! empty ( request['create'] ) ):
-        $id        = sha1( request['mail'] );
+        $id        = sha1( request['email'] );
         $file      = $user_dir . $id . ".json";
         if( ! file_exists( $file ) ) :
             file_put_contents( $file, '{}' );
@@ -79,10 +92,11 @@
         $id                 = request['profile'];
         $profile_token      = $token_dir . $id . ".json";      
         $json               = json_decode( file_get_contents( $profile_token ) );
-        $user               = json_decode( file_get_contents(  $user_dir . $json->user . ".json"  ) );
+        $user               = json_decode( file_get_contents(  $user_dir . sha1( $json->user ) . ".json"  ) );
         unset( $user->pass );
         unset( $user->ativo );
         unset( $user->status );
+        unset( $user->domain );
         echo json_encode( $user );
         die;
     endif;
@@ -100,6 +114,10 @@
         endif;
         echo json_encode( [ "alter-pass" => $valid ?? false ] );
         die;
+    endif;
+
+    if( ! empty ( request['recuperar-senha'] ) ):
+        
     endif;
 
     $lista = glob( "{$user_dir}*.json*" );

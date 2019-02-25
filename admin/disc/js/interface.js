@@ -1,11 +1,9 @@
 "use strict";
-var _beta = {
+var _vio = {};
 
-};
-
-var beta = {
+var vio = {
     set modalidade(cont) {
-        _beta.modalidade = cont;
+        _vio.modalidade = cont;
         query('#modalidade__table_title').innerHTML = cont
             .map(x => `
                 <tr>
@@ -17,10 +15,9 @@ var beta = {
                 </tr>
         ` ).join('');
     },
-    get modalidade() { return _beta.modalidade },
 
     set admin(cont) {
-        _beta.admin = cont;
+        _vio.admin = cont;
         if(cont) {
             query('#selecionar-dominio').removeAttribute('disabled');            
             query('#selecionar-dominio').classList.remove('no-admin');            
@@ -29,10 +26,9 @@ var beta = {
             query('#selecionar-dominio').classList.add('no-admin');            
         }
     },
-    get admin() { return _beta.admin; },
 
     set sistema(cont) {
-        _beta.sistema = cont;
+        _vio.sistema = cont;
         if(cont) {
             query( '#aside-sistema' ).style.display       = 'none';
             query( '[for="menu_quadra"]' ).style.display  = 'none';
@@ -52,17 +48,15 @@ var beta = {
             to('#agenda');
         }
     },
-    get sistema() { return _beta.sistema; },
 
     set modalidade_nova(cont) {
-        _beta.modalidade_nova = cont;
+        _vio.modalidade_nova = cont;
         query('#modalidade__form_input_nome').innerHTML = cont.name;
         query('#modalidade__form_input_cor').innerHTML = cont.color;
     },
-    get modalidade_nova() { return _beta.modalidade_nova },
 
     set quadra(cont) {
-        _beta.quadra = cont;
+        _vio.quadra = cont;
         query('#quadra__table_body').innerHTML = cont
             .map( x => `
                 <tr>
@@ -77,10 +71,9 @@ var beta = {
                 </tr>
             ` ).join( '' );
     },
-    get quadra() { return _beta.quadra },
 
     set quadra_nova(cont) {
-        _beta.quadra_nova = cont;
+        _vio.quadra_nova = cont;
         query('#quadra-nova__form_select-modalidade').innerHTML = cont.modalidade.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
         query('#quadra-nova__form_nome').innerHTML = cont.name;
         query('#quadra-nova__form_avulso').innerHTML = cont.price_day;
@@ -94,10 +87,9 @@ var beta = {
         query('#quadra-nova__form_5').innerHTML = cont.img4;
         query('#quadra-nova__form_6').innerHTML = cont.img5;
     },
-    get quadra_nova() { return _beta.quadra_nova },
 
     set horario(cont) {
-        _beta.horario = cont;
+        _vio.horario = cont;
         query('#horario__table_body').innerHTML = cont
             .map( x => `
                 <tr>
@@ -111,18 +103,16 @@ var beta = {
                 </tr>
             ` ).join( '' );
     },
-    get horario() { return _beta.horario },
 
     set horario_novo(cont) {
-        _beta.horario_novo = cont;
+        _vio.horario_novo = cont;
         query('#horario-novo__form_quadra').innerHTML = cont.quadra.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
         query('#horario-novo__form_inicial').innerHTML = cont.init;
         query('#horario-novo__form_final').innerHTML = cont.end;
     },
-    get horario_novo() { return _beta.horario_novo },
 
     set capitao(cont) {
-        _beta.capitao = cont;
+        _vio.capitao = cont;
         query('#capitao__table_body').innerHTML = cont
             .map( x => `
                 <tr>
@@ -135,10 +125,9 @@ var beta = {
                 </tr>
             ` ).join( '' );
     },
-    get capitao() { return _beta.capitao },
 
     set capitao_novo(cont) {
-        _beta.capitao_novo = cont;
+        _vio.capitao_novo = cont;
         query('#capitao-novo__form_nome').value = cont.name;
         query('#capitao-novo__form_apelido').innerHTML = cont.nickname;
         query('#capitao-novo__form_tel').innerHTML = cont.telephone;
@@ -150,10 +139,9 @@ var beta = {
         query('#capitao-novo__table__time_tel').innerHTML = cont.telephone;
         query('#capitao-novo__table__time_email').innerHTML = cont.mail;
     },
-    get capitao_novo() { return _beta.capitao_novo },
 
     set jogadores(cont) {
-        _beta.capitao_novo = cont;
+        _vio.capitao_novo = cont;
         query('#jogadores__table_body').innerHTML = cont
             .map( x => `
                 <tr>
@@ -164,10 +152,9 @@ var beta = {
                 </tr>
             ` ).join( '' );
     },
-    get jogadores() { return _beta.jogadores },
 
     set historico(cont) {
-        _beta.capitao_novo = cont;
+        _vio.capitao_novo = cont;
         query('#historico__table_body').innerHTML = cont
             .map( x => `
                 <tr>
@@ -185,10 +172,9 @@ var beta = {
                 </tr>
             ` ).join( '' );
     },
-    get historico() { return _beta.historico },
 
     set visual(cont) {
-        _beta.visual = cont;
+        _vio.visual = cont;
         query('#visual_form_title').innerHTML = cont.title;
         query('#visual_form_google').innerHTML = cont.description;
         query('#visual_form_descricao').innerHTML = cont.description;
@@ -211,10 +197,9 @@ var beta = {
         query('#visual_form_email-pagseguro').innerHTML = cont.email;
         query('#visual_form_token').innerHTML = cont.token;
     },
-    get visual() { return _beta.visual },
 
     set quem_somos(cont) {
-        _beta.quem_somos = cont;
+        _vio.quem_somos = cont;
         query('#quem-somos__form_title').innerHTML = cont.title;
         query('#quem-somos__form_text-area').innerHTML = cont.html;
         query('#quem-somos__form_1-grande').innerHTML = cont.img1_grande;
@@ -224,17 +209,15 @@ var beta = {
         query('#quem-somos__form_5').innerHTML = cont.img4;
         query('#quem-somos__form_6').innerHTML = cont.img5;
     },
-    get quem_somos() { return _beta.quem_somos },
 
     set servicos(cont) {
-        _beta.servicos = cont;
+        _vio.servicos = cont;
         query('#servicos__form_title').innerHTML = cont.title;
         query('#servicos__form_text-area').innerHTML = cont.html;
     },
-    get servicos() { return _beta.servicos },
 
     set banner(cont) {
-        _beta.banner = cont;
+        _vio.banner = cont;
         query('#banner__table_body').innerHTML = cont
             .map( x => `
                 <tr>
@@ -246,20 +229,18 @@ var beta = {
                 </tr>
             ` ).join( '' );
     },
-    get banner() { return _beta.banner },
 
     set banner_novo(cont) {
-        _beta.banner_novo = cont;
+        _vio.banner_novo = cont;
         query('#banner-novo__form_nome').innerHTML = cont.name;
         query('#banner-novo__form_link').innerHTML = cont.link;
         query('#banner-novo__form_text').innerHTML = cont.text;
         query('#banner-novo__form_photo').innerHTML = cont.photo;
         query('#banner-novo__form_status').innerHTML = cont.status;
     },
-    get banner_novo() { return _beta.banner_novo },
 
     set dominio(cont) {
-        _beta.dominio = cont;
+        _vio.dominio = cont;
         query('#dominio__table_body').innerHTML = cont.map( x => `
                 <tr>
                     <td><img onclick="delete_dominio( '${x.id}' )" src="./disc/ico/trash.png" class="ico-table"></td>
@@ -271,19 +252,17 @@ var beta = {
                 </tr>
             ` ).join( '' );
     },
-    get dominio() { return _beta.dominio; },
 
     set dominio_novo(cont) {
-        _beta.dominio_novo = cont;
+        _vio.dominio_novo = cont;
         query('#dominio-novo__form_id').value = cont.id || '';
         query('#dominio-novo__form_nome').value = cont.name || '';
         query('#dominio-novo__form_dominio').value = cont.domain || '';
         query(`#dominio-novo__form_status option[value='${cont.ativo || '1'}']`).setAttribute('selected','');
     },
-    get dominio_novo() { return _beta.dominio_novo },
 
     set usuario(cont) {
-        _beta.usuario = cont;
+        _vio.usuario = cont;
         query('#usuario__table_body').innerHTML = cont
             .map( x => `
                 <tr>
@@ -297,10 +276,9 @@ var beta = {
                 </tr>
             ` ).join( '' );
     },
-    get usuario() { return _beta.usuario },
 
     set usuario_novo(cont) {
-        _beta.usuario_novo = cont;
+        _vio.usuario_novo = cont;
         query('#usuario-novo__form_id').value = cont.id || '';
         query('#usuario-novo__form_nome').value = cont.name || '';
         query('#usuario-novo__form_email').value = cont.mail || '';
@@ -313,10 +291,9 @@ var beta = {
         query(`#usuario-novo__form_nivel option[value="${cont.admin || '1'}"]`).setAttribute('selected', 'true');
         query(`#usuario-novo__form_status option[value="${cont.ativo || '1'}"]`).setAttribute('selected', 'true');
     },
-    get usuario_novo() { return _beta.usuario_novo },
 
     set registro_problema(cont) {
-        _beta.registro_problema = cont;
+        _vio.registro_problema = cont;
         query('#registro-problema__table_body').innerHTML = cont
             .map( x => `
                 <tr>
@@ -329,31 +306,27 @@ var beta = {
                 </tr>
             ` ).join( '' );
     },
-    get registro_problema() { return _beta.registro_problema },
 
     set perfil(cont) {
-        _beta.perfil = cont;
+        _vio.perfil = cont;
         query('#perfil__form_nome').value = cont.name;
         query('#perfil__form_email').value = cont.mail;
         query('#perfil__form_tel').value = cont.telephone;
     },
-    get perfil() { return _beta.perfil },
 
     set relar_problema(cont) {
-        _beta.relar_problema = cont;
+        _vio.relar_problema = cont;
         query('#relar-problema__select').innerHTML = cont.type_error;
         query('#relar-problema__descriocao').innerHTML = cont.description;
     },
-    get relar_problema() { return _beta.relar_problema },
 
     set estaticos_pagina(cont) {
-        _beta.estaticos_pagina = cont;
+        _vio.estaticos_pagina = cont;
         query('#selecionar-dominio').innerHTML = cont.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
     },
-    get estaticos_pagina() { return _beta.estaticos_pagina },
 
     set aside_quadra(cont) {
-        _beta.aside_quadra = cont;
+        _vio.aside_quadra = cont;
         query('#aside').innerHTML = cont
             .map( x => `
                 <div id="aside_quadra" class="box gap gap-bottom text-center">
@@ -375,22 +348,25 @@ var beta = {
                 <smal class="gray-text">${x.modalidade}</small>
             ` );
     },
-    get aside_quadra() { return _beta.aside_quadra },
 
     set agenda(cont) {
-        _beta.agenda = cont;
+        _vio.agenda = cont;
         log( cont );
         query('#agenda__title').innerHTML = cont.name;
         query('#agenda__modalidade').innerHTML = cont.modalidade;
         query('#agenda__data').innerHTML = cont.date;
         query('#agenda__dia-semana').innerHTML = cont.day;
     },
-    get agenda() { return _beta.agenda },
 
     set mudar_senha(cont) {
-        _beta.mudar_senha = cont;
+        _vio.mudar_senha = cont;
         query('#mudar-senha_password').innerHTML = cont.pass;
         query('#mudar-senha_new-password').innerHTML = cont.password;
     },
-    get mudar_senha() { return _beta.mudar_senha },
 }
+
+Object.keys( vio ).forEach( index => {
+    Object.defineProperty(vio, index, {
+        get: function() { return _vio[index]; },    
+    });
+} );
