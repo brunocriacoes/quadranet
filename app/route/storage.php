@@ -7,7 +7,7 @@
         $file  = request['file'] ?? '';
         $name  = ! empty( request['name'] ) ? request['id'] : uniqid() . ".jpg";  
         $file  = base64_decode( $file  ); 
-        $file  = explode(',', $file  ); 
+        $file  = explode( ',', $file  );
         $file  = $file[1] ?? '';
         $file  = base64_decode( $file );
         file_put_contents ( "{$upload_dir}{$name}", $file );
