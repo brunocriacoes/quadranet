@@ -104,12 +104,6 @@ var vio = {
             ` ).join( '' );
     },
 
-    set horario_novo(cont) {
-        _vio.horario_novo = cont;
-        query('#horario-novo__form_quadra').innerHTML = cont.quadra.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
-        query('#horario-novo__form_inicial').value = cont.init;
-        query('#horario-novo__form_final').value = cont.end;
-    },
 
     set capitao(cont) {
         _vio.capitao = cont;
@@ -126,19 +120,7 @@ var vio = {
             ` ).join( '' );
     },
 
-    set capitao_novo(cont) {
-        _vio.capitao_novo = cont;
-        query('#capitao-novo__form_nome').value = cont.name;
-        query('#capitao-novo__form_apelido').value = cont.nickname;
-        query('#capitao-novo__form_tel').value = cont.telephone;
-        query('#capitao-novo__form_email').value = cont.mail;
-        query('#capitao-novo__form_senha').value = cont.pass;
-        query('#capitao-novo__form_select-status').innerHTML = cont.status;
-        query('#capitao-novo__table__time_nome').value = cont.nome;
-        query('#capitao-novo__table__time_apelido').value = cont.nickname;
-        query('#capitao-novo__table__time_tel').value = cont.telephone;
-        query('#capitao-novo__table__time_email').value = cont.mail;
-    },
+
 
     set jogadores(cont) {
         _vio.capitao_novo = cont;
@@ -216,108 +198,24 @@ var vio = {
         query('#servicos__form_text-area').innerHTML = cont.html;
     },
 
-    set banner(cont) {
-        _vio.banner = cont;
-        query('#banner__table_body').innerHTML = cont
-            .map( x => `
-                <tr>
-                    <td><img src="./disc/ico/trash.png" class="ico-table"></td>
-                    <td>${x.name}</td>
-                    <td>
-                        <img onclick="to( '?id=${x.id}#banner-novo' )" src="./disc/ico/edit.png" class="ico-table">
-                    </td>
-                </tr>
-            ` ).join( '' );
+    set banner(arr) {
+        _vio.banner = arr;
+        query('#banner__table_body').innerHTML = tpl_array( arr, '#tr_banner', 'banner' );
     },
 
-    set banner_novo(cont) {
-        _vio.banner_novo = cont;
-        query('#banner-novo__form_nome').innerHTML = cont.name;
-        query('#banner-novo__form_link').innerHTML = cont.link;
-        query('#banner-novo__form_text').innerHTML = cont.text;
-        query('#banner-novo__form_photo').innerHTML = cont.photo;
-        query('#banner-novo__form_status').innerHTML = cont.status;
+    set dominio(arr) {
+        _vio.dominio = arr;
+        query('#dominio__table_body').innerHTML = tpl_array( arr, '#tr_default', 'dominio' );
     },
 
-    set dominio(cont) {
-        _vio.dominio = cont;
-        query('#dominio__table_body').innerHTML = cont.map( x => `
-                <tr>
-                    <td><img onclick="delete_dominio( '${x.id}' )" src="./disc/ico/trash.png" class="ico-table"></td>
-                    <td>${x.name || ''}</td>
-                    <td>${( x.ativo || '' === '1' ) ? 'sim' : 'não'}</td>
-                    <td>
-                        <img onclick="to( '#dominio-novo' ); edite_dominio('${x.id}')" src="./disc/ico/edit.png" class="ico-table">
-                    </td>
-                </tr>
-            ` ).join( '' );
+    set usuario(arr) {
+        _vio.usuario = arr;
+        query('#usuario__table_body').innerHTML = tpl_array( arr, '#tr_usuario', 'usuario' );
     },
 
-    set dominio_novo(cont) {
-        _vio.dominio_novo = cont;
-        query('#dominio-novo__form_id').value = cont.id || '';
-        query('#dominio-novo__form_nome').value = cont.name || '';
-        query('#dominio-novo__form_dominio').value = cont.domain || '';
-        query(`#dominio-novo__form_status option[value='${cont.ativo || '1'}']`).setAttribute('selected','');
-    },
-
-    set usuario(cont) {
-        _vio.usuario = cont;
-        query('#usuario__table_body').innerHTML = cont
-            .map( x => `
-                <tr>
-                    <td><img onclick="delete_usuario('${x.mail}')" src="./disc/ico/trash.png" class="ico-table"></td>
-                    <td>${x.name}</td>
-                    <td>${x.telephone}</td>
-                    <td>${( x.ativo == 1 ) ? 'sim' : 'não'}</td>
-                    <td>
-                        <img onclick="to( '#usuario-novo' ); edit_usuario('${x.id}')" src="./disc/ico/edit.png" class="ico-table">
-                    </td>
-                </tr>
-            ` ).join( '' );
-    },
-
-    set usuario_novo(cont) {
-        _vio.usuario_novo = cont;
-        query('#usuario-novo__form_id').value = cont.id || '';
-        query('#usuario-novo__form_nome').value = cont.name || '';
-        query('#usuario-novo__form_email').value = cont.mail || '';
-        query('#usuario-novo__form_tel').value = cont.telephone || '';
-        if ( typeof cont.domain === 'string' ) {
-            query(`#usuario-novo__form_dominio option[value="${cont.domain || ''}"]`).setAttribute('selected', 'true');
-        } else {
-            query('#usuario-novo__form_dominio').innerHTML = cont.domain.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
-        }
-        query(`#usuario-novo__form_nivel option[value="${cont.admin || '1'}"]`).setAttribute('selected', 'true');
-        query(`#usuario-novo__form_status option[value="${cont.ativo || '1'}"]`).setAttribute('selected', 'true');
-    },
-
-    set registro_problema(cont) {
-        _vio.registro_problema = cont;
-        query('#registro-problema__table_body').innerHTML = cont
-            .map( x => `
-                <tr>
-                    <td><img src="./disc/ico/trash.png" class="ico-table"></td>
-                    <td>${x.domain}</td>
-                    <td>${x.name}</td>
-                    <td>${x.telephone}</td>
-                    <td>${x.description}</td>
-                    <td>${x.type}</td>
-                </tr>
-            ` ).join( '' );
-    },
-
-    set perfil(cont) {
-        _vio.perfil = cont;
-        query('#perfil__form_nome').value = cont.name;
-        query('#perfil__form_email').value = cont.mail;
-        query('#perfil__form_tel').value = cont.telephone;
-    },
-
-    set relar_problema(cont) {
-        _vio.relar_problema = cont;
-        query('#relar-problema__select').innerHTML = cont.type_error;
-        query('#relar-problema__descriocao').innerHTML = cont.description;
+    set error(arr) {
+        _vio.error = arr;
+        query('#registro-problema__table_body').innerHTML = tpl_array( arr, '#tr_error', 'error' );
     },
 
     set estaticos_pagina(cont) {

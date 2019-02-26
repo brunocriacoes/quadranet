@@ -207,10 +207,10 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="30"></th>
                             <th>Nome</th>
                             <th width="200">Telefone</th>
                             <th width="50">Ativo</th>
+                            <th width="30"></th>
                             <th width="30"></th>
                         </tr>
                     </thead>
@@ -223,7 +223,7 @@
                  <header> 
                     <h5>Adicionar novo usuário</h5>
                 </header>
-                <form action="javascript:void(0)" onsubmit="create_usuario( '#form-usuaario' )" id="form-usuaario" method="POST">
+                <form action="javascript:void(0)" onsubmit="post_api_form( 'auth', 'form-usuario', 'dash.html#usuario' )" id="form-usuario" method="POST">
                     <input type="hidden" name="id">
                     <label for="" class="input-label">Nome</label>
                     <input type="text" class="input-field" name="nome" required>
@@ -264,9 +264,6 @@
                 </table>
             </section>
             <section id="visual" class="gap box">
-                 <header> 
-                    <h5>Informações do site</h5>
-                </header>
                 <div class="text-center gap-bottom">
                     <label for="m-site" class="link_menu">Site</label>
                     <label for="m-rede-social" class="link_menu">Rede Social</label>
@@ -278,98 +275,91 @@
                 <input type="radio" name="menu-visual" id="m-info" hidden>
                 <input type="radio" name="menu-visual" id="m-pagseguro" hidden>
                 <div class="m-inicial m-site">
-                    <form action="javascript:void(0)" id="visual__form__info" onsubmit="gravarDados('#visual__form__info', 'visual', '#visual')" method="POST">
-                        <label for="" class="input-label">Titulo</label>
-                        <input id="visual_form_title" type="text" name="title" class="input-field">
-                        <label for="" class="input-label">Palavra chave (google)</label>
-                        <input id="visual_form_google"t type="text" name="description" class="input-field">
-                        <label for="" class="input-label">Descrição (google)</label>
-                        <textarea id="visual_form_descricao" name="description" rows="3" class="input-field"></textarea>
-                        <label for="" class="input-label">Cor site</label>
-                        <input id="visual_form_cor" type="color" name="color" class="input-field">
-                        <label for="" class="input-label">Logo</label>
-                        <input id="visual_form_logo" type="file" name="logo" class="input-field">  
+                    <form action="javascript:void(0)" id="visual__form__info" onsubmit="post_api_form( 'site', 'visual__form__info', 'dash.html#visual', 1 )" method="POST">
+                        <div class="grid-2 grid-gap">
+                            <div> 
+                                <input type="hidden" name="id" value="info">
+                                <label for="" class="input-label">Titulo</label>
+                                <input type="text" name="title" class="input-field">
+                                <label for="" class="input-label">Palavra chave (google)</label>
+                                <input type="text" name="description" class="input-field">
+                                <label for="" class="input-label">Descrição (google)</label>
+                                <textarea name="description" rows="3" class="input-field"></textarea>
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Cor site</label>
+                                <input type="color" name="color" class="input-field">
+                                <label for="info_logo" class="input-label">Logo</label>
+                                <label for="info_logo">
+                                    <img src="./disc/img/default.jpg" height="200" alt="logo" id="previa_info_logo">
+                                </label>
+                                <label for="info_ico" class="input-label">icone</label>
+                                <label for="info_ico">
+                                    <img src="./disc/img/default.jpg" height="32" alt="ico" id="previa_info_ico">
+                                </label>
+                            </div>
+                        </div>
                         <input type="submit" value="salvar" class="btn btn-sucess">
                     </form>
+                    <input type="file" hidden name="logo" onchange="previwew_img( 'info_logo', 'previa_info_logo' )" id="info_logo">  
+                    <input type="file" hidden name="ico"  onchange="previwew_img( 'info_ico', 'previa_info_ico' )" id="info_ico">  
                 </div>
                 <div class="m-inicial m-rede-social">
-                    <form action="javascript:void(0)" id="visual__form__social" onsubmit="gravarDados('#visual__form__social', 'visual', '#visual')" method="POST">
+                    <form action="javascript:void(0)" id="visual__form__social" onsubmit="post_api_form( 'site', '', 'dash.html#visual', 1 )" method="POST">
+                        <input type="hidden" name="id" value="info">
                         <label for="" class="input-label">Facebook</label>
-                        <input id="visual_form_facebook" type="url" name="facebook" class="input-field">
+                        <input type="url" name="facebook" class="input-field" placeholder="http://">
                         <label for="" class="input-label">Instagram</label>
-                        <input id="visual_form_instagram" type="url" name="instagram" class="input-field">
+                        <input type="url" name="instagram" class="input-field" placeholder="http://">
                         <label for="" class="input-label">Twitter</label>
-                        <input id="visual_form_twitter" type="url" name="twitter" class="input-field">
+                        <input type="url" name="twitter" class="input-field" placeholder="http://">
                         <label for="" class="input-label">Youtube</label>
-                        <input id="visual_form_Youtube" type="url" name="Youtube" class="input-field">
+                        <input type="url" name="youtube" class="input-field" placeholder="http://">
                         <input type="submit" value="salvar" class="btn btn-sucess">
                     </form>
                 </div>
                 <div class="m-inicial m-info">
-                    <form action="javascript:void(0)" id="visual__form__contato" onsubmit="gravarDados('#visual__form__contato', 'visual', '#visual')" method="POST" class="grid-2 grid-gap">
-                        <div>
-                            <label for="" class="input-label">Email</label>
-                            <input id="visual__form_email" type="email" name="email" class="input-field">
+                    <form action="javascript:void(0)" id="visual__form__contato" onsubmit="post_api_form( 'site', '', 'dash.html#visual', 1 )" method="POST">
+                        <input type="hidden" name="id" value="info">
+                        <div class="grid-3 grid-gap">
+                            <div>
+                                <label for="" class="input-label">Email</label>
+                                <input type="email" name="email" class="input-field" placeholder="contato@domio.com">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Telefone</label>
+                                <input type="tel" name="telefone" class="input-field" placeholder="+55 (00) 0 0000-0000">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">WhatsApp</label>
+                                <input type="tel" name="whatsapp" class="input-field" placeholder="+55 (00) 0 0000-0000">
+                            </div>
                         </div>
-                        <div>
-                            <label for="" class="input-label">Telefone</label>
-                            <input id="visual__form_tel" type="tel" name="telephone" class="input-field">
-                        </div>
-                        <div>
-                            <label for="" class="input-label">WhatsApp</label>
-                            <input id="visual__form_whatsapp" type="tel" name="whatsapp" class="input-field">
-                        </div>
-                        <div>
-                            <label for="" class="input-label">Cep</label>
-                            <input id="visual__form_cep" type="text" name="zipcode" class="input-field">
-                        </div>
-                        <div>
-                            <label for="" class="input-label">Rua</label>
-                            <input id="visual__form_rua" type="text" name="street" class="input-field">
-                        </div>
-                        <div>
-                            <label for="" class="input-label">Número</label>
-                            <input id="visual__form_numero" type="text" name="number" class="input-field">
-                        </div>
-                        <div>
-                            <label for="" class="input-label">Bairro</label>
-                            <input id="visual__form_bairro" type="text" name="bairro" class="input-field">
-                        </div>
-                        <div>
-                            <label for="" class="input-label">Cidade</label>
-                            <input id="visual__form_cidade" type="text" name="city" class="input-field">
-                        </div>
-                        <div>                            
-                            <label for="" class="input-label">Estado</label>
-                            <select id="visual__form_estado" name="state" class="input-field">
-                                <option value="AC">Acre</option>
-                                <option value="AL">Alagoas</option>
-                                <option value="AP">Amapá</option>
-                                <option value="AM">Amazonas</option>
-                                <option value="BA">Bahia</option>
-                                <option value="CE">Ceará</option>
-                                <option value="DF">Distrito Federal</option>
-                                <option value="ES">Espírito Santo</option>
-                                <option value="GO">Goiás</option>
-                                <option value="MA">Maranhão</option>
-                                <option value="MT">Mato Grosso</option>
-                                <option value="MS">Mato Grosso do Sul</option>
-                                <option value="MG">Minas Gerais</option>
-                                <option value="PA">Pará </option>
-                                <option value="PB">Paraíba</option>
-                                <option value="PR">Paraná</option>
-                                <option value="PE">Pernambuco</option>
-                                <option value="PI">Piauí</option>
-                                <option value="RJ">Rio de Janeiro</option>
-                                <option value="RN">Rio Grande do Norte</option>
-                                <option value="RS">Rio Grande do Sul</option>
-                                <option value="RO">Rondônia</option>
-                                <option value="RR">Roraima</option>
-                                <option value="SC">Santa Catarina</option>
-                                <option value="SP">São Paulo</option>
-                                <option value="SE">Sergipe</option>
-                                <option value="TO">Tocantins</option>
-                            </select>
+                        <div class="grid-2 grid-gap">
+                            <div>
+                                <label for="" class="input-label">Cep</label>
+                                <input type="text" name="cep" class="input-field" placeholder="00000-000">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Rua</label>
+                                <input type="text" name="rua" class="input-field">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Número</label>
+                                <input type="text" name="numero" class="input-field" placeholder="0">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Bairro</label>
+                                <input type="text" name="bairro" class="input-field">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Cidade</label>
+                                <input type="text" name="cidade" class="input-field">
+                            </div>
+                            <div>                            
+                                <label for="" class="input-label">Estado</label>
+                                <select name="estado" class="input-field"></select>
+                            </div>
                         </div>
                         <div>
                             <label for="" class="input-label">Codigo embed google maps</label>
@@ -381,11 +371,18 @@
                     </form>
                 </div>
                 <div class="m-inicial m-pagseguro">
-                    <form action="javascript:void(0)" id="visual__form__pag" onsubmit="gravarDados('#visual__form__pag', 'visual', '#visual')" method="POST">
-                        <label for="" class="input-label">Email</label>
-                        <input id="visual_form_email-pagseguro" type="url" name="email" class="input-field">
-                        <label for="" class="input-label">Token</label>
-                        <input id="visual_form_token" type="url" name="token" class="input-field">
+                    <form action="javascript:void(0)" id="visual__form__pag" onsubmit="post_api_form( 'site', '', 'dash.html#visual', 1 )" method="POST">
+                        <input type="hidden" name="id" value="pagseguro">
+                        <div class="grid-2 grid-gap">
+                            <div>
+                                <label for="" class="input-label">Email</label>
+                                <input type="email" name="email" class="input-field">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Token</label>
+                                <input type="password" name="token" class="input-field">
+                            </div>
+                        </div>
                         <input type="submit" value="salvar" class="btn btn-sucess">
                     </form>
                 </div>
@@ -394,77 +391,67 @@
                  <header class="gap-bottom"> 
                     <h5>Página quem somos</h5>
                 </header>
-                <div class="grid-2 grid-gap">
-                    <form action="javascript:void(0)" id="servicos_form__quem-somos" onsubmit="gravarDados('#servicos_form__quem-somos', 'quem-somos', '#quem-somos')" method="POST">
-                        <label for="" class="input-label">Titulo</label>
-                        <input id="quem-somos__form_title" type="text" name="title" class="input-field">
-                        <div class="editor-box gap-bottom">
-                            <div class="editor-nav">
-                                <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
-                                <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
-                                <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
-                                <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
-                                <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
-                                <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
-                                <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
-                                <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
+                <form action="javascript:void(0)" id="servicos_form__quem-somos" onsubmit="post_api_form( 'pagina', 'servicos_form__quem-somos', 'dash.html#quem-somos', 1 )" method="POST">
+                    <input type="hidden" name="id" value="sobre">
+                    <div class="grid-2 grid-gap">
+                        <div>
+                            <label for="" class="input-label">Titulo</label>
+                            <input type="text" name="nome" class="input-field">
+                            <div class="editor-box gap-bottom">
+                                <div class="editor-nav">
+                                    <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
+                                    <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
+                                    <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
+                                    <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
+                                    <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
+                                    <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
+                                    <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
+                                    <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
+                                </div>
+                                <div contenteditable="true" id="editor-content-quem-somos__form_text-area" onkeyup="duplicar( 'quem-somos__form_text-area' )" class="editor-local"></div>
+                            </div>     
+                        </div>                        
+                        <div>
+                            <label for="foto_1">
+                                <img id="previa_foto_1B" alt="foto_1" src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                            <div class="grid-5">
+                                <label for="foto_1">
+                                    <img src="./disc/img/default.jpg" alt="foto_1" id="previa_foto_1" class="responsive img-galery">
+                                </label>
+                                <label for="foto_2">
+                                    <img src="./disc/img/default.jpg" alt="foto_2" id="previa_foto_2" class="responsive img-galery">
+                                </label>
+                                <label for="foto_3">
+                                    <img src="./disc/img/default.jpg" alt="foto_3" id="previa_foto_3" class="responsive img-galery">
+                                </label>
+                                <label for="foto_4">
+                                    <img src="./disc/img/default.jpg" alt="foto_4" id="previa_foto_4" class="responsive img-galery">
+                                </label>
+                                <label for="foto_5">
+                                    <img src="./disc/img/default.jpg" alt="foto_5" id="previa_foto_5" class="responsive img-galery">
+                                </label>
                             </div>
-                            <div contenteditable="true" id="editor-content-quem-somos__form_text-area" onkeyup="duplicar( 'quem-somos__form_text-area' )" class="editor-local"></div>
-                            <input id="quem_somos__foto_1" type="file" onchange="getFile( '#quem_somos__foto_1', '#quem-somos__form_1-grande', '#quem-somos__form_1' )" hidden>
-                            <input id="quem_somos__foto_2" type="file" onchange="getFile( '#quem_somos__foto_2', '#quem-somos__form_2' )" hidden>
-                            <input id="quem_somos__foto_3" type="file" onchange="getFile( '#quem_somos__foto_3', '#quem-somos__form_3' )" hidden>
-                            <input id="quem_somos__foto_4" type="file" onchange="getFile( '#quem_somos__foto_4', '#quem-somos__form_4' )" hidden>
-                            <input id="quem_somos__foto_5" type="file" onchange="getFile( '#quem_somos__foto_5', '#quem-somos__form_5' )" hidden>
-                        </div>     
-                        <textarea id="quem-somos__form_text-area" name="html" hidden></textarea>
-                        <input type="submit" value="salvar" class="btn btn-sucess">
-                    </form>
-                    <div>
-                        <label for="quem_somos__foto_1">
-                            <img id="quem-somos__form_1-grande" src="./disc/img/default.jpg" class="responsive img-galery">
-                        </label>
-                        <div class="grid-5">
-                            <label for="quem_somos__foto_1">
-                                <img id="quem-somos__form_1" src="./disc/img/default.jpg" class="responsive img-galery">
-                            </label>
-                            <label for="quem_somos__foto_2">
-                                <img id="quem-somos__form_2" src="./disc/img/default.jpg" class="responsive img-galery">
-                            </label>
-                            <label for="quem_somos__foto_3">
-                                <img id="quem-somos__form_3" src="./disc/img/default.jpg" class="responsive img-galery">
-                            </label>
-                            <label for="quem_somos__foto_4">
-                                <img id="quem-somos__form_4" src="./disc/img/default.jpg" class="responsive img-galery">
-                            </label>
-                            <label for="quem_somos__foto_5">
-                                <img id="quem-somos__form_5" src="./disc/img/default.jpg" class="responsive img-galery">
-                            </label>
                         </div>
                     </div>
-                </div>
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+                <input id="foto_1" type="file" name="foto_1" onchange="previwew_img( 'foto_1', 'previa_foto_1' );previwew_img( 'foto_1', 'previa_foto_1B' )" hidden>
+                <input id="foto_2" type="file" name="foto_2" onchange="previwew_img( 'foto_2', 'previa_foto_2' )" hidden>
+                <input id="foto_3" type="file" name="foto_3" onchange="previwew_img( 'foto_3', 'previa_foto_3' )" hidden>
+                <input id="foto_4" type="file" name="foto_4" onchange="previwew_img( 'foto_4', 'previa_foto_4' )" hidden>
+                <input id="foto_5" type="file" name="foto_5" onchange="previwew_img( 'foto_5', 'previa_foto_5' )" hidden>
             </section>
             <section id="servicos" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Página serviços</h5>
                 </header>
-                <form action="javascript:void(0)" id="servicos_form" onsubmit="gravarDados('#servicos_form', 'servicos', 'servicos')" method="POST">
+                <form action="javascript:void(0)" id="servicos_form" onsubmit="post_api_form( 'pagina', 'servicos_form', 'dash.html#servicos', 1 )" method="POST">
+                    <input type="hidden" name="id" value="servico">
                     <label for="" class="input-label">Titulo</label>
-                    <input id="servicos__form_title" type="text" name="title" class="input-field">
-                    <input type="text" name="id" value="servico" hidden>
-                    <div class="editor-box gap-bottom">
-                        <div class="editor-nav">
-                            <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
-                            <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
-                            <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
-                            <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
-                            <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
-                            <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
-                            <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
-                            <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
-                        </div>
-                        <div contenteditable="true" id="editor-content-servicos__form_text-area" onkeyup="duplicar( 'servicos__form_text-area' )" class="editor-local"></div>
-                        <textarea id="servicos__form_text-area" name="html" hidden></textarea>
-                    </div>    
+                    <input type="text" name="nome" class="input-field">     
+                    <label for="" class="input-label">Descrição</label>
+                    <textarea class="input-field" rows="7" name="conteudo" placeholder="ex: Comodidades, wifi, tv etc..." ></textarea>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
@@ -701,36 +688,41 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="30"></th>
                             <th>Nome</th>
+                            <th width="30"></th>
                             <th width="30"></th>
                         </tr>
                     </thead>
-                    <tbody id="banner__table_body">
-                        
-                    </tbody>
+                    <tbody id="banner__table_body"></tbody>
                 </table>
             </section>
             <section id="banner-novo" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Adicionar um novo banner</h5>
                 </header>
-                <form action="javascript:void(0)" id="servicos_form__banner-novo" onsubmit="gravarDados('#servicos_form__banner-novo', 'banner-novo', '#banner')" method="POST">
+                <form action="javascript:void(0)" id="servicos_form__banner-novo" onsubmit="post_api_form( 'banner', 'servicos_form__banner-novo', 'dash.html#banner' )" method="POST">
+                    <input type="hidden" name="id" value="">
                     <label for="" class="input-label">Nome</label>
-                    <input id="banner-novo__form_nome" type="text" class="input-field" name="name" required>
-                    <label for="" class="input-label">link</label>
-                    <input id="banner-novo__form_link" type="url" class="input-field" name="link" required>
-                    <label for="" class="input-label">Texto</label>
-                    <textarea id="banner-novo__form_text" name="text" rows="3" class="input-field" required></textarea>                    
-                    <label for="" class="input-label">foto</label>
-                    <input id="banner-novo__form_photo" type="file" class="input-field" name="photo" required>
-                    <label for="" class="input-label">Status</label>
-                    <select id="banner-novo__form_status" name="status" class="input-field">
-                        <option value="1">Ativo</option>
-                        <option value="0">Inativo</option>
-                    </select>
+                    <input type="text" class="input-field" name="nome" required>
+                    <div class="grid-2 grid-gap">
+                        <div>                            
+                            <label for="" class="input-label">link</label>
+                            <input type="url" class="input-field" name="link" required>
+                            <label for="" class="input-label">Status</label>
+                            <select name="ativo" class="input-field"></select>
+                            <label for="" class="input-label">Texto</label>
+                            <textarea name="conteudo" rows="3" class="input-field" required></textarea>                    
+                        </div>
+                        <div>
+                            <label for="banner_foto" class="input-label">foto</label>
+                            <label for="banner_foto">
+                                <img src="./disc/img/default.jpg" id="previa_banner_foto" alt="foto" width="80%">
+                            </label>
+                        </div>
+                    </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
+                <input type="file" id="banner_foto" onchange="previwew_img( 'banner_foto', 'previa_banner_foto' )" hidden name="foto" required>
             </section>
             <section id="jogadores" class="gap box">
                 <header class="grid-2 gap-bottom">
@@ -995,6 +987,48 @@
                 <button class="btn gap-top">Cancelar Locação</button>
             </div>
         </div>
+
+        <template id="tr_usuario">
+            <tr>
+                <td>{{nome}}</td>
+                <td>{{telefone}}</td>
+                <td>{{ativo}}</td>
+                <td>
+                    <img onclick="to( '#{{prefix}}-novo' ); edit_usuario('{{id}}')" src="./disc/ico/edit.png" class="ico-table">
+                </td>
+                <td><img onclick="delete_usuario('{{id}}')" src="./disc/ico/trash.png" class="ico-table"></td>
+            </tr>
+        </template>
+        <template id="tr_error">
+            <tr>
+                <td></td>
+                <td>{{dominio}}</td>
+                <td>{{nome}}</td>
+                <td>{{telefone}}</td>
+                <td>{{description}}</td>
+                <td>{{tipo_error}}</td>
+            </tr>
+        </template>
+        <template id="tr_default">
+            <tr>
+                <td>{{nome}}</td>
+                <td>{{ativo}}</td>
+                <td>
+                    <img onclick="to( '{{prefix}}' ); edite_dominio('{{id}}')" src="./disc/ico/edit.png" class="ico-table">
+                </td>
+                <td><img onclick="delete_dominio( '{{id}}' )" src="./disc/ico/trash.png" class="ico-table"></td>
+            </tr>
+        </template>
+        <template id="tr_banner">
+            <tr>
+                <td>{{nome}}</td>
+                <td>
+                    <img onclick="" src="./disc/ico/edit.png" class="ico-table">
+                </td>
+                <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+            </tr>
+        </template>
+
         <script src="./disc/js/config.js"></script>
         <script src="./disc/js/functions.js"></script>
         <script src="./disc/js/interface.js"></script>

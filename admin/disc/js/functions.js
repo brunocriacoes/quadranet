@@ -77,14 +77,14 @@ function get_api( url, hof )
 function preencher( seletor, objeto )
 {
     let formulario = queryAll( `#${seletor} input, #${seletor} textarea, #${seletor} select, #${seletor} img` );
-    let lista_var = queryAll(`#${seletor} img`);
+    let lista_var = queryAll(`#${seletor} img:not([onclick])`);
     for (let index = 0; index < lista_var.length; index++) {
         lista_var[index].src = storage + '/' + objeto[lista_var[index].alt || ''] || '';
     }    
     let tmp_name      = '';
     let temp_element  = '';
     for( let i = 0; i < formulario.length; i++ ) {
-        tmp_name = formulario[i].name || formulario[i].id;
+        tmp_name = formulario[i].name || formulario[i].id || '';
         switch (formulario[i].type) {
             case 'select-one':
                 temp_element = query( `#${seletor} select[name='${tmp_name}'] option[value='${objeto[tmp_name]}']` );
@@ -96,6 +96,7 @@ function preencher( seletor, objeto )
                 formulario[i].innerHTML = objeto[tmp_name] || '';
             break;        
             case 'submit':                
+            case 'file':                
             break;        
             default:
                 formulario[i].value = objeto[tmp_name] || '';
