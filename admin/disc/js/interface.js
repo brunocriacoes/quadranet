@@ -2,18 +2,20 @@
 var _vio = {};
 
 var vio = {
-    set modalidade(cont) {
-        _vio.modalidade = cont;
-        query('#modalidade__table_title').innerHTML = cont
+    set modalidade( arr ) {
+        _vio.modalidade = arr;
+        query('#modalidade__table_title').innerHTML = arr
             .map(x => `
                 <tr>
-                    <td><img src="./disc/ico/trash.png" class="ico-table"></td>
-                    <td>${x.name}</td>
-                    <td onclick="to( '?id=${x.id}#modalidade-nova' )">
-                        <img src="./disc/ico/edit.png" class="ico-table">
+                    <td>${x.nome || ''}</td>
+                    <td onclick=" editar( 'modalidade', '${x.id}', 'modalidade-nova', 'dash.html#modalidade-nova' )">
+                    <img src="./disc/ico/edit.png" class="ico-table">
                     </td>
+                    <td><img src="./disc/ico/trash.png" class="ico-table" onclick="trash( 'modalidade', '${x.id}' )"></td>
                 </tr>
         ` ).join('');
+        draw_select( arr, 'modalidade' );
+        
     },
 
     set admin(cont) {
@@ -49,43 +51,22 @@ var vio = {
         }
     },
 
-    set modalidade_nova(cont) {
-        _vio.modalidade_nova = cont;
-        query('#modalidade__form_input_nome').innerHTML = cont.name;
-        query('#modalidade__form_input_cor').innerHTML = cont.color;
-    },
-
-    set quadra(cont) {
-        _vio.quadra = cont;
-        query('#quadra__table_body').innerHTML = cont
+    set quadra( arr ) {
+        _vio.quadra = arr;
+        query('#quadra__table_body').innerHTML = arr
             .map( x => `
-                <tr>
-                    <td><img src="./disc/ico/trash.png" class="ico-table"></td>
-                    <td>${x.name}</td>
-                    <td>${x.price_mounth}</td>
-                    <td>${x.price_day}</td>
-                    <td>
-                        <img src="./disc/ico/field.png" class="ico-table">
-                        <img onclick="to( '?id=${x.id}#quadra-nova' )" src="./disc/ico/edit.png" class="ico-table">
+                <tr>                    
+                    <td>${x.nome}</td>
+                    <td>R$ ${x.mensalidade}</td>
+                    <td>R$ ${x.diaria}</td>
+                    <td>                        
+                        <img onclick="editar( 'quadra', '${x.id}', 'quadra_nova__form', 'dash.html#quadra-nova' )" src="./disc/ico/edit.png" class="ico-table">
                     </td>
+                    <td><img src="./disc/ico/field.png" onclick="edita_quadra('${x.id}')" class="ico-table"></td>
+                    <td><img src="./disc/ico/trash.png" onclick="trash( 'quadra', '${x.id}'  )" class="ico-table"></td>
                 </tr>
             ` ).join( '' );
-    },
-
-    set quadra_nova(cont) {
-        _vio.quadra_nova = cont;
-        query('#quadra-nova__form_select-modalidade').innerHTML = cont.modalidade.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
-        query('#quadra-nova__form_nome').value = cont.name;
-        query('#quadra-nova__form_avulso').value = cont.price_day;
-        query('#quadra-nova__form_mensal').value = cont.price_mounth;
-        query('#quadra-nova__form_select-status').innerHTML = cont.status;
-        query('#quadra-nova__form_text-areas').innerHTML = cont.html;
-        query('#quadra-nova__form_1-grande').src = cont.img1_grande;
-        query('#quadra-nova__form_1').src = cont.img1;
-        query('#quadra-nova__form_2').src = cont.img2;
-        query('#quadra-nova__form_3').src = cont.img3;
-        query('#quadra-nova__form_4').src = cont.img4;
-        query('#quadra-nova__form_5').src = cont.img5;
+        vio.aside_quadra = 1;
     },
 
     set horario(cont) {
@@ -104,7 +85,6 @@ var vio = {
             ` ).join( '' );
     },
 
-
     set capitao(cont) {
         _vio.capitao = cont;
         query('#capitao__table_body').innerHTML = cont
@@ -119,8 +99,6 @@ var vio = {
                 </tr>
             ` ).join( '' );
     },
-
-
 
     set jogadores(cont) {
         _vio.capitao_novo = cont;
@@ -223,28 +201,59 @@ var vio = {
         query('#selecionar-dominio').innerHTML = cont.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
     },
 
-    set aside_quadra(cont) {
-        _vio.aside_quadra = cont;
-        query('#aside').innerHTML = cont
-            .map( x => `
-                <div id="aside_quadra" class="box gap gap-bottom text-center">
-                <svg class="quadrasvg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;margin: 20px;" xml:space="preserve">
-                    <g>
-                        <g>
-                            <path fill="#05f" d="M482,91.03H30c-16.542,0-30,13.458-30,30v269.94c0,16.542,13.458,30,30,30h452c16.542,0,30-13.458,30-30V121.03
-                                C512,104.488,498.542,91.03,482,91.03z M482.013,308.958h-45.191V203.042h45.184L482.013,308.958z M271,218.896
-                                c14.772,5.926,25.229,20.319,25.229,37.104c0,16.785-10.457,31.179-25.229,37.104V218.896z M30,203.042h45.178v105.916H30V203.042
-                                z M241,293.104c-14.772-5.926-25.229-20.319-25.229-37.104c0-16.785,10.457-31.179,25.229-37.104V293.104z M241,187.624
-                                c-31.539,6.869-55.229,34.91-55.229,68.376s23.69,61.507,55.229,68.376v66.594H30v-52.012h60.178c8.284,0,15-6.716,15-15V188.042
-                                c0-8.284-6.716-15-15-15H30V121.03h211V187.624z M482,390.97H271v-66.594c31.539-6.869,55.229-34.91,55.229-68.376
-                                s-23.69-61.507-55.229-68.376V121.03h211l0.004,52.012h-60.181c-8.284,0-15,6.716-15,15v135.916c0,8.284,6.716,15,15,15h60.193
-                                l0.003,52.011C482.019,390.969,482.013,390.97,482,390.97z"/>
-                        </g>
-                    </g>
-                </svg>
-                <h6>${x.name}</h6>
-                <smal class="gray-text">${x.modalidade}</small>
-            ` );
+    set aside_quadra( gatilho ) {
+
+        query('#aside').innerHTML = _vio.quadra.map( x => {
+            let modalidade = _vio.modalidade.find( z => z.id == x.modalidade  ) || {};
+            return `
+                <div id="aside_quadra" class="box gap gap-bottom text-center" onclick="edita_quadra( '${x.id}' )">
+                    <svg
+                        xmlns:dc="http://purl.org/dc/elements/1.1/"
+                        xmlns:cc="http://creativecommons.org/ns#"
+                        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                        xmlns:svg="http://www.w3.org/2000/svg"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                        viewBox="0 -52 512 407.99999"
+                        width="100%"
+                        version="1.1"
+                        sodipodi:docname="sports-and-competition.svg"
+                        inkscape:version="0.92.3 (2405546, 2018-03-11)">
+                    
+                    <defs
+                        id="defs8" />
+                    <sodipodi:namedview
+                        pagecolor="#ffffff"
+                        bordercolor="#666666"
+                        borderopacity="1"
+                        objecttolerance="10"
+                        gridtolerance="10"
+                        guidetolerance="10"
+                        inkscape:pageopacity="0"
+                        inkscape:pageshadow="2"
+                        inkscape:window-width="1366"
+                        inkscape:window-height="705"
+                        id="namedview6"
+                        showgrid="false"
+                        units="px"
+                        inkscape:zoom="0.34322678"
+                        inkscape:cx="637.41198"
+                        inkscape:cy="523.14847"
+                        inkscape:window-x="-8"
+                        inkscape:window-y="-8"
+                        inkscape:window-maximized="1"
+                        inkscape:current-layer="svg4" />
+                    <path fill="${modalidade.cor}"
+                        d="m 492,149 c 11.04687,0 20,-8.95313 20,-20 V 27.999992 c 0,-44.113279 -35.88672,-79.999999 -80,-79.999999 H 80.000001 C 35.88672,-52.000007 7.7744225e-7,-16.113287 7.7744225e-7,27.999992 V 276 C 7.7744225e-7,320.11328 35.88672,356 80.000001,356 H 432 c 44.11328,0 80,-35.88672 80,-80 v -48 c 0,-11.04688 -8.95313,-20 -20,-20 h -40 c -11.02734,0 -20,-8.97266 -20,-20 v -72 c 0,-11.02734 8.97266,-20.000004 20,-20.000004 h 20 V 129 c 0,11.04687 8.95312,20 20,20 z M 236,206.44531 C 213.84375,198.27734 198,176.95703 198,152 c 0,-24.95703 15.84375,-46.27734 38,-54.445314 z M 276,97.554686 c 22.15625,8.167974 38,29.488284 38,54.445314 0,24.95703 -15.84375,46.27734 -38,54.44531 z M 40.000001,95.999996 h 20 c 11.027344,0 20,8.972664 20,20.000004 v 72 c 0,11.02734 -8.972656,20 -20,20 h -20 z m 0,180.000004 v -28 h 20 C 93.085939,248 120,221.08594 120,188 V 116 C 120,82.914052 93.085939,55.999992 60.000001,55.999992 h -20 v -28 c 0,-22.054688 17.945312,-39.999999 40,-39.999999 H 236 V 56.054682 C 191.51953,65.316402 158,104.81641 158,152 c 0,47.18359 33.51953,86.6875 78,95.94531 V 316 H 80.000001 c -22.054688,0 -40,-17.94531 -40,-40 z M 452,55.999992 c -33.08594,0 -60,26.91406 -60,60.000008 v 72 c 0,33.08594 26.91406,60 60,60 h 20 v 28 c 0,22.05469 -17.94531,40 -40,40 H 276 V 247.94531 C 320.48047,238.68359 354,199.18359 354,152 354,104.81641 320.48047,65.312492 276,56.054682 v -68.054689 h 156 c 22.05469,0 40,17.945311 40,39.999999 v 28 z m 0,0"
+                        id="path2"
+                        inkscape:connector-curvature="0" />
+                    </svg>
+                    <h6>${x.nome || ''}</h6>
+                    <small class="gray-text">${modalidade.nome|| ''}</small>
+                </div>
+            `;
+        } );
     },
 
     set agenda(cont) {

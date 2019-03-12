@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5, h6 {
 .ico-theme      { background-image: url( '../ico/theme.png' ); }
 .ico-sistema    { background-image: url( '../ico/website.png' ); }
 .ico-user       { background-image: url( '../ico/user.png' ); }
-.ico-plus       { background-image: url( '../ico/plus.png' ); }
+.ico-plus       { background-image: url( '../ico/plus.png' ); background-size: 17px; background-position: center center; }
 .ico-plus:hover { background-color: #0000ff; }
 .ico-close      { background-image: url( '../ico/x.png' ); }
 .ico-pass       { background-image: url( '../ico/key.png' ); }
@@ -175,6 +175,12 @@ nav input#menu_user:checked ~ .menu_user {
 #nav { grid-area: nav; }
 #main { grid-area: main; }
 #aside { grid-area: aside; }
+#aside h6 {
+    font-size: 18px;
+}
+#aside small {
+    font-size: 11px;
+ }
 body {
     display: grid;
     grid-template-areas: "header header header" "nav nav nav" "aside main main";

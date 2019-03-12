@@ -17,6 +17,7 @@ const request = window.location.search.replace('?','').split('&')
     }
     return acc;
 }, {} );
+
 var options = 
 {
     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
@@ -26,5 +27,8 @@ var options =
     cache: 'default',
     body: null
 };
-var files = {};
-var day   = '';
+
+var day      = '';
+var files    = {};
+var cart     = [];
+var edit     = {};

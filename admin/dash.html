@@ -63,7 +63,6 @@
 
                 <div class="box gap gap-bottom text-center grid-1">
                     <a href="#quadra-nova" class="ico ico-plus center theme circle"></a>
-                    <small class="gray-text">Adicionar Quadra</small>
                 </div>
             </div>
         </aside>
@@ -408,7 +407,7 @@
                                     <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
                                     <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
                                 </div>
-                                <div contenteditable="true" id="editor-content-quem-somos__form_text-area" onkeyup="duplicar( 'quem-somos__form_text-area' )" class="editor-local"></div>
+                                <div contenteditable="true" class="editor-local"></div>
                             </div>     
                         </div>                        
                         <div>
@@ -465,31 +464,36 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="30"></th>
                             <th>Nome</th>
+                            <th width="30"></th>
                             <th width="30"></th>
                         </tr>
                     </thead>
-                    <tbody id="modalidade__table_title">
-                        
-                    </tbody>
+                    <tbody id="modalidade__table_title"></tbody>
                 </table>
             </section>
             <section id="modalidade-nova" class="gap box">
                  <header class="gap-bottom"> 
-                    <h5>Adicionar nova modalidade</h5>
+                    <h5>Modalidade</h5>
                 </header>
-                <form action="javascript:void(0)" id="modalidade_novo_form" onsubmit="gravarDados('#modalidade_novo_form', 'modalidade-nova', '#modalidade')" method="POST">
-                    <label for="" class="input-label">Nome</label>
-                    <input id="modalidade__form_input_nome" type="text" name="name" class="input-field">
-                    <label for="" class="input-label">Cor</label>
-                    <input id="modalidade__form_input_cor" type="color" name="color" class="input-field">
+                <form action="javascript:void(0)" id="modalidade_novo_form" onsubmit="post_api_form( 'modalidade', 'modalidade_novo_form', 'dash.html#modalidade' )" method="POST">
+                    <input type="hidden" name="id">
+                    <div class="grid-2 grid-gap">
+                        <div>
+                            <label for="" class="input-label">Nome *</label>
+                            <input type="text" name="nome" class="input-field" required>
+                        </div>
+                        <div>
+                            <label for="" class="input-label">Cor</label>
+                            <input type="color" name="cor" value="#000000" class="input-field">
+                        </div>
+                    </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
             <section id="quadra" class="gap box">
                  <header class="gap-bottom grid-2"> 
-                    <h5>Lista de quadras</h5>
+                    <h5>Quadras</h5>
                     <div class="text-right">
                         <a href="#quadra-nova" class="ico ico-plus theme circle"></a>
                     </div>
@@ -497,39 +501,35 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="30"></th>
                             <th>Nome</th>
-                            <th width="150">Valor mensalidade</th>
-                            <th width="150">Valor diária</th>
-                            <th width="100"></th>
+                            <th width="100">Mensalidade</th>
+                            <th width="100">Diária</th>
+                            <th width="30"></th>
+                            <th width="30"></th>
+                            <th width="30"></th>
                         </tr>
                     </thead>
-                    <tbody id="quadra__table_body">
-                        
-                    </tbody>
+                    <tbody id="quadra__table_body"></tbody>
                 </table>
             </section>
+
             <section id="quadra-nova" class="gap box">
                  <header class="gap-bottom"> 
-                    <h5>Adicionar nova quadra</h5>
+                    <h5>Quadra</h5>
                 </header>
                 <div class="grid-2 grid-gap">
-                    <form action="javascript:void(0)" id="quadra_nova__form" onsubmit="gravarDados('#quadra_nova__form', 'quadra-novo', '#quadra')" method="POST">
-                        <label for="" class="input-label">Modalidade</label>
-                        <select id="quadra-nova__form_select-modalidade" name="modalidade" class="input-field">
-                            <option value="1">Escolha Modalidade</option>
-                        </select>
-                        <label for="" class="input-label">Nome</label>
-                        <input id="quadra-nova__form_nome"  type="text" class="input-field" name="name" required>
-                        <label for="" class="input-label">Valor diária</label>
-                        <input id="quadra-nova__form_avulso"  type="text" class="input-field" name="price_day" required>
-                        <label for="" class="input-label">Valor mensalidade</label>
-                        <input id="quadra-nova__form_mensal"  type="text" class="input-field" name="price_month" required>
-                        <label for="" class="input-label">Status</label>
-                        <select id="quadra-nova__form_select-status" name="status" class="input-field">
-                            <option value="1">Ativo</option>
-                            <option value="0">Inativo</option>
-                        </select>
+                    <form action="javascript:void(0)" id="quadra_nova__form" onsubmit="post_api_form( 'quadra', 'quadra_nova__form', 'dash.html#quadra')" method="POST">
+                        <input type="hidden" name="id">
+                        <label for="" class="input-label">Modalidade *</label>
+                        <select name="modalidade" class="input-field"></select>
+                        <label for="" class="input-label">Nome *</label>
+                        <input type="text" class="input-field" name="nome" required>
+                        <label for="" class="input-label">Valor diária *</label>
+                        <input type="text" class="input-field" name="diaria" placeholder="0,00" required>
+                        <label for="" class="input-label">Valor mensalidade *</label>
+                        <input type="text" class="input-field" name="mensalidade"  placeholder="0,00" required>
+                        <label for="" class="input-label">Publicado</label>
+                        <select name="ativo" class="input-field"></select>
                         <div class="editor-box gap-bottom">
                             <div class="editor-nav">
                                 <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
@@ -541,40 +541,45 @@
                                 <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
                                 <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
                             </div>
-                            <div contenteditable="true" id="editor-content-quadra-nova__form_text-area" onkeyup="duplicar( 'quadra-nova__form_text-area' )" class="editor-local"></div>
+                            <div contenteditable="true" class="editor-local"></div>
                             <input id="quadra__foto_1" type="file" onchange="getFile( '#quadra__foto_1', '#quadra-nova__form_1-grande', '#quadra-nova__form_1' )" hidden>
                             <input id="quadra__foto_2" type="file" onchange="getFile( '#quadra__foto_2', '#quadra-nova__form_2' )" hidden>
                             <input id="quadra__foto_3" type="file" onchange="getFile( '#quadra__foto_3', '#quadra-nova__form_3' )" hidden>
                             <input id="quadra__foto_4" type="file" onchange="getFile( '#quadra__foto_4', '#quadra-nova__form_4' )" hidden>
                             <input id="quadra__foto_5" type="file" onchange="getFile( '#quadra__foto_5', '#quadra-nova__form_5' )" hidden>
                         </div>
-                        <textarea id="quadra-nova__form_text-area" name="html" hidden></textarea>
                         <input type="submit" value="salvar" class="btn btn-sucess">
                     </form>
                     <div>
-                        <label for="quadra__foto_1">
-                            <img id="quadra-nova__form_1-grande" src="./disc/img/default.jpg" class="responsive img-galery">
+                        <label for="quadra_foto_1">
+                            <img alt="foto_1" id="previa_quadra_foto_1A" src="./disc/img/default.jpg" class="responsive img-galery">
                         </label>
                         <div class="grid-5">
-                            <label for="quadra__foto_1">
-                                <img id="quadra-nova__form_1" src="./disc/img/default.jpg" class="responsive img-galery">
+                            <label for="quadra_foto_1">
+                                <img alt="foto_1" id="previa_quadra_foto_1" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="quadra__foto_2">
-                                <img id="quadra-nova__form_2" src="./disc/img/default.jpg" class="responsive img-galery">
+                            <label for="quadra_foto_2">
+                                <img alt="foto_2" id="previa_quadra_foto_2" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="quadra__foto_3">
-                                <img id="quadra-nova__form_3" src="./disc/img/default.jpg" class="responsive img-galery">
+                            <label for="quadra_foto_3">
+                                <img alt="foto_3" id="previa_quadra_foto_3" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="quadra__foto_4">
-                                <img id="quadra-nova__form4" src="./disc/img/default.jpg" class="responsive img-galery">
+                            <label for="quadra_foto_4">
+                                <img alt="foto_4" id="previa_quadra_foto_4" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="quadra__foto_5">
-                                <img id="quadra-nova__form_5" src="./disc/img/default.jpg" class="responsive img-galery">
+                            <label for="quadra_foto_5">
+                                <img alt="foto_5" id="previa_quadra_foto_5" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
                         </div>
+                        <input hidden type="file" id="quadra_foto_1" nome="foto_1" onchange="previwew_img( 'quadra_foto_1', 'previa_quadra_foto_1', 'previa_quadra_foto_1A' )">
+                        <input hidden type="file" id="quadra_foto_2" nome="foto_2" onchange="previwew_img( 'quadra_foto_2', 'previa_quadra_foto_2' )">
+                        <input hidden type="file" id="quadra_foto_3" nome="foto_3" onchange="previwew_img( 'quadra_foto_3', 'previa_quadra_foto_3' )">
+                        <input hidden type="file" id="quadra_foto_4" nome="foto_4" onchange="previwew_img( 'quadra_foto_4', 'previa_quadra_foto_4' )">
+                        <input hidden type="file" id="quadra_foto_5" nome="foto_5" onchange="previwew_img( 'quadra_foto_5', 'previa_quadra_foto_5' )">
                     </div>
                 </div>
             </section>
+
             <section id="horario" class="gap box">
                  <header class="gap-bottom grid-2"> 
                     <h5>Lista de Horários</h5>
@@ -1029,6 +1034,7 @@
             </tr>
         </template>
 
+        <script src="./disc/js/data.js"></script>
         <script src="./disc/js/config.js"></script>
         <script src="./disc/js/functions.js"></script>
         <script src="./disc/js/interface.js"></script>

@@ -32,27 +32,6 @@ function obj_to_url( obj )
     return encodeURI( url );
 }
 
-async function post_api_form( url, id_formulario, redirect = null, is_clear = 0 )
-{
-    let formulario = form_data( id_formulario );
-    let fotos      = await upload();
-    post_api( url,{ ...formulario, ...fotos }, x => {
-        if (redirect != null) {
-            files      = {};
-            vio[url]   = vio[url] || [];
-            _vio[url]  = _vio[url] || [];
-            vio[url]   = _vio[url].filter( p => p.id != x.id );
-            vio[url]   = [...[x], ..._vio[url] || [] ] ;
-            if( is_clear == 0 ) {
-                query( `#${id_formulario}` ).reset();
-            }
-            alerta( 'Salvo com sucesso' );
-            to( `${admin}/${redirect}` );
-        }
-    } );
-    return true;
-}
-
 async function post_api( url, obj, hof )
 {
     options.body   = obj_to_url( obj );
@@ -74,17 +53,98 @@ function get_api( url, hof )
     return true;
 }
 
+async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
+{
+    let formulario    = form_data( id_formulario );
+    let send          = await sendImage();
+    formulario        = { ... formulario, ... send };
+    vio.aside_quadra  = 1;
+    post_api( url, formulario, x => {
+        files     = {};
+        cart      = [];
+        edit      = {};
+        let eco =  vio.ecosistema || [];
+        eco.forEach( z => {
+            let select =  `.eco-option-${z.id||''}`;
+            if( query( select ) ) {
+                query( select ).classList.remove(`nao-mostra`);
+                query( select ).classList.add(`mostra`);
+                query( `.eco-install-${z.id}` ).classList.add('nao-mostra');
+            }        
+        } );
+        if ( redirect != null ) {
+            if( reset == 0 ) {
+                query( `#${id_formulario}` ).reset();
+            }
+           
+            _vio[url] = _vio[url] || [];
+            vio[url]  = _vio[url].filter( y => x.id != y.id );
+            vio[url]  = [ ... [x], ... _vio[url] ];
+            to( `${admin}/${redirect}` );
+            alerta( 'Salvo com Sucesso!' );
+        }      
+
+    } );
+    return true;
+}
+
+async function sendImage() {
+    var obj = {};
+    let arqui = Object.keys(files);
+    if ( arqui.length !== 0 ) {
+        for (let index = 0; index < arqui.length; index++) {
+            options.body = encodeURI(`file=${files[arqui[index]]}`);
+            var foto = await fetch( storage, options )
+            .then( j => j.json() )
+            .then( x => {
+                obj[arqui[index]] = x.name;
+            } );
+        }
+    }
+    return obj;
+}
+
+const editar = ( url, id, formulario, redirect = null ) => {
+    let data        = vio[url] || [];
+    let objeto      = data.find( x => id == x.id ) || {};
+    objeto.id       = id;
+    edit            = objeto;    
+    objeto.update   = 1;
+    objeto.pass     = '';
+    objeto.password = '';
+    if( redirect != null ) {
+        to( `${admin}/${redirect}` );
+    }
+    preencher( formulario, objeto );
+};
+
+function edita_quadra( id ) {
+    to(`${admin}/dash.html#agenda`);
+}
+
+const trash = ( url, id  ) => {
+    post_api( url, { 'id': id, status: 0 }, x => {
+        vio[url] = _vio[url].filter( x => id != x.id );
+    } )
+};
+
 function preencher( seletor, objeto )
 {
     let formulario = queryAll( `#${seletor} input, #${seletor} textarea, #${seletor} select, #${seletor} img` );
-    let lista_var = queryAll(`#${seletor} img:not([onclick])`);
+    let lista_var = queryAll(`#${seletor} img:not([src*="editor"])`);
     for (let index = 0; index < lista_var.length; index++) {
         lista_var[index].src = storage + '/' + objeto[lista_var[index].alt || ''] || '';
+    }
+    let html = objeto.html || '';
+    if( html.length > 0 ) {
+        if(query( `#${seletor} .editor-box` )) {
+            query( `#${seletor} .editor-box` ).innerHTML = objeto.html || '';
+        }
     }    
     let tmp_name      = '';
     let temp_element  = '';
     for( let i = 0; i < formulario.length; i++ ) {
-        tmp_name = formulario[i].name || formulario[i].id || '';
+        tmp_name = formulario[i].name || formulario[i].id;
         switch (formulario[i].type) {
             case 'select-one':
                 temp_element = query( `#${seletor} select[name='${tmp_name}'] option[value='${objeto[tmp_name]}']` );
@@ -95,8 +155,8 @@ function preencher( seletor, objeto )
             case 'textarea':                
                 formulario[i].innerHTML = objeto[tmp_name] || '';
             break;        
+            break;        
             case 'submit':                
-            case 'file':                
             break;        
             default:
                 formulario[i].value = objeto[tmp_name] || '';
@@ -170,7 +230,7 @@ function recuperar_senha()
     } );
 }
 
-function previwew_img( ID, ID_PREVIEW )
+function previwew_img( ID, ID_PREVIEW, ID_PREVIEW_2 = null )
 {
     let input     = query( `#${ID}` );
     let nome      = input.name || 'default';
@@ -182,6 +242,9 @@ function previwew_img( ID, ID_PREVIEW )
             let img            = e.srcElement.result;
             files[nome]        = window.btoa(img);
             preview.src        = img;
+            if( ID_PREVIEW_2 != null ) {
+                query(`#${ID_PREVIEW_2}`).src = img;
+            }
         };           
         reader.readAsDataURL( input.files[0] );
     }        
