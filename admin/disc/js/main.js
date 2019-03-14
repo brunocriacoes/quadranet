@@ -5,7 +5,6 @@ window.onpopstate = function() {
     // page   = window.location.hash.replace('#', '');
 }
 
-day = hoje();
 
 fetch( `${app}` )
 .then( j => j.json() )
@@ -16,6 +15,8 @@ fetch( `${app}` )
     } );
     x.pagina = x.pagina || [];
     x.info   = x.info || [];
+    quadra_sisten = x.quadra[0].id;
+    edita_quadra( quadra_sisten )
     preencher( 'visual__form__info', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__social', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__contato', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
@@ -29,6 +30,7 @@ draw_select( tipo_error, 'tipo_error' );
 draw_select( sim_nao, 'ativo' );
 draw_select( is_admin, 'admin' );
 draw_select( estado, 'estado' );
+draw_select( status_pagamento, 'status_pagamento' );
 
 
 fetch( `${app}/auth/?profile=${window.localStorage.token_painel||''}` )
@@ -58,3 +60,17 @@ fetch( `${app}/auth` )
 .then( x => {
     vio.usuario = x;
 } );
+
+
+day = hoje().data_sisten;
+query('#set-date').value = day;
+
+setInterval( x => {
+    let atual = query('#agenda_contador span');
+    if ( +atual.innerHTML > 1 ) {
+        atual.innerHTML = +atual.innerHTML - 1;
+    } else {
+        atual.innerHTML = 0;
+    }
+    edita_quadra( quadra_sisten );
+},100000 );

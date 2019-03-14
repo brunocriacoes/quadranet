@@ -20,9 +20,8 @@
     if( ! empty( $_REQUEST['status'] ) ):
         $_REQUEST['status'] = ( $_REQUEST['status'] == '1' ) ? true : false;
     endif;
-    if( ! empty( $_REQUEST['data'] ) ):
-        $_REQUEST['data'] = Date('d/m/Y');
-    endif;
+
+    $_REQUEST['data'] = Date('d/m/Y');
 
     define( 'dominio', str_replace( 'www.','', $_SERVER['SERVER_NAME'] ) ) ;
     define( 'http'   , $_SERVER['REQUEST_SCHEME'] );

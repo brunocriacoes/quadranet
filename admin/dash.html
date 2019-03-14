@@ -32,9 +32,8 @@
             <div class="menu_quadra">
                 <a href="#modalidade" class="link_menu">Modalidade</a>
                 <a href="#quadra" class="link_menu">Quadra</a>
-                <a href="#horario" class="link_menu">Horário</a>
-                <a href="#capitao" class="link_menu">Capitão</a>
-                <a href="#jogadores" class="link_menu">Jogadores</a>
+                <a href="#contratantes" class="link_menu">Contratantes</a>
+                <a href="#lista-de-espera" class="link_menu">lista de espera</a>
                 <a href="#historico" class="link_menu">Histórico de pagamento</a>
             </div>
             <div class="menu_theme">
@@ -67,6 +66,7 @@
             </div>
         </aside>
         <main id="main" class="gap">
+
             <section id="perfil" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Meu perfil</h5>
@@ -83,6 +83,7 @@
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
+
             <section id="mudar-senha" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Mudar minha senha</h5>
@@ -98,6 +99,7 @@
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
+
             <section id="relar-problema" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Relatar problema ou dica</h5>
@@ -110,7 +112,8 @@
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
-            <section id="detalhe-locacao" class="gap box">
+
+            <section id="os" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Detalhes de Locação</h5>
                 </header>
@@ -163,9 +166,10 @@
                     </tbody>
                 </table>
             </section>
+
             <section id="dominio" class="gap box">
                 <header class="gap-bottom grid-2"> 
-                    <h5>Lista de domínio</h5>
+                    <h5>Domínio</h5>
                     <div class="text-right">
                         <a href="#dominio-novo" class="ico ico-plus theme circle"></a>
                     </div>
@@ -173,15 +177,16 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="30"></th>
                             <th>Nome</th>
                             <th width="50">Ativo</th>
+                            <th width="30"></th>
                             <th width="30"></th>
                         </tr>
                     </thead>
                     <tbody id="dominio__table_body"></tbody>
                 </table>
             </section>
+
             <section id="dominio-novo" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Adicionar novo domínio</h5>
@@ -196,6 +201,7 @@
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
+
             <section id="usuario" class="gap box">
                  <header class="gap-bottom grid-2"> 
                     <h5>Lista de usuário</h5>
@@ -218,6 +224,7 @@
                     </tbody>
                 </table>
             </section>
+
             <section id="usuario-novo" class="gap box">
                  <header> 
                     <h5>Adicionar novo usuário</h5>
@@ -241,6 +248,7 @@
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
+
             <section id="registro-problemas" class="gap box">
                  <header> 
                     <h5>Lista de Relatos de problemas ou de dicas</h5>
@@ -262,12 +270,13 @@
                     </tbody>
                 </table>
             </section>
+
             <section id="visual" class="gap box">
-                <div class="text-center gap-bottom">
-                    <label for="m-site" class="link_menu">Site</label>
-                    <label for="m-rede-social" class="link_menu">Rede Social</label>
-                    <label for="m-info" class="link_menu">Infomações de contato</label>
-                    <label for="m-pagseguro" class="link_menu">Pagseguro</label>
+                <div class="text-center gap-bottom link_menu-tab-box">
+                    <label for="m-site" class="link_menu-tab">Site</label>
+                    <label for="m-rede-social" class="link_menu-tab">Rede Social</label>
+                    <label for="m-info" class="link_menu-tab">Infomações de contato</label>
+                    <label for="m-pagseguro" class="link_menu-tab">Pagseguro</label>
                 </div>
                 <input type="radio" name="menu-visual" id="m-site" checked hidden>
                 <input type="radio" name="menu-visual" id="m-rede-social" hidden>
@@ -304,7 +313,7 @@
                     <input type="file" hidden name="ico"  onchange="previwew_img( 'info_ico', 'previa_info_ico' )" id="info_ico">  
                 </div>
                 <div class="m-inicial m-rede-social">
-                    <form action="javascript:void(0)" id="visual__form__social" onsubmit="post_api_form( 'site', '', 'dash.html#visual', 1 )" method="POST">
+                    <form action="javascript:void(0)" id="visual__form__social" onsubmit="post_api_form( 'site', 'visual__form__social', 'dash.html#visual', 1 )" method="POST">
                         <input type="hidden" name="id" value="info">
                         <label for="" class="input-label">Facebook</label>
                         <input type="url" name="facebook" class="input-field" placeholder="http://">
@@ -318,7 +327,7 @@
                     </form>
                 </div>
                 <div class="m-inicial m-info">
-                    <form action="javascript:void(0)" id="visual__form__contato" onsubmit="post_api_form( 'site', '', 'dash.html#visual', 1 )" method="POST">
+                    <form action="javascript:void(0)" id="visual__form__contato" onsubmit="post_api_form( 'site', 'visual__form__contato', 'dash.html#visual', 1 )" method="POST">
                         <input type="hidden" name="id" value="info">
                         <div class="grid-3 grid-gap">
                             <div>
@@ -341,23 +350,23 @@
                             </div>
                             <div>
                                 <label for="" class="input-label">Rua</label>
-                                <input type="text" name="rua" class="input-field">
+                                <input type="text" name="rua" class="input-field" disabled >
                             </div>
                             <div>
                                 <label for="" class="input-label">Número</label>
-                                <input type="text" name="numero" class="input-field" placeholder="0">
+                                <input type="text" name="numero" class="input-field" placeholder="0" >
                             </div>
                             <div>
                                 <label for="" class="input-label">Bairro</label>
-                                <input type="text" name="bairro" class="input-field">
+                                <input type="text" name="bairro" class="input-field" disabled>
                             </div>
                             <div>
                                 <label for="" class="input-label">Cidade</label>
-                                <input type="text" name="cidade" class="input-field">
+                                <input type="text" name="cidade" class="input-field" disabled>
                             </div>
                             <div>                            
                                 <label for="" class="input-label">Estado</label>
-                                <select name="estado" class="input-field"></select>
+                                <select name="estado" class="input-field" disabled></select>
                             </div>
                         </div>
                         <div>
@@ -370,7 +379,7 @@
                     </form>
                 </div>
                 <div class="m-inicial m-pagseguro">
-                    <form action="javascript:void(0)" id="visual__form__pag" onsubmit="post_api_form( 'site', '', 'dash.html#visual', 1 )" method="POST">
+                    <form action="javascript:void(0)" id="visual__form__pag" onsubmit="post_api_form( 'site', 'visual__form__pag', 'dash.html#visual', 1 )" method="POST">
                         <input type="hidden" name="id" value="pagseguro">
                         <div class="grid-2 grid-gap">
                             <div>
@@ -386,6 +395,7 @@
                     </form>
                 </div>
             </section>
+
             <section id="quem-somos" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Página quem somos</h5>
@@ -441,6 +451,7 @@
                 <input id="foto_4" type="file" name="foto_4" onchange="previwew_img( 'foto_4', 'previa_foto_4' )" hidden>
                 <input id="foto_5" type="file" name="foto_5" onchange="previwew_img( 'foto_5', 'previa_foto_5' )" hidden>
             </section>
+
             <section id="servicos" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Página serviços</h5>
@@ -454,6 +465,7 @@
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
+
             <section id="modalidade" class="gap box">
                  <header class="gap-bottom grid-2"> 
                     <h5>Lista de modalidades</h5>
@@ -472,6 +484,7 @@
                     <tbody id="modalidade__table_title"></tbody>
                 </table>
             </section>
+
             <section id="modalidade-nova" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Modalidade</h5>
@@ -491,6 +504,7 @@
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
+
             <section id="quadra" class="gap box">
                  <header class="gap-bottom grid-2"> 
                     <h5>Quadras</h5>
@@ -517,120 +531,104 @@
                  <header class="gap-bottom"> 
                     <h5>Quadra</h5>
                 </header>
-                <div class="grid-2 grid-gap">
-                    <form action="javascript:void(0)" id="quadra_nova__form" onsubmit="post_api_form( 'quadra', 'quadra_nova__form', 'dash.html#quadra')" method="POST">
-                        <input type="hidden" name="id">
-                        <label for="" class="input-label">Modalidade *</label>
-                        <select name="modalidade" class="input-field"></select>
-                        <label for="" class="input-label">Nome *</label>
-                        <input type="text" class="input-field" name="nome" required>
-                        <label for="" class="input-label">Valor diária *</label>
-                        <input type="text" class="input-field" name="diaria" placeholder="0,00" required>
-                        <label for="" class="input-label">Valor mensalidade *</label>
-                        <input type="text" class="input-field" name="mensalidade"  placeholder="0,00" required>
-                        <label for="" class="input-label">Publicado</label>
-                        <select name="ativo" class="input-field"></select>
-                        <div class="editor-box gap-bottom">
-                            <div class="editor-nav">
-                                <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
-                                <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
-                                <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
-                                <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
-                                <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
-                                <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
-                                <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
-                                <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
+                <form action="javascript:void(0)" id="quadra_nova__form" onsubmit="post_api_form( 'quadra', 'quadra_nova__form', 'dash.html#quadra')" method="POST">
+                    <div class="grid-2 grid-gap">
+                        <div>
+                            <input type="hidden" name="id">
+                            <label for="" class="input-label">Modalidade *</label>
+                            <select name="modalidade" class="input-field"></select>
+                            <label for="" class="input-label">Nome *</label>
+                            <input type="text" class="input-field" name="nome" required>
+                            <label for="" class="input-label">Valor diária *</label>
+                            <input type="text" class="input-field" name="diaria" placeholder="0,00" required>
+                            <label for="" class="input-label">Valor mensalidade *</label>
+                            <input type="text" class="input-field" name="mensalidade"  placeholder="0,00" required>
+                            <label for="" class="input-label">Publicado</label>
+                            <select name="ativo" class="input-field"></select>
+                            <div class="editor-box gap-bottom">
+                                <div class="editor-nav">
+                                    <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
+                                    <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
+                                    <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
+                                    <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
+                                    <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
+                                    <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
+                                    <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
+                                    <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
+                                </div>
+                                <div contenteditable="true" class="editor-local"></div>
+                                <input id="quadra__foto_1" type="file" onchange="getFile( '#quadra__foto_1', '#quadra-nova__form_1-grande', '#quadra-nova__form_1' )" hidden>
+                                <input id="quadra__foto_2" type="file" onchange="getFile( '#quadra__foto_2', '#quadra-nova__form_2' )" hidden>
+                                <input id="quadra__foto_3" type="file" onchange="getFile( '#quadra__foto_3', '#quadra-nova__form_3' )" hidden>
+                                <input id="quadra__foto_4" type="file" onchange="getFile( '#quadra__foto_4', '#quadra-nova__form_4' )" hidden>
+                                <input id="quadra__foto_5" type="file" onchange="getFile( '#quadra__foto_5', '#quadra-nova__form_5' )" hidden>
                             </div>
-                            <div contenteditable="true" class="editor-local"></div>
-                            <input id="quadra__foto_1" type="file" onchange="getFile( '#quadra__foto_1', '#quadra-nova__form_1-grande', '#quadra-nova__form_1' )" hidden>
-                            <input id="quadra__foto_2" type="file" onchange="getFile( '#quadra__foto_2', '#quadra-nova__form_2' )" hidden>
-                            <input id="quadra__foto_3" type="file" onchange="getFile( '#quadra__foto_3', '#quadra-nova__form_3' )" hidden>
-                            <input id="quadra__foto_4" type="file" onchange="getFile( '#quadra__foto_4', '#quadra-nova__form_4' )" hidden>
-                            <input id="quadra__foto_5" type="file" onchange="getFile( '#quadra__foto_5', '#quadra-nova__form_5' )" hidden>
-                        </div>
-                        <input type="submit" value="salvar" class="btn btn-sucess">
-                    </form>
-                    <div>
-                        <label for="quadra_foto_1">
-                            <img alt="foto_1" id="previa_quadra_foto_1A" src="./disc/img/default.jpg" class="responsive img-galery">
-                        </label>
-                        <div class="grid-5">
+                            <input type="submit" value="salvar" class="btn btn-sucess">
+                        </div>                    
+                        <div>
                             <label for="quadra_foto_1">
-                                <img alt="foto_1" id="previa_quadra_foto_1" src="./disc/img/default.jpg" class="responsive img-galery">
+                                <img alt="foto_1" id="previa_quadra_foto_1A" src="./disc/img/default.jpg" class="responsive img-galery">
                             </label>
-                            <label for="quadra_foto_2">
-                                <img alt="foto_2" id="previa_quadra_foto_2" src="./disc/img/default.jpg" class="responsive img-galery">
-                            </label>
-                            <label for="quadra_foto_3">
-                                <img alt="foto_3" id="previa_quadra_foto_3" src="./disc/img/default.jpg" class="responsive img-galery">
-                            </label>
-                            <label for="quadra_foto_4">
-                                <img alt="foto_4" id="previa_quadra_foto_4" src="./disc/img/default.jpg" class="responsive img-galery">
-                            </label>
-                            <label for="quadra_foto_5">
-                                <img alt="foto_5" id="previa_quadra_foto_5" src="./disc/img/default.jpg" class="responsive img-galery">
-                            </label>
+                            <div class="grid-5">
+                                <label for="quadra_foto_1">
+                                    <img alt="foto_1" id="previa_quadra_foto_1" src="./disc/img/default.jpg" class="responsive img-galery">
+                                </label>
+                                <label for="quadra_foto_2">
+                                    <img alt="foto_2" id="previa_quadra_foto_2" src="./disc/img/default.jpg" class="responsive img-galery">
+                                </label>
+                                <label for="quadra_foto_3">
+                                    <img alt="foto_3" id="previa_quadra_foto_3" src="./disc/img/default.jpg" class="responsive img-galery">
+                                </label>
+                                <label for="quadra_foto_4">
+                                    <img alt="foto_4" id="previa_quadra_foto_4" src="./disc/img/default.jpg" class="responsive img-galery">
+                                </label>
+                                <label for="quadra_foto_5">
+                                    <img alt="foto_5" id="previa_quadra_foto_5" src="./disc/img/default.jpg" class="responsive img-galery">
+                                </label>
+                            </div>
+                            <input hidden type="file" id="quadra_foto_1" name="foto_1" onchange="previwew_img( 'quadra_foto_1', 'previa_quadra_foto_1', 'previa_quadra_foto_1A' )">
+                            <input hidden type="file" id="quadra_foto_2" name="foto_2" onchange="previwew_img( 'quadra_foto_2', 'previa_quadra_foto_2' )">
+                            <input hidden type="file" id="quadra_foto_3" name="foto_3" onchange="previwew_img( 'quadra_foto_3', 'previa_quadra_foto_3' )">
+                            <input hidden type="file" id="quadra_foto_4" name="foto_4" onchange="previwew_img( 'quadra_foto_4', 'previa_quadra_foto_4' )">
+                            <input hidden type="file" id="quadra_foto_5" name="foto_5" onchange="previwew_img( 'quadra_foto_5', 'previa_quadra_foto_5' )">
                         </div>
-                        <input hidden type="file" id="quadra_foto_1" nome="foto_1" onchange="previwew_img( 'quadra_foto_1', 'previa_quadra_foto_1', 'previa_quadra_foto_1A' )">
-                        <input hidden type="file" id="quadra_foto_2" nome="foto_2" onchange="previwew_img( 'quadra_foto_2', 'previa_quadra_foto_2' )">
-                        <input hidden type="file" id="quadra_foto_3" nome="foto_3" onchange="previwew_img( 'quadra_foto_3', 'previa_quadra_foto_3' )">
-                        <input hidden type="file" id="quadra_foto_4" nome="foto_4" onchange="previwew_img( 'quadra_foto_4', 'previa_quadra_foto_4' )">
-                        <input hidden type="file" id="quadra_foto_5" nome="foto_5" onchange="previwew_img( 'quadra_foto_5', 'previa_quadra_foto_5' )">
                     </div>
-                </div>
-            </section>
-
-            <section id="horario" class="gap box">
-                 <header class="gap-bottom grid-2"> 
-                    <h5>Lista de Horários</h5>
-                    <div class="text-right">
-                        <a href="#horario-novo" class="ico ico-plus theme circle"></a>
-                    </div>
-                </header>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th width="30"></th>
-                            <th>quadra</th>
-                            <th width="150">Horário inicial</th>
-                            <th width="150">Horário final</th>
-                            <th width="30"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="horario__table_body">
-                        
-                    </tbody>
-                </table>
-            </section>
-            <section id="horario-novo" class="gap box">
-                 <header class="gap-bottom"> 
-                    <h5>Adicionar um novo Horário</h5>
-                </header>
-                <form action="javascript:void(0)" id="horario_nova__form" onsubmit="gravarDados('#horario_nova__form', 'horario-novo', '#horario')" method="POST">
-                    <label for="" class="input-label">Quadra</label>
-                    <select id="horario-novo__form_quadra" name="quadra" class="input-field" required>
-                        <option value="">Escolha uma quadra</option>
-                    </select>
-                    <label for="" class="input-label">Inicio</label>
-                    <input id="horario-novo__form_inicial" type="time" class="input-field" name="init" required>
-                    <label for="" class="input-label">Final</label>
-                    <input id="horario-novo__form_final" type="time" class="input-field" name="end" required>
-                    <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
-            </section>
-            <section id="capitao" class="gap box">
+                <br>
+                <h2>Horario</h2>
+                <br>
+                <div id="horarios"></div>
+                <template id="tpl-horas">
+                    <div>
+                        <div>
+                            <label for="">Inicio</label>
+                            <input type="time" name="inicio" value="{{inicio}}" class="input-field" onblur="save_horario( this,'{{id}}')">
+                        </div>
+                        <div>
+                            <label for="">Final</label>
+                            <input type="time" name="final" value="{{final}}" class="input-field" onblur="save_horario( this,'{{id}}')">
+                        </div>
+                        <img src="./disc/ico/trash.png" onclick="remove_horario('{{id}}')">
+                    </div>
+                </template>
+                <div>
+                    <span class="btn-horario" onclick="add_horario()"> + Adicionar Horario</span>
+                </div>
+            </section>           
+       
+            <section id="contratantes" class="gap box">
                  <header class="gap-bottom grid-2"> 
-                    <h5>Lista de capitões</h5>
+                    <h5>Contratantes</h5>
                     <div class="text-right">
-                        <a href="#capitao-novo" class="ico ico-plus theme circle"></a>
+                        <a href="#contratante" class="ico ico-plus theme circle"></a>
                     </div>
                 </header>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="30"></th>
                             <th>Nome</th>
                             <th width="200">Telefone</th>
+                            <th width="30"></th>
                             <th width="30"></th>
                         </tr>
                     </thead>
@@ -639,26 +637,63 @@
                     </tbody>
                 </table>
             </section>
-            <section id="capitao-novo" class="gap box">
+
+            <section id="contratante" class="gap box">
                  <header class="gap-bottom"> 
-                    <h5>Adicionar um novo capitão</h5>
+                    <h5>Contratante</h5>
                 </header>
-                <form action="javascript:void(0)" id="capitao_nova__form" onsubmit="gravarDados('#capitao_nova__form', 'capitao-novo', '#capitao')" method="POST">
-                    <label for="" class="input-label">Nome</label>
-                    <input id="capitao-novo__form_nome" type="text" class="input-field" name="name" required>
-                    <label for="" class="input-label">Apelido</label>
-                    <input id="capitao-novo__form_apelido" type="text" class="input-field" name="nickname" required>
-                    <label for="" class="input-label">Telefone</label>
-                    <input id="capitao-novo__form_tel" type="text" class="input-field" name="telephone" required>
-                    <label for="" class="input-label">Email</label>
-                    <input id="capitao-novo__form_email" type="email" class="input-field" name="email" required>
-                    <label for="" class="input-label">Senha</label>
-                    <input id="capitao-novo__form_senha" type="password" class="input-field" name="pass" required>  
-                    <label for="" class="input-label">Status</label>
-                    <select id="capitao-novo__form_select-status" name="status" class="input-field">
-                        <option value="1">Ativo</option>
-                        <option value="0">Inativo</option>
-                    </select>
+                <form action="javascript:void(0)" id="form-contratante" onsubmit="post_api_form( '_user', 'form-contratante', 'dash.html#contratantes' )" method="POST">
+                    <input type="hidden" name="id">
+                    <div class="grid-2 grid-gap">
+                        <div>
+                            <label for="" class="input-label">Nome *</label>
+                            <input type="text" class="input-field" name="nome" required>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Sobrenome</label>
+                            <input type="text" class="input-field" name="sobrenome" required>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Telefone*</label>
+                            <input type="text" class="input-field" name="telefone" required>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Email *</label>
+                            <input type="email" class="input-field" name="email" required>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Senha</label>
+                            <input type="password" class="input-field" name="pass">  
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Ativo</label>
+                            <select name="ativo" class="input-field"></select>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">CEP</label>
+                            <input type="text" class="input-field" name="cep" required>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Rua</label>
+                            <input type="text" class="input-field" name="rua" disabled required>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">numero</label>
+                            <input type="text" class="input-field" name="numero" required>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Bairro</label>
+                            <input type="text" class="input-field" name="bairro" disabled required>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Cidade</label>
+                            <input type="text" class="input-field" name="cidade" disabled required>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Estado</label>
+                            <select name="estado" class="input-field" disabled></select>
+                        </div>
+                    </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
                 <h4 class="gap-top gap-bottom">Time</h4>
@@ -683,9 +718,10 @@
                     </tbody>
                 </table>               
             </section>
+
             <section id="banner" class="gap box">
                  <header class="gap-bottom grid-2"> 
-                    <h5>Lista de banners</h5>
+                    <h5>Banners</h5>
                     <div class="text-right">
                         <a href="#banner-novo" class="ico ico-plus theme circle"></a>
                     </div>
@@ -701,9 +737,10 @@
                     <tbody id="banner__table_body"></tbody>
                 </table>
             </section>
+
             <section id="banner-novo" class="gap box">
                  <header class="gap-bottom"> 
-                    <h5>Adicionar um novo banner</h5>
+                    <h5>Banner</h5>
                 </header>
                 <form action="javascript:void(0)" id="servicos_form__banner-novo" onsubmit="post_api_form( 'banner', 'servicos_form__banner-novo', 'dash.html#banner' )" method="POST">
                     <input type="hidden" name="id" value="">
@@ -729,10 +766,12 @@
                 </form>
                 <input type="file" id="banner_foto" onchange="previwew_img( 'banner_foto', 'previa_banner_foto' )" hidden name="foto" required>
             </section>
-            <section id="jogadores" class="gap box">
+
+            <section id="lista-de-espera" class="gap box">
                 <header class="grid-2 gap-bottom">
-                    <h5>Lista de jogadores</h5>
-                    <div class="text-right">
+                    <h5>Lista de espera</h5>
+                    <div class="text-right modalidade-lista">
+                        <select name="modalidade" class="input-field "></select>
                         <form action="javascript:void(0)" method="POST" onsubmit="" class="search">
                             <input type="search" name="s" required>
                             <label for="busca-jogadores">
@@ -756,36 +795,48 @@
                     </tbody>
                 </table>                
             </section>
+
             <section id="historico" class="gap box">
                 <header class="grid-2 gap-bottom">
                     <h5>Histórico de pagamentos</h5>
-                    <div class="text-right">
-                        <form action="javascript:void(0)" method="POST" onsubmit="" class="search">
-                            <input type="search" name="s" required>
-                            <label for="busca-capitão">
+                    <div class="text-right modalidade-lista">
+                        <select name="status_pagamento" id="busca-os-status" onblur="busca_os_contratante()"  class="input-field"></select>
+                        <form action="javascript:void(0)" method="POST" onsubmit="busca_os_contratante()" class="search">
+                            <input type="search" name="s" id="termo-os-status" placeholder="Nome Contratante" onkeyup="busca_os_contratante()" required>
+                            <label for="busca-capitao">
                                 <img src="./disc/ico/search.png">
                             </label>
-                            <input type="submit" id="busca-capitão" hidden>
+                            <input type="submit" id="busca-capitao" hidden>
                         </form>
                     </div>
                 </header>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="100">Código</th>
-                            <th width="150">Data</th>
                             <th>nome</th>
-                            <th width="200">Telefone</th>
-                            <th width="150">Valor total</th>
-                            <th width="200">Status</th>
+                            <th>Telefone</th>
+                            <th >Status compra</th>
+                            <th width="50">Valor</th>
                             <th width="50"></th>
                         </tr>
                     </thead>
-                    <tbody id="historico__table_body">
-                        
-                    </tbody>
+                    <tbody id="historico__table_body"></tbody>
+                    <template id="tpl_historico">
+                        <tr>
+                            <td>{{contratante_nome}}</td>
+                            <td>{{contratante_Id}}</td>
+                            <td>{{pagamento}}</td>
+                            <td>{{valor}}</td>
+                            <td>
+                                <a href="#os">
+                                    <img onclick="editar( 'reservas', '{{id}}', 'form-os', 'dash.html#os' )" src="./disc/ico/eye.png" class="ico-table">
+                                </a>
+                            </td>
+                        </tr>
+                    </template>
                 </table>                
             </section>
+
             <section id="agenda" class="gap box">
                 <header class="grid-agenda gap-bottom">
                     <h5  class="title"> 
@@ -796,11 +847,11 @@
                         <label for="set-date">
                             <img src="./disc/ico/calendar.png">
                         </label>
-                        <input id="agenda__data" type="date" id="set-date">
+                        <input class="input-field" type="date" id="set-date" onblur="mudar_data( this )">
                     </div>
                     <div class="grid-elements-agenda">
                         <img src="./disc/ico/time.png">
-                        <div id="agenda_contador">00:00 mm</div>
+                        <div id="agenda_contador"> <span>15</span> min</div>
                     </div>
                 </header>
                 <div class="calendario-grid agenda-header">
@@ -808,37 +859,39 @@
                         <span class="descktop">Horários</span>
                         <span class="mobile">HS</span>
                     </div>
-                    <div>
+                    <div class="hoje_0">
+                        <span class="descktop">Domingo</span>
+                        <span class="mobile">DO</span>
+                    </div>          
+                    <div class="hoje_1">
                         <span class="descktop">Segunda</span>
                         <span class="mobile">SE</span>
                     </div>
-                    <div>
+                    <div class="hoje_2">
                         <span class="descktop">Terça</span>
                         <span class="mobile">TE</span>
                     </div>
-                    <div>
+                    <div class="hoje_3">
                         <span class="descktop">Quarta</span>
                         <span class="mobile">QU</span>
                     </div>
-                    <div>
+                    <div class="hoje_4">
                         <span class="descktop">Quinta</span>
                         <span class="mobile">QI</span>
                     </div>
-                    <div>
+                    <div class="hoje_5">
                         <span class="descktop">Sexta</span>
                         <span class="mobile">SX</span>
                     </div>
-                    <div>
+                    <div class="hoje_6">
                         <span class="descktop">Sábado</span>
                         <span class="mobile">SA</span>
                     </div>
-                    <div>
-                        <span class="descktop">Domingo</span>
-                        <span class="mobile">DO</span>
-                    </div>
+                              
                 </div>
-                <div class="calendario-grid agenda-body">
-                    <div><i class="descktop">00:00 às 00:00</i> </div>
+                <div class="calendario-grid agenda-body"></div>
+                <template>
+                    <label><i class="descktop">00:00 às 00:00</i> </label>
                     <label for="pop-agenda-livre"> 
                         <span id="agenda__dia-semana" class="descktop">LIVRE +</span> 
                     </label>
@@ -853,8 +906,8 @@
                             <b>Nome</b>
                             <i>Avulso</i>
                         </span> 
-                    </label>
-                </div>
+                        </label>
+                </template>
                 <div class="legendas gap-top ">
                     <div></div>
                     <div></div>
@@ -863,6 +916,7 @@
                     <div class="text-right">ocupado</div>  <span class="legenda lg-ocupado"></span>
                 </div>
             </section>
+
         </main>
         <input type="checkbox" id="show-alerta" hidden>
         <div id="alerta">
@@ -877,7 +931,6 @@
                 <img src="./disc/ico/x.png">
             </label>
             <div>
-                <h4 class="gap-bottom">Criar locação</h4>
                 <input type="radio" name="escolha-cad" id="cad-change" checked hidden>
                 <input type="radio" name="escolha-cad" id="cad-search" hidden>
                 <input type="radio" name="escolha-cad" id="cad-finalizar" hidden>
@@ -889,21 +942,22 @@
                     </span>
                 </span>
                 <span class="cad cad-create">
-                    <form action="javascript:void(0)" onsubmit="" method="POST">
+                    <form action="javascript:click('cad-search')" id="pop-cadastrar-contratante" onsubmit="post_api_form( '_user', 'pop-cadastrar-contratante', 'dash.html#agenda')" method="POST">
                         <label for="" class="input-label">Nome</label>
-                        <input type="text" class="input-field" name="name" required>
+                        <input type="text" class="input-field" name="nome" required>
                         <label for="" class="input-label">Telefone</label>
-                        <input type="text" class="input-field" name="telephone" required>
+                        <input type="text" class="input-field" name="telefone" required>
                         <label for="" class="input-label">Email</label>
                         <input type="email" class="input-field" name="email" required>
                         <label for="" class="input-label">Senha</label>
-                        <input type="password" class="input-field" name="pass" required>  
-                        <label for="cad-finalizar" class="btn btn-sucess text-center">Cadastrar</label>
+                        <input type="password" class="input-field" name="pass" required>
+                        <input type="submit" class="btn btn-sucess text-center" value="Cadastrar">
+                        <label for="cad-change">Voltar</label>
                     </form>
                 </span>
                 <span class="cad cad-search" >
                     <form action="javascript:void(0)" method="POST" onsubmit="" class="search">
-                        <input type="search" name="s" required>
+                        <input type="search" onkeyup="busca_capiao(this)" required>
                         <label for="pop-busca-jogadores">
                             <img src="./disc/ico/search.png">
                         </label>
@@ -912,31 +966,26 @@
                     <table class="table" width="100%">
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th width="150">Telefone</th>
+                                <th></th>
+                                <th></th>
                                 <th width="50"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Bolinha</td>
-                                <td>+55 (00) 0 0000-0000 </td>
-                                <td>
-                                    <label for="cad-finalizar">
-                                        <img src="./disc/ico/check.png" class="ico-table">
-                                    </label>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table> 
+                        <tbody id="lista-de-capitao"></tbody>
+                    </table>
+                    <br>
+                    <label for="cad-change">Voltar</label>
                 </span>
-                <form action="javascript:void(0)" method="POST" class="cad cad-finalizar">
-                    <label for="" class="input-label">Buscar capitão</label>
-                    <input type="text" name="capitain" class="input-field" required>
+                <form action="javascript:click( 'pop-agenda-livre', 'cad-change' )" id="form-reservas" method="POST" onsubmit="post_api_form( 'reservas', 'form-reservas', 'dash.html#agenda')" class="cad cad-finalizar">
+                    <input type="hidden" name="contratante" id="contratante-id-locacao">
+                    <input type="text" name="contratante_nome" id="contratante-nome-locacao" class="input-field" disabled>
+                    <input type="hidden" name="contratante_Id" id="contratante-telefone-locacao">
+                    <input type="hidden" name="contratante_email" id="contratante-email-locacao">
+                    <input type="hidden" name="id" id="id_quadra_contratar">
                     <label for="" class="input-label">Tipo locação</label>
-                    <select name="" class="input-field">
-                        <option value="">Diária</option>
-                        <option value="">Mensal</option>
+                    <select name="tipo_contatacao" class="input-field">
+                        <option value="1">Diária</option>
+                        <option value="2">Mensal</option>
                     </select>
                     <input type="submit" value="criar reserva" class="btn btn-sucess">
                 </form>
@@ -992,7 +1041,6 @@
                 <button class="btn gap-top">Cancelar Locação</button>
             </div>
         </div>
-
         <template id="tr_usuario">
             <tr>
                 <td>{{nome}}</td>
@@ -1028,7 +1076,7 @@
             <tr>
                 <td>{{nome}}</td>
                 <td>
-                    <img onclick="" src="./disc/ico/edit.png" class="ico-table">
+                    <img onclick="editar( 'banner', '{{id}}', 'servicos_form__banner-novo', 'dash.html#banner-novo' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
                 <td><img src="./disc/ico/trash.png" class="ico-table"></td>
             </tr>
@@ -1039,7 +1087,6 @@
         <script src="./disc/js/functions.js"></script>
         <script src="./disc/js/interface.js"></script>
         <script src="./disc/js/main.js"></script>
-        <script src="./disc/js/agenda.js"></script>
         <script defer >
             privado();
         </script>

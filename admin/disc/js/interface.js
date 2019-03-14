@@ -69,35 +69,22 @@ var vio = {
         vio.aside_quadra = 1;
     },
 
-    set horario(cont) {
-        _vio.horario = cont;
-        query('#horario__table_body').innerHTML = cont
-            .map( x => `
-                <tr>
-                    <td><img src="./disc/ico/trash.png" class="ico-table"></td>
-                    <td>${x.name}</td>
-                    <td>${x.init}</td>
-                    <td>${x.end}</td>
-                    <td>
-                        <img onclick="to( '?id=${x.id}#horario-novo' )" src="./disc/ico/edit.png" class="ico-table">
-                    </td>
-                </tr>
-            ` ).join( '' );
+    set horario(arr) {
+        _vio.horario = arr;
     },
 
-    set capitao(cont) {
-        _vio.capitao = cont;
-        query('#capitao__table_body').innerHTML = cont
-            .map( x => `
-                <tr>
-                    <td><img src="./disc/ico/trash.png" class="ico-table"></td>
-                    <td>${x.name}</td>
-                    <td>${x.telephone}</td>
-                    <td>
-                        <img onclick="to( '?id=${x.id}#capitao-novo' )" src="./disc/ico/edit.png" class="ico-table">
-                    </td>
-                </tr>
-            ` ).join( '' );
+    set _user( arr ) {
+        _vio._user = arr;
+        query('#capitao__table_body').innerHTML = arr.map( x => `
+            <tr>                
+                <td>${x.nome}</td>
+                <td>${x.telefone}</td>
+                <td>
+                    <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html#contratante' )" src="./disc/ico/edit.png" class="ico-table">
+                </td>
+                <td><img onclick="trash( '_user', '${x.id}' )" src="./disc/ico/trash.png" class="ico-table"></td>
+            </tr>
+        ` ).join( '' );
     },
 
     set jogadores(cont) {
@@ -109,26 +96,6 @@ var vio = {
                     <td>${x.nickname}</td>
                     <td>${x.telephone}</td>
                     <td>${x.email}</td>
-                </tr>
-            ` ).join( '' );
-    },
-
-    set historico(cont) {
-        _vio.capitao_novo = cont;
-        query('#historico__table_body').innerHTML = cont
-            .map( x => `
-                <tr>
-                    <td>${x.code}</td>
-                    <td>${x.date}</td>
-                    <td>${x.name}</td>
-                    <td>${x.telephone}</td>
-                    <td>${x.price_total}</td>
-                    <td>${x.status}</td>
-                    <td>
-                    <a href="#detalhe-locacao">
-                        <img onclick="to( '?id=${x.id}#detalhe-locacao' )" src="./disc/ico/eye.png" class="ico-table">
-                    </a>
-                    </td>
                 </tr>
             ` ).join( '' );
     },
@@ -206,7 +173,7 @@ var vio = {
         query('#aside').innerHTML = _vio.quadra.map( x => {
             let modalidade = _vio.modalidade.find( z => z.id == x.modalidade  ) || {};
             return `
-                <div id="aside_quadra" class="box gap gap-bottom text-center" onclick="edita_quadra( '${x.id}' )">
+                <div id="aside_quadra" class="box gap-aside text-center" onclick="edita_quadra( '${x.id}' )">
                     <svg
                         xmlns:dc="http://purl.org/dc/elements/1.1/"
                         xmlns:cc="http://creativecommons.org/ns#"
@@ -216,7 +183,7 @@ var vio = {
                         xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
                         xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
                         viewBox="0 -52 512 407.99999"
-                        width="100%"
+                        width="60%"
                         version="1.1"
                         sodipodi:docname="sports-and-competition.svg"
                         inkscape:version="0.92.3 (2405546, 2018-03-11)">
@@ -270,6 +237,33 @@ var vio = {
         query('#mudar-senha_password').innerHTML = cont.pass;
         query('#mudar-senha_new-password').innerHTML = cont.password;
     },
+    set mostrar_horarios( catilho ) {
+        query('#horarios').innerHTML = tpl_array( horario, '#tpl-horas' );
+    },
+    set reservas( arr ) {
+        _vio.reservas = arr;
+        edita_quadra( quadra_sisten );
+        arr.forEach( x => {
+            if ( !x.status_compra ) {
+                x.status_compra = 0;
+            }
+            let tipo_pagamento = status_pagamento.find( y => y.id == x.status_compra  ) || {};
+            x.pagamento        = tipo_pagamento.nome || 'aguardando pagamento';
+            let id_quadra      = x.id.substr( 25, 34 );
+            let todas_quadra   = vio.quadra;
+            let qd             = todas_quadra.find( z => z.id == id_quadra );
+            if( x.tipo_contatacao == 1 ) {
+
+                x.valor            = qd.diaria || '0,00';
+            } else {
+                x.valor            = qd.mensalidade || '0,00';
+            }
+        } );
+        query('#historico__table_body').innerHTML = tpl_array( arr, '#tpl_historico' );
+    },
+
+    
+
 }
 
 Object.keys( vio ).forEach( index => {

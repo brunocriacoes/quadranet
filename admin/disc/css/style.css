@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+/* @import url('https://fonts.googleapis.com/css?family=Roboto:400,700'); */
 * { box-sizing: border-box; outline: none; }
 :root {
     --theme: #05f;
@@ -353,11 +353,12 @@ option {
     grid-template-columns: 1fr 40px;
     border: 1px solid #DDD;
     border-radius: 40px;
+    height: 40px;
 }
 .search input {
     border: none;
-    height: 40px;
-    line-height: 40px;
+    height: 35px;
+    line-height: 35px;
     padding: 0 12px;
     border-radius: 40px;
 }
@@ -412,14 +413,6 @@ option {
     line-height: 40px;
     height: 40px;
 }
-.grid-elements-agenda input {
-    display: block;
-    height: 40px;
-    font-family: var(--font);
-    border: 1px solid #DDD;
-    padding: 7px;
-    border-radius: 4px;
-}
 .title {
     display: flex;
     color: #111;
@@ -459,7 +452,8 @@ option {
 }
 .calendario-grid div.agenda-hoje {
     border: 1px solid var(--theme);
-    color: var(--theme);
+    background: var(--theme);
+    color: #FFF;
 }
 .calendario-grid label {
     display: grid;
@@ -637,13 +631,99 @@ option {
 .item-3{
 	animation-name: anim-3;
 }
+.btn-horario {
+    display: inline-block;
+    color: #FFF;
+    background: var(--theme);
+    padding: 7px 23px;
+    cursor: pointer;
+    filter: saturate(30%);
+    border-radius: 5px;
+
+}
+#horarios {
+    display: grid;
+    grid-gap: 30px;
+    padding: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    background: #DDD;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+#horarios > div {
+    display: grid;
+    grid-gap: 30px;
+    padding: 20px;
+    grid-template-columns: repeat(2, 1fr) 30px;
+    background: #EEE;
+    border-radius: 5px;
+    align-items: center;
+    box-shadow: 0 0 7px rgba(0, 0, 0, .1);
+}
+#horarios > div input {
+    margin-bottom: 0px;
+    background-color: #EEE;
+    border: 1px solid #EEE;
+    border-bottom: 2px solid #CCC;
+}
+#horarios > div input:focus {    
+    border-bottom: 2px solid var(--theme);
+}
+#horarios > div label {    
+   color: #777;
+   font-size: 13px;
+}
+#horarios > div img {
+    filter: opacity(.3);
+    cursor: pointer;
+    height: 20px;
+    margin-top: 25px;
+}
+#horarios > div img:hover {
+    filter: opacity(.7);
+}
 [type="color"] {
     width: 50px;
     height: 50px;
     padding: 0;
     border: 0;
 }
-
+.modalidade-lista {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+}
+.modalidade-lista input {
+    margin-bottom: 0;
+}
+.timer {
+    background-color: #FFF !important;
+    border: 1px solid #CCC !important;
+    color: #777 !important;
+}
+.cad-search form {
+    width: 100%;
+}
+.gap-aside {
+    padding: 12px;
+}
+.link_menu-tab-box {
+    border-bottom: 1px solid #DDD;
+}
+.link_menu-tab {
+    display: inline-block;
+    padding: 17px;
+    border: 1px solid #DDD;
+    border-bottom: none;
+    margin: 0 3px;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    color: #777;
+}
+.link_menu-tab:hover {
+    background-color: var(--theme);
+    color: #FFF;
+}
 @keyframes anim-1 {
 	0%, 8% { left: -20%; opacity: 0; }
     8%,25% { left: 25%; opacity: 1; }

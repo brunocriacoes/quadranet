@@ -27,8 +27,12 @@ var options =
     cache: 'default',
     body: null
 };
+ 
+var day           = '';
+var files         = {};
+var cart          = [];
+var edit          = {};
+var horario       = [];
+var agenda        = [];
+var quadra_sisten = '';
 
-var day      = '';
-var files    = {};
-var cart     = [];
-var edit     = {};

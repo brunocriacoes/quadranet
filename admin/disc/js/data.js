@@ -4,18 +4,22 @@ var tipo_error = [
     { id: '1', nome: "Dica"},
     { id: '2', nome: "Relatar error"},
     { id: '3', nome: "Dúvida"},
-    { id: '4', nome: "Suporte"},
-
+    { id: '4', nome: "Suporte"}
 ];
 
 var sim_nao = [
     { id : "1", nome: "Sim" },
-    { id : "0", nome: "Não" },
+    { id : "0", nome: "Não" }
 ];
 
 var is_admin = [
     { id: "1", nome: "Usuário"},
-    { id: "2", nome: "Administrador"},
+    { id: "2", nome: "Administrador"}
+];
+var status_pagamento = [
+    { id: "0", nome: "Aguardando pagamento"},
+    { id: "1", nome: "Pago"},
+    { id: "2", nome: "Cancelado"}
 ];
 
 var estado = [
@@ -45,5 +49,5 @@ var estado = [
     { id: "SC", nome: "Santa Catarina"},
     { id: "SP", nome: "São Paulo"},
     { id: "SE", nome: "Sergipe"},
-    { id: "TO", nome: "Tocantins"},
+    { id: "TO", nome: "Tocantins"}
 ];

@@ -4,7 +4,10 @@ const query      = x => document.querySelector(x);
 const queryAll   = x => document.querySelectorAll(x);
 const log        = console.log;
 const table      = console.table;
-const time_stemp = () => new Date().getTime();
+const time_stemp = () => { 
+    let data = new Date();
+    return data.getTime();
+}
 
 const to   = x => { window.location.href = x };
 const back = x => { window.history.back() };
@@ -12,6 +15,10 @@ const back = x => { window.history.back() };
 function form_data( id ) 
 {
     let formulario = queryAll( `#${id} input, #${id} textarea, #${id} select` );
+    let html       = '';
+    if( query( `#${id} .editor-local` ) ) {
+        html       = query( `#${id} .editor-local` ).innerHTML || '';
+    }
     let data  = {};
     let nome  = '';
     let valor = '';
@@ -21,6 +28,9 @@ function form_data( id )
         if( nome != -1 && valor.length > 0 ) {
             data[nome] = valor;
         }
+    }
+    if( html.length > 0 ) {
+        data.html = html;
     }
     return data;
 }
@@ -57,12 +67,16 @@ async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
 {
     let formulario    = form_data( id_formulario );
     let send          = await sendImage();
+    
     formulario        = { ... formulario, ... send };
     vio.aside_quadra  = 1;
     post_api( url, formulario, x => {
+        gravar_horario( x.id );
+        
         files     = {};
         cart      = [];
         edit      = {};
+        horario   = [];
         let eco =  vio.ecosistema || [];
         eco.forEach( z => {
             let select =  `.eco-option-${z.id||''}`;
@@ -105,21 +119,178 @@ async function sendImage() {
 }
 
 const editar = ( url, id, formulario, redirect = null ) => {
-    let data        = vio[url] || [];
-    let objeto      = data.find( x => id == x.id ) || {};
-    objeto.id       = id;
-    edit            = objeto;    
-    objeto.update   = 1;
-    objeto.pass     = '';
-    objeto.password = '';
+    let data             = vio[url] || [];
+    let objeto           = data.find( x => id == x.id ) || {};
+    objeto.id            = id;
+    edit                 = objeto;    
+    objeto.update        = 1;
+    objeto.pass          = '';
+    objeto.password      = '';
+    editar_horarios( objeto.id );
+    vio.mostrar_horarios = 1;
     if( redirect != null ) {
         to( `${admin}/${redirect}` );
     }
     preencher( formulario, objeto );
 };
 
+function hoje( day = '' ) {
+    let data = new Date();
+    if( day != '' ) {
+        data = new Date( day );
+    }
+    let obj = {
+        dia : `${data.getDate()}`,
+        mes: `${data.getMonth() + 1}`,
+        ano: `${data.getFullYear()}`,
+        dia_semana: `${data.getDay()}`        
+    };
+    obj.dia = obj.dia.length == 2 ? obj.dia : `0${obj.dia}`;
+    obj.mes = obj.mes.length == 2 ? obj.mes : `0${obj.mes}`;
+    return {
+        ...obj,
+        data: `${obj.dia}/${obj.mes}/${obj.ano}`,
+        data_sisten: `${obj.ano}-${obj.mes}-${obj.dia}`
+    }
+}
+
+function mudar_data( e ) {
+    day = e.value;
+    edita_quadra( quadra_sisten );
+}
+
+function semana( dia, data )
+{
+    let data_arr            = data.split('-');
+    let quandidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30 ];
+    let mes                 = +data_arr[1];
+    let max                 = quandidade_dias_mes[mes];
+    let semana              =  [ "DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB",  ];
+    let futuro              = +data_arr[2];
+    let passado             = +data_arr[2] - +dia;
+    for( let p = 0; p < dia; p++ ) {
+        if( passado <= 0 ) {
+            passado = max - +dia;
+            data_arr[1] = +data_arr[1] - 1;
+            data_arr[0] = data_arr[1] > 0 ? data_arr[0] : +data_arr[0] - 1;
+            data_arr[1] = data_arr[1] > 0 ? data_arr[1] : 12;
+            data_arr[1] = `${data_arr[1]}`;
+            data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
+        }
+        let atemporal = passado++;
+        semana[p] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
+    }
+    for( let f = dia; f < 7; f++ ) {
+        if( futuro > max ) {
+            futuro = 1;
+            data_arr[1] = +data_arr[1] + 1;
+            data_arr[1] = data_arr[1] < 13 ? data_arr[1] : 1;
+            data_arr[1] = `${data_arr[1]}`;
+            data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
+        }
+        let atemporal = `${futuro++}`;
+        atemporal = atemporal.length == 1 ? `0${atemporal}` : atemporal;
+        semana[f] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
+    }
+    semana[dia] = data;
+    return semana;
+}
+
 function edita_quadra( id ) {
+    query('#agenda_contador span').innerHTML = 0;   
+    horario = [];
+    quadra_sisten = id || vio.quadra[0].id;
+    let data_now  = hoje( day.replace(/\-/gi, '/') );
+    let horario_temp = editar_agenda( id );
     to(`${admin}/dash.html#agenda`);
+    let quadra     = vio.quadra.find( x => x.id == id ) || vio.quadra[0];
+    let modalidade = vio.modalidade.find( x => x.id == quadra.modalidade || '' ) || vio.modalidade[0];
+    query('#agenda__tile').innerHTML       = quadra.nome;
+    query('#agenda__modalidade').innerHTML = modalidade.nome || '';
+    agenda = [];
+    let id_base = horario_temp.map( x => {
+        let hora = `${x.inicio}-${x.final}`;
+        hora = hora.replace(/:/gi, '-');
+        return hora;
+    } );
+    id_base = id_base.sort();
+    let toda_semana = semana( data_now.dia_semana, data_now.data_sisten );
+    id_base.forEach( x => {
+        agenda.push( x );
+        for( let i = 0; i < 7; i++) {
+            agenda.push( `${toda_semana[i]}-${x}-${i}-${quadra.id}` );
+        }
+    } );
+    query('.agenda-body').innerHTML = agenda.map( x => `
+        <label for="pop-agenda-livre" id="b${x}" onclick="set_quadra_contratar('${x}')">
+            <span id="agenda__dia-semana" class="descktop">LIVRE +</span> 
+        </label>
+    ` ).join('');
+    let toda_agenda = queryAll( '.agenda-body label' );
+    toda_agenda.forEach( x => {
+        if( x.id.length == 12 ) {
+            let html = x.id.split('-');
+            x.innerHTML = `${html[0].replace('b','')}:${html[1]} às ${html[2]}:${html[3]} `;
+            x.classList.add('timer');
+        }
+    } );
+    let agendados = vio.agenda || []; 
+
+    let todos_dias = queryAll( '.agenda-header div' );
+    todos_dias.forEach( x => {
+        x.classList.remove('agenda-hoje');
+    } );
+    query(`.hoje_${data_now.dia_semana}`).classList.add('agenda-hoje');    
+    
+    let reservas = vio.reservas;
+
+    let time    = new Date();
+    let hora    = time.getHours();
+    let minutos = time.getMinutes();
+    let jogando = reservas.filter( x => {
+        let id = x.id;
+        let init_hora   = +id.substr( 11, 2 );
+        let init_minuto = +id.substr( 14, 2 );
+        let end_hora    = +id.substr( 17, 2 );
+        let end_minuto  = +id.substr( 20, 2 );
+        let dia         = x.id.substr(0, 10)
+       
+        if ( init_hora <= hora && end_hora > hora && dia == day  ) {
+            return true;
+        } else {
+            return false;
+        }
+    } );
+    let id_jogando = jogando.map( x => x.id);
+      
+    reservas.forEach( x => {
+        let elementor = query(`#b${x.id}`);
+        if( elementor ) {
+           
+            elementor.for = "pop-agenda-ocupado";
+            elementor.classList.add('agenda-ocupado');
+            let is_jogando = id_jogando.indexOf( x.id );
+            if( is_jogando > -1 ) {
+                let id          = x.id;
+                let init_hora   = +id.substr( 11, 2 );
+                let end_hora    = +id.substr( 17, 2 );
+                let total_hs    = end_hora - hora;
+                let init_minuto = +id.substr( 14, 2 );
+                let end_minuto  = +id.substr( 20, 2 );
+                let total_mm    = init_minuto + end_minuto;
+                total_mm        = total_mm - minutos;
+                let total       = ( total_hs * 60 ) + total_mm;
+                query('#agenda_contador span').innerHTML = total;
+                elementor.classList.add('agenda-jogando');
+            }
+            elementor.innerHTML = `
+                <span class="descktop">
+                    <b>${x.contratante_nome}</b>
+                    <i>${x.tipo_contatacao == 1 ? 'Diaria' : 'Mensal'}</i>
+                </span> 
+            `;            
+        }
+    } );
 }
 
 const trash = ( url, id  ) => {
@@ -131,14 +302,14 @@ const trash = ( url, id  ) => {
 function preencher( seletor, objeto )
 {
     let formulario = queryAll( `#${seletor} input, #${seletor} textarea, #${seletor} select, #${seletor} img` );
-    let lista_var = queryAll(`#${seletor} img:not([src*="editor"])`);
+    let lista_var = queryAll(`#${seletor} img:not([src*="ico"])`);
     for (let index = 0; index < lista_var.length; index++) {
         lista_var[index].src = storage + '/' + objeto[lista_var[index].alt || ''] || '';
     }
     let html = objeto.html || '';
     if( html.length > 0 ) {
-        if(query( `#${seletor} .editor-box` )) {
-            query( `#${seletor} .editor-box` ).innerHTML = objeto.html || '';
+        if(query( `#${seletor} .editor-local` )) {
+            query( `#${seletor} .editor-local` ).innerHTML = objeto.html || '';
         }
     }    
     let tmp_name      = '';
@@ -155,7 +326,7 @@ function preencher( seletor, objeto )
             case 'textarea':                
                 formulario[i].innerHTML = objeto[tmp_name] || '';
             break;        
-            break;        
+            case 'file':                
             case 'submit':                
             break;        
             default:
@@ -261,11 +432,6 @@ function params() {
     return toObject;
 }
 
-function hoje()
-{
-    let hour = new Date();
-    return `${hour.getFullYear()}-${hour.getMonth() + 1}-${hour.getDate()}`;
-}
 
 function router( pag, HOF ) { if ( page === pag ) { HOF(); } }
 
@@ -338,7 +504,117 @@ function tpl_array( arr, seletor, prefix = '' )
             }
             return tpl_temp;
         } ).join('');
+        html = html.replace( /\{\{.*\}\}/gi, '' );
         return html;
     }
     return '';
+}
+
+function add_horario() {
+    horario.push( {id: time_stemp() } );
+    vio.mostrar_horarios = 1;
+}
+function remove_horario( id ) {
+    horario =  horario.filter( x => x.id != id );
+    post_api( 'horario', {'id': id, status: 0 }, z => {} );
+    vio.mostrar_horarios = 1;
+}
+function save_horario( elemento, id ) {
+    let name  = elemento.name || '';
+    let valor = elemento.value || '';
+    horario.forEach( x => {
+        if( id == x.id && name != '' ) {
+           x[name] = valor;
+        }
+    } );
+}
+
+function gravar_horario( id ) {
+    horario.forEach( x => {
+        let obj = {
+            id: x.id,
+            quadra: id,
+            inicio: x.inicio,
+            final: x.final,
+            status: 1,
+            ativo: 1
+        };
+        post_api( 'horario', obj, z => {} );
+    } );
+}
+function editar_horarios( id ) {
+    let times =  vio.horario;
+    horario = times.filter( x => x.quadra == id );
+}
+function editar_agenda( id ) {
+    let times =  vio.horario;
+    return times.filter( x => x.quadra == id );
+}
+function click( id , id_2 = null ) {
+    query(`#${id}`).click();
+    if( id_2 != null ) {
+        query(`#${id_2}`).click();
+    }
+}
+
+function busca_capiao( e ) {
+    let valor = e.value;
+    let arr  = vio._user;
+    arr      = arr.filter( x => {
+        if( valor != '' && x.nome.indexOf( valor ) != -1  ) {
+            return true;
+        } else {
+            return  false;
+        }
+    } );
+    let html = arr.map( x => `
+        <tr>
+            <td>${x.nome}</td>
+            <td>${x.telefone}</td>
+            <td>
+                <label for="cad-finalizar" onclick="set_user_locacao('${x.id}','${x.nome}', '${x.telefone}', '${x.email}')">
+                    <img src="./disc/ico/check.png" class="ico-table">
+                </label>
+            </td>
+        </tr>
+    ` ).join('');
+    query('#lista-de-capitao').innerHTML = html;
+}
+
+function set_user_locacao( id, nome, telefone, email ) {
+    query('#contratante-id-locacao').value = id;
+    query('#contratante-nome-locacao').value = nome;
+    query('#contratante-telefone-locacao').value = telefone;
+    query('#contratante-email-locacao').value = email;
+}
+
+function set_quadra_contratar( id ) {
+    query('#id_quadra_contratar').value = id;
+}
+
+function busca_os_contratante() {
+    let e      = query('#termo-os-status');
+    let status = query('#busca-os-status').value;
+    
+    let valor =  e.value;
+    let lista = vio.reservas;
+    lista.forEach( x => {
+        if ( !x.status_compra ) {
+            x.status_compra = 0;
+        }
+        let tipo_pagamento = status_pagamento.find( y => y.id == x.status_compra  ) || {};
+        x.pagamento        = tipo_pagamento.nome || 'aguardando pagamento';
+        let id_quadra      = x.id.substr( 25, 34 );
+        let todas_quadra   = vio.quadra;
+        let qd             = todas_quadra.find( z => z.id == id_quadra );
+        if( x.tipo_contatacao == 1 ) {
+
+            x.valor            = qd.diaria || '0,00';
+        } else {
+            x.valor            = qd.mensalidade || '0,00';
+        }
+    } );
+    log( lista );
+    let arr   = lista.filter( x => x.contratante_nome.indexOf(valor) != -1 && status == x.status_compra  );
+    query( '#historico__table_body' ).innerHTML = tpl_array( arr, '#tpl_historico' );
 }
