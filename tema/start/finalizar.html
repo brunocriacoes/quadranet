@@ -1,0 +1,31 @@
+<section class="cart box gap" id="finalizar">
+    <h2 class="text-center">Finalizar Compra</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Quadra</th>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Tipo</th>
+                <th>Preço</th>
+            </tr>
+        </thead>
+        <tbody id="vio_finalizar"></tbody>
+    </table>
+    <h3 class="text-center gap-top"> TOTAL: <span id="finalizar_total">00,00</span></h3>
+    <div class="text-center pague">
+        <img id="img_pague" src="./disc/img/comprar.gif" onclick="buy()">
+        <div id="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <a class="btn btn-finalizar" href="#quadras">Ir para página de Quadras</a>
+    </div>
+    <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post" onsubmit="PagSeguroLightbox(this); return false;">
+        <input type="hidden" id="pag-code" name="code" value="" />
+        <input id="pag-send" hidden type="submit" />
+    </form>
+    <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+</section>

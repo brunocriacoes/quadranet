@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Página em Construção</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="disc/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <script src="main.js"></script>
+</head>
+<body>
+
+    <main>
+        <center>
+            <img src="disc/logo/logo.png" height="200">
+        </center>
+        <h2>Em Manunteção</h2>
+        <span>No momento, nós estamos trabalhando em atualizações.</span>
+        <span>Fique por dentro das novidades e seja avisado assim que estivermos no ar.</span>
+        <form action="javascript:void(0)" method="POST" id="form_new" onsubmit="newsletter( '#form_new' )">
+            <input type="email" name="email" placeholder="Fique por dentro. Entre com seu e-mail aqui!">
+            <input type="submit" value="CADASTRAR">
+        </form>
+        <footer>
+            <span>Telefone +55 (00) 0 0000-0000 </span>
+            
+        </footer>
+    </main>
+
+    <script>
+        const http = window.location.protocol;
+        const dominio = window.location.hostname.replace('www.', '');
+        const uri = `${http}//${dominio}`;
+        const app = `${uri}/app`;
+        const fnc = `${app}/fnc`;
+        const admin = `${uri}/painel`;
+        const storage = `${uri}/app/upload`;
+        const tag = window.location.hash;
+        const request = window.location.search.replace('?', '').split('&')
+            .reduce((acc, item) => {
+                let data = item.split('=');
+                let valor = data[1] || '';
+                if (valor.length > 0) {
+                    acc[data[0]] = decodeURI(valor);
+                }
+                return acc;
+            }, {});
+        var options =
+        {
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            credentials: "same-origin",
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            body: null
+        };
+        var files = [];
+        function newsletter(id) {
+            let info = document.querySelectorAll(`${id} input:not([type="submit"])`);
+            let obj = {};
+            let data = new Date();
+            let atual = data.getDate() + '/' + data.getMonth() + '/' + data.getFullYear();
+            for (let index = 0; index < info.length; index++) {
+                obj[info[index].name] = info[index].value;
+            }
+            options.body = encodeURI(`email=${obj.email}&ativo=1&data=${atual}`);
+            fetch(`${uri}/app/inscrito`, options)
+                .then(x => x.json())
+                .then(y => {
+                    alert('Email cadastrado com sucesso!');
+                });
+        }
+    </script>
+</body>
+</html>

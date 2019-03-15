@@ -3,7 +3,7 @@ var _vio = {};
 
 var vio = {
     set modalidade( arr ) {
-        _vio.modalidade = arr;
+        _vio.modalidade = arr || [];
         query('#modalidade__table_title').innerHTML = arr
             .map(x => `
                 <tr>
@@ -19,7 +19,7 @@ var vio = {
     },
 
     set admin(cont) {
-        _vio.admin = cont;
+        _vio.admin = cont || [];
         if(cont) {
             query('#selecionar-dominio').removeAttribute('disabled');            
             query('#selecionar-dominio').classList.remove('no-admin');            
@@ -30,7 +30,7 @@ var vio = {
     },
 
     set sistema(cont) {
-        _vio.sistema = cont;
+        _vio.sistema = cont || [];
         if(cont) {
             query( '#aside-sistema' ).style.display       = 'none';
             query( '[for="menu_quadra"]' ).style.display  = 'none';
@@ -52,7 +52,7 @@ var vio = {
     },
 
     set quadra( arr ) {
-        _vio.quadra = arr;
+        _vio.quadra = arr || [];
         query('#quadra__table_body').innerHTML = arr
             .map( x => `
                 <tr>                    
@@ -70,11 +70,11 @@ var vio = {
     },
 
     set horario(arr) {
-        _vio.horario = arr;
+        _vio.horario = arr || [];
     },
 
     set _user( arr ) {
-        _vio._user = arr;
+        _vio._user = arr || [];
         query('#capitao__table_body').innerHTML = arr.map( x => `
             <tr>                
                 <td>${x.nome}</td>
@@ -88,7 +88,7 @@ var vio = {
     },
 
     set jogadores(cont) {
-        _vio.capitao_novo = cont;
+        _vio.capitao_novo = cont || [];
         query('#jogadores__table_body').innerHTML = cont
             .map( x => `
                 <tr>
@@ -101,7 +101,7 @@ var vio = {
     },
 
     set visual(cont) {
-        _vio.visual = cont;
+        _vio.visual = cont || [];
         query('#visual_form_title').innerHTML = cont.title;
         query('#visual_form_google').innerHTML = cont.description;
         query('#visual_form_descricao').innerHTML = cont.description;
@@ -126,7 +126,7 @@ var vio = {
     },
 
     set quem_somos(cont) {
-        _vio.quem_somos = cont;
+        _vio.quem_somos = cont || [];
         query('#quem-somos__form_title').innerHTML = cont.title;
         query('#quem-somos__form_text-area').innerHTML = cont.html;
         query('#quem-somos__form_1-grande').innerHTML = cont.img1_grande;
@@ -138,40 +138,41 @@ var vio = {
     },
 
     set servicos(cont) {
-        _vio.servicos = cont;
+        _vio.servicos = cont || [];
         query('#servicos__form_title').innerHTML = cont.title;
         query('#servicos__form_text-area').innerHTML = cont.html;
     },
 
     set banner(arr) {
-        _vio.banner = arr;
+        _vio.banner = arr || [];
         query('#banner__table_body').innerHTML = tpl_array( arr, '#tr_banner', 'banner' );
     },
 
     set dominio(arr) {
-        _vio.dominio = arr;
+        _vio.dominio = arr || [];
         query('#dominio__table_body').innerHTML = tpl_array( arr, '#tr_default', 'dominio' );
     },
 
     set usuario(arr) {
-        _vio.usuario = arr;
+        _vio.usuario = arr || [];
         query('#usuario__table_body').innerHTML = tpl_array( arr, '#tr_usuario', 'usuario' );
     },
 
     set error(arr) {
-        _vio.error = arr;
+        _vio.error = arr || [];
         query('#registro-problema__table_body').innerHTML = tpl_array( arr, '#tr_error', 'error' );
     },
 
     set estaticos_pagina(cont) {
-        _vio.estaticos_pagina = cont;
+        _vio.estaticos_pagina = cont || [];
         query('#selecionar-dominio').innerHTML = cont.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
     },
 
     set aside_quadra( gatilho ) {
-
-        query('#aside').innerHTML = _vio.quadra.map( x => {
-            let modalidade = _vio.modalidade.find( z => z.id == x.modalidade  ) || {};
+        let quadra     = _vio.quadra || [];
+        let modalidades = _vio.modalidade || [];
+        query('#aside').innerHTML = quadra.map( x => {
+            let modalidade = modalidades.find( z => z.id == x.modalidade  ) || {};
             return `
                 <div id="aside_quadra" class="box gap-aside text-center" onclick="edita_quadra( '${x.id}' )">
                     <svg

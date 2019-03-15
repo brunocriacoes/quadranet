@@ -13,10 +13,14 @@ fetch( `${app}` )
     lista.forEach( e => {
         vio[e] = x[e];
     } );
-    x.pagina = x.pagina || [];
-    x.info   = x.info || [];
-    quadra_sisten = x.quadra[0].id;
+    x.pagina       = x.pagina || [];
+    x.info         = x.info || [];
+    let tmp_quadra = x.quadra || []
+    tmp_quadra     = tmp_quadra[0] || {};
+    quadra_sisten  = tmp_quadra.id || '';
     edita_quadra( quadra_sisten )
+    x.site = x.site   || [];
+    x.site = x.pagina || [];
     preencher( 'visual__form__info', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__social', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__contato', x.site.find( y => y.id == 'info' ) || { id: 'info' } );

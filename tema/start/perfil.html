@@ -1,0 +1,22 @@
+<section id="perfil">
+    <div class="menu-perfil">
+        <a href="#perfil">Perfil</a>
+        <a href="#trocar-senha">Mudar Senha</a>
+        <a href="#historico-compras">Histórico</a>
+        <a href="#meu-time">Meu time</a>
+        <a href="#sair">Sair</a>
+    </div>
+    <form action="javascript:void(0)" method="POST" class="form form-short box" id="atualizar_perfil">
+        <h2 class="text-center">Perfil</h2>
+        <input type="text" class="field" placeholder="Nome" id="vio_nome">
+        <input type="text" class="field" placeholder="Digite um Apelido" id="vio_apelido">
+        <input type="email" class="field" placeholder="email" id="vio_email" value="email@gmail.com" disabled>
+        <input type="text" class="field" placeholder="CPF" id="vio_cpf">
+        <input type="text" class="field" placeholder="Cep" id="vio_cep">
+        <input type="text" class="field" placeholder="Estado" id="vio_estado">
+        <input type="text" class="field" placeholder="Cidade" id="vio_cidade">
+        <input type="text" class="field" placeholder="Endereço" id="vio_endereco">
+        <input type="tel" class="field" placeholder="Whatsapp" id="vio_whatsapp">
+        <input onclick="atualizarPerfil()" type="submit" value="salvar" class="btn btn-sucess btn-center">
+    </form>
+</section>

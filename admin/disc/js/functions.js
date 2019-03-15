@@ -199,12 +199,16 @@ function semana( dia, data )
 function edita_quadra( id ) {
     query('#agenda_contador span').innerHTML = 0;   
     horario = [];
-    quadra_sisten = id || vio.quadra[0].id;
+    let tmp_quadra = vio.quadra || []
+    tmp_quadra     = tmp_quadra[0] || {};
+    quadra_sisten = id || tmp_quadra.id || '';
     let data_now  = hoje( day.replace(/\-/gi, '/') );
     let horario_temp = editar_agenda( id );
     to(`${admin}/dash.html#agenda`);
-    let quadra     = vio.quadra.find( x => x.id == id ) || vio.quadra[0];
-    let modalidade = vio.modalidade.find( x => x.id == quadra.modalidade || '' ) || vio.modalidade[0];
+    let quadra     = vio.quadra || [];
+    quadra         = quadra.find( x => x.id == id ) || '';
+    let modalidade = vio.modalidade || [];
+    modalidade     = modalidade.find( x => x.id == quadra.modalidade || '' ) || [];
     query('#agenda__tile').innerHTML       = quadra.nome;
     query('#agenda__modalidade').innerHTML = modalidade.nome || '';
     agenda = [];
@@ -242,7 +246,7 @@ function edita_quadra( id ) {
     } );
     query(`.hoje_${data_now.dia_semana}`).classList.add('agenda-hoje');    
     
-    let reservas = vio.reservas;
+    let reservas = vio.reservas || [];
 
     let time    = new Date();
     let hora    = time.getHours();
@@ -543,11 +547,11 @@ function gravar_horario( id ) {
     } );
 }
 function editar_horarios( id ) {
-    let times =  vio.horario;
+    let times =  vio.horario || [];
     horario = times.filter( x => x.quadra == id );
 }
 function editar_agenda( id ) {
-    let times =  vio.horario;
+    let times =  vio.horario || [];
     return times.filter( x => x.quadra == id );
 }
 function click( id , id_2 = null ) {
@@ -597,7 +601,7 @@ function busca_os_contratante() {
     let status = query('#busca-os-status').value;
     
     let valor =  e.value;
-    let lista = vio.reservas;
+    let lista = vio.reservas || [];
     lista.forEach( x => {
         if ( !x.status_compra ) {
             x.status_compra = 0;
@@ -605,7 +609,7 @@ function busca_os_contratante() {
         let tipo_pagamento = status_pagamento.find( y => y.id == x.status_compra  ) || {};
         x.pagamento        = tipo_pagamento.nome || 'aguardando pagamento';
         let id_quadra      = x.id.substr( 25, 34 );
-        let todas_quadra   = vio.quadra;
+        let todas_quadra   = vio.quadra || [];
         let qd             = todas_quadra.find( z => z.id == id_quadra );
         if( x.tipo_contatacao == 1 ) {
 

@@ -1,0 +1,23 @@
+<section class="hours box gap" id="agenda">
+    <div class="hours__title gap-bottom">
+        <h1>Reserva de Horários</h1>
+        <img id="vio_calendar_img" src="./disc/img/default.jpg">
+        <h4 id="vio_calendar_name"></h4> -
+        <small id="vio_calendar_modal"></small>
+    </div>
+    <div class="gap-bottom tree">
+        <div>
+            <label>Dia da Semana:</label>
+            <span id="vio_calendar_day">---</span>
+        </div>
+        <div>
+            <label>Data Atual:</label>
+            <span id="vio_calendar_date">--/--/---</span>
+        </div>
+        <div class="text-right">
+            <label for="date">Agendar uma data:</label>
+            <input id="data__atual" type="date" onchange="set_date( this )" value="">
+        </div>
+    </div>
+    <div id="vio_agenda"></div>
+</section>

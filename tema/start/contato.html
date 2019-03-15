@@ -1,0 +1,39 @@
+<section id="contato" class="box">
+    <form action="javascript:void(0)" method="POST" class="form" id="send_mail" onsubmit="send_mail()">
+
+        <input type="text" id="nome" name="nome" value="" placeholder="Digite seu nome" required="required" class="field">
+        <input type="text" id="telefone" name="telefone" value="" placeholder="Digite seu telefone" required="required"
+            class="field">
+        <input type="email" id="email" name="email" value="" placeholder="Digite seu email" required="required"
+            class="field">
+        <select id="assunto" name="assunto" required="required" class="field">
+            <option value="">Escolha uma opção</option>
+            <option value="horario">Horário</option>
+            <option value="cobranca">Cobrança</option>
+            <option value="pagamento">Pagamento</option>
+            <option value="fornecedor">Fornecedor</option>
+            <option value="reserva">Reserva</option>
+            <option value="critica">Crítica</option>
+        </select>
+        <textarea name="mensagem" id="mensagem" rows="7" placeholder="Escreva a mensagem" required="required" class="field"></textarea>
+        <input type="submit" id="submit" name="submit" value="ENVIAR MENSAGEM" class="btn btn-sucess">
+        <span id="alert_send_mail" onclick="this.style.display = 'none'" class="alert" style="display: 'none !important'">mensagem
+            enviada com sucesso x </span>
+    </form>
+    <div class="contato-info">
+        <h1>Contato</h1>
+        <p id="vio_contact_text">
+
+        </p>
+        <p class="ico ico-map">
+
+        </p>
+        <a href="mailto:" class="ico ico-mail link" id="vio_contact_email">
+
+        </a> <br>
+        <a href="tel:" class="ico ico-tel link" id="vio_contact_tel">
+
+        </a> <br>
+        <div id="vio_contact_map"></div>
+    </div>
+</section>
