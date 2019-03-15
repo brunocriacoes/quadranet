@@ -1,78 +1,72 @@
-
-
-    <section class="carousel">
-        <div class="carousel">
-            <div class="carousel-inner">
-                <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden=""
-                    checked="checked">
-                <div class="carousel-item">
-                    <div class="carousel__slide_info">
-                        <span id="vio_text_1"></span>
-                        <a href="" id="vio_link_1" class="btn carousel__slide_info_btn">Mais Detalhes</a>
-                    </div>
-                    <img src="./disc/img/banner.png" alt="" id="vio_carrousel_foto_1" onerror="img_default_banner( this )">
-                </div>
-                <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
-                <div class="carousel-item">
-                    <div class="carousel__slide_info">
-                        <span id="vio_text_2"></span>
-                        <a href="" id="vio_link_2" class="btn carousel__slide_info_btn">Mais Detalhes</a>
-                    </div>
-                    <img src="./disc/img/banner.png" alt="" id="vio_carrousel_foto_2" onerror="img_default_banner( this )">
-                </div>
-                <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
-                <div class="carousel-item">
-                    <div class="carousel__slide_info">
-                        <span id="vio_text_3"></span>
-                        <a href="" id="vio_link_3" class="btn carousel__slide_info_btn">Mais Detalhes</a>
-                    </div>
-                    <img src="./disc/img/banner.png" alt="" id="vio_carrousel_foto_3" onerror="img_default_banner( this )">
-                </div>
-                <label for="carousel-3" class="carousel-control prev control-1">‹</label>
-                <label for="carousel-2" class="carousel-control next control-1">›</label>
-                <label for="carousel-1" class="carousel-control prev control-2">‹</label>
-                <label for="carousel-3" class="carousel-control next control-2">›</label>
-                <label for="carousel-2" class="carousel-control prev control-3">‹</label>
-                <label for="carousel-1" class="carousel-control next control-3">›</label>
-                <ol class="carousel-indicators">
-                    <li>
-                        <label for="carousel-1" class="carousel-bullet">•</label>
-                    </li>
-                    <li>
-                        <label for="carousel-2" class="carousel-bullet">•</label>
-                    </li>
-                    <li>
-                        <label for="carousel-3" class="carousel-bullet">•</label>
-                    </li>
-                </ol>
-            </div>
+<section class="carousel">
+    <div class="banner" onmouseover="clearInterval(animacao_slider)" onmouseout="play_slider()">
+        <input type="radio" name="slides" id="iten-1" hidden checked>
+        <input type="radio" name="slides" id="iten-2" hidden>
+        <input type="radio" name="slides" id="iten-3" hidden>
+        <input type="radio" name="slides" id="iten-4" hidden>
+        <input type="radio" name="slides" id="iten-5" hidden>
+        <input type="radio" name="slides" id="iten-6" hidden>
+        <div class="banner-inner">
+            {{banner}}
         </div>
-    </section>
+        <div class="banner-boletes">
 
-    <h1 class="card__title">Principais Serviços</h1>
-    <section class="card">
-        <div class="card__services">
-            <img src="disc/ico/info.png">
-            <h2>Serviços</h2>
-            <p id="card__services__paragrafo">
+        </div>
+    </div>
+</section>
 
-            </p>
-            <a href="#servicos" class="btn btn-sucess">Mais Detalhes</a>
-        </div>
-        <div class="card__services">
-            <img src="disc/ico/soccer-field.png">
-            <h2>Quadras</h2>
-            <p>
-                Veja as nossas quadras, certamente você encontrará uma que te agranda, click no link abaixo e confira.
-            </p>
-            <a href="#quadras" class="btn btn-sucess">Mais Detalhes</a>
-        </div>
-        <div class="card__services">
-            <img src="disc/ico/avatar.png">
-            <h2>Cadastro</h2>
-            <p>
-                Faça seu cadastro, para poder alocar um horario, cadastrar uma lista com os contato dos seu amigos.
-            </p>
-            <a href="#me-cadastrar" class="btn btn-sucess">Mais Detalhes</a>
-        </div>
-    </section>
+<script>
+    var status_banner = 1;
+    var animacao_slider = null;
+    var bullets = document.querySelectorAll('.banner-inner .banner-iten').length;
+    for (let index = 0; index < bullets; index++) {
+        console.log(bullets);
+        document.querySelector('.banner-boletes').innerHTML += `<label for="iten-${index + 1}" onclick="status_banner = ${index}"></label>`;
+    }
+    function play_slider() {
+        animacao_slider = setInterval(x => {
+            status_banner++;
+            status_banner = status_banner == bullets ? 0 : status_banner;
+            let btns = document.querySelectorAll('.banner input[type=radio]');
+            btns[status_banner].click();
+        }, 3000)
+    }
+    play_slider();
+</script>
+
+<h1 class="card__title">Novidade</h1>
+<section class="card">
+    <a href="">
+        <img src="" alt="">
+        <span>Titulo</span>
+        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, doloribus?</span>
+    </a>
+</section>
+
+<h1 class="card__title">Principais Serviços</h1>
+<section class="card">
+    <div class="card__services">
+        <img src="disc/ico/info.png">
+        <h2>Serviços</h2>
+        <p id="card__services__paragrafo">
+
+        </p>
+        <a href="#servicos" class="btn btn-sucess">Mais Detalhes</a>
+    </div>
+    <div class="card__services">
+        <img src="disc/ico/soccer-field.png">
+        <h2>Quadras</h2>
+        <p>
+            Veja as nossas quadras, certamente você encontrará uma que te agranda, click no link abaixo e confira.
+        </p>
+        <a href="#quadras" class="btn btn-sucess">Mais Detalhes</a>
+    </div>
+    <div class="card__services">
+        <img src="disc/ico/avatar.png">
+        <h2>Cadastro</h2>
+        <p>
+            Faça seu cadastro, para poder alocar um horario, cadastrar uma lista com os contato dos seu amigos.
+        </p>
+        <a href="#me-cadastrar" class="btn btn-sucess">Mais Detalhes</a>
+    </div>
+</section>

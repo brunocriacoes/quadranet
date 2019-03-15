@@ -10,7 +10,7 @@
     include __DIR__ . '/app/core/help.php';
     include __DIR__ . '/funcoes.php';
     
-    $data    = json_decode( file_get_contents( uri.'/app' ) );     
+    $data    = json_decode( file_get_contents( uri.'/app' ) );
     $html    = '';
     $header  = get_part( 'header' );
     $footer  = get_part( 'footer' );
