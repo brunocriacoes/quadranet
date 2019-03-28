@@ -6,15 +6,16 @@
 
     <footer class="footer">
         <div class="footer__redes-sociais">
-            <a href="" target="_blank" id="facebook"><img src="disc/ico/facebook.png"></a>
-            <a href="" target="_blank" id="twitter"><img src="disc/ico/twitter.png"></a>
-            <a href="" target="_blank" id="youtube"><img src="disc/ico/youtube.png"></a>
+            <a href="{{facebook}}" target="_blank"><img src="disc/ico/facebook.png"></a>
+            <a href="{{twitter}}" target="_blank"><img src="disc/ico/twitter.png"></a>
+            <a href="{{youtube}}" target="_blank"><img src="disc/ico/youtube.png"></a>
+            <a href="{{instagram}}" target="_blank"><img src="disc/ico/instagram.png"></a>
         </div>
         <div class="container footer-info">
             <div class="footer__about">
                 <h2>Quem Somos?</h2>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque cum nesciunt sapiente.
+                    {{description}}
                 </p>
             </div>
             <div class="footer__adress">
@@ -22,13 +23,21 @@
                     <h2>Endereço</h2>
                     <a href="">
                         <img src="disc/ico/map.png">
-                        <span id="adress"> 06786-270 </span>
+                        <span id="adress"> 
+                            {{cep}}
+                            {{numero}}
+                            {{estado}}
+                        </span>
                     </a>
                 </div>
                 <div class="footer__adress__item">
-                    <a href="">
+                    <a href="tel:{{telefone}}">
                         <img src="disc/ico/whatsapp.png">
-                        <span id="whatsapp">+55 (00) 0 0000-0000 </span>
+                        <span id="whatsapp">{{telefone}}</span>
+                    </a>
+                    <a href="mailto:{{email}}">
+                        <img src="disc/ico/mail.png">
+                        <span id="whatsapp">{{email}}</span>
                     </a>
                 </div>
             </div>
@@ -53,3 +62,4 @@
 
 </body>
 </html>
+

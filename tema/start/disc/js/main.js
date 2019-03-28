@@ -1,119 +1,119 @@
 'use strict';
-let bug  = debug ? '?bug=true' : '';
-fetch( url_api + bug + chache )
-    .then(x => x.json())
-    .then(y => {
-        if( y.length == 0 ) {
-            window.location.href = './manutencao.html';
-        }
-        let quadra = y.quadra;
-        const conjunto = Object.values(quadra.results);
-        vio.quadra = conjunto;
+// let bug  = debug ? '?bug=true' : '';
+// fetch( url_api + bug + chache )
+//     .then(x => x.json())
+//     .then(y => {
+//         if( y.length == 0 ) {
+//             window.location.href = './manutencao.html';
+//         }
+//         let quadra = y.quadra;
+//         const conjunto = Object.values(quadra.results);
+//         vio.quadra = conjunto;
 
-        if( y.quem !== undefined )
-        {
-            let quem = y.quem;
-            let resum = quem.results.quem || '';
-            query('.footer__about').innerHTML = `
-            <h2>Quem Somos?</h2>
-            <p>
-                ${resum.resumo}
-            </p>
-            `;
-            let sobre = y.quem.results.quem;
-            vio.sobre = {
-                title: sobre.title || '',
-                content: sobre.html || '',
-                foto_1: sobre.foto || '',
-                foto_2: sobre.foto1 || '',
-                foto_3: sobre.foto2 || '',
-                foto_4: sobre.foto3 || '',
-                foto_5: sobre.foto4 || '',
-            };
-        }
+//         if( y.quem !== undefined )
+//         {
+//             let quem = y.quem;
+//             let resum = quem.results.quem || '';
+//             query('.footer__about').innerHTML = `
+//             <h2>Quem Somos?</h2>
+//             <p>
+//                 ${resum.resumo}
+//             </p>
+//             `;
+//             let sobre = y.quem.results.quem;
+//             vio.sobre = {
+//                 title: sobre.title || '',
+//                 content: sobre.html || '',
+//                 foto_1: sobre.foto || '',
+//                 foto_2: sobre.foto1 || '',
+//                 foto_3: sobre.foto2 || '',
+//                 foto_4: sobre.foto3 || '',
+//                 foto_5: sobre.foto4 || '',
+//             };
+//         }
 
-        if( y.servico !== undefined ) 
-        {
-            let service = y.servico;
-            let resume = service.results.servico;
-            query('#card__services__paragrafo').innerHTML = `${resume.resumo}`;
-            let servico = y.servico.results.servico;
-            vio.servico = servico.html || '';
-        }
+//         if( y.servico !== undefined ) 
+//         {
+//             let service = y.servico;
+//             let resume = service.results.servico;
+//             query('#card__services__paragrafo').innerHTML = `${resume.resumo}`;
+//             let servico = y.servico.results.servico;
+//             vio.servico = servico.html || '';
+//         }
 
-        if( y.banner !== undefined ) 
-        {
-            vio.banner = Object.values(y.banner.results).map(x => ({ text: x.title, link: x.url, foto: x.foto }));
-        }
+//         if( y.banner !== undefined ) 
+//         {
+//             vio.banner = Object.values(y.banner.results).map(x => ({ text: x.title, link: x.url, foto: x.foto }));
+//         }
 
-        if( y.visual !== undefined ) 
-        {
-            let visual = y.visual.results.visual;
-            vio.title = visual.title;
-            vio.description = visual.description;
-            vio.keywords = visual.keyword;
-            vio.facebook = visual.facebook;
-            vio.twitter = visual.twitter;
-            vio.youtube = visual.youtube;
-            vio.logo = visual.foto;
+//         if( y.visual !== undefined ) 
+//         {
+//             let visual = y.visual.results.visual;
+//             vio.title = visual.title;
+//             vio.description = visual.description;
+//             vio.keywords = visual.keyword;
+//             vio.facebook = visual.facebook;
+//             vio.twitter = visual.twitter;
+//             vio.youtube = visual.youtube;
+//             vio.logo = visual.foto;
     
-            query('#personalizar').innerHTML = `
-                :root {
-                    --theme: ${visual.cor};
-                }
-            `;
-            let contato = y.visual.results.visual;
-            vio.contato = {
-                text : contato.contato,
-                email: contato.email,
-                tel  : contato.tel,
-                map  : contato.map.replace( /\\/ig, '' ),
-            };
-        }
+//             query('#personalizar').innerHTML = `
+//                 :root {
+//                     --theme: ${visual.cor};
+//                 }
+//             `;
+//             let contato = y.visual.results.visual;
+//             vio.contato = {
+//                 text : contato.contato,
+//                 email: contato.email,
+//                 tel  : contato.tel,
+//                 map  : contato.map.replace( /\\/ig, '' ),
+//             };
+//         }
 
-        if( y.tag !== undefined )
-        {
-            const tag = y.tag.results;
-            let tipo = Object.values(tag)
-                .map(p => {
-                    return `<option value="${p.ID}">${p.title}</option>`;
-                });
-            query('#fields_type_select').innerHTML += tipo;
-        }
+//         if( y.tag !== undefined )
+//         {
+//             const tag = y.tag.results;
+//             let tipo = Object.values(tag)
+//                 .map(p => {
+//                     return `<option value="${p.ID}">${p.title}</option>`;
+//                 });
+//             query('#fields_type_select').innerHTML += tipo;
+//         }
         
-        router('agenda', x => {
-            if( y.agenda !== undefined )
-            {
-                let agendas     = y.agenda;
-                let conj        = Object.values(agendas.results);
-                let para        = parametros();
-                let category    = y.tag.results;
-                let quadra      = conjunto.find(p => p.ID == para.id);
-                let comp        = Object.values(category);
-                let tags        = comp.find(p => p.ID == quadra.tag);
-                vio.agenda      = conj.map(y => ({ ID: quadra.ID, foto: quadra.foto, name: quadra.title, modal: tags.title, init: y.inicio, end: y.final, mensal: quadra.mensal, avulso: quadra.avulso, idAgenda: date().split('/').reverse().join('-') + '-' + y.inicio.replace(':', '-') + '-' + newDay() }));
-                let data        = date();
-                let dia         = day();
-                vio.agenda_info = { name: quadra.title, foto: quadra.foto, modal: tags.title, day: dia, date: data };
-                reserva();
-            }
-        });
+//         router('agenda', x => {
+//             if( y.agenda !== undefined )
+//             {
+//                 let agendas     = y.agenda;
+//                 let conj        = Object.values(agendas.results);
+//                 let para        = parametros();
+//                 let category    = y.tag.results;
+//                 let quadra      = conjunto.find(p => p.ID == para.id);
+//                 let comp        = Object.values(category);
+//                 let tags        = comp.find(p => p.ID == quadra.tag);
+//                 vio.agenda      = conj.map(y => ({ ID: quadra.ID, foto: quadra.foto, name: quadra.title, modal: tags.title, init: y.inicio, end: y.final, mensal: quadra.mensal, avulso: quadra.avulso, idAgenda: date().split('/').reverse().join('-') + '-' + y.inicio.replace(':', '-') + '-' + newDay() }));
+//                 let data        = date();
+//                 let dia         = day();
+//                 vio.agenda_info = { name: quadra.title, foto: quadra.foto, modal: tags.title, day: dia, date: data };
+//                 reserva();
+//             }
+//         });
 
-        if( y.visual !== undefined ) 
-        {
-            let visual = y.visual;
-            let sobre = Object.values(visual.results)
-            .map( x => {
-                query('#adress').innerHTML = `${x.contato}`;
-                query('#whatsapp').innerHTML = `${x.tel}`;                
-            } );
-        }
+//         if( y.visual !== undefined ) 
+//         {
+//             let visual = y.visual;
+//             let sobre = Object.values(visual.results)
+//             .map( x => {
+//                 query('#adress').innerHTML = `${x.contato}`;
+//                 query('#whatsapp').innerHTML = `${x.tel}`;                
+//             } );
+//         }
 
-        let items = localStorage.cart;
-        items     = JSON.parse(items);
-        vio.cart  = items;
+//         let items = localStorage.cart;
+//         items     = JSON.parse(items);
+//         vio.cart  = items;
         
-});
+// });
     
 window.onpopstate = function()
 {
@@ -159,14 +159,4 @@ router( 'historico-compras', p => {
     vio.historico = historico
 } );
 
-query( '.share' ).innerHTML = `
-<span>compartilhe com seus amigos</span>
-<a href="http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F${window.location.hostname}&t=" target="_blank">
-    <img src="./disc/ico/facebook.png">
-</a>
-<a href="http://twitter.com/intent/tweet?text=http%3A%2F%2F${window.location.hostname}" target="_blank">
-    <img src="./disc/ico/twitter.png">
-</a>
-`;
 
-query( '#data__atual' ).value = date().split( '/' ).reverse().join( '-' );

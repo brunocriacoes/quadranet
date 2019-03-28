@@ -11,6 +11,32 @@
     include __DIR__ . '/funcoes.php';
     
     $data    = json_decode( file_get_contents( uri.'/app' ) );
+
+    $sertvico = $data->pagina ?? [];
+    $sertvico = jsFind( $sertvico, function($x) { return $x->id == 'servico' ; } );
+
+    $modalidade = $data->modalidade ?? [];
+
+    $site = $data->site ?? (object) [];
+    $site = jsFind( $site, function($x) { return $x->id == 'info' ; } );
+    $site->map = str_replace('\\','', $site->map ?? '' );
+
+    $sobre = $data->pagina ?? (object) [];
+    $sobre = jsFind( $sobre, function($x) { return $x->id == 'sobre' ; } );
+
+    $blog = $data->blog ?? (object) [];
+    $blog = array_map( function($x) {
+        $x->resumo = substr( trim( strip_tags( $x->html ?? '' ) ), 0, 75 ) . "..."; 
+        return $x;
+    }, $blog );
+
+    $quadra = $data->quadra ?? (object) [];
+    $quadra = array_map( function($x) {
+        $x->resumo = substr( trim( strip_tags( $x->html ?? '' ) ), 0, 75 ) . "..."; 
+        return $x;
+    }, $quadra );
+
+
     $html    = '';
     $header  = get_part( 'header' );
     $footer  = get_part( 'footer' );
@@ -24,12 +50,24 @@
         $html  = $header . $html . $footer;       
     }
 
-    $pasta = uri . "/tema/".tema."/";
-    $html  = preg_replace( '/link .*href="(?!h)/', "link rel=\"stylesheet\" href=\"{$pasta}", $html );
-    $html  = preg_replace( '/src="(?!h)/', "src=\"{$pasta}", $html );
+    if( !empty( urls[1] ) ) {
+        $single  =  jsFind( $quadra, function( $x ) { return $x->id == urls[1]; } );
+    }
 
+    $pasta = uri . "/tema/".tema."/";
+   
     $componente = [
-        [ "is_array" => true,  "flag" => "banner",  "data" => $data->banner ?? [],  "tpl" => "banner"  ]
+        [ "is_array" => true,  "flag" => "banner",  "data" => $data->banner ?? [],  "tpl" => "banner"  ],
+        [ "is_array" => false,  "flag" => "servico",  "data" => $sertvico ?? [],  "tpl" => "servico"  ],
+        [ "is_array" => false,  "flag" => "menu",  "data" => [],  "tpl" => "menu"  ],
+        [ "is_array" => false,  "flag" => "sobre",  "data" => $sobre ?? [],  "tpl" => "sobre"  ],
+        [ "is_array" => false,  "flag" => "single",  "data" => $single ?? [],  "tpl" => "single"  ],
+        [ "is_array" => false,  "flag" => "agenda",  "data" => $single ?? [],  "tpl" => "agenda"  ],
+        [ "is_array" => true,  "flag" => "blog",  "data" => $blog,  "tpl" => "blog"  ],
+        [ "is_array" => true,  "flag" => "quadra",  "data" => $quadra,  "tpl" => "quadra"  ],
+        [ "is_array" => true,  "flag" => "categorias",  "data" => $modalidade,  "tpl" => "categoria"  ],
+        [ "is_array" => true,  "flag" => "modalidade",  "data" => $modalidade,  "tpl" => "modalidade"  ],
+        [ "is_array" => false,  "flag" => "share",  "data" => [],  "tpl" => "share"  ],
     ];
 
     foreach( $componente as $e ) {
@@ -39,7 +77,11 @@
             $html  = str_replace( '{{'.$e["flag"].'}}', single_print_content( $e["data"], $e["tpl"] ), $html );
         }
     }
-
+    
+    $html  = str_replace( '{{uri}}', uri, $html );
+    $html  = preg_replace( '/link .*href="(?!h)/', "link rel=\"stylesheet\" href=\"{$pasta}", $html );
+    $html  = preg_replace( '/src="(?!h)/', "src=\"{$pasta}", $html );
+    $html  = single_print_content( $site, '', $html );
     // $html = preg_replace( '/\{\{.*\}\}/', '', $html );
 
     echo $html;

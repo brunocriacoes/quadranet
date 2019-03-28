@@ -40,6 +40,7 @@
                 <a href="#visual" class="link_menu">Visual</a>
                 <a href="#quem-somos" class="link_menu">Quem somos</a>
                 <a href="#servicos" class="link_menu">Serviços</a>
+                <a href="#blogs" class="link_menu">Blog</a>
                 <a href="#banner" class="link_menu">Banner</a>
             </div>
             <div class="menu_sistema">
@@ -450,6 +451,62 @@
                 <input id="foto_3" type="file" name="foto_3" onchange="previwew_img( 'foto_3', 'previa_foto_3' )" hidden>
                 <input id="foto_4" type="file" name="foto_4" onchange="previwew_img( 'foto_4', 'previa_foto_4' )" hidden>
                 <input id="foto_5" type="file" name="foto_5" onchange="previwew_img( 'foto_5', 'previa_foto_5' )" hidden>
+            </section>
+
+            <section id="blog" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Blog</h5>
+                </header>
+                <form action="javascript:void(0)" id="blog-form" onsubmit="post_api_form( 'blog', 'blog-form', 'dash.html#blogs', 1 )" method="POST">
+                    <input type="hidden" name="id" value="">
+                    <div class="grid-2 grid-gap">
+                        <div>
+                            <label for="" class="input-label">Titulo</label>
+                            <input type="text" name="nome" class="input-field">
+                            <label for="" class="input-label">link de origen</label>
+                            <input type="text" name="link" class="input-field">
+                            <div class="editor-box gap-bottom">
+                                <div class="editor-nav">
+                                    <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
+                                    <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
+                                    <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
+                                    <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
+                                    <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
+                                    <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
+                                    <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
+                                    <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
+                                </div>
+                                <div contenteditable="true" class="editor-local"></div>
+                            </div>     
+                        </div>                        
+                        <div>
+                            <label for="foto_blog">
+                                <img id="previa_foto_blog" alt="foto" src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                        </div>
+                    </div>
+                    <input type="submit" value="salvar" class="btn btn-sucess">
+                </form>
+                <input id="foto_blog" type="file" name="foto" onchange="previwew_img( 'foto_blog', 'previa_foto_blog' );" hidden>
+            </section>
+
+            <section id="blogs" class="gap box">
+                <header class="gap-bottom grid-2"> 
+                    <h5>blog</h5>
+                    <div class="text-right">
+                        <a href="#blog" class="ico ico-plus theme circle"></a>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th width="30"></th>
+                            <th width="30"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="blog__table_body"></tbody>
+                </table>
             </section>
 
             <section id="servicos" class="gap box">
@@ -1077,6 +1134,15 @@
                 <td>{{nome}}</td>
                 <td>
                     <img onclick="editar( 'banner', '{{id}}', 'servicos_form__banner-novo', 'dash.html#banner-novo' )" src="./disc/ico/edit.png" class="ico-table">
+                </td>
+                <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+            </tr>
+        </template>
+        <template id="tr_blog">
+            <tr>
+                <td>{{nome}}</td>
+                <td>
+                    <img onclick="editar( 'blog', '{{id}}', 'blog-form', 'dash.html#blog' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
                 <td><img src="./disc/ico/trash.png" class="ico-table"></td>
             </tr>

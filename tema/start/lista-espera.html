@@ -1,0 +1,37 @@
+<div id="mister-m"></div>
+<br>
+<br>
+<div class="container">
+    <h1>Catrastre-se</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ullam suscipit consequatur.</p>
+
+    <form action="javascript:void(0)" method="post" id="espera-form" class="form" onsubmit="post_api_form( 'espera', 'espera-form', null )">
+        <label for="">Escolha modalidade</label>
+        <div class="grid-6 modalidade-escolha">
+            {{modalidade}}
+        </div>
+        <br>            
+        <br>            
+        <div class="grid-2">
+            <div>
+                <label for="">Nome completo</label>
+                <input type="text" name="nome" class="field">        
+                <label for="">Idade</label>
+                <input type="text" name="idade" class="field">        
+                <label for="">Email</label>
+                <input type="text" name="email" class="field">        
+                <label for="">Celular - WhatsApp</label>
+                <input type="text" name="celular" class="field">        
+                <label for="">Posição que joga </label>
+                <input type="text" name="posicao" class="field">
+            </div>
+            <div>        
+                <label for="">OBS</label>
+                <textarea name="obs" rows="10" class="field"></textarea>
+            </div>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-sucess" value="Cadastre se">
+        </div>
+    </form>
+</div>

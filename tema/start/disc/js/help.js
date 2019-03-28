@@ -1,5 +1,17 @@
 const log = console.log;
 const query = x => document.querySelector(x);
+const to   = x => { window.location.href = x };
+var data = {};
+
+var options = 
+{
+    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+    credentials: "same-origin",
+    method: 'POST',
+    mode: 'cors',
+    cache: 'default',
+    body: null
+};
 
 function parametros() {
     let url = window.location.search.replace('?', '');
@@ -168,17 +180,22 @@ function reserva() {
 }
 
 function filtro(select) {
-    fetch(url_api)
-        .then(x => x.json())
-        .then(q => {
-            let quadra = q.quadra;
-            let conjunto = Object.values(quadra.results);
-            if (select.value !== '') {
-                conjunto = Object.values(quadra.results).filter(p => p.tag == select.value);
-            }
-            let quadras = conjunto;
-            vio.quadra = quadras;
-        });
+    let id = select.value;
+    let lista = document.querySelectorAll('[class*="filter_"]');
+    let lista2 = document.querySelectorAll(`[class*="${id}"]`);
+    log(lista);
+    for( let i = 0; i < lista.length; i++) {
+        lista[i].setAttribute('hidden','');
+    }
+    for( let i = 0; i < lista2.length; i++) {
+        lista2[i].removeAttribute('hidden');
+    }
+    if( id == "A" ) {
+        for( let i = 0; i < lista.length; i++) {
+            lista[i].removeAttribute('hidden');
+        }        
+    }
+
 }
 
 function add_player() {
@@ -354,4 +371,57 @@ function marcar() {
     for (let index = 0; index < arr.length; index++) {
         arr[index].classList.add( 'active' );
     }
+}
+
+const queryAll   = x => { 
+    return document.querySelectorAll(x) 
+};
+
+function form_data( id ) 
+{
+    let formulario = queryAll( `#${id} input, #${id} textarea, #${id} select` );
+    for( let i = 0; i < formulario.length; i++ ) {
+        nome  = formulario[i].name || formulario[i].id || 'b'
+        valor = formulario[i].value || formulario[i].innerHTML || 'b';
+        if( nome.length > 0 && valor.length > 0 ) {
+            log( nome );
+            data[nome] = valor;
+        }
+    }
+    return data;
+}
+
+function obj_to_url( obj )
+{
+    let indices =  Object.keys( obj );
+    let url     = indices.map( i => `${i}=${obj[i]}` ).join('&');
+    return encodeURI( url );
+}
+
+async function post_api( url, obj, hof )
+{
+    options.body   = obj_to_url( obj );
+    fetch( `${app}/${url}`, options )
+    .then( j => j.json() )
+    .then( x => {
+        hof( x );
+    } );
+    return true;
+}
+
+async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
+{
+    let formulario    = form_data( id_formulario );
+    post_api( url, formulario, x => {       
+        data = {};
+        if ( redirect != null ) {
+            to( redirect );
+        }      
+        if( reset == 0 ) {
+            query( `#${id_formulario}` ).reset();
+        }             
+        alerta( 'Cadastrado' );
+        
+    } );
+    return true;
 }

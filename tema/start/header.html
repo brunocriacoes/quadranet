@@ -4,31 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Quadra</title>
+    <title>{{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="{{description}}">
     <meta name="keywords" content="">
-    <meta property="og:title" content="" />
-    <meta property="og:type" content="article.article" />
-    <meta property="og:url" content="" />
-    <meta property="og:image" content="" />
     <link rel="stylesheet" type="text/css" media="screen" href="disc/css/style.css" />
-    <!-- <link rel="stylesheet" type="text/css" media="( max-width: 320px )" href="disc/css/mobile.css" /> -->
-    <link rel="manifest" href="api/manifest">
-    <link rel="shortcut icon" href="disc/logo/ico.png" type="image/x-icon">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Weather PWA">
-    <link rel="apple-touch-icon" href="disc/logo/ico.png">
-    <meta name="msapplication-TileImage" content="disc/logo/ico.png">
-    <meta name="msapplication-TileColor" content="#CC0000">
-    <meta name="theme-color" content="#CC0000">
-    <meta name="application-name" content="PWA solução sites">
-    <link rel="icon" sizes="16x16 32x32 48x48" href="disc/logo/ico.png">
-    <link rel="icon" sizes="512x512" href="disc/logo/ico.png">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
+    <!-- <link rel="stylesheet" type="text/css" media="( max-width: 320px )" href="disc/css/mobile.css" /> -->    
+    <link rel="shortcut icon" href="disc/logo/ico.png" type="image/x-icon"> 
     <script>
         const debug = true;
         const chache = '&cache=' + new Date().getTime();
@@ -37,13 +19,17 @@
         const dominio = window.location.hostname.replace('www.', '');
         const base = `${http}//${dominio}`;
         const uri_api = `${http}//${dominio}/api`;
+        const app     = `${http}//${dominio}/app`;
         const url_api = `${http}//${dominio}/api/get/${dominio}`;
         const url_storage = `${http}//${dominio}/api/Data/${dominio}/uploads`;
         const menu_2 = document.querySelector('#menu');
     </script>
+    <style>
+        :root {
+            --theme: {{color}};
+        }
+    </style>
 
-    <style id="personalizar"></style>
-    <link rel="stylesheet" href="api/css">
 </head>
 
 <body>
@@ -52,15 +38,10 @@
     <div class="menu-vertical">
         <div class="menu-vertical__space">
             <div class="menu-vertical__avatar">
-                <img id="vio_logo_2" src="disc/img/default.jpg" onerror="img_default( this )">
-                <span id="vio_title">Nome da empresa</span>
+                <img src="{{uri}}/app/storage/{{logo}}">
+                <span>{{title}}</span>
             </div>
-            <a href="{{uri}}" onclick="menu.click()" class="link-menu">Inicio</a>
-            <a href="quem-somos" onclick="menu.click()" class="link-menu">Quem somos</a>
-            <a href="servicos" onclick="menu.click()" class="link-menu">Serviços</a>
-            <a href="quadras" onclick="menu.click()" class="link-menu">Quadras</a>
-            <a href="lista-espera" onclick="menu.click()" class="link-menu">Lista de Espera</a>
-            <a href="contato" onclick="menu.click()" class="link-menu">Contato</a>
+            {{menu}}
         </div>
     </div>
     <div id="menu_closer"><label for="menu">X</label></div>
@@ -74,20 +55,15 @@
                 <img src="disc/ico/soccer-field.png">
             </a>
             <a href="{{uri}}" class="menu-mobile_link">
-                <img id="vio_logo" src="disc/logo/logo-header-black.png" onerror="img_default( this )">
+                <img src="{{uri}}/app/storage/{{logo}}">
             </a>
             <div class="box-link-menu">
-                <a href="{{uri}}" class="link-menu">Inicio</a>
-                <a href="quem-somos" class="link-menu">quem somos</a>
-                <a href="servicos" class="link-menu">serviços</a>
-                <a href="quadras" class="link-menu">quadras</a>
-                <a href="lista-espera" class="link-menu">Lista de Espera</a>
-                <a href="contato" class="link-menu">contato</a>
+                {{menu}}
             </div>
-            <a href="perfil" class="menu-mobile_link">
+            <a href="{{uri}}/perfil" class="menu-mobile_link">
                 <img src="disc/ico/avatar.png">
             </a>
-            <a href="carrinho" class="menu-mobile_link cart_count">
+            <a href="{{uri}}/carrinho" class="menu-mobile_link cart_count">
                 <img src="disc/ico/shopping-cart.png">
                 <span id="vio_itens_count">0</span>
             </a>

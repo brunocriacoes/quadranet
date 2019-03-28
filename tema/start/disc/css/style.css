@@ -16,8 +16,9 @@
     --screen: 1200px;
 }
 body {
-    background-color: #EEE;
+    background-color: #FFF;
     font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -71,10 +72,9 @@ h1, h2, h3, h4, h5, h6 {
 .footer__dev {
     display: block;
     line-height: 40px;
-    background-color: rgba( 0, 0, 0, .2 );
     color: #fff;
     text-align: center;
-    font-size: 11px;
+    font-size: 10px;
 }
 .footer__dev a {
     color: #FFF;
@@ -96,22 +96,32 @@ h1, h2, h3, h4, h5, h6 {
 .footer__redes-sociais a img {
     filter: invert( 100% );
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    padding: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 7px;
     margin: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+.footer__redes-sociais a img:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 .container {
     display: block;
     width: var(--screen);
     max-width: 90vw;
     margin: 0 auto;
+    position: relative;
 }
 .footer-info {
     display: grid;
     grid-template-columns: repeat( 2, 1fr );
     grid-gap: 30px;
     color: #FFF;
+}
+.footer-info h2 {
+    font-size: 18px;
+    margin-bottom: 20px !important;
 }
 .footer__about, .footer__adress {
     margin-bottom: 24px;
@@ -129,13 +139,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 .footer__adress__item a {
     display: flex;
-    color: #fff;
+    color: #DDD;
     text-decoration: none;
     align-items: center;
 }
 .footer__adress__item a img {
     filter: invert( 100% );
     margin-right: 12px;
+    width: 40px;
+    height: 40px;
+    padding: 9px;
 }
 .card {
     display: grid;
@@ -147,22 +160,19 @@ h1, h2, h3, h4, h5, h6 {
     grid-gap: 30px;
 }
 .card__title, .cart__title, .fields__title, .servico_title, .title__carrinho {
-    margin-top: 12px;
-    margin-bottom: 15px;
     text-align: center;
     text-transform: uppercase;
-    border-bottom: 4px solid #ECEFF1;
 }
 
+.card__title {
+    font-size: 18px;
+}
 .card__services {
     background-color: #fff;
     width: 100%;
-    padding: 15px;
+    padding: 30px;
     border-radius: 8px;
     margin: 0 auto;
-    margin-bottom: 20px;
-    border-top: 6px solid var(--theme);
-    box-shadow: 0 12px 22px rgba(0,0,0,0.25), 0 8px 8px rgba(0,0,0,0.22);
 }
 .card__services h2 {
     padding: 15px;
@@ -461,7 +471,7 @@ h1, h2, h3, h4, h5, h6 {
 .fields_grid {
     display: grid;
     grid-gap: 30px;
-    grid-template-columns: repeat( 3, 1fr );
+    grid-template-columns: repeat( 4, 1fr );
     width: 100%;
 }
 .fields__card {
@@ -547,14 +557,21 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
 }
 .fields_type {
-    text-align: center;
+    text-align: right;
     margin: 20px;
+    display: flex;
+    justify-content: flex-end;
 }
 .fields_type_select {
-    width: 100px;
-    border: 2px solid #ccc;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    width: 170px;
+    border: 1px solid #DDD;
     border-radius: 4px; 
     outline: none;
+    margin-left: 15px;
+    padding-left: 12px;
 }
 .btn_fields__card_details,
 .btn_fields__card_hours {
@@ -566,6 +583,11 @@ h1, h2, h3, h4, h5, h6 {
     margin: 20px 0;
 }
 .form {}
+.form label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
 .field {
     display: block;
     width: 100%;
@@ -910,18 +932,23 @@ p {
 
 .grid-blog {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
+    padding: 50px 0;
 }
 .grid-blog a {
     display: block;
     position: relative;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #FFF;
     text-decoration: none;
     color: #FFF;
     border: none;
     overflow: hidden;
+}
+.grid-blog a:hover {
+    filter: grayscale(1);
+    box-shadow: 0 0 3px rgba(0, 0, 0, .5);
 }
 .grid-blog a img {
     display: block;
@@ -951,4 +978,54 @@ p {
     background-image: url('../img/m.jpg');
     background-position: center top;
     background-size: cover;
+}
+.servico_bg {
+    background: #DDD;
+    margin-bottom: -30px;
+    padding: 50px 0;
+    margin-top: 40px;
+}
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+}
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+}
+.grid-6 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 30px;
+}
+.link-contact {
+    display: flex;
+    text-decoration: none;
+    color: #000;
+    align-items: center;
+}
+.link-contact img {
+    height: 18px;
+    margin: 10px;
+}
+iframe {
+    display:block;
+    width: 100%;
+}
+.modalidade-escolha {
+    
+}
+.modalidade-escolha label {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.modalidade-escolha input {
+    display: block;
+    margin-right: 12px;
 }

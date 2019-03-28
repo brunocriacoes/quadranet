@@ -148,6 +148,11 @@ var vio = {
         query('#banner__table_body').innerHTML = tpl_array( arr, '#tr_banner', 'banner' );
     },
 
+    set blog(arr) {
+        _vio.blog = arr || [];
+        query('#blog__table_body').innerHTML = tpl_array( arr, '#tr_blog', 'blog' );
+    },
+
     set dominio(arr) {
         _vio.dominio = arr || [];
         query('#dominio__table_body').innerHTML = tpl_array( arr, '#tr_default', 'dominio' );
