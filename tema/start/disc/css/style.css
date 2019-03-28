@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 :root {
-    --theme: #8733FC;
+    --theme: #2e7d32;
     --primary: var(--theme);
     --secondary: var(--theme);
     --danger: #b71c1c;
@@ -33,11 +33,11 @@ h1, h2, h3, h4, h5, h6 {
     display: grid;
     align-items: center;
     width: 100vw;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     height: 100px;
-    background: transparent;
+    background: linear-gradient( #000, transparent );
     z-index: 999;
 }
 .menu-mobile {
@@ -65,12 +65,13 @@ h1, h2, h3, h4, h5, h6 {
 .link-field { display: none; }
 .footer {
     display: block;
+    margin-top: 30px;
     background-color: var(--theme);
 }
 .footer__dev {
     display: block;
     line-height: 40px;
-    background-color: rgba( 0, 0, 0, .3 );
+    background-color: rgba( 0, 0, 0, .2 );
     color: #fff;
     text-align: center;
     font-size: 11px;
@@ -85,8 +86,7 @@ h1, h2, h3, h4, h5, h6 {
 .footer__redes-sociais {
     display: block;
     text-align: center;
-    background-color: var( --theme );
-    filter: saturate( 80% );
+    background-color: rgba(0, 0, 0,.1);
     margin-bottom: 30px;
 }
 .footer__redes-sociais a {
@@ -96,10 +96,10 @@ h1, h2, h3, h4, h5, h6 {
 .footer__redes-sociais a img {
     filter: invert( 100% );
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     padding: 5px;
-    margin: 10px;
+    margin: 12px;
 }
 .container {
     display: block;
@@ -201,7 +201,7 @@ h1, h2, h3, h4, h5, h6 {
 .banner {
     width: 100vw;
     max-width: 100vw;
-    height: 700px;
+    height: 80vh;
     position: relative;
     overflow: hidden;
     background: #333;
@@ -906,4 +906,49 @@ p {
 
 .table__span {
     display: block;
+}
+
+.grid-blog {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+}
+.grid-blog a {
+    display: block;
+    position: relative;
+    border-radius: 5px;
+    background-color: #FFF;
+    text-decoration: none;
+    color: #FFF;
+    border: none;
+    overflow: hidden;
+}
+.grid-blog a img {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+.grid-blog a span {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    padding: 20px;
+    background: linear-gradient( transparent, #000;)
+}
+.grid-blog a b {
+    display: block;
+    font-size: 28px;
+}
+.title {
+    margin-top:20px;
+    color: #333;
+}
+#mister-m {
+    display: block;
+    width: 100%;
+    height: 220px;
+    background-image: url('../img/m.jpg');
+    background-position: center top;
+    background-size: cover;
 }

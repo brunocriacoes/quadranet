@@ -40,6 +40,6 @@
         }
     }
 
-    $html = preg_replace( '/\{\{.*\}\}/', '', $html );
+    // $html = preg_replace( '/\{\{.*\}\}/', '', $html );
 
     echo $html;

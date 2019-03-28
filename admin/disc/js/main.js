@@ -76,5 +76,4 @@ setInterval( x => {
     } else {
         atual.innerHTML = 0;
     }
-    edita_quadra( quadra_sisten );
 },100000 );
