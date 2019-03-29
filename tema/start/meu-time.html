@@ -1,29 +1,33 @@
 <div id="mister-m"></div>
-<section id="meu-time">
-    <div class="menu-perfil">
-        <a href="#perfil">Perfil</a>
-        <a href="#trocar-senha">Mudar Senha</a>
-        <a href="#historico-compras">Histórico</a>
-        <a href="#meu-time">Meu time</a>
-        <a href="#sair">Sair</a>
+<br>
+<br>
+<section id="servicos" class="container grid-2">
+    <div>        
+        <a href="{{uri}}/perfil">Perfil</a>
+        <a href="{{uri}}/trocar-senha">Mudar Senha</a>
+        <a href="{{uri}}/historico-compras">Histórico</a>
+        <a href="{{uri}}/meu-time">Meu time</a>
+        <a href="javascript:void(sair())">Sair</a>
     </div>
-    <div class="form-short box">
-        <h2 class="text-center gap-top">Meu Time</h2>
-        <table class="table text-cente">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Whatsapp</th>
-                    <th>E-mail</th>
-                    <th>Pagou</th>
-                    <th><img src="./disc/ico/delete.png" class="trash"></th>
-                </tr>
-            </thead>
-            <tbody id="vio_time">
-
-            </tbody>
-        </table>
-        <form action="javascript:void(0)" method="POST" class="form" id="add-jogador" onsubmit="add_player()">
+    <div class="grid-2">
+        <div>
+            <table class="table text-cente">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Whatsapp</th>
+                        <th>E-mail</th>
+                        <th>Pagou</th>
+                        <th><img src="./disc/ico/delete.png" class="trash"></th>
+                    </tr>
+                </thead>
+                <tbody id="vio_time">
+    
+                </tbody>
+            </table>
+        </div>
+        <form action="javascript:void(0)" method="POST" class="" id="add-jogador" onsubmit="add_player()">
+            <h2 class="text-center gap-top">Meu Time</h2>
             <input type="text" class="field" id="player_name" placeholder="Nome ou Apelido">
             <input type="text" class="field" id="player_tel" placeholder="Whatsapp">
             <input type="text" class="field" id="player_mail" placeholder="E-mail">

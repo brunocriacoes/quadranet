@@ -1,23 +1,27 @@
 <div id="mister-m"></div>
-<section id="perfil">
-    <div class="menu-perfil">
-        <a href="#perfil">Perfil</a>
-        <a href="#trocar-senha">Mudar Senha</a>
-        <a href="#historico-compras">Histórico</a>
-        <a href="#meu-time">Meu time</a>
-        <a href="#sair">Sair</a>
+<br>
+<br>
+<section id="servicos" class="container grid-2">
+    <div>        
+        <a href="{{uri}}/perfil">Perfil</a>
+        <a href="{{uri}}/trocar-senha">Mudar Senha</a>
+        <a href="{{uri}}/historico-compras">Histórico</a>
+        <a href="{{uri}}/meu-time">Meu time</a>
+        <a href="javascript:void(sair())">Sair</a>
     </div>
-    <form action="javascript:void(0)" method="POST" class="form form-short box" id="atualizar_perfil">
+    <form action="javascript:void(0)" method="POST" class="" id="atualizar_perfil">
         <h2 class="text-center">Perfil</h2>
-        <input type="text" class="field" placeholder="Nome" id="vio_nome">
-        <input type="text" class="field" placeholder="Digite um Apelido" id="vio_apelido">
-        <input type="email" class="field" placeholder="email" id="vio_email" value="email@gmail.com" disabled>
-        <input type="text" class="field" placeholder="CPF" id="vio_cpf">
-        <input type="text" class="field" placeholder="Cep" id="vio_cep">
-        <input type="text" class="field" placeholder="Estado" id="vio_estado">
-        <input type="text" class="field" placeholder="Cidade" id="vio_cidade">
-        <input type="text" class="field" placeholder="Endereço" id="vio_endereco">
-        <input type="tel" class="field" placeholder="Whatsapp" id="vio_whatsapp">
+        <div class="grid-2">
+            <input type="text" class="field" placeholder="Nome">
+            <input type="text" class="field" placeholder="Digite um Apelido">
+            <input type="email" class="field" placeholder="email" value="email@gmail.com" disabled>
+            <input type="text" class="field" placeholder="CPF">
+            <input type="text" class="field" placeholder="Cep">
+            <input type="text" class="field" placeholder="Estado">
+            <input type="text" class="field" placeholder="Cidade">
+            <input type="text" class="field" placeholder="Endereço">
+            <input type="tel" class="field" placeholder="Whatsapp">
+        </div>
         <input onclick="atualizarPerfil()" type="submit" value="salvar" class="btn btn-sucess btn-center">
     </form>
 </section>
