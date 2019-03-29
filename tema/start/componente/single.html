@@ -1,15 +1,23 @@
 <article>
-    <h1 id="vio_sobre_title">{{nome}}</h1>
+    <div class="detalhes_header">
+        <h1 id="vio_sobre_title">{{nome}}</h1>
+        <a class="btn btn_detalhes" href="{{uri}}/agenda/{{id}}">Agendar</a>
+    </div>
     <div id="vio_sobre_content">{{html}}</div>
     {{share}}
 </article>
 <article class="gap-bottom">
     <img src="{{uri}}/app/storage/{{foto_1}}" class="img-responsive" id="galeria-sobre">
     <div class="galeria">
-        <img src="{{uri}}/app/storage/{{foto_1}}" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )">
-        <img src="{{uri}}/app/storage/{{foto_2}}" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )">
-        <img src="{{uri}}/app/storage/{{foto_3}}" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )">
-        <img src="{{uri}}/app/storage/{{foto_4}}" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )">
-        <img src="{{uri}}/app/storage/{{foto_5}}" class="img-responsive" onmouseover="hover_photo( this, '#galeria-sobre' )">
+        <img src="{{uri}}/app/storage/{{foto_1}}" class="img-responsive"
+            onmouseover="hover_photo( this, '#galeria-sobre' )">
+        <img src="{{uri}}/app/storage/{{foto_2}}" class="img-responsive"
+            onmouseover="hover_photo( this, '#galeria-sobre' )">
+        <img src="{{uri}}/app/storage/{{foto_3}}" class="img-responsive"
+            onmouseover="hover_photo( this, '#galeria-sobre' )">
+        <img src="{{uri}}/app/storage/{{foto_4}}" class="img-responsive"
+            onmouseover="hover_photo( this, '#galeria-sobre' )">
+        <img src="{{uri}}/app/storage/{{foto_5}}" class="img-responsive"
+            onmouseover="hover_photo( this, '#galeria-sobre' )">
     </div>
 </article>

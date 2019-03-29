@@ -1029,3 +1029,20 @@ iframe {
     display: block;
     margin-right: 12px;
 }
+
+.detalhes_header {
+    display: grid;
+    grid-template-columns: 1fr 130px;
+    align-items: center;
+}
+
+.btn_detalhes {
+    background-color: var( --primary );
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.hours__img {
+    width: 300px;
+    margin-bottom: 10px;
+}
