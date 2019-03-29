@@ -7,11 +7,31 @@
     maker_dir( $token_dir ); 
 
     file_put_contents( $user_dir . sha1( 'user@gmail.com' ) . ".json", json_encode( [
-        "pass"   => sha1( '123' ),
-        "mail"   => 'user@gmail.com',
-        "id"     => sha1( 'user@gmail.com' ),
-        "status" => true,
+        "nome"        => 'usuario',
+        "telephone"   => '+55 (00) 0 0000-0000',
+        "pass"        => sha1( '123' ),
+        "email"        => 'user@gmail.com',
+        "id"          => sha1( 'user@gmail.com' ),
+        "admin"       => 1,
+        "domain"      => 1,
+        "ativo"       => 1,
+        "status"      => true,
     ] ) );
+
+    if( ! empty( request['update'] ) ):
+        $id        = sha1( request['email'] );
+        $user_file = "{$user_dir}{$id}.json";
+        $user      = json_decode( file_get_contents( $user_file ) );
+        foreach( request as $k => $v ):
+            $user->{$k} = $v;
+        endforeach;
+        
+        file_put_contents( $user_file, json_encode( $user ) );
+        unset(  $user->pass );
+        unset(  $user->password );
+        echo json_encode( $user );
+        die;
+    endif;
     
     if( ! empty ( request['token'] ) ):
         $token_file = $token_dir . request['token'] . ".json";
@@ -76,7 +96,6 @@
         $json               = json_decode( file_get_contents( $profile_token ) );
         $user               = json_decode( file_get_contents(  $user_dir . sha1( $json->user ) . ".json"  ) );
         unset( $user->pass );
-        unset( $user->admin );
         unset( $user->ativo );
         unset( $user->status );
         unset( $user->domain );

@@ -92,10 +92,12 @@ var vio = {
         query('#jogadores__table_body').innerHTML = cont
             .map( x => `
                 <tr>
-                    <td>${x.name}</td>
-                    <td>${x.nickname}</td>
-                    <td>${x.telephone}</td>
+                    <td>${x.nome}</td>
+                    <td>${x.idade}</td>
+                    <td>${x.posicao}</td>
+                    <td>${x.celular}</td>
                     <td>${x.email}</td>
+                    <td><img onclick="trash( 'espera', '${x.id}' )" src="./disc/ico/trash.png" class="ico-table"></td>
                 </tr>
             ` ).join( '' );
     },
@@ -257,7 +259,7 @@ var vio = {
             x.pagamento        = tipo_pagamento.nome || 'aguardando pagamento';
             let id_quadra      = x.id.substr( 25, 34 );
             let todas_quadra   = vio.quadra;
-            let qd             = todas_quadra.find( z => z.id == id_quadra );
+            let qd             = todas_quadra.find( z => z.id == id_quadra ) || {};
             if( x.tipo_contatacao == 1 ) {
 
                 x.valor            = qd.diaria || '0,00';
@@ -267,8 +269,13 @@ var vio = {
         } );
         query('#historico__table_body').innerHTML = tpl_array( arr, '#tpl_historico' );
     },
-
-    
+    set espera( arr ) {
+        _vio.espera = arr;
+        vio.jogadores = arr;
+    },   
+    set site( arr ) {
+        _vio.site = arr;
+    },   
 
 }
 

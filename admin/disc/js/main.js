@@ -18,9 +18,11 @@ fetch( `${app}` )
     let tmp_quadra = x.quadra || []
     tmp_quadra     = tmp_quadra[0] || {};
     quadra_sisten  = tmp_quadra.id || '';
-    edita_quadra( quadra_sisten )
-    x.site = x.site   || [];
-    x.site = x.pagina || [];
+    edita_quadra( quadra_sisten );
+    x.site   = x.site   || [];
+    x.pagina = x.pagina || [];
+    let info =  x.site;
+    log( info );
     preencher( 'visual__form__info', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__social', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__contato', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
@@ -32,6 +34,7 @@ fetch( `${app}` )
 
 draw_select( tipo_error, 'tipo_error' );
 draw_select( sim_nao, 'ativo' );
+draw_select( sim_nao, 'juridico' );
 draw_select( is_admin, 'admin' );
 draw_select( estado, 'estado' );
 draw_select( status_pagamento, 'status_pagamento' );
@@ -48,9 +51,9 @@ fetch( `${app}/auth/?profile=${window.localStorage.token_painel||''}` )
 fetch( `${app}/dominio` )
 .then( x => x.json() )
 .then( x => {
+    vio.dominio = x;
     let lista = [...[{ id: '', nome: 'sistema'}], ...x];
     draw_select( lista, 'dominio' );
-    vio.dominio = x;
 } );
 
 fetch( `${app}/error` )
@@ -77,3 +80,20 @@ setInterval( x => {
         atual.innerHTML = 0;
     }
 },100000 );
+
+queryAll('.ico-plus').forEach( x => {
+    x.addEventListener('click', function() {
+        let id = this.href.split('#')[1];
+        let id_form = query(`#${id} form`);
+        query(`#${id} form`).reset();
+        if( query(`#${id} form .editor-local`) ) {
+            query(`#${id} form .editor-local`).innerHTML = '';
+        }
+        horario   = [];
+        vio.mostrar_horarios = 1;
+        let lista_var = queryAll(`#${id} form img:not([src*="ico"])`);
+        for (let index = 0; index < lista_var.length; index++) {
+            lista_var[index].src = 'disc/img/default.jpg';
+        }        
+    } );
+} );

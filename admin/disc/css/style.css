@@ -27,7 +27,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .grid-1 { display: grid; grid-template-columns: repeat( 1, 1fr); }
 .grid-2 { display: grid; grid-template-columns: repeat( 2, 1fr); }
-.grid-3 { display: grid; grid-template-columns: repeat( 3, 1fr); }
+.grid-3 { display: grid; grid-template-columns: repeat( 3, 1fr); grid-gap: 24px; }
 .grid-4 { display: grid; grid-template-columns: repeat( 4, 1fr); }
 .grid-5 { display: grid; grid-template-columns: repeat( 5, 1fr); }
 .grid-6 { display: grid; grid-template-columns: repeat( 6, 1fr); }
@@ -706,6 +706,7 @@ option {
 }
 .gap-aside {
     padding: 12px;
+    cursor: pointer;
 }
 .link_menu-tab-box {
     border-bottom: 1px solid #DDD;
@@ -740,4 +741,7 @@ option {
 	0%, 66% { left: -20%; opacity: 0; }
     74%, 91% { left: 25%; opacity: 1; }
     100% { left: 50%; opacity: 0; }
+}
+label img {
+    cursor: pointer;
 }

@@ -58,3 +58,19 @@ function get_tpl( $nome = '' ) {
     }
     return ""; 
 }
+
+function dominio_valid() {
+    $file  = __DIR__ . "/app/data/dominio/" . dominio . ".json";
+    if( file_exists( $file ) ) {
+        $json = file_get_contents( $file );
+        $json = json_decode( $json );
+        $status = $json->status ?? false;
+        if( $status ) {
+            return 'start';
+        } else {
+            return 'construcao';
+        }
+    } else {
+        return 'construcao';
+    }
+}

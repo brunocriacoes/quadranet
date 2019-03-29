@@ -71,8 +71,7 @@ async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
     formulario        = { ... formulario, ... send };
     vio.aside_quadra  = 1;
     post_api( url, formulario, x => {
-        gravar_horario( x.id );
-        
+        gravar_horario( x.id );        
         files     = {};
         cart      = [];
         edit      = {};
@@ -89,8 +88,7 @@ async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
         if ( redirect != null ) {
             if( reset == 0 ) {
                 query( `#${id_formulario}` ).reset();
-            }
-           
+            }           
             _vio[url] = _vio[url] || [];
             vio[url]  = _vio[url].filter( y => x.id != y.id );
             vio[url]  = [ ... [x], ... _vio[url] ];
@@ -442,6 +440,9 @@ function router( pag, HOF ) { if ( page === pag ) { HOF(); } }
 function alerta( str ) {
     query( '#show-alerta' ).click();
     query( '#alerta span' ).innerHTML = str;
+    setTimeout( x => {
+        query( '#show-alerta' ).click();
+    }, 2000 );
 }
 
 function set_domain( THIS ) {
@@ -543,7 +544,12 @@ function gravar_horario( id ) {
             status: 1,
             ativo: 1
         };
-        post_api( 'horario', obj, z => {} );
+        post_api( 'horario', obj, z => {
+            let horarios =  vio.horario || [];
+            horarios = horarios.filter( x => z.id  != x.id  );
+            horarios.push( z );
+            vio.horario = horarios;
+        } );
     } );
 }
 function editar_horarios( id ) {
@@ -622,3 +628,49 @@ function busca_os_contratante() {
     let arr   = lista.filter( x => x.contratante_nome.indexOf(valor) != -1 && status == x.status_compra  );
     query( '#historico__table_body' ).innerHTML = tpl_array( arr, '#tpl_historico' );
 }
+
+function query_cep( elemento, seletor = null ) {
+    let cep   = elemento.value;
+    cep       = cep.replace( /\-/gi, '' );
+    let total = cep.length;
+    if( total == 8 ) {
+        fetch( `https://viacep.com.br/ws/${cep}/json/` )
+        .then( x => x.json() )
+        .then( x => {
+            let obj = x;
+            obj.id = 'endereco';
+            obj.rua = x.logradouro;
+            obj.cidade = x.localidade;
+            obj.estado = x.uf;
+            if( seletor == null ) {
+                preencher( 'form-endereco', { ...edit, ...obj, id: edit.id } );
+            } else {
+                let form = form_data( seletor );
+                preencher( seletor, { ...edit, ...obj, id: edit.id, ...form } );
+            }
+        } );
+    }
+}
+
+function lista_espera() {
+    let lista  = vio.espera || [];
+    let select = query('#espera-modalidade').value;
+    let input  = query('#espera-termo').value;
+    lista = lista.filter( ( x ) => {
+        let keys   = Object.keys(x);
+        keys   = keys.map( c => c.replace('mod_', '') );
+        let valid  = keys.indexOf(select);
+        return valid != -1 ? true : false;
+   });
+   vio.jogadores = lista;
+}
+function delete_dominio( id ) {
+    trash( 'dominio', id );
+}
+
+function delete_usuario( id, mail ) {
+    post_api('auth', { update: 1, status:0, bug: 1, email: mail }, x => {
+        vio.usuario = _vio.usuario.filter( y => x.email != y.email );
+    })
+}
+

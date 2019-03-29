@@ -193,6 +193,7 @@
                     <h5>Adicionar novo domínio</h5>
                 </header>
                 <form onsubmit="post_api_form( 'dominio', 'form-dominio-novo', 'dash.html#dominio' )" id="form-dominio-novo" action="javascript:void(0)"  method="POST">
+                    <input type="hidden" name="id">
                     <label for="" class="input-label">Nome</label>
                     <input  type="text" class="input-field" name="nome" required>
                     <label for="" class="input-label">Dominio</label>
@@ -231,21 +232,38 @@
                     <h5>Adicionar novo usuário</h5>
                 </header>
                 <form action="javascript:void(0)" onsubmit="post_api_form( 'auth', 'form-usuario', 'dash.html#usuario' )" id="form-usuario" method="POST">
-                    <input type="hidden" name="id">
-                    <label for="" class="input-label">Nome</label>
-                    <input type="text" class="input-field" name="nome" required>
-                    <label for="" class="input-label">Email</label>
-                    <input type="email" class="input-field" name="mail" required>
-                    <label for="" class="input-label">Senha</label>
-                    <input type="password" class="input-field" name="pass">
-                    <label for="" class="input-label">Telefone</label>
-                    <input type="text" class="input-field" name="telephone">
-                    <label for="" class="input-label">Domínio</label>
-                    <select name="dominio" class="input-field" required></select>
-                    <label for="" class="input-label">Nivel Acesso</label>
-                    <select name="admin" class="input-field"></select>
-                    <label for="" class="input-label">Ativo</label>
-                    <select name="ativo" class="input-field"></select>
+                    <div class="grid-2">
+                        <input type="hidden" name="id">
+                        <input type="hidden" name="update" value="1">
+                        <div>                            
+                            <label for="" class="input-label">Nome</label>
+                            <input type="text" class="input-field" name="nome" required>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Email</label>
+                            <input type="email" class="input-field" name="email" required>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Senha</label>
+                            <input type="password" class="input-field" name="pass">
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Telefone</label>
+                            <input type="text" class="input-field" name="telephone">
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Domínio</label>
+                            <select name="dominio" class="input-field" required></select>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Nivel Acesso</label>
+                            <select name="admin" class="input-field"></select>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Ativo</label>
+                            <select name="ativo" class="input-field"></select>
+                        </div>
+                    </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
@@ -347,7 +365,7 @@
                         <div class="grid-2 grid-gap">
                             <div>
                                 <label for="" class="input-label">Cep</label>
-                                <input type="text" name="cep" class="input-field" placeholder="00000-000">
+                                <input type="text" name="cep" class="input-field" onblur="query_cep( this, 'visual__form__contato' )" placeholder="00000-000">
                             </div>
                             <div>
                                 <label for="" class="input-label">Rua</label>
@@ -518,7 +536,19 @@
                     <label for="" class="input-label">Titulo</label>
                     <input type="text" name="nome" class="input-field">     
                     <label for="" class="input-label">Descrição</label>
-                    <textarea class="input-field" rows="7" name="conteudo" placeholder="ex: Comodidades, wifi, tv etc..." ></textarea>
+                    <div class="editor-box gap-bottom">
+                        <div class="editor-nav">
+                            <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
+                            <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
+                            <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
+                            <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
+                            <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
+                            <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
+                            <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
+                            <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
+                        </div>
+                        <div contenteditable="true" class="editor-local"></div>
+                    </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
             </section>
@@ -701,15 +731,25 @@
                 </header>
                 <form action="javascript:void(0)" id="form-contratante" onsubmit="post_api_form( '_user', 'form-contratante', 'dash.html#contratantes' )" method="POST">
                     <input type="hidden" name="id">
-                    <div class="grid-2 grid-gap">
-                        <div>
-                            <label for="" class="input-label">Nome *</label>
-                            <input type="text" class="input-field" name="nome" required>
+                    <div>
+                        <label for="" class="input-label">Nome completo*</label>
+                        <input type="text" class="input-field" name="nome" required>
+                    </div>
+                    <div class="grid-3 grid-gap">
+                        <div>                            
+                            <label for="" class="input-label">É pessoa juridica?</label>
+                            <select name="juridico" class="input-field"></select>
                         </div>
                         <div>                            
-                            <label for="" class="input-label">Sobrenome</label>
-                            <input type="text" class="input-field" name="sobrenome" required>
+                            <label for="" class="input-label">CFP / CNPJ</label>
+                            <input type="text" class="input-field" name="cpf_cnpj" required>
                         </div>
+                        <div>                            
+                            <label for="" class="input-label">Razão social</label>
+                            <select name="razao" class="input-field"></select>
+                        </div>
+                    </div>
+                    <div class="grid-2 grid-gap">
                         <div>                            
                             <label for="" class="input-label">Telefone*</label>
                             <input type="text" class="input-field" name="telefone" required>
@@ -728,7 +768,7 @@
                         </div>
                         <div>                            
                             <label for="" class="input-label">CEP</label>
-                            <input type="text" class="input-field" name="cep" required>
+                            <input type="text" class="input-field" onblur="query_cep( this, 'form-contratante' )" name="cep" required>
                         </div>
                         <div>                            
                             <label for="" class="input-label">Rua</label>
@@ -751,6 +791,8 @@
                             <select name="estado" class="input-field" disabled></select>
                         </div>
                     </div>
+                    <label for="" class="input-label">OBS</label>
+                    <textarea name="obs" class="input-field"></textarea>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
                 <h4 class="gap-top gap-bottom">Time</h4>
@@ -828,9 +870,9 @@
                 <header class="grid-2 gap-bottom">
                     <h5>Lista de espera</h5>
                     <div class="text-right modalidade-lista">
-                        <select name="modalidade" class="input-field "></select>
-                        <form action="javascript:void(0)" method="POST" onsubmit="" class="search">
-                            <input type="search" name="s" required>
+                        <select name="modalidade" class="input-field " id="espera-modalidade" onchange="lista_espera()"></select>
+                        <form action="javascript:void(0)" method="POST" onsubmit="lista_espera()" class="search">
+                            <input type="search" name="s" id="espera-termo" onkeyup="lista_espera()" required>
                             <label for="busca-jogadores">
                                 <img src="./disc/ico/search.png">
                             </label>
@@ -842,14 +884,14 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Apelido</th>
-                            <th>Telefone</th>
+                            <th>Idade</th>
+                            <th>Posicao</th>
+                            <th>Celular</th>
                             <th>Email</th>
+                            <th width="30"></th>
                         </tr>
                     </thead>
-                    <tbody id="jogadores__table_body">
-                        
-                    </tbody>
+                    <tbody id="jogadores__table_body"></tbody>
                 </table>                
             </section>
 
@@ -1104,9 +1146,9 @@
                 <td>{{telefone}}</td>
                 <td>{{ativo}}</td>
                 <td>
-                    <img onclick="to( '#{{prefix}}-novo' ); edit_usuario('{{id}}')" src="./disc/ico/edit.png" class="ico-table">
+                    <img onclick="editar( 'usuario', '{{id}}', 'form-usuario', 'dash.html#usuario-novo' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
-                <td><img onclick="delete_usuario('{{id}}')" src="./disc/ico/trash.png" class="ico-table"></td>
+                <td><img onclick="delete_usuario('{{id}}', '{{email}}')" src="./disc/ico/trash.png" class="ico-table"></td>
             </tr>
         </template>
         <template id="tr_error">
@@ -1124,7 +1166,7 @@
                 <td>{{nome}}</td>
                 <td>{{ativo}}</td>
                 <td>
-                    <img onclick="to( '{{prefix}}' ); edite_dominio('{{id}}')" src="./disc/ico/edit.png" class="ico-table">
+                    <img onclick="editar( 'dominio', '{{id}}', 'form-dominio-novo', 'dash.html#dominio-novo' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
                 <td><img onclick="delete_dominio( '{{id}}' )" src="./disc/ico/trash.png" class="ico-table"></td>
             </tr>
@@ -1135,7 +1177,7 @@
                 <td>
                     <img onclick="editar( 'banner', '{{id}}', 'servicos_form__banner-novo', 'dash.html#banner-novo' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
-                <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+                <td><img onclick="trash( 'banner','{{id}}' )" src="./disc/ico/trash.png" class="ico-table"></td>
             </tr>
         </template>
         <template id="tr_blog">
@@ -1144,7 +1186,7 @@
                 <td>
                     <img onclick="editar( 'blog', '{{id}}', 'blog-form', 'dash.html#blog' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
-                <td><img src="./disc/ico/trash.png" class="ico-table"></td>
+                <td><img onclick="trash( 'blog','{{id}}' )" src="./disc/ico/trash.png" class="ico-table"></td>
             </tr>
         </template>
 

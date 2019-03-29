@@ -25,9 +25,11 @@
         foreach( request as $k => $v ):
             $user->{$k} = $v;
         endforeach;
-        $user      = json_encode( $user );
-        file_put_contents( $user_file, $user );
-        echo $user;
+        
+        file_put_contents( $user_file, json_encode( $user ) );
+        unset(  $user->pass );
+        unset(  $user->password );
+        echo json_encode( $user );
         die;
     endif;
     

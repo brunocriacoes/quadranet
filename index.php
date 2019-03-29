@@ -3,12 +3,12 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: text/html; charset=utf-8');
     date_default_timezone_set('America/Sao_Paulo');
-
-    define( 'tema', 'start' );
-
+    
     include __DIR__ . '/app/core/hook.php';
     include __DIR__ . '/app/core/help.php';
     include __DIR__ . '/funcoes.php';
+
+    define( 'tema', dominio_valid() );
     
     $data    = json_decode( file_get_contents( uri.'/app' ) );
 
