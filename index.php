@@ -17,20 +17,20 @@
 
     $modalidade = $data->modalidade ?? [];
 
-    $site = $data->site ?? (object) [];
+    $site = $data->site ?? [];
     $site = jsFind( $site, function($x) { return $x->id == 'info' ; } );
     $site->map = str_replace('\\','', $site->map ?? '' );
 
-    $sobre = $data->pagina ?? (object) [];
+    $sobre = $data->pagina ?? [];
     $sobre = jsFind( $sobre, function($x) { return $x->id == 'sobre' ; } );
 
-    $blog = $data->blog ?? (object) [];
+    $blog = $data->blog ?? [];
     $blog = array_map( function($x) {
         $x->resumo = substr( trim( strip_tags( $x->html ?? '' ) ), 0, 75 ) . "..."; 
         return $x;
     }, $blog );
 
-    $quadra = $data->quadra ?? (object) [];
+    $quadra = $data->quadra ?? [];
     $quadra = array_map( function($x) {
         $x->resumo = substr( trim( strip_tags( $x->html ?? '' ) ), 0, 75 ) . "..."; 
         return $x;

@@ -32,7 +32,14 @@ function objToUrl(OBJ) {
 }
 
 function page() {
-    let hash = window.location.hash.replace('#', '');
+    let hash = window.location.href.replace(`${base}`, '');
+    hash = hash.split( '/' );;
+    return hash[1];
+}
+
+function url() {
+    let hash = window.location.href.replace(`${base}/`, '');
+    hash = hash.split( '/' );;
     return hash;
 }
 
@@ -424,4 +431,147 @@ async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
         
     } );
     return true;
+}
+
+function semana( dia, data )
+{
+    let data_arr            = data.split('-');
+    let quandidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30 ];
+    let mes                 = +data_arr[1];
+    let max                 = quandidade_dias_mes[mes];
+    let semana              =  [ "DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB",  ];
+    let futuro              = +data_arr[2];
+    let passado             = +data_arr[2] - +dia;
+    for( let p = 0; p < dia; p++ ) {
+        if( passado <= 0 ) {
+            passado = max - +dia;
+            data_arr[1] = +data_arr[1] - 1;
+            data_arr[0] = data_arr[1] > 0 ? data_arr[0] : +data_arr[0] - 1;
+            data_arr[1] = data_arr[1] > 0 ? data_arr[1] : 12;
+            data_arr[1] = `${data_arr[1]}`;
+            data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
+        }
+        let atemporal = passado++;
+        semana[p] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
+    }
+    for( let f = dia; f < 7; f++ ) {
+        if( futuro > max ) {
+            futuro = 1;
+            data_arr[1] = +data_arr[1] + 1;
+            data_arr[1] = data_arr[1] < 13 ? data_arr[1] : 1;
+            data_arr[1] = `${data_arr[1]}`;
+            data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
+        }
+        let atemporal = `${futuro++}`;
+        atemporal = atemporal.length == 1 ? `0${atemporal}` : atemporal;
+        semana[f] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
+    }
+    semana[dia] = data;
+    return semana;
+}
+
+function editar_agenda( id ) {
+    let times =  vio.horario || [];
+    return times.filter( x => x.quadra == id );
+}
+
+function edita_quadra( id ) {
+    query('#agenda_contador span').innerHTML = 0;   
+    horario = [];
+    let tmp_quadra = vio.quadra || []
+    tmp_quadra     = tmp_quadra[0] || {};
+    quadra_sisten = id || tmp_quadra.id || '';
+    let data_now  = hoje( day.replace(/\-/gi, '/') );
+    let horario_temp = editar_agenda( id );
+    to(`${admin}/dash.html#agenda`);
+    let quadra     = vio.quadra || [];
+    quadra         = quadra.find( x => x.id == id ) || '';
+    let modalidade = vio.modalidade || [];
+    modalidade     = modalidade.find( x => x.id == quadra.modalidade || '' ) || [];
+    query('#agenda__tile').innerHTML       = quadra.nome;
+    query('#agenda__modalidade').innerHTML = modalidade.nome || '';
+    agenda = [];
+    let id_base = horario_temp.map( x => {
+        let hora = `${x.inicio}-${x.final}`;
+        hora = hora.replace(/:/gi, '-');
+        return hora;
+    } );
+    id_base = id_base.sort();
+    let toda_semana = semana( data_now.dia_semana, data_now.data_sisten );
+    id_base.forEach( x => {
+        agenda.push( x );
+        for( let i = 0; i < 7; i++) {
+            agenda.push( `${toda_semana[i]}-${x}-${i}-${quadra.id}` );
+        }
+    } );
+    query('.agenda-body').innerHTML = agenda.map( x => `
+        <label for="pop-agenda-livre" id="b${x}" onclick="set_quadra_contratar('${x}')">
+            <span id="agenda__dia-semana" class="descktop">LIVRE +</span> 
+        </label>
+    ` ).join('');
+    let toda_agenda = document.querySelectorAll( '.agenda-body label' );
+    toda_agenda.forEach( x => {
+        if( x.id.length == 12 ) {
+            let html = x.id.split('-');
+            x.innerHTML = `${html[0].replace('b','')}:${html[1]} às ${html[2]}:${html[3]} `;
+            x.classList.add('timer');
+        }
+    } );
+    let agendados = vio.agenda || []; 
+
+    let todos_dias = document.querySelectorAll( '.agenda-header div' );
+    todos_dias.forEach( x => {
+        x.classList.remove('agenda-hoje');
+    } );
+    query(`.hoje_${data_now.dia_semana}`).classList.add('agenda-hoje');
+    
+    let reservas = vio.reservas || [];
+
+    let time    = new Date();
+    let hora    = time.getHours();
+    let minutos = time.getMinutes();
+    let jogando = reservas.filter( x => {
+        let id = x.id;
+        let init_hora   = +id.substr( 11, 2 );
+        let init_minuto = +id.substr( 14, 2 );
+        let end_hora    = +id.substr( 17, 2 );
+        let end_minuto  = +id.substr( 20, 2 );
+        let dia         = x.id.substr(0, 10)
+       
+        if ( init_hora <= hora && end_hora > hora && dia == day  ) {
+            return true;
+        } else {
+            return false;
+        }
+    } );
+    let id_jogando = jogando.map( x => x.id);
+      
+    reservas.forEach( x => {
+        let elementor = query(`#b${x.id}`);
+        if( elementor ) {
+           
+            elementor.for = "pop-agenda-ocupado";
+            elementor.classList.add('agenda-ocupado');
+            let is_jogando = id_jogando.indexOf( x.id );
+            if( is_jogando > -1 ) {
+                let id          = x.id;
+                let init_hora   = +id.substr( 11, 2 );
+                let end_hora    = +id.substr( 17, 2 );
+                let total_hs    = end_hora - hora;
+                let init_minuto = +id.substr( 14, 2 );
+                let end_minuto  = +id.substr( 20, 2 );
+                let total_mm    = init_minuto + end_minuto;
+                total_mm        = total_mm - minutos;
+                let total       = ( total_hs * 60 ) + total_mm;
+                query('#agenda_contador span').innerHTML = total;
+                elementor.classList.add('agenda-jogando');
+            }
+            elementor.innerHTML = `
+                <span class="descktop">
+                    <b>${x.contratante_nome}</b>
+                    <i>${x.tipo_contatacao == 1 ? 'Diaria' : 'Mensal'}</i>
+                </span> 
+            `;            
+        }
+    } );
 }
