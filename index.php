@@ -67,6 +67,7 @@
         [ "is_array" => true,  "flag" => "quadra",  "data" => $quadra,  "tpl" => "quadra"  ],
         [ "is_array" => true,  "flag" => "categorias",  "data" => $modalidade,  "tpl" => "categoria"  ],
         [ "is_array" => true,  "flag" => "modalidade",  "data" => $modalidade,  "tpl" => "modalidade"  ],
+        [ "is_array" => false,  "flag" => "menu_lateral",  "data" => [],  "tpl" => "menu_lateral"  ],
         [ "is_array" => false,  "flag" => "share",  "data" => [],  "tpl" => "share"  ],
     ];
 

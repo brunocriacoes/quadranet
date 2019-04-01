@@ -126,12 +126,12 @@ function entrar() {
 
 function img_default(e) { e.src = "./disc/img/default.jpg"; }
 
-function day() {
-    let semana = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
-    let data = new Date();
-    let day = semana[data.getDay()];
-    return day;
-}
+// function day() {
+//     let semana = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+//     let data = new Date();
+//     let day = semana[data.getDay()];
+//     return day;
+// }
 
 function newDay() {
     let data = new Date();
@@ -190,7 +190,6 @@ function filtro(select) {
     let id = select.value;
     let lista = document.querySelectorAll('[class*="filter_"]');
     let lista2 = document.querySelectorAll(`[class*="${id}"]`);
-    log(lista);
     for( let i = 0; i < lista.length; i++) {
         lista[i].setAttribute('hidden','');
     }
@@ -257,7 +256,6 @@ function meCadastrar() {
 
 function atualizarPerfil() {
     let form = get_form_vio('#atualizar_perfil');
-    log(form);
     let uri = objToUrl(form);
     let url = `${uri_api}/profile/?atualizar=${form.email}&${uri}${trol}`;
     fetch(url)
@@ -391,7 +389,6 @@ function form_data( id )
         nome  = formulario[i].name || formulario[i].id || 'b'
         valor = formulario[i].value || formulario[i].innerHTML || 'b';
         if( nome.length > 0 && valor.length > 0 ) {
-            log( nome );
             data[nome] = valor;
         }
     }
@@ -433,41 +430,49 @@ async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
     return true;
 }
 
-function semana( dia, data )
-{
-    let data_arr            = data.split('-');
+function hoje( day = '' ) {
+    let data = new Date();
+    if( day != '' ) {
+        data = new Date( day );
+    }
+    let obj = {
+        dia : `${data.getDate()}`,
+        mes: `${data.getMonth() + 1}`,
+        ano: `${data.getFullYear()}`,
+        dia_semana: `${data.getDay()}`        
+    };
+    obj.dia = obj.dia.length == 2 ? obj.dia : `0${obj.dia}`;
+    obj.mes = obj.mes.length == 2 ? obj.mes : `0${obj.mes}`;
+    return {
+        ...obj,
+        data: `${obj.dia}/${obj.mes}/${obj.ano}`,
+        data_sisten: `${obj.ano}-${obj.mes}-${obj.dia}`
+    }
+}
+
+function duasCasas( data ) {
+    data = data + '';
+    return (data.length == 1) ? '0' + data : data;
+}
+
+function semana( data ) {
+    let result = ['2019-03-31', '2019-04-01', '2019-04-02', '2019-04-03' ,'2019-04-04', '2019-04-05', '2019-04-06'];
+    let hoje = new Date(data);
+    let dia = (hoje.getDay() == 6) ? 0 : hoje.getDay() + 1;
+    let [ano, mes, diaMes] = data.split('-');
     let quandidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30 ];
-    let mes                 = +data_arr[1];
-    let max                 = quandidade_dias_mes[mes];
-    let semana              =  [ "DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB",  ];
-    let futuro              = +data_arr[2];
-    let passado             = +data_arr[2] - +dia;
-    for( let p = 0; p < dia; p++ ) {
-        if( passado <= 0 ) {
-            passado = max - +dia;
-            data_arr[1] = +data_arr[1] - 1;
-            data_arr[0] = data_arr[1] > 0 ? data_arr[0] : +data_arr[0] - 1;
-            data_arr[1] = data_arr[1] > 0 ? data_arr[1] : 12;
-            data_arr[1] = `${data_arr[1]}`;
-            data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
-        }
-        let atemporal = passado++;
-        semana[p] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
+    let futuro = +diaMes;
+    let passado = (+diaMes - 1 == 0) ? quandidade_dias_mes[+mes - 1] - dia + 1 : +diaMes - dia;
+    let mesPassado = (+diaMes - 1 == 0) ? +mes - 1 : +mes;
+    for (let index = 0; index < dia; index++) {
+        result[index] = `${ano}-${duasCasas( mesPassado )}-${duasCasas( passado++ )}@${index}`;
     }
-    for( let f = dia; f < 7; f++ ) {
-        if( futuro > max ) {
-            futuro = 1;
-            data_arr[1] = +data_arr[1] + 1;
-            data_arr[1] = data_arr[1] < 13 ? data_arr[1] : 1;
-            data_arr[1] = `${data_arr[1]}`;
-            data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
-        }
-        let atemporal = `${futuro++}`;
-        atemporal = atemporal.length == 1 ? `0${atemporal}` : atemporal;
-        semana[f] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
+    for (let index = dia; index < 7; index++) {
+        result[index] = `${ano}-${duasCasas( mes )}-${duasCasas( futuro++ )}@${index}`;
     }
-    semana[dia] = data;
-    return semana;
+    
+    result[dia] = data + `@${dia}`;
+    return result;
 }
 
 function editar_agenda( id ) {
@@ -475,21 +480,30 @@ function editar_agenda( id ) {
     return times.filter( x => x.quadra == id );
 }
 
+function DrawAgenda( id ) {
+    post_api(  );
+}
+
 function edita_quadra( id ) {
-    query('#agenda_contador span').innerHTML = 0;   
+    if(query('#agenda_contador span')) {
+        query('#agenda_contador span').innerHTML = 0;
+    }
     horario = [];
-    let tmp_quadra = vio.quadra || []
+    let tmp_quadra = vio.quadra || [];
     tmp_quadra     = tmp_quadra[0] || {};
     quadra_sisten = id || tmp_quadra.id || '';
     let data_now  = hoje( day.replace(/\-/gi, '/') );
     let horario_temp = editar_agenda( id );
-    to(`${admin}/dash.html#agenda`);
     let quadra     = vio.quadra || [];
     quadra         = quadra.find( x => x.id == id ) || '';
     let modalidade = vio.modalidade || [];
     modalidade     = modalidade.find( x => x.id == quadra.modalidade || '' ) || [];
-    query('#agenda__tile').innerHTML       = quadra.nome;
-    query('#agenda__modalidade').innerHTML = modalidade.nome || '';
+    if(query('#agenda__tile')) {
+        query('#agenda__tile').innerHTML       = quadra.nome;
+    }
+    if(query('#agenda__modalidade')) {
+        query('#agenda__modalidade').innerHTML = modalidade.nome || '';
+    }
     agenda = [];
     let id_base = horario_temp.map( x => {
         let hora = `${x.inicio}-${x.final}`;
@@ -504,11 +518,13 @@ function edita_quadra( id ) {
             agenda.push( `${toda_semana[i]}-${x}-${i}-${quadra.id}` );
         }
     } );
-    query('.agenda-body').innerHTML = agenda.map( x => `
+    if(query('.agenda-body')) {
+        query('.agenda-body').innerHTML = agenda.map( x => `
         <label for="pop-agenda-livre" id="b${x}" onclick="set_quadra_contratar('${x}')">
             <span id="agenda__dia-semana" class="descktop">LIVRE +</span> 
         </label>
     ` ).join('');
+    }
     let toda_agenda = document.querySelectorAll( '.agenda-body label' );
     toda_agenda.forEach( x => {
         if( x.id.length == 12 ) {
@@ -523,7 +539,9 @@ function edita_quadra( id ) {
     todos_dias.forEach( x => {
         x.classList.remove('agenda-hoje');
     } );
-    query(`.hoje_${data_now.dia_semana}`).classList.add('agenda-hoje');
+    if( query(`.hoje_${data_now.dia_semana}`) ) {
+        query(`.hoje_${data_now.dia_semana}`).classList.add('agenda-hoje');
+    }
     
     let reservas = vio.reservas || [];
 

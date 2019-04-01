@@ -1,58 +1,68 @@
 'use strict';
-let bug  = debug ? '?bug=true' : '';
-fetch( app )
+let bug = debug ? '?bug=true' : '';
+fetch(app)
     .then(x => x.json())
     .then(y => {
-        if( y.length == 0 ) {
+        if (y.length == 0) {
             window.location.href = './manutencao.html';
         }
         let quadra = y.quadra;
         const conjunto = Object.values(quadra);
         vio.quadra = conjunto;
-        
+
         router('agenda', x => {
-            if( y.reservas != undefined )
-            {
-                let agendas     = y.reservas;
-                log(agendas);
-                let conj        = Object.values(reservas);
-                let para        = url()[1];
-                let category    = y.tag;
-                let quadra      = conjunto.find(p => p.ID == para);
-                let comp        = Object.values(category);
-                let tags        = comp.find(p => p.ID == quadra.tag);
-                vio.agenda      = conj.map(y => ({ ID: quadra.ID, foto: quadra.foto, name: quadra.title, modal: tags.title, init: y.inicio, end: y.final, mensal: quadra.mensal, avulso: quadra.avulso, idAgenda: date().split('/').reverse().join('-') + '-' + y.inicio.replace(':', '-') + '-' + newDay() }));
-                let data        = date();
-                let dia         = day();
-                vio.agenda_info = { name: quadra.title, foto: quadra.foto, modal: tags.title, day: dia, date: data };
-                reserva();
+            if (y.reservas != undefined) {
+                let quadra = y.quadra.find(y => {
+                    let quadraFiltrada = window.location.pathname.split('/');
+                    return quadraFiltrada[2] == y.id;
+                });
+                let horario = y.horario.filter(h => {
+                    return h.quadra == quadra.id;
+                });
+                let rese = y.reservas.filter(r => {
+                    let idQuadra = r.id.split('-');
+                    return idQuadra[8] == quadra.id;
+                });
+                agenda = [];
+                let id_base = horario.map(x => {
+                    let hora = `${x.inicio}-${x.final}`;
+                    hora = hora.replace(/:/gi, '-');
+                    return hora;
+                });
+                id_base = id_base.sort();
+                let week = semana( '2019-04-01' );
+                id_base.forEach(e => {
+                    week.forEach(m => {
+                        agenda.push(`${m}-${e}-${quadra.id}`);
+                    });
+                });
+                log(agenda);
             }
         });
 
         let items = localStorage.cart;
-        items     = JSON.parse(items);
-        vio.cart  = items;
-        
-});
-    
-window.onpopstate = function()
-{
+        items = JSON.parse(items);
+        vio.cart = items;
+
+    });
+
+window.onpopstate = function () {
     restrito();
-    router( 'sair', () => { logout(); } );
+    router('sair', () => { logout(); });
     vio.perfil = {
-        nome      : _profile.name || '',
-        apelido   : _profile.nickname || '',
-        email     : _profile.email || '',
-        cpf       : _profile.cpf || '',
-        cep       : _profile.cep || '',
-        estado    : _profile.estado || '',
-        cidade    : _profile.cidade || '',
-        endereco  : _profile.endereco || '',
-        whatsapp  : _profile.whatsapp || '',
+        nome: _profile.name || '',
+        apelido: _profile.nickname || '',
+        email: _profile.email || '',
+        cpf: _profile.cpf || '',
+        cep: _profile.cep || '',
+        estado: _profile.estado || '',
+        cidade: _profile.cidade || '',
+        endereco: _profile.endereco || '',
+        whatsapp: _profile.whatsapp || '',
     };
     vio.historico = _profile.history || []; //[ { id:, status:, day:, price: } ];
-    _vio.time = []; 
-    vio.time  = _profile.tean || []; //[{name tel mail}]
+    _vio.time = [];
+    vio.time = _profile.tean || []; //[{name tel mail}]
 
     marcar();
 };
@@ -71,11 +81,11 @@ router('detalhe', z => {
         });
 });
 
-router( 'historico-compras', p => {
+router('historico-compras', p => {
     let profile = localStorage.profile;
     profile = JSON.parse(profile);
-    let historico = profile.history.map( x => ({ id: x.transacao || '', status: x.payment || '', day: x.data || '', price: x.price || '11'}) );
+    let historico = profile.history.map(x => ({ id: x.transacao || '', status: x.payment || '', day: x.data || '', price: x.price || '11' }));
     vio.historico = historico
-} );
+});
 
 

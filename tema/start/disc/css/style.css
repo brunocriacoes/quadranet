@@ -1046,3 +1046,10 @@ iframe {
     width: 300px;
     margin-bottom: 10px;
 }
+
+.menu__lateral__user a {
+    display: block;
+    text-decoration: none;
+    margin: 30px;
+    color: #333;
+}
