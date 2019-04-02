@@ -83,8 +83,8 @@ var vio = {
             acc = acc + to_float(iten.price || "0");
             return acc;
         }, 0);
-        this.itens_count = el.length;
-        this.total = soma_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
+        // this.itens_count = el.length;
+        // this.total = soma_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
         if( query('#vio_cart') ) {
             query('#vio_cart').innerHTML = el.map(x => {
                 return `
@@ -96,7 +96,7 @@ var vio = {
                     <td>${ x.init || '--:--'} ás ${x.end || '--:--'}</td>
                     <td>${ (x.status || true) ? 'Diária' : 'Mensal'}</td>
                     <td>R$ ${ x.price || '00,00'} </td>
-                    <td onclick="removeItem( '${x.idAgenda}' )"><img src="./disc/ico/delete.png" class="trash"></td>
+                    <td onclick="removeItem( '${x.idAgenda}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></td>
                     </tr>
                 `;
             }).join('');
@@ -217,7 +217,7 @@ var vio = {
             return acc;
         }, 0);
         this.itens_count = el.length;
-        this.total = soma_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
+        // this.total = soma_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
         if (query('#vio_finalizar')) {
             query('#vio_finalizar').innerHTML = el.map(x => {
                 return `

@@ -1014,9 +1014,6 @@ iframe {
     display:block;
     width: 100%;
 }
-.modalidade-escolha {
-    
-}
 .modalidade-escolha label {
     display: flex;
     align-items: center;
@@ -1052,4 +1049,110 @@ iframe {
     text-decoration: none;
     margin: 30px;
     color: #333;
+}
+
+.agenda_reserva {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 20px;
+}
+
+.agenda_reserva div, .agenda__horarios > div {
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.grid_agenda {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: top;
+}
+
+.agenda__horarios {
+    display: grid;
+    grid-gap: 6px;
+}
+
+.agenda__horario_ocupado {
+    background-color: var(--danger);
+    color: #fff;
+}
+
+#pop-agenda-livre:checked ~ .pop-agenda-livre { display: grid; }
+#pop-agenda-ocupado:checked ~ .pop-agenda-ocupado { display: grid; }
+.pop-agenda-livre,
+.pop-agenda-ocupado {
+    display: none;
+}
+.pop-box {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .9);
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    z-index: 9999;
+    color: #666;
+}
+.pop-box div {
+    display: block;
+    max-width: 90vw;
+    background: #FFF;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+.pop-close {
+    cursor: pointer;
+    margin: 10px !important;
+}
+
+.pop-close:hover {
+    filter: brightness(150%)
+}
+
+.header__pop {
+    display: grid !important;
+    grid-template-columns: 1fr 52px;
+    align-items: center;
+    background-color: #CCC !important;
+}
+
+.body_pop {
+    margin: 20px !important;
+}
+
+.body_pop span {
+    margin: 10px;
+    display: block;
+}
+
+.pop_select {
+    display: block;
+    background-color: #FFF;
+    border-radius: 0px;
+    padding: 0 12px;
+    line-height: 40px;
+    min-height: 40px;
+    margin-bottom: var(--gap);
+    color: #333;
+    width: 100%;
+    border: 1px solid #FFF;
+    border-bottom: 2px solid #CCC;
+    font-weight: bold;
+}
+.pop_select:focus {
+    border-bottom: 2px solid var(--theme);
+    color: #111;
+    
+}
+.pop_select:disabled {
+    background-color: #CCC;
+    filter: opacity(.5);
+    cursor: not-allowed;
 }

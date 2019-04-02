@@ -1,11 +1,11 @@
 const log = console.log;
 const query = x => document.querySelector(x);
-const to   = x => { window.location.href = x };
+const to = x => { window.location.href = x };
 var data = {};
 
-var options = 
+var options =
 {
-    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     credentials: "same-origin",
     method: 'POST',
     mode: 'cors',
@@ -33,13 +33,13 @@ function objToUrl(OBJ) {
 
 function page() {
     let hash = window.location.href.replace(`${base}`, '');
-    hash = hash.split( '/' );;
+    hash = hash.split('/');;
     return hash[1];
 }
 
 function url() {
     let hash = window.location.href.replace(`${base}/`, '');
-    hash = hash.split( '/' );;
+    hash = hash.split('/');;
     return hash;
 }
 
@@ -140,23 +140,47 @@ function newDay() {
 }
 
 function set_date(now) {
-    let dia = now.value;
-    let data = dia.split('-').reverse().join('/');
-    let semana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
-    let newdate = new Date(dia);
-    let day = semana[newdate.getDay()];
-    let newSemana = ["1", "2", "3", "4", "5", "6", "7"];
-    let novodia = newSemana[newdate.getDay()];
-    let agendaUp = vio.agenda.map(x => ({ ...x, idAgenda: dia + '-' + x.init.replace(':', '-') + '-' + novodia }));
-
-    vio.agenda_info = { ..._vio.agenda_info, day: day, date: data };
-    vio.agenda = [...agendaUp];
-
-    reserva();
+    fetch(app)
+        .then(x => x.json())
+        .then(y => {
+            let quadra = y.quadra.find(y => {
+                let quadraFiltrada = window.location.pathname.split('/');
+                return quadraFiltrada[2] == y.id;
+            });
+            let horario = y.horario.filter(h => {
+                return h.quadra == quadra.id;
+            });
+            let rese = y.reservas.filter(r => {
+                let idQuadra = r.id.split('-');
+                return idQuadra[8] == quadra.id;
+            });
+            agenda = [];
+            let id_base = horario.map(x => {
+                let hora = `${x.inicio}-${x.final}`;
+                hora = hora.replace(/:/gi, '-');
+                return hora;
+            });
+            id_base = id_base.sort();
+            let week = semana(now.value);
+            id_base.forEach(e => {
+                week.forEach(m => {
+                    m = m.split('@');
+                    agenda.push(`${m[0]}-${e}-${m[1]}-${quadra.id}`);
+                });
+            });
+            document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).join('');
+            document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => `<div id="agenda_${a}">Disponivel</div>`).join('');
+            document.querySelector('#agenda_semana').innerHTML = week.map(a => `<div>${a.split('@')[0].split('-').reverse().join('/')}</div>`).join('');
+            rese.forEach(r => {
+                if (document.querySelector(`#agenda_${r.id}`)) {
+                    document.querySelector(`#agenda_${r.id}`).innerHTML = 'Ocupado';
+                }
+            });
+        });
 }
 
-function menorNove( numero ) {
-    return ( numero < 10 ) ? `0${numero}` : numero;
+function menorNove(numero) {
+    return (numero < 10) ? `0${numero}` : numero;
 }
 
 function date() {
@@ -190,16 +214,16 @@ function filtro(select) {
     let id = select.value;
     let lista = document.querySelectorAll('[class*="filter_"]');
     let lista2 = document.querySelectorAll(`[class*="${id}"]`);
-    for( let i = 0; i < lista.length; i++) {
-        lista[i].setAttribute('hidden','');
+    for (let i = 0; i < lista.length; i++) {
+        lista[i].setAttribute('hidden', '');
     }
-    for( let i = 0; i < lista2.length; i++) {
+    for (let i = 0; i < lista2.length; i++) {
         lista2[i].removeAttribute('hidden');
     }
-    if( id == "A" ) {
-        for( let i = 0; i < lista.length; i++) {
+    if (id == "A") {
+        for (let i = 0; i < lista.length; i++) {
             lista[i].removeAttribute('hidden');
-        }        
+        }
     }
 
 }
@@ -286,7 +310,7 @@ function addJogador() {
         });
 }
 
-function join_payment( emailCapitao, idJogador ) {
+function join_payment(emailCapitao, idJogador) {
     let url = `${uri_api}/profile/?player-buy=${emailCapitao}&usuario=${idJogador}${trol}`;
     fetch(url)
         .then(j => j.json())
@@ -367,79 +391,75 @@ function setReserva(ID) {
 }
 
 function marcar() {
-    let array = document.querySelectorAll( `section a` );
+    let array = document.querySelectorAll(`section a`);
     for (let index = 0; index < array.length; index++) {
-        array[index].classList.remove( 'active' );
-    }   
+        array[index].classList.remove('active');
+    }
     let hash = window.location.hash;
-    let arr = document.querySelectorAll( `section [href="${hash}"]` );
+    let arr = document.querySelectorAll(`section [href="${hash}"]`);
     for (let index = 0; index < arr.length; index++) {
-        arr[index].classList.add( 'active' );
+        arr[index].classList.add('active');
     }
 }
 
-const queryAll   = x => { 
-    return document.querySelectorAll(x) 
+const queryAll = x => {
+    return document.querySelectorAll(x)
 };
 
-function form_data( id ) 
-{
-    let formulario = queryAll( `#${id} input, #${id} textarea, #${id} select` );
-    for( let i = 0; i < formulario.length; i++ ) {
-        nome  = formulario[i].name || formulario[i].id || 'b'
+function form_data(id) {
+    let formulario = queryAll(`#${id} input, #${id} textarea, #${id} select`);
+    for (let i = 0; i < formulario.length; i++) {
+        nome = formulario[i].name || formulario[i].id || 'b'
         valor = formulario[i].value || formulario[i].innerHTML || 'b';
-        if( nome.length > 0 && valor.length > 0 ) {
+        if (nome.length > 0 && valor.length > 0) {
             data[nome] = valor;
         }
     }
     return data;
 }
 
-function obj_to_url( obj )
-{
-    let indices =  Object.keys( obj );
-    let url     = indices.map( i => `${i}=${obj[i]}` ).join('&');
-    return encodeURI( url );
+function obj_to_url(obj) {
+    let indices = Object.keys(obj);
+    let url = indices.map(i => `${i}=${obj[i]}`).join('&');
+    return encodeURI(url);
 }
 
-async function post_api( url, obj, hof )
-{
-    options.body   = obj_to_url( obj );
-    fetch( `${app}/${url}`, options )
-    .then( j => j.json() )
-    .then( x => {
-        hof( x );
-    } );
+async function post_api(url, obj, hof) {
+    options.body = obj_to_url(obj);
+    fetch(`${app}/${url}`, options)
+        .then(j => j.json())
+        .then(x => {
+            hof(x);
+        });
     return true;
 }
 
-async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
-{
-    let formulario    = form_data( id_formulario );
-    post_api( url, formulario, x => {       
+async function post_api_form(url, id_formulario, redirect = null, reset = 0) {
+    let formulario = form_data(id_formulario);
+    post_api(url, formulario, x => {
         data = {};
-        if ( redirect != null ) {
-            to( redirect );
-        }      
-        if( reset == 0 ) {
-            query( `#${id_formulario}` ).reset();
-        }             
-        alerta( 'Cadastrado' );
-        
-    } );
+        if (redirect != null) {
+            to(redirect);
+        }
+        if (reset == 0) {
+            query(`#${id_formulario}`).reset();
+        }
+        alerta('Cadastrado');
+
+    });
     return true;
 }
 
-function hoje( day = '' ) {
+function hoje(day = '') {
     let data = new Date();
-    if( day != '' ) {
-        data = new Date( day );
+    if (day != '') {
+        data = new Date(day);
     }
     let obj = {
-        dia : `${data.getDate()}`,
+        dia: `${data.getDate()}`,
         mes: `${data.getMonth() + 1}`,
         ano: `${data.getFullYear()}`,
-        dia_semana: `${data.getDay()}`        
+        dia_semana: `${data.getDay()}`
     };
     obj.dia = obj.dia.length == 2 ? obj.dia : `0${obj.dia}`;
     obj.mes = obj.mes.length == 2 ? obj.mes : `0${obj.mes}`;
@@ -450,137 +470,137 @@ function hoje( day = '' ) {
     }
 }
 
-function duasCasas( data ) {
+function duasCasas(data) {
     data = data + '';
     return (data.length == 1) ? '0' + data : data;
 }
 
-function semana( data ) {
-    let result = ['2019-03-31', '2019-04-01', '2019-04-02', '2019-04-03' ,'2019-04-04', '2019-04-05', '2019-04-06'];
+function semana(data) {
+    let result = ['2019-03-31', '2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04', '2019-04-05', '2019-04-06'];
     let hoje = new Date(data);
     let dia = (hoje.getDay() == 6) ? 0 : hoje.getDay() + 1;
     let [ano, mes, diaMes] = data.split('-');
-    let quandidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30 ];
+    let quandidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30];
     let futuro = +diaMes;
     let passado = (+diaMes - 1 == 0) ? quandidade_dias_mes[+mes - 1] - dia + 1 : +diaMes - dia;
     let mesPassado = (+diaMes - 1 == 0) ? +mes - 1 : +mes;
     for (let index = 0; index < dia; index++) {
-        result[index] = `${ano}-${duasCasas( mesPassado )}-${duasCasas( passado++ )}@${index}`;
+        result[index] = `${ano}-${duasCasas(mesPassado)}-${duasCasas(passado++)}@${index}`;
     }
     for (let index = dia; index < 7; index++) {
-        result[index] = `${ano}-${duasCasas( mes )}-${duasCasas( futuro++ )}@${index}`;
+        result[index] = `${ano}-${duasCasas(mes)}-${duasCasas(futuro++)}@${index}`;
     }
-    
+
     result[dia] = data + `@${dia}`;
     return result;
 }
 
-function editar_agenda( id ) {
-    let times =  vio.horario || [];
-    return times.filter( x => x.quadra == id );
+function editar_agenda(id) {
+    let times = vio.horario || [];
+    return times.filter(x => x.quadra == id);
 }
 
-function DrawAgenda( id ) {
-    post_api(  );
+function DrawAgenda(id) {
+    post_api();
 }
 
-function edita_quadra( id ) {
-    if(query('#agenda_contador span')) {
+function edita_quadra(id) {
+    if (query('#agenda_contador span')) {
         query('#agenda_contador span').innerHTML = 0;
     }
     horario = [];
     let tmp_quadra = vio.quadra || [];
-    tmp_quadra     = tmp_quadra[0] || {};
+    tmp_quadra = tmp_quadra[0] || {};
     quadra_sisten = id || tmp_quadra.id || '';
-    let data_now  = hoje( day.replace(/\-/gi, '/') );
-    let horario_temp = editar_agenda( id );
-    let quadra     = vio.quadra || [];
-    quadra         = quadra.find( x => x.id == id ) || '';
+    let data_now = hoje(day.replace(/\-/gi, '/'));
+    let horario_temp = editar_agenda(id);
+    let quadra = vio.quadra || [];
+    quadra = quadra.find(x => x.id == id) || '';
     let modalidade = vio.modalidade || [];
-    modalidade     = modalidade.find( x => x.id == quadra.modalidade || '' ) || [];
-    if(query('#agenda__tile')) {
-        query('#agenda__tile').innerHTML       = quadra.nome;
+    modalidade = modalidade.find(x => x.id == quadra.modalidade || '') || [];
+    if (query('#agenda__tile')) {
+        query('#agenda__tile').innerHTML = quadra.nome;
     }
-    if(query('#agenda__modalidade')) {
+    if (query('#agenda__modalidade')) {
         query('#agenda__modalidade').innerHTML = modalidade.nome || '';
     }
     agenda = [];
-    let id_base = horario_temp.map( x => {
+    let id_base = horario_temp.map(x => {
         let hora = `${x.inicio}-${x.final}`;
         hora = hora.replace(/:/gi, '-');
         return hora;
-    } );
+    });
     id_base = id_base.sort();
-    let toda_semana = semana( data_now.dia_semana, data_now.data_sisten );
-    id_base.forEach( x => {
-        agenda.push( x );
-        for( let i = 0; i < 7; i++) {
-            agenda.push( `${toda_semana[i]}-${x}-${i}-${quadra.id}` );
+    let toda_semana = semana(data_now.dia_semana, data_now.data_sisten);
+    id_base.forEach(x => {
+        agenda.push(x);
+        for (let i = 0; i < 7; i++) {
+            agenda.push(`${toda_semana[i]}-${x}-${i}-${quadra.id}`);
         }
-    } );
-    if(query('.agenda-body')) {
-        query('.agenda-body').innerHTML = agenda.map( x => `
+    });
+    if (query('.agenda-body')) {
+        query('.agenda-body').innerHTML = agenda.map(x => `
         <label for="pop-agenda-livre" id="b${x}" onclick="set_quadra_contratar('${x}')">
             <span id="agenda__dia-semana" class="descktop">LIVRE +</span> 
         </label>
     ` ).join('');
     }
-    let toda_agenda = document.querySelectorAll( '.agenda-body label' );
-    toda_agenda.forEach( x => {
-        if( x.id.length == 12 ) {
+    let toda_agenda = document.querySelectorAll('.agenda-body label');
+    toda_agenda.forEach(x => {
+        if (x.id.length == 12) {
             let html = x.id.split('-');
-            x.innerHTML = `${html[0].replace('b','')}:${html[1]} às ${html[2]}:${html[3]} `;
+            x.innerHTML = `${html[0].replace('b', '')}:${html[1]} às ${html[2]}:${html[3]} `;
             x.classList.add('timer');
         }
-    } );
-    let agendados = vio.agenda || []; 
+    });
+    let agendados = vio.agenda || [];
 
-    let todos_dias = document.querySelectorAll( '.agenda-header div' );
-    todos_dias.forEach( x => {
+    let todos_dias = document.querySelectorAll('.agenda-header div');
+    todos_dias.forEach(x => {
         x.classList.remove('agenda-hoje');
-    } );
-    if( query(`.hoje_${data_now.dia_semana}`) ) {
+    });
+    if (query(`.hoje_${data_now.dia_semana}`)) {
         query(`.hoje_${data_now.dia_semana}`).classList.add('agenda-hoje');
     }
-    
+
     let reservas = vio.reservas || [];
 
-    let time    = new Date();
-    let hora    = time.getHours();
+    let time = new Date();
+    let hora = time.getHours();
     let minutos = time.getMinutes();
-    let jogando = reservas.filter( x => {
+    let jogando = reservas.filter(x => {
         let id = x.id;
-        let init_hora   = +id.substr( 11, 2 );
-        let init_minuto = +id.substr( 14, 2 );
-        let end_hora    = +id.substr( 17, 2 );
-        let end_minuto  = +id.substr( 20, 2 );
-        let dia         = x.id.substr(0, 10)
-       
-        if ( init_hora <= hora && end_hora > hora && dia == day  ) {
+        let init_hora = +id.substr(11, 2);
+        let init_minuto = +id.substr(14, 2);
+        let end_hora = +id.substr(17, 2);
+        let end_minuto = +id.substr(20, 2);
+        let dia = x.id.substr(0, 10)
+
+        if (init_hora <= hora && end_hora > hora && dia == day) {
             return true;
         } else {
             return false;
         }
-    } );
-    let id_jogando = jogando.map( x => x.id);
-      
-    reservas.forEach( x => {
+    });
+    let id_jogando = jogando.map(x => x.id);
+
+    reservas.forEach(x => {
         let elementor = query(`#b${x.id}`);
-        if( elementor ) {
-           
+        if (elementor) {
+
             elementor.for = "pop-agenda-ocupado";
             elementor.classList.add('agenda-ocupado');
-            let is_jogando = id_jogando.indexOf( x.id );
-            if( is_jogando > -1 ) {
-                let id          = x.id;
-                let init_hora   = +id.substr( 11, 2 );
-                let end_hora    = +id.substr( 17, 2 );
-                let total_hs    = end_hora - hora;
-                let init_minuto = +id.substr( 14, 2 );
-                let end_minuto  = +id.substr( 20, 2 );
-                let total_mm    = init_minuto + end_minuto;
-                total_mm        = total_mm - minutos;
-                let total       = ( total_hs * 60 ) + total_mm;
+            let is_jogando = id_jogando.indexOf(x.id);
+            if (is_jogando > -1) {
+                let id = x.id;
+                let init_hora = +id.substr(11, 2);
+                let end_hora = +id.substr(17, 2);
+                let total_hs = end_hora - hora;
+                let init_minuto = +id.substr(14, 2);
+                let end_minuto = +id.substr(20, 2);
+                let total_mm = init_minuto + end_minuto;
+                total_mm = total_mm - minutos;
+                let total = (total_hs * 60) + total_mm;
                 query('#agenda_contador span').innerHTML = total;
                 elementor.classList.add('agenda-jogando');
             }
@@ -589,7 +609,7 @@ function edita_quadra( id ) {
                     <b>${x.contratante_nome}</b>
                     <i>${x.tipo_contatacao == 1 ? 'Diaria' : 'Mensal'}</i>
                 </span> 
-            `;            
+            `;
         }
-    } );
+    });
 }

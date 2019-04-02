@@ -33,10 +33,21 @@ fetch(app)
                 let week = semana( '2019-04-01' );
                 id_base.forEach(e => {
                     week.forEach(m => {
-                        agenda.push(`${m}-${e}-${quadra.id}`);
+                        m = m.split('@');
+                        agenda.push(`${m[0]}-${e}-${m[1]}-${quadra.id}`);
                     });
                 });
-                log(agenda);
+                log(quadra);
+                document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios</div>' + horario.map( h => `<div>${h.inicio} - ${h.final}</div>` ).join( '' );
+                document.querySelector('#agenda_reserva').innerHTML = agenda.map( a => `<label for="pop-agenda-livre"><div id="agenda_${a}" onclick="cart(  )">Disponivel</div></label>` ).join( '' );
+                document.querySelector('#agenda_semana').innerHTML = week.map( a => `<div>${a.split('@')[0].split('-').reverse().join('/')}</div>` ).join( '' );
+                rese.forEach(r => {
+                    if( document.querySelector(`#agenda_${r.id}`) ) {
+                        document.querySelector(`#agenda_${r.id}`).innerHTML = 'Ocupado';
+                        document.querySelector(`#agenda_${r.id}`).classList.add( 'agenda__horario_ocupado' );
+                        document.querySelector(`#agenda_${r.id}`).removeAttribute( 'onclick' );
+                    }
+                });
             }
         });
 
@@ -87,5 +98,7 @@ router('historico-compras', p => {
     let historico = profile.history.map(x => ({ id: x.transacao || '', status: x.payment || '', day: x.data || '', price: x.price || '11' }));
     vio.historico = historico
 });
+
+addCart( '3123123', 'Quadra Esportiva', true, '100,00', '14:00', '16:00', '02/04/2019', '3123123', '312312', '123123' );
 
 

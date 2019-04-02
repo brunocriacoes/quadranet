@@ -1,20 +1,45 @@
 <div class="hours__title gap-bottom">
     <h1>Reserva de Horários</h1>
     <img class="hours__img" src="{{uri}}/app/storage/{{foto_1}}">
-    <h4 >{{nome}}</h4>
+    <h4>{{nome}}</h4>
 </div>
 <div class="gap-bottom tree">
-    <div>
-        <label>Dia da Semana:</label>
-        <span id="vio_calendar_day">---</span>
-    </div>
-    <div>
-        <label>Data Atual:</label>
-        <span id="vio_calendar_date">--/--/---</span>
-    </div>
     <div class="text-right">
         <label for="date">Agendar uma data:</label>
         <input id="data__atual" type="date" onchange="set_date( this )" value="">
     </div>
 </div>
-<div id="vio_agenda"></div>
+<div class="grid_agenda">
+    <div class="agenda__horarios" id="reserva__horarios"></div>
+    <div>
+        <div class="agenda_reserva" id="agenda_semana"></div>
+        <div class="agenda_reserva">
+            <div>Segunda</div>
+            <div>Terça</div>
+            <div>Quarta</div>
+            <div>Quinta</div>
+            <div>Sexta</div>
+            <div>Sábado</div>
+            <div>Domingo</div>
+        </div>
+        <div class="agenda_reserva" id="agenda_reserva"></div>
+    </div>
+</div>
+
+<input type="checkbox" id="pop-agenda-livre" hidden>
+<div class="pop-box pop-agenda-livre">
+    <div>
+        <div class="header__pop">
+            <span>Informações do Horário</span>
+            <label for="pop-agenda-livre" class="pop-close">
+                <img src="./disc/ico/close.png">
+            </label>
+        </div>
+        <div class="body_pop">
+            <span>Nome: Quadra Esportiva</span>
+            <span>Horário: 14:00 às 16:00</span>
+            <a class="btn" href="carrinho">Contratar Mensal: R$100,00</a>
+            <a class="btn" href="carrinho">Contratar Diária: R$50,00</a>
+        </div>
+    </div>
+</div>
