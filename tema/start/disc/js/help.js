@@ -191,7 +191,7 @@ function date() {
 
 function reserva() {
     let para = parametros();
-    fetch(`${uri_api}/reservas?_dominio=quadranet.com.br&quadra=${para.id}${trol}`)
+    fetch(`${app}/reservas?_dominio=quadranet.com.br&quadra=${para.id}${trol}`)
         .then(x => x.json())
         .then(y => {
             let indisponivel = y.map(p => p.ID.substr(0, 16));
@@ -238,7 +238,7 @@ function add_player() {
 
 function send_mail() {
     let form = get_form('#send_mail');
-    let url = `${uri_api}/mail/contato@quadranet.com.br/${form.email}/${form.assunto}/${form.mensagem} telefone: ${form.telefone}`;
+    let url = `${app}/mail/contato@quadranet.com.br/${form.email}/${form.assunto}/${form.mensagem} telefone: ${form.telefone}`;
     url = encodeURI(url);
     disabled_form('#send_mail');
     fetch(url)
@@ -253,7 +253,7 @@ function send_mail() {
 function recuperarSenha() {
     let form = get_form('#formulario_recuperar-senha');
     disabled_form('#formulario_recuperar-senha');
-    let url = `${uri_api}/profile/?recovery-pass=${form.email || '17'}${trol}`;
+    let url = `${app}/profile/?recovery-pass=${form.email || '17'}${trol}`;
     fetch(url)
         .then(j => j.json())
         .then(x => {
@@ -267,7 +267,7 @@ function meCadastrar() {
     let form = get_form('#formulario_me-cadastrar');
     let uri = objToUrl(form);
     disabled_form('#formulario_me-cadastrar');
-    let url = `${uri_api}/profile/?cadastrar=true&${uri}${trol}`;
+    let url = `${app}/profile/?cadastrar=true&${uri}${trol}`;
     fetch(url)
         .then(j => j.json())
         .then(x => {
@@ -281,7 +281,7 @@ function meCadastrar() {
 function atualizarPerfil() {
     let form = get_form_vio('#atualizar_perfil');
     let uri = objToUrl(form);
-    let url = `${uri_api}/profile/?atualizar=${form.email}&${uri}${trol}`;
+    let url = `${app}/profile/?atualizar=${form.email}&${uri}${trol}`;
     fetch(url)
         .then(j => j.json())
         .then(x => {
@@ -291,7 +291,7 @@ function atualizarPerfil() {
 
 function mudarSenha() {
     let form = get_form('#mudar_senha');
-    let url = `${uri_api}/profile/?alter-pass=${_profile.email}&pass=${form.pass}${trol}`;
+    let url = `${app}/profile/?alter-pass=${_profile.email}&pass=${form.pass}${trol}`;
     fetch(url)
         .then(j => j.json())
         .then(x => {
@@ -301,7 +301,7 @@ function mudarSenha() {
 
 function addJogador() {
     let form = get_form('#add-jogador');
-    let url = `${uri_api}/profile/?add-player=${_profile.email}&name=${form.player_name}&tel=${form.player_tel}&mail=${form.player_mail}${trol}`;
+    let url = `${app}/profile/?add-player=${_profile.email}&name=${form.player_name}&tel=${form.player_tel}&mail=${form.player_mail}${trol}`;
     fetch(url)
         .then(j => j.json())
         .then(x => {
@@ -311,7 +311,7 @@ function addJogador() {
 }
 
 function join_payment(emailCapitao, idJogador) {
-    let url = `${uri_api}/profile/?player-buy=${emailCapitao}&usuario=${idJogador}${trol}`;
+    let url = `${app}/profile/?player-buy=${emailCapitao}&usuario=${idJogador}${trol}`;
     fetch(url)
         .then(j => j.json())
         .then(x => {
@@ -346,14 +346,14 @@ async function buy() {
             _token: null,
         };
         let uri = objToUrl(obj);
-        let path = `${uri_api}/reserva/?${uri}${trol}`;
+        let path = `${app}/reserva/?${uri}${trol}`;
         fetch(path)
             .then(x => x.json())
             .then(x => {
 
             });
     });
-    let path = `${uri_api}/buy/?register=${id}&cart=${cart}${trol}`;
+    let path = `${app}/buy/?register=${id}&cart=${cart}${trol}`;
     fetch(path)
         .then(x => x.json())
         .then(x => {
@@ -370,7 +370,7 @@ async function buy() {
 
 function removePlayer(emailCapitao, idJogador) {
     query(`#vio_player_${idJogador}`).style.display = 'none';
-    let url = `${uri_api}/profile?player-del=${emailCapitao}&jogador=${idJogador}${trol}`;
+    let url = `${app}/profile?player-del=${emailCapitao}&jogador=${idJogador}${trol}`;
     fetch(url)
         .then(j => j.json())
         .then(x => {
@@ -612,4 +612,17 @@ function edita_quadra(id) {
             `;
         }
     });
+}
+
+var temp_quadra = {};
+var tempHorario = '';
+function setHorario( x ) {
+    tempHorario = x.split( '-' );
+    let inicio = `${tempHorario[3]}:${tempHorario[4]}`;
+    let final = `${tempHorario[5]}:${tempHorario[6]}`;
+    tempHorario = { ...temp_quadra, inicio, final, id: x };
+
+    document.querySelector( '#btn__reserva_mensal' ).setAttribute( 'onclick', `addCart( ${JSON.stringify( {...tempHorario, tipocontratacao: 0} )} )` );
+    document.querySelector( '#btn__reserva_diaria' ).setAttribute( 'onclick', `addCart( ${JSON.stringify( {...tempHorario, tipocontratacao: 1} )} )` );
+    document.querySelector( '#agenda_hor' ).innerHTML = `Horários: ${inicio}hrs ás ${final}hrs`;
 }

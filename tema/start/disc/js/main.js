@@ -6,9 +6,8 @@ fetch(app)
         if (y.length == 0) {
             window.location.href = './manutencao.html';
         }
-        let quadra = y.quadra;
-        const conjunto = Object.values(quadra);
-        vio.quadra = conjunto;
+
+        vio.modalidade = y.modalidade;
 
         router('agenda', x => {
             if (y.reservas != undefined) {
@@ -16,9 +15,8 @@ fetch(app)
                     let quadraFiltrada = window.location.pathname.split('/');
                     return quadraFiltrada[2] == y.id;
                 });
-                let horario = y.horario.filter(h => {
-                    return h.quadra == quadra.id;
-                });
+                temp_quadra = quadra;
+                let horario = y.horario.filter(h => { return h.quadra == quadra.id; });
                 let rese = y.reservas.filter(r => {
                     let idQuadra = r.id.split('-');
                     return idQuadra[8] == quadra.id;
@@ -37,9 +35,8 @@ fetch(app)
                         agenda.push(`${m[0]}-${e}-${m[1]}-${quadra.id}`);
                     });
                 });
-                log(quadra);
                 document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios</div>' + horario.map( h => `<div>${h.inicio} - ${h.final}</div>` ).join( '' );
-                document.querySelector('#agenda_reserva').innerHTML = agenda.map( a => `<label for="pop-agenda-livre"><div id="agenda_${a}" onclick="cart(  )">Disponivel</div></label>` ).join( '' );
+                document.querySelector('#agenda_reserva').innerHTML = agenda.map( a => `<label onclick="setHorario( '${a}' )" for="pop-agenda-livre"><div id="agenda_${a}">Disponivel</div></label>` ).join( '' );
                 document.querySelector('#agenda_semana').innerHTML = week.map( a => `<div>${a.split('@')[0].split('-').reverse().join('/')}</div>` ).join( '' );
                 rese.forEach(r => {
                     if( document.querySelector(`#agenda_${r.id}`) ) {
@@ -98,7 +95,5 @@ router('historico-compras', p => {
     let historico = profile.history.map(x => ({ id: x.transacao || '', status: x.payment || '', day: x.data || '', price: x.price || '11' }));
     vio.historico = historico
 });
-
-addCart( '3123123', 'Quadra Esportiva', true, '100,00', '14:00', '16:00', '02/04/2019', '3123123', '312312', '123123' );
 
 

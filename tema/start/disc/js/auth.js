@@ -7,7 +7,7 @@ if( localStorage.profile === undefined ) {
 var _profile = {};
 function privado()
 {
-    fetch( `${uri_api}/auth2?token=${ localStorage.token || '' }` )
+    fetch( `${app}/auth2?token=${ localStorage.token || '' }` )
     .then( j => j.json() )
     .then( x => {
         if( x.error ) {
@@ -22,7 +22,7 @@ function privado()
 }
 function login( MAIL, PASS, HOF )
 {
-    fetch( `${uri_api}/auth2?pass=${ PASS }&email=${MAIL}` )
+    fetch( `${app}/auth2?pass=${ PASS }&email=${MAIL}` )
     .then( j => j.json() )
     .then( x => {
         HOF( x );
@@ -38,19 +38,18 @@ function login( MAIL, PASS, HOF )
         }
     } );
 }
-function logout()
-{
-    fetch( `${uri_api}/auth2?logout=${ localStorage.token }` )
+function logout() {
+    fetch( `${app}/auth2?logout=${ localStorage.token }` )
     .then( j => j.json() )
     .then( x => {
-        localStorage.token   = "";
+        localStorage.token_painel   = "";
         localStorage.profile = "";
         _profile = {};
     } );
 }
 function profile()
 {
-    fetch( `${uri_api}/profile?token=${localStorage.token }${trol}` )
+    fetch( `${app}/profile?token=${localStorage.token_painel}${trol}` )
     .then( j => j.json() )
     .then( x => {
         localStorage.profile = JSON.stringify( x );

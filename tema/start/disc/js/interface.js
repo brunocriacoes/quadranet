@@ -79,35 +79,42 @@ var vio = {
     set cart(el) {
         _vio.cart = el;
         vio.finalizar = el;
-        let soma_total = el.reduce((acc, iten) => {
-            acc = acc + to_float(iten.price || "0");
+        let soma_total = el.reduce((acc, item) => {
+            acc = acc + to_float((item.tipocontratacao == 0 ) ? item.mensalidade : item.diaria || "0");
             return acc;
         }, 0);
-        // this.itens_count = el.length;
-        // this.total = soma_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
+        this.itens_count = el.length;
+        this.total = soma_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
         if( query('#vio_cart') ) {
             query('#vio_cart').innerHTML = el.map(x => {
+                let modalidade = vio.modalidade;
+                modalidade = modalidade.find( f => f.id == x.modalidade );
                 return `
                     <tr>
-                    <td><img src="${url_storage}/${x.foto}" class="cart__img"></td>
-                    <td>${ x.name || '---'}</td>
-                    <td>${ x.modal || '---'}</td>
-                    <td>${ x.day || '--/--/----'}</td>
-                    <td>${ x.init || '--:--'} ás ${x.end || '--:--'}</td>
-                    <td>${ (x.status || true) ? 'Diária' : 'Mensal'}</td>
-                    <td>R$ ${ x.price || '00,00'} </td>
-                    <td onclick="removeItem( '${x.idAgenda}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></td>
+                        <td><img src="${url_storage}/${x.foto_1}" class="cart__img"></td>
+                        <td>${ x.nome || '---'}</td>
+                        <td>${ modalidade.nome || '---'}</td>
+                        <td>${ x.data || '--/--/----'}</td>
+                        <td>${ x.inicio || '--:--'} ás ${x.final || '--:--'}</td>
+                        <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Diária'}</td>
+                        <td>R$${(x.tipocontratacao == 0 ) ? x.mensalidade : x.diaria}</td>
+                        <td onclick="removeItem( '${x.id}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></td>
                     </tr>
                 `;
             }).join('');
         }
     },
     get cart() { return _vio.cart; },
+
+    set modalidade(el) {
+        _vio.modalidade = el;
+    },
+    get modalidade() { return _vio.modalidade; },
+
     set total(el) {
         _vio.total = el;
         if (query('#vio_total_carrinho')) {
             query('#vio_total_carrinho').innerHTML = el;
-            query('#finalizar_total').innerHTML = el;
         }
     },
     get total() { return _vio.total; },
@@ -222,11 +229,11 @@ var vio = {
             query('#vio_finalizar').innerHTML = el.map(x => {
                 return `
                     <tr>
-                        <td>${ x.name || '---'}</td>
-                        <td>${ x.day || '--/--/----'}</td>
-                        <td>${ x.init || '--:--'} ás ${x.end || '--:--'}</td>
+                        <td>${ x.nome || '---'}</td>
+                        <td>${ x.data || '--/--/----'}</td>
+                        <td>${ x.inicio || '--:--'} ás ${x.final || '--:--'}</td>
                         <td>${ (x.status || true) ? 'por um dia' : 'por mês'}</td>
-                        <td>R$ ${ x.price || '00,00'} </td>
+                        <td>R$ ${ x.preco || '00,00'} </td>
                     </tr>
                 `;
             }).join('');

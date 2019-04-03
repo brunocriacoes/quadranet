@@ -1,46 +1,30 @@
-if( localStorage.cart == undefined ) {
+if (localStorage.cart == undefined) {
     localStorage.setItem('cart', '[]');
 }
 
-function addCart( ID, name, status, price, init, end, data, idAgenda, foto, modal ) {
-    let item = [{
-        'id': ID,
-        'name': name,
-        'status': status,
-        'price': price,
-        'init': init,
-        'end': end,
-        'day': data,
-        'idAgenda': idAgenda,
-        'foto': foto,
-        'modal': modal
-    }];
+function addCart(obj) {
+    let items = get_cart();
+    log(items);
+    items.push(obj);
+    log(items);
 
-    let items = localStorage.cart;
-    items = JSON.parse(items);
-    let indice = items.findIndex(x => { return x.idAgenda == idAgenda; });
-    if (indice == -1) {
-        items.push(...item);
-    }
-
-    localStorage.cart = JSON.stringify(items);
     vio.cart = items;
 
-    window.location.href = '#carrinho';
-    alerta( 'Item adicionado ao Carrinho' );
+    save_cart(items);
+    alerta('Item adicionado ao Carrinho');
 }
 
-function removeItem( idAgenda ) {
+function removeItem(id) {
     let items = localStorage.cart;
     items = JSON.parse(items);
-    let indice = items.findIndex( x => { return x.idAgenda == idAgenda } );
+    let indice = items.findIndex(x => { return x.id == id });
     if (items[indice] > 1) {
         let remove = items;
         localStorage.cart = JSON.stringify(remove);
         vio.cart = remove;
     } else {
         let remove = items.filter(y => {
-            if (y.idAgenda === idAgenda) {
+            if (y.id === id) {
                 return false;
             }
             return true;
@@ -48,4 +32,12 @@ function removeItem( idAgenda ) {
         localStorage.cart = JSON.stringify(remove);
         vio.cart = remove;
     }
+}
+
+function get_cart() {
+    let cart = window.localStorage.cart || '[]';
+    return JSON.parse(cart);
+}
+function save_cart(obj) {
+    window.localStorage.setItem('cart', JSON.stringify(obj));
 }
