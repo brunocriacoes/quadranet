@@ -23,6 +23,67 @@ function parametros() {
     return uri;
 }
 
+const time_stemp = () => { let data = new Date(); return data.getTime(); };
+
+function preencher(seletor, objeto) {
+    let formulario = queryAll(`#${seletor} input, #${seletor} textarea, #${seletor} select, #${seletor} img`);
+    let lista_var = queryAll(`#${seletor} img:not([src*="ico"])`);
+    for (let index = 0; index < lista_var.length; index++) {
+        lista_var[index].src = storage + '/' + objeto[lista_var[index].alt || ''] || '';
+    }
+    let html = objeto.html || '';
+    if (html.length > 0) {
+        if (query(`#${seletor} .editor-local`)) {
+            query(`#${seletor} .editor-local`).innerHTML = objeto.html || '';
+        }
+    }
+    let tmp_name = '';
+    let temp_element = '';
+    for (let i = 0; i < formulario.length; i++) {
+        tmp_name = formulario[i].name || formulario[i].id;
+        switch (formulario[i].type) {
+            case 'select-one':
+                temp_element = query(`#${seletor} select[name='${tmp_name}'] option[value='${objeto[tmp_name]}']`);
+                if (temp_element) {
+                    temp_element.setAttribute('selected', '');
+                }
+                break;
+            case 'textarea':
+                formulario[i].innerHTML = objeto[tmp_name] || '';
+                break;
+            case 'file':
+            case 'submit':
+                break;
+            default:
+                formulario[i].value = objeto[tmp_name] || '';
+                break;
+        }
+    }
+}
+
+function query_cep(elemento, seletor = null) {
+    let cep = elemento.value;
+    cep = cep.replace(/\-/gi, '');
+    let total = cep.length;
+    if (total == 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(x => x.json())
+            .then(x => {
+                let obj = x;
+                obj.id = 'endereco';
+                obj.rua = x.logradouro;
+                obj.cidade = x.localidade;
+                obj.estado = x.uf;
+                if (seletor == null) {
+                    preencher(seletor, { ...obj });
+                } else {
+                    let form = form_data(seletor);
+                    preencher(seletor, { ...obj, ...form });
+                }
+            });
+    }
+}
+
 function objToUrl(OBJ) {
     let url = Object.keys(OBJ).map(x => {
         return `${x}=${OBJ[x]}`;
@@ -67,6 +128,16 @@ function to_float(str) {
     str = str.replace('.', '').replace(',', '.');
     return +str;
 }
+
+function get_api(url, hof) {
+    fetch(`${app}/${url}`)
+        .then(j => j.json())
+        .then(x => {
+            hof(x);
+        });
+    return true;
+}
+
 function get_form(ID) {
     let form = query(ID);
     let obj = {};
@@ -228,12 +299,19 @@ function filtro(select) {
 
 }
 
+_time = [];
+
 function add_player() {
-    vio.time = [{
-        name: query('#player_name').value,
+    _time.push({
+        nome: query('#player_name').value,
         tel: query('#player_tel').value,
-        mail: query('#player_mail').value
-    }];
+        email: query('#player_mail').value,
+        id: time_stemp(),
+        id_contratante: _profile.email,
+        pagou: 0
+    });
+    vio.time = _time;
+    addJogador();
 }
 
 function send_mail() {
@@ -267,32 +345,26 @@ function meCadastrar() {
     let form = get_form('#formulario_me-cadastrar');
     let uri = objToUrl(form);
     disabled_form('#formulario_me-cadastrar');
-    let url = `${app}/profile/?cadastrar=true&${uri}${trol}`;
+    let url = `${app}/auth2/?create=1&${uri}${trol}`;
     fetch(url)
         .then(j => j.json())
         .then(x => {
+            localStorage.setItem('profile', x)
             abled_form('#formulario_me-cadastrar');
             query('#formulario_me-cadastrar').reset;
-            window.location.href = '#entrar';
+            window.location.href = 'entrar';
             alerta('Cadastrado Com Sucesso');
         });
 }
 
 function atualizarPerfil() {
-    let form = get_form_vio('#atualizar_perfil');
-    let uri = objToUrl(form);
-    let url = `${app}/profile/?atualizar=${form.email}&${uri}${trol}`;
-    fetch(url)
-        .then(j => j.json())
-        .then(x => {
-
-        });
+    let form = get_form('#atualizar_perfil');
+    post_api('/auth2/?update=1', form, x => { });
 }
 
 function mudarSenha() {
     let form = get_form('#mudar_senha');
-    let url = `${app}/profile/?alter-pass=${_profile.email}&pass=${form.pass}${trol}`;
-    fetch(url)
+    fetch(`${app}/auth2/?alter-pass=${form.email},${form.pass}${trol}`)
         .then(j => j.json())
         .then(x => {
             alerta('Senha Alterada com Sucesso');
@@ -300,22 +372,19 @@ function mudarSenha() {
 }
 
 function addJogador() {
-    let form = get_form('#add-jogador');
-    let url = `${app}/profile/?add-player=${_profile.email}&name=${form.player_name}&tel=${form.player_tel}&mail=${form.player_mail}${trol}`;
-    fetch(url)
-        .then(j => j.json())
-        .then(x => {
-            alerta('Jogador adicionado com sucesso!');
-            query('#add-jogador').reset();
-        });
+    let time = _time || [];
+    time.forEach(e => {
+        post_api('time', e, x => { });
+        alerta('Jogador adicionado com sucesso!');
+        query('#add-jogador').reset();
+    });
 }
 
-function join_payment(emailCapitao, idJogador) {
-    let url = `${app}/profile/?player-buy=${emailCapitao}&usuario=${idJogador}${trol}`;
-    fetch(url)
-        .then(j => j.json())
-        .then(x => {
-        });
+function join_payment(idJogador) {
+    get_api(`time?id=${idJogador}`, p => {
+        let bombom = ( p.pagou == 0 ) ? 1 : 0 ;
+        post_api('time', { id: idJogador, pagou: bombom }, x => { });
+    });
 }
 
 async function buy() {
@@ -368,14 +437,12 @@ async function buy() {
     query('#lds-ring').style.display = 'inline-block';
 }
 
-function removePlayer(emailCapitao, idJogador) {
-    query(`#vio_player_${idJogador}`).style.display = 'none';
-    let url = `${app}/profile?player-del=${emailCapitao}&jogador=${idJogador}${trol}`;
-    fetch(url)
-        .then(j => j.json())
-        .then(x => {
-        });
-}
+const trash = (url, id_no) => {
+    post_api(url, { id: id_no, status: 0 }, x => {
+        vio[url] = _vio[url].filter(x => x.id != id_no);
+        _time = _time.filter(x => x.id != id_no);
+    })
+};
 
 function setReserva(ID) {
     fetch(url_api + bug + chache)
@@ -409,8 +476,8 @@ const queryAll = x => {
 function form_data(id) {
     let formulario = queryAll(`#${id} input, #${id} textarea, #${id} select`);
     for (let i = 0; i < formulario.length; i++) {
-        nome = formulario[i].name || formulario[i].id || 'b'
-        valor = formulario[i].value || formulario[i].innerHTML || 'b';
+        nome = formulario[i].name || formulario[i].id || '';
+        valor = formulario[i].value || formulario[i].innerHTML || '';
         if (nome.length > 0 && valor.length > 0) {
             data[nome] = valor;
         }
@@ -616,13 +683,13 @@ function edita_quadra(id) {
 
 var temp_quadra = {};
 var tempHorario = '';
-function setHorario( x ) {
-    tempHorario = x.split( '-' );
+function setHorario(x) {
+    tempHorario = x.split('-');
     let inicio = `${tempHorario[3]}:${tempHorario[4]}`;
     let final = `${tempHorario[5]}:${tempHorario[6]}`;
     tempHorario = { ...temp_quadra, inicio, final, id: x };
 
-    document.querySelector( '#btn__reserva_mensal' ).setAttribute( 'onclick', `addCart( ${JSON.stringify( {...tempHorario, tipocontratacao: 0} )} )` );
-    document.querySelector( '#btn__reserva_diaria' ).setAttribute( 'onclick', `addCart( ${JSON.stringify( {...tempHorario, tipocontratacao: 1} )} )` );
-    document.querySelector( '#agenda_hor' ).innerHTML = `Horários: ${inicio}hrs ás ${final}hrs`;
+    document.querySelector('#btn__reserva_mensal').setAttribute('onclick', `addCart( ${JSON.stringify({ ...tempHorario, tipocontratacao: 0 })} )`);
+    document.querySelector('#btn__reserva_diaria').setAttribute('onclick', `addCart( ${JSON.stringify({ ...tempHorario, tipocontratacao: 1 })} )`);
+    document.querySelector('#agenda_hor').innerHTML = `Horários: ${inicio}hrs ás ${final}hrs`;
 }

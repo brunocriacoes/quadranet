@@ -32,20 +32,20 @@ var vio = {
         document.querySelector('meta[name="keywords"]').content = val;
     },
     get keywords() { return _vio.keywords },
-    set time(el) {
-        _vio.time.push(...el);
-        query('#vio_time').innerHTML = _vio.time.reduce((acc, iten) => {
-            acc.push(`
+    set time(arr) {
+        _vio.time = arr;
+        let loop = arr.map( iten => {
+            return `
             <tr id="vio_player_${iten.id}">
-                <th>${ iten.name || '...'}</th>
+                <th>${ iten.nome || '...'}</th>
                 <th>${ iten.tel || '...'}</th>
-                <th>${ iten.mail || '...'}</th>
-                <th><input type="checkbox" ${ iten.status ? 'checked' : ''} onclick="join_payment( '${_profile.email || '301'}', '${iten.id || '42'}' )"></th>
-                <th onclick="removePlayer( '${_profile.email || '301'}', '${iten.id || '42'}' )"><img src="./disc/ico/delete.png" class="trash"></th>
+                <th>${ iten.email || '...'}</th>
+                <th><input type="checkbox" ${ (iten.pagou == 1) ? 'checked' : '' } onclick="join_payment( '${iten.id}' )"></th>
+                <th onclick="trash( 'time', '${iten.id}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></th>
             </tr>
-            `);
-            return acc;
-        }, []).join('');
+            `;
+        } );
+        query('#vio_time').innerHTML = loop.join( '' );
     },
     get time() { return _vio.time; },
     set agenda(el) {

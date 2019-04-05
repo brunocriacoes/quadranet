@@ -358,15 +358,14 @@ function baixar_inscritos()
     dowload_csv( '#baixar', dados, "inscritos.csv" );
 }
 
-function privado()
-{
+function privado() {
     let url = `auth/?token=${window.localStorage.token_painel || 1}`;
     get_api( encodeURI(url), x => {
         if( !x.token ) {
             window.localStorage.removeItem('token_painel');
             to( `${admin}/#entrar` );
         }
-    } );    
+    } );
 }
 
 function publico()

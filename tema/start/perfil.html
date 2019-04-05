@@ -6,15 +6,20 @@
     <form action="javascript:void(0)" method="POST" class="" id="atualizar_perfil">
         <h2 class="text-center">Perfil</h2>
         <div class="grid-2">
-            <input type="text" class="field" placeholder="Nome">
-            <input type="text" class="field" placeholder="Digite um Apelido">
-            <input type="email" class="field" placeholder="email" value="email@gmail.com" disabled>
-            <input type="text" class="field" placeholder="CPF">
-            <input type="text" class="field" placeholder="Cep">
-            <input type="text" class="field" placeholder="Estado">
-            <input type="text" class="field" placeholder="Cidade">
-            <input type="text" class="field" placeholder="Endereço">
-            <input type="tel" class="field" placeholder="Whatsapp">
+            <select class="field" name="pessoa">
+                <option value="0">Pessoa Fisica</option>
+                <option value="1">Pessoa Jurídica</option>
+            </select>
+            <input type="text" class="field" placeholder="Nome Completo" name="nome" required>
+            <input type="email" class="field" placeholder="Email" name="email" required>
+            <input type="text" class="field" placeholder="CPF/CNPJ" name="cpf_cnpj" required>
+            <input type="text" class="field" placeholder="CEP" onblur="query_cep( this, 'formulario_me-cadastrar' )" name="cep" required>
+            <input type="text" class="field" placeholder="Estado" name="estado" disabled required>
+            <input type="text" class="field" placeholder="Cidade" name="cidade" disabled required>
+            <input type="text" class="field" placeholder="Bairro" name="bairro" required>
+            <input type="text" class="field" placeholder="Rua" name="rua" required>
+            <input type="text" class="field" placeholder="Número" name="numero" required>
+            <input type="tel" class="field" name="whatsapp" placeholder="Whatsapp" required>
         </div>
         <input onclick="atualizarPerfil()" type="submit" value="salvar" class="btn btn-sucess btn-center">
     </form>

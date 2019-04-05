@@ -54,6 +54,7 @@
         $list = glob( "{$this_dir}*.json*" );
         $list = array_map( function( $DIR ) { return json_decode( file_get_contents( $DIR ) ); }, $list );
         $list = array_filter( $list, function( $EL ) { return $EL->status ?? false; } );
+        $list = array_values( $list );
         $json_print = json_encode( $list );
         echo $json_print;
         die;

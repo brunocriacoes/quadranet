@@ -28,21 +28,21 @@ fetch(app)
                     return hora;
                 });
                 id_base = id_base.sort();
-                let week = semana( '2019-04-01' );
+                let week = semana('2019-04-01');
                 id_base.forEach(e => {
                     week.forEach(m => {
                         m = m.split('@');
                         agenda.push(`${m[0]}-${e}-${m[1]}-${quadra.id}`);
                     });
                 });
-                document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios</div>' + horario.map( h => `<div>${h.inicio} - ${h.final}</div>` ).join( '' );
-                document.querySelector('#agenda_reserva').innerHTML = agenda.map( a => `<label onclick="setHorario( '${a}' )" for="pop-agenda-livre"><div id="agenda_${a}">Disponivel</div></label>` ).join( '' );
-                document.querySelector('#agenda_semana').innerHTML = week.map( a => `<div>${a.split('@')[0].split('-').reverse().join('/')}</div>` ).join( '' );
+                document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).join('');
+                document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => `<label onclick="setHorario( '${a}' )" for="pop-agenda-livre"><div id="agenda_${a}">Disponivel</div></label>`).join('');
+                document.querySelector('#agenda_semana').innerHTML = week.map(a => `<div>${a.split('@')[0].split('-').reverse().join('/')}</div>`).join('');
                 rese.forEach(r => {
-                    if( document.querySelector(`#agenda_${r.id}`) ) {
+                    if (document.querySelector(`#agenda_${r.id}`)) {
                         document.querySelector(`#agenda_${r.id}`).innerHTML = 'Ocupado';
-                        document.querySelector(`#agenda_${r.id}`).classList.add( 'agenda__horario_ocupado' );
-                        document.querySelector(`#agenda_${r.id}`).removeAttribute( 'onclick' );
+                        document.querySelector(`#agenda_${r.id}`).classList.add('agenda__horario_ocupado');
+                        document.querySelector(`#agenda_${r.id}`).removeAttribute('onclick');
                     }
                 });
             }
@@ -56,7 +56,6 @@ fetch(app)
 
 window.onpopstate = function () {
     restrito();
-    router('sair', () => { logout(); });
     vio.perfil = {
         nome: _profile.name || '',
         apelido: _profile.nickname || '',
@@ -69,7 +68,6 @@ window.onpopstate = function () {
         whatsapp: _profile.whatsapp || '',
     };
     vio.historico = _profile.history || []; //[ { id:, status:, day:, price: } ];
-    _vio.time = [];
     vio.time = _profile.tean || []; //[{name tel mail}]
 
     marcar();
@@ -96,4 +94,19 @@ router('historico-compras', p => {
     vio.historico = historico
 });
 
+fetch(`${app}/auth2?profile=${localStorage.token_site}`)
+    .then(j => j.json())
+    .then(x => {
+        fetch(`${app}/time`)
+            .then(p => p.json())
+            .then(b => {
+                vio.time = b;
+                _time = b;
+            });
+        x.pass = '';
+        x.password = '';
+        _profile = x;
+        preencher('atualizar_perfil', x);
+        preencher('mudar_senha', x);
+    });
 

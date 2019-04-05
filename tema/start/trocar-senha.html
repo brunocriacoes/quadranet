@@ -3,8 +3,9 @@
 <br>
 <section id="servicos" class="container grid-2">
     {{menu_lateral}}
-    <form action="javascript:void(0)" method="POST" class="" id="mudar_senha">
+    <form action="javascript:void(0)" method="POST" id="mudar_senha">
         <h1 class="text-center">Muda Senha</h1>
+        <input type="text" name="email" hidden>
         <input type="password" class="field ico ico-pass" name="password" required placeholder="Nova Senha">
         <input type="password" class="field ico ico-pass" name="pass" required placeholder="Confirmar Nova Senha">
         <input onclick="mudarSenha()" type="submit" class="btn btn-sucess btn-center" value="salvar">

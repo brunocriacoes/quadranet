@@ -55,9 +55,9 @@
     endif;
 
     if( ! empty ( request['login'] ) ):
-        $email     = request['mail'];
+        $email     = request['email'];
         $pass      = request['pass'];
-        $id        = sha1( request['mail'] );
+        $id        = sha1( request['email'] );
         $user_file = $user_dir . $id . ".json";
         if( file_exists( $user_file ) ):
             $json         = json_decode( file_get_contents( $user_file ) );
