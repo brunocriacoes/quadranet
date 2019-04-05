@@ -1044,11 +1044,25 @@ iframe {
     margin-bottom: 10px;
 }
 
+.menu__lateral__user {
+    margin-top: 50px;
+}
+
 .menu__lateral__user a {
     display: block;
     text-decoration: none;
-    margin: 30px;
     color: #333;
+    border: 1px solid #DDD;
+    padding: 10px;
+}
+
+.menu__lateral__user a img {
+    width: 20px;
+    margin-right: 10px ;
+}
+
+.menu__lateral__user a:hover {
+    background-color: #ddd;
 }
 
 .agenda_reserva {
@@ -1155,4 +1169,10 @@ iframe {
     background-color: #CCC;
     filter: opacity(.5);
     cursor: not-allowed;
+}
+
+#servicos {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-gap: 30px !important;
 }
