@@ -382,57 +382,61 @@ function addJogador() {
 
 function join_payment(idJogador) {
     get_api(`time?id=${idJogador}`, p => {
-        let bombom = ( p.pagou == 0 ) ? 1 : 0 ;
+        let bombom = (p.pagou == 0) ? 1 : 0;
         post_api('time', { id: idJogador, pagou: bombom }, x => { });
     });
 }
 
 async function buy() {
-    let id = new Date().getTime();
     let code = query('#pag-code');
     let btn = query('#pag-send');
+    let carrinho = _vio.cart || [];
+    let carEstatico = {};
+
+    for (let index = 0; index < carrinho.length; index++) {
+        let preco = (carrinho[index].tipocontratacao == 0) ? carrinho[index].mensalidade : carrinho[index].diaria;
+        carEstatico[`itemId${index + 1}`] = carrinho[index].id;
+        carEstatico[`itemDescription${index + 1}`] = carrinho[index].nome;
+        carEstatico[`itemAmount${index + 1}`] = preco.replace(',', '.');
+        carEstatico[`itemQuantity${index + 1}`] = '1';
+        carEstatico[`itemWeight${index + 1}`] = '1000';
+    }
 
     let cart = {
-        usuario: _profile.id || '',
-        title: _profile.name || '',
-        email: _profile.email || '',
-        whatsapp: _profile.whatsapp || '',
-        cart: _vio.cart || [],
-        status: 1,
-        payment: 1
+        usuario_id: _profile.id || '',
+        usuario_nome: _profile.name || '',
+        usuario_email: _profile.email || '',
+        usuario_whatsapp: _profile.whatsapp || '',
+        status_compra: 1,
+        tipo_pagamento: 1
     };
-    cart = JSON.stringify(cart);
-    cart = encodeURI(cart);
-    _vio.cart.forEach(x => {
+
+    carrinho.forEach(x => {
         let obj = {
             _dominio: dominio,
-            _method: 'POST',
-            ID: x.idAgenda,
-            usuario: _profile.id,
-            quadra: x.id,
-            tipocontratacao: x.status,
-            final: x.init,
-            _token: null,
+            id: x.id,
+            quadra_nome: x.nome,
+            tipocontratacao: x.tipocontratacao,
+            inicio: x.inicio,
+            final: x.final,
+            preco: (x.tipocontratacao == 0) ? x.mensalidade : x.diaria,
+            ...cart
         };
-        let uri = objToUrl(obj);
-        let path = `${app}/reserva/?${uri}${trol}`;
-        fetch(path)
-            .then(x => x.json())
-            .then(x => {
 
-            });
+        post_api( 'reservas', obj, o => {
+            log(o);
+        } )
     });
-    let path = `${app}/buy/?register=${id}&cart=${cart}${trol}`;
-    fetch(path)
-        .then(x => x.json())
-        .then(x => {
-            code.value = x.code;
-            // window.location.href = `https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${x.code}`;
-            btn.click();
-            query('#lds-ring').style.display = 'none';
-            localStorage.setItem('cart', '[]');
-            query('.btn-finalizar').style.display = 'block';
-        });
+
+    post_api(`fnc/pagseguro`, carEstatico, p => {
+        code.value = p.code;
+        btn.click();
+
+        query('#lds-ring').style.display = 'none';
+        localStorage.setItem('cart', '[]');
+        query('.btn-finalizar').style.display = 'block';
+    })
+
     query('#img_pague').style.display = 'none';
     query('#lds-ring').style.display = 'inline-block';
 }

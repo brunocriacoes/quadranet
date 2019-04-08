@@ -8,6 +8,14 @@ fetch(app)
         }
 
         vio.modalidade = y.modalidade;
+        vio.reservas = y.reservas;
+
+        router('historico-compras', p => {
+            let loop = _vio.reservas;
+            loop = loop.filter( f => f.usuario_id == _profile.id );
+            log(loop);
+            vio.historico = loop;
+        });
 
         router('agenda', x => {
             if (y.reservas != undefined) {
@@ -85,13 +93,6 @@ router('detalhe', z => {
             let conjquadra = conjunto.find(p => p.ID == para.id);
             vio.detalhe = { title: conjquadra.title, text: conjquadra.resumo, img_1: conjquadra.foto, img_2: conjquadra.foto1, img_3: conjquadra.foto2, img_4: conjquadra.foto3, img_5: conjquadra.foto4, ID: conjquadra.ID };
         });
-});
-
-router('historico-compras', p => {
-    let profile = localStorage.profile;
-    profile = JSON.parse(profile);
-    let historico = profile.history.map(x => ({ id: x.transacao || '', status: x.payment || '', day: x.data || '', price: x.price || '11' }));
-    vio.historico = historico
 });
 
 fetch(`${app}/auth2?profile=${localStorage.token_site}`)

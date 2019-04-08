@@ -22,6 +22,10 @@ var vio = {
         document.querySelector('#vio_title').innerHTML = val;
     },
     get title() { return _vio.title },
+    set reservas(val) {
+        _vio.reservas = val;
+    },
+    get reservas() { return _vio.reservas },
     set description(val) {
         _vio.description = val;
         document.querySelector('meta[name="description"]').content = val;
@@ -34,18 +38,20 @@ var vio = {
     get keywords() { return _vio.keywords },
     set time(arr) {
         _vio.time = arr;
-        let loop = arr.map( iten => {
+        let loop = arr.map(iten => {
             return `
             <tr id="vio_player_${iten.id}">
                 <th>${ iten.nome || '...'}</th>
                 <th>${ iten.tel || '...'}</th>
                 <th>${ iten.email || '...'}</th>
-                <th><input type="checkbox" ${ (iten.pagou == 1) ? 'checked' : '' } onclick="join_payment( '${iten.id}' )"></th>
+                <th><input type="checkbox" ${ (iten.pagou == 1) ? 'checked' : ''} onclick="join_payment( '${iten.id}' )"></th>
                 <th onclick="trash( 'time', '${iten.id}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></th>
             </tr>
             `;
-        } );
-        query('#vio_time').innerHTML = loop.join( '' );
+        });
+        if (query('#vio_time')) {
+            query('#vio_time').innerHTML = loop.join('');
+        }
     },
     get time() { return _vio.time; },
     set agenda(el) {
@@ -64,31 +70,32 @@ var vio = {
     get agenda() { return _vio.agenda; },
     set historico(el) {
         _vio.historico = el;
-        query('#vio_historico').innerHTML = el.map(x => {
-            return `
+        if (query('#vio_historico')) {
+            query('#vio_historico').innerHTML = el.map(x => {
+                return `
             <tr>
-                <td>${ x.id || '---'}</td>
+                <td>${ x.data || '--/--/----'}</td>
+                <td>R$ ${ x.preco || '00,00'}</td>
                 <td>${ (x.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
-                <td>${ x.day || '--/--/----'}</td>
-                <td>R$ ${ x.price || '00,00'}</td>
             </tr>
             `;
-        }).join('');
+            }).join('');
+        }
     },
     get historico() { return _vio.historico; },
     set cart(el) {
         _vio.cart = el;
         vio.finalizar = el;
         let soma_total = el.reduce((acc, item) => {
-            acc = acc + to_float((item.tipocontratacao == 0 ) ? item.mensalidade : item.diaria || "0");
+            acc = acc + to_float((item.tipocontratacao == 0) ? item.mensalidade : item.diaria || "0");
             return acc;
         }, 0);
         this.itens_count = el.length;
         this.total = soma_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
-        if( query('#vio_cart') ) {
+        if (query('#vio_cart')) {
             query('#vio_cart').innerHTML = el.map(x => {
                 let modalidade = vio.modalidade;
-                modalidade = modalidade.find( f => f.id == x.modalidade );
+                modalidade = modalidade.find(f => f.id == x.modalidade);
                 return `
                     <tr>
                         <td><img src="${url_storage}/${x.foto_1}" class="cart__img"></td>
@@ -97,7 +104,7 @@ var vio = {
                         <td>${ x.data || '--/--/----'}</td>
                         <td>${ x.inicio || '--:--'} ás ${x.final || '--:--'}</td>
                         <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Diária'}</td>
-                        <td>R$${(x.tipocontratacao == 0 ) ? x.mensalidade : x.diaria}</td>
+                        <td>R$${(x.tipocontratacao == 0) ? x.mensalidade : x.diaria}</td>
                         <td onclick="removeItem( '${x.id}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></td>
                     </tr>
                 `;
@@ -232,8 +239,8 @@ var vio = {
                         <td>${ x.nome || '---'}</td>
                         <td>${ x.data || '--/--/----'}</td>
                         <td>${ x.inicio || '--:--'} ás ${x.final || '--:--'}</td>
-                        <td>${ (x.status || true) ? 'por um dia' : 'por mês'}</td>
-                        <td>R$ ${ x.preco || '00,00'} </td>
+                        <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Diária'}</td>
+                        <td>R$${(x.tipocontratacao == 0) ? x.mensalidade : x.diaria}</td>
                     </tr>
                 `;
             }).join('');
