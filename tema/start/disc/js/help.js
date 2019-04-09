@@ -397,7 +397,7 @@ async function buy() {
         let preco = (carrinho[index].tipocontratacao == 0) ? carrinho[index].mensalidade : carrinho[index].diaria;
         carEstatico[`itemId${index + 1}`] = carrinho[index].id;
         carEstatico[`itemDescription${index + 1}`] = carrinho[index].nome;
-        carEstatico[`itemAmount${index + 1}`] = preco.replace(',', '.');
+        carEstatico[`itemAmount${index + 1}`] = preco.replace( ',', '.' );
         carEstatico[`itemQuantity${index + 1}`] = '1';
         carEstatico[`itemWeight${index + 1}`] = '1000';
     }
@@ -424,21 +424,23 @@ async function buy() {
         };
 
         post_api( 'reservas', obj, o => {
-            log(o);
+
         } )
     });
 
     post_api(`fnc/pagseguro`, carEstatico, p => {
         code.value = p.code;
-        btn.click();
-
-        query('#lds-ring').style.display = 'none';
-        localStorage.setItem('cart', '[]');
-        query('.btn-finalizar').style.display = 'block';
+        if( p.error != undefined ) {
+            alert('Sua compra não foi finalizada');
+        } else {
+            btn.click();
+            query('#lds-ring').style.display = 'none';
+            localStorage.setItem('cart', '[]');
+            query('.btn-finalizar').style.display = 'block';
+            query('#img_pague').style.display = 'none';
+            query('#lds-ring').style.display = 'inline-block';
+        }
     })
-
-    query('#img_pague').style.display = 'none';
-    query('#lds-ring').style.display = 'inline-block';
 }
 
 const trash = (url, id_no) => {

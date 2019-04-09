@@ -99,8 +99,8 @@ var vio = {
                 return `
                     <tr>
                         <td><img src="${url_storage}/${x.foto_1}" class="cart__img"></td>
-                        <td>${ x.nome || '---'}</td>
                         <td>${ modalidade.nome || '---'}</td>
+                        <td>${ x.nome || '---'}</td>
                         <td>${ x.data || '--/--/----'}</td>
                         <td>${ x.inicio || '--:--'} ás ${x.final || '--:--'}</td>
                         <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Diária'}</td>
@@ -122,6 +122,9 @@ var vio = {
         _vio.total = el;
         if (query('#vio_total_carrinho')) {
             query('#vio_total_carrinho').innerHTML = el;
+        }
+        if (query('#finalizar_total')) {
+            query('#finalizar_total').innerHTML = el;
         }
     },
     get total() { return _vio.total; },
@@ -231,7 +234,7 @@ var vio = {
             return acc;
         }, 0);
         this.itens_count = el.length;
-        // this.total = soma_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
+        this.total = soma_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
         if (query('#vio_finalizar')) {
             query('#vio_finalizar').innerHTML = el.map(x => {
                 return `
