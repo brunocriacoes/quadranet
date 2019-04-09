@@ -103,7 +103,7 @@ var vio = {
                         <td>${ x.nome || '---'}</td>
                         <td>${ x.data || '--/--/----'}</td>
                         <td>${ x.inicio || '--:--'} ás ${x.final || '--:--'}</td>
-                        <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Diária'}</td>
+                        <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
                         <td>R$${(x.tipocontratacao == 0) ? x.mensalidade : x.diaria}</td>
                         <td onclick="removeItem( '${x.id}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></td>
                     </tr>
@@ -242,7 +242,7 @@ var vio = {
                         <td>${ x.nome || '---'}</td>
                         <td>${ x.data || '--/--/----'}</td>
                         <td>${ x.inicio || '--:--'} ás ${x.final || '--:--'}</td>
-                        <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Diária'}</td>
+                        <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
                         <td>R$${(x.tipocontratacao == 0) ? x.mensalidade : x.diaria}</td>
                     </tr>
                 `;

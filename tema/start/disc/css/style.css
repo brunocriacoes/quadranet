@@ -1068,7 +1068,6 @@ iframe {
 .agenda_reserva {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-gap: 20px;
 }
 
 .agenda_reserva div, .agenda__horarios > div {
@@ -1077,7 +1076,6 @@ iframe {
     border-radius: 8px;
     padding: 10px;
     margin: 10px;
-    cursor: pointer;
 }
 
 .grid_agenda {
@@ -1088,12 +1086,15 @@ iframe {
 
 .agenda__horarios {
     display: grid;
-    grid-gap: 6px;
 }
 
 .agenda__horario_ocupado {
-    background-color: var(--danger);
+    background-color: var(--danger) !important;
     color: #fff;
+}
+
+.agenda__horario_ocupado:hover {
+    filter: brightness(117%)
 }
 
 #pop-agenda-livre:checked ~ .pop-agenda-livre { display: grid; }
@@ -1175,4 +1176,162 @@ iframe {
     display: grid;
     grid-template-columns: 20% 80%;
     grid-gap: 30px !important;
+}
+
+.btn_pagseguro {
+    cursor: pointer;
+}
+
+.link_termos_finalizar {
+    color: var(--theme) !important;
+    cursor: pointer;
+}
+
+.link_termos_finalizar:hover {
+    text-decoration: underline;
+}
+
+.select_termos {
+    z-index: 0;
+    position: relative;
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.select_termos > input {
+    appearance: none;
+    z-index: -1;
+    position: absolute;
+    left: -10px;
+    top: -8px;
+    display: block;
+    margin: 0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: none;
+    outline: none;
+    opacity: 0;
+    transform: scale(1);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+.select_termos > span::before {
+    content: "";
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 3px 11px 3px 1px;
+    border: solid 2px;
+    border-color: rgba(0, 0, 0, 0.6);
+    border-radius: 2px;
+    width: 18px;
+    height: 18px;
+    vertical-align: top;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.select_termos > span::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    width: 10px;
+    height: 5px;
+    border: solid 2px transparent;
+    border-right: none;
+    border-top: none;
+    transform: translate(3px, 4px) rotate(-45deg);
+}
+
+.select_termos > input:checked,
+.select_termos > input:indeterminate {
+    background-color: rgb(33, 150, 243);
+}
+
+.select_termos > input:checked + span::before,
+.select_termos > input:indeterminate + span::before {
+    border-color: rgb(33, 150, 243);
+    background-color: rgb(33, 150, 243);
+}
+
+.select_termos > input:checked + span::after,
+.select_termos > input:indeterminate + span::after {
+    border-color: rgb(255, 255, 255);
+}
+
+.select_termos > input:indeterminate + span::after {
+    border-left: none;
+    transform: translate(4px, 3px);
+}
+
+.select_termos:hover > input {
+    opacity: 0.04;
+}
+
+.select_termos > input:focus {
+    opacity: 0.12;
+}
+
+.select_termos:hover > input:focus {
+    opacity: 0.16;
+}
+
+.select_termos > input:active {
+    opacity: 1;
+    transform: scale(0);
+    transition: transform 0s, opacity 0s;
+}
+
+.select_termos > input:active + span::before {
+    border-color: rgb(33, 150, 243));
+}
+
+.select_termos > input:checked:active + span::before {
+    border-color: transparent;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.select_termos > input:disabled {
+    opacity: 0;
+}
+
+.select_termos > input:disabled + span {
+    color: rgba(0, 0, 0, 0.38);
+    cursor: initial;
+}
+
+.select_termos > input:disabled + span::before {
+    border-color: currentColor;
+}
+
+.select_termos > input:checked:disabled + span::before,
+.select_termos > input:indeterminate:disabled + span::before {
+    border-color: transparent;
+    background-color: currentColor;
+}
+
+#termos__checados {
+    color: #fff;
+    text-align: center;
+}
+
+#termos__checados span {
+    padding: 14px !important;
+    background-color: var(--danger);
+    border-radius: 6px;
+}
+
+.agenda-disponivel {
+    background-color: var(--sucess);
+    color: #fff;
+    cursor: pointer;
+}
+
+.agenda-disponivel:hover {
+    filter: brightness(117%)
 }

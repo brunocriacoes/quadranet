@@ -23,8 +23,31 @@
             </tr>
         </tfoot>
     </table>
+    <label class="select_termos">
+        <input id="termos__checkbox" type="checkbox" name="termos" value="Termos">
+        <span>Concordo com os <label class="link_termos_finalizar" for="pop-agenda-livre">Termos de compras</label></span>
+    </label>
+
+    <input type="checkbox" id="pop-agenda-livre" hidden>
+    <div class="pop-box pop-agenda-livre">
+        <div>
+            <div class="header__pop">
+                <span>Termos de Compra</span>
+                <label for="pop-agenda-livre" class="pop-close">
+                    <img src="./disc/ico/close.png">
+                </label>
+            </div>
+            <div class="body_pop">
+                <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia quae porro odio accusamus
+                    architecto, assumenda dicta nulla sed dolores vero.</span>
+            </div>
+        </div>
+    </div>
+
     <div class="or">
         <a href="{{uri}}/quadras" class="btn btn-center gap-top gap-bottom">Continuar comprando</a>
-        <a href="{{uri}}/finalizar" class="btn btn-sucess btn-center gap-top gap-bottom">Finalizar a Compra</a>
+        <a href="javascript:void(0)" onclick="termos()" class="btn btn-sucess btn-center gap-top gap-bottom">Finalizar a Compra</a>
+        <div></div>
+        <div id="termos__checados"></div>
     </div>
 </section>

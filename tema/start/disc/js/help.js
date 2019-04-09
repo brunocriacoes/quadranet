@@ -434,12 +434,12 @@ async function buy() {
             alert('Sua compra não foi finalizada');
         } else {
             btn.click();
-            query('#lds-ring').style.display = 'none';
-            localStorage.setItem('cart', '[]');
-            query('.btn-finalizar').style.display = 'block';
             query('#img_pague').style.display = 'none';
-            query('#lds-ring').style.display = 'inline-block';
+            localStorage.setItem('cart', '[]');
         }
+        query('#lds-ring').style.display = 'inline-block';
+        query('#lds-ring').style.display = 'none';
+        query('.btn-finalizar').style.display = 'block';
     })
 }
 
@@ -698,4 +698,17 @@ function setHorario(x) {
     document.querySelector('#btn__reserva_mensal').setAttribute('onclick', `addCart( ${JSON.stringify({ ...tempHorario, tipocontratacao: 0 })} )`);
     document.querySelector('#btn__reserva_diaria').setAttribute('onclick', `addCart( ${JSON.stringify({ ...tempHorario, tipocontratacao: 1 })} )`);
     document.querySelector('#agenda_hor').innerHTML = `Horários: ${inicio}hrs ás ${final}hrs`;
+}
+
+function termos() {
+    let termo = document.querySelector( '#termos__checkbox' ).checked;
+    if( termo ) {
+        window.location = 'finalizar';
+    }else{
+        document.querySelector( '#termos__checados' ).innerHTML = '<span>Aceitar os Termos para Continuar!</span>';
+        setTimeout(() => {
+            document.querySelector( '#termos__checados' ).innerHTML = '';            
+        }, 2000);
+    }
+    log(termo);
 }
