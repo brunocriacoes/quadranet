@@ -397,7 +397,7 @@ async function buy() {
         let preco = (carrinho[index].tipocontratacao == 0) ? carrinho[index].mensalidade : carrinho[index].diaria;
         carEstatico[`itemId${index + 1}`] = carrinho[index].id;
         carEstatico[`itemDescription${index + 1}`] = carrinho[index].nome;
-        carEstatico[`itemAmount${index + 1}`] = preco.replace( ',', '.' );
+        carEstatico[`itemAmount${index + 1}`] = preco.replace(',', '.');
         carEstatico[`itemQuantity${index + 1}`] = '1';
         carEstatico[`itemWeight${index + 1}`] = '1000';
     }
@@ -423,14 +423,14 @@ async function buy() {
             ...cart
         };
 
-        post_api( 'reservas', obj, o => {
+        post_api('reservas', obj, o => {
 
-        } )
+        })
     });
 
     post_api(`fnc/pagseguro`, carEstatico, p => {
         code.value = p.code;
-        if( p.error != undefined ) {
+        if (p.error != undefined) {
             alert('Sua compra não foi finalizada');
         } else {
             btn.click();
@@ -701,14 +701,31 @@ function setHorario(x) {
 }
 
 function termos() {
-    let termo = document.querySelector( '#termos__checkbox' ).checked;
-    if( termo ) {
+    let termo = document.querySelector('#termos__checkbox').checked;
+    if (termo) {
         window.location = 'finalizar';
-    }else{
-        document.querySelector( '#termos__checados' ).innerHTML = '<span>Aceitar os Termos para Continuar!</span>';
+    } else {
+        document.querySelector('#termos__checados').innerHTML = '<span>Aceitar os Termos para Continuar!</span>';
         setTimeout(() => {
-            document.querySelector( '#termos__checados' ).innerHTML = '';            
+            document.querySelector('#termos__checados').innerHTML = '';
         }, 2000);
     }
     log(termo);
+}
+
+function dataCompra(data) {
+    fetch(app)
+        .then(x => x.json())
+        .then(y => {
+            let reservas = y.reservas.filter(r => +r.data.split('/')[1] == data.value);
+            document.querySelector('#vio_historico').innerHTML = reservas.map(t => {
+                return `     
+                <tr>
+                    <td>${ t.data || '--/--/----'}</td>
+                    <td>R$ ${ t.preco || '00,00'}</td>
+                    <td>${ (t.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
+                </tr>
+                `;
+            }).join('');
+        });
 }

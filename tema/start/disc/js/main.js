@@ -12,8 +12,7 @@ fetch(app)
 
         router('historico-compras', p => {
             let loop = _vio.reservas;
-            loop = loop.filter( f => f.usuario_id == _profile.id );
-            log(loop);
+            loop = loop.filter(f => f.usuario_id == _profile.id);
             vio.historico = loop;
         });
 
@@ -112,3 +111,7 @@ fetch(`${app}/auth2?profile=${localStorage.token_site}`)
         preencher('mudar_senha', x);
     });
 
+if (document.querySelector(`#mes__compras`)) {
+    let diaCompra = hoje();
+    document.querySelector(`#mes__compras option[value="${+diaCompra.mes}"]`).setAttribute('selected', 'selected');
+}
