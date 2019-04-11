@@ -45,7 +45,7 @@ var vio = {
                 <th>${ iten.tel || '...'}</th>
                 <th>${ iten.email || '...'}</th>
                 <th><input type="checkbox" ${ (iten.pagou == 1) ? 'checked' : ''} onclick="join_payment( '${iten.id}' )"></th>
-                <th onclick="trash( 'time', '${iten.id}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></th>
+                <th class="termos__checkbox" onclick="trash( 'time', '${iten.id}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></th>
             </tr>
             `;
         });
@@ -77,6 +77,7 @@ var vio = {
                 <td>${ x.data || '--/--/----'}</td>
                 <td>R$ ${ x.preco || '00,00'}</td>
                 <td>${ (x.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
+                <td><img src="${base}/tema/start/disc/ico/credit-card.png"></td>
             </tr>
             `;
             }).join('');

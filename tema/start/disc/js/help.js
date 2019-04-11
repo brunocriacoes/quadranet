@@ -240,11 +240,14 @@ function set_date(now) {
                 });
             });
             document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).join('');
-            document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => `<div id="agenda_${a}">Disponivel</div>`).join('');
+            document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => `<label id="lb_${a}" onclick="setHorario( '${a}' )" for="pop-agenda-livre"><div class="agenda-disponivel" id="agenda_${a}">Disponivel</div></label>`).join('');
             document.querySelector('#agenda_semana').innerHTML = week.map(a => `<div>${a.split('@')[0].split('-').reverse().join('/')}</div>`).join('');
             rese.forEach(r => {
                 if (document.querySelector(`#agenda_${r.id}`)) {
                     document.querySelector(`#agenda_${r.id}`).innerHTML = 'Ocupado';
+                    document.querySelector(`#agenda_${r.id}`).classList.add('agenda__horario_ocupado');
+                    document.querySelector(`#lb_${r.id}`).removeAttribute('onclick');
+                    document.querySelector(`#lb_${r.id}`).removeAttribute('for');
                 }
             });
         });

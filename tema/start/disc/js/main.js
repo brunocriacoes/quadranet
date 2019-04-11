@@ -1,5 +1,7 @@
 'use strict';
 let bug = debug ? '?bug=true' : '';
+var dataSemana = hoje().data_sisten;
+
 fetch(app)
     .then(x => x.json())
     .then(y => {
@@ -15,6 +17,7 @@ fetch(app)
             loop = loop.filter(f => f.usuario_id == _profile.id);
             vio.historico = loop;
         });
+        
 
         router('agenda', x => {
             if (y.reservas != undefined) {
@@ -35,7 +38,7 @@ fetch(app)
                     return hora;
                 });
                 id_base = id_base.sort();
-                let week = semana('2019-04-01');
+                let week = semana(dataSemana);
                 id_base.forEach(e => {
                     week.forEach(m => {
                         m = m.split('@');

@@ -729,7 +729,7 @@ p {
     display: table;
     width: 100%;
     border-spacing: 0px;
-    text-align: center;
+    text-align: center !important;
 }
 .table tr {
     width: 100%;
@@ -743,12 +743,12 @@ p {
     border-bottom: 2px solid #000;
 }
 
-.table tbody tr:nth-child(2n+1) {
-    background: #ECEFF1;
+.table tbody tr td {
+    padding: 4px;
 }
 
-.table tbody tr td:first-child {
-    text-align: left !important;
+.table tbody tr:nth-child(2n+1) {
+    background: #ECEFF1;
 }
 
 .table tbody tr:hover {
@@ -1091,6 +1091,7 @@ iframe {
 .agenda__horario_ocupado {
     background-color: var(--danger) !important;
     color: #fff;
+    cursor: default !important;
 }
 
 .agenda__horario_ocupado:hover {
@@ -1334,4 +1335,11 @@ iframe {
 
 .agenda-disponivel:hover {
     filter: brightness(117%)
+}
+
+.grid_historico {
+    display: block;
+    width: 300px;
+    margin: 0 auto !important;
+    text-align: center;
 }
