@@ -166,6 +166,7 @@ function semana( dia, data )
     let semana              =  [ "DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB",  ];
     let futuro              = +data_arr[2];
     let passado             = +data_arr[2] - +dia;
+    
     for( let p = 0; p < dia; p++ ) {
         if( passado <= 0 ) {
             passado = max - +dia;
@@ -176,6 +177,7 @@ function semana( dia, data )
             data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
         }
         let atemporal = passado++;
+        atemporal     = atemporal < 10 ? `0${atemporal}` : atemporal; 
         semana[p] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
     }
     for( let f = dia; f < 7; f++ ) {
@@ -223,6 +225,7 @@ function edita_quadra( id ) {
             agenda.push( `${toda_semana[i]}-${x}-${i}-${quadra.id}` );
         }
     } );
+   
     query('.agenda-body').innerHTML = agenda.map( x => `
         <label for="pop-agenda-livre" id="b${x}" onclick="set_quadra_contratar('${x}')">
             <span id="agenda__dia-semana" class="descktop">LIVRE +</span> 
@@ -246,6 +249,9 @@ function edita_quadra( id ) {
     
     let reservas = vio.reservas || [];
 
+    log(reservas);
+    log(agenda);
+
     let time    = new Date();
     let hora    = time.getHours();
     let minutos = time.getMinutes();
@@ -264,9 +270,10 @@ function edita_quadra( id ) {
         }
     } );
     let id_jogando = jogando.map( x => x.id);
-      
+    
     reservas.forEach( x => {
         let elementor = query(`#b${x.id}`);
+        
         if( elementor ) {
            
             elementor.for = "pop-agenda-ocupado";
