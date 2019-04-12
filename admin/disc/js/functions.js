@@ -249,9 +249,6 @@ function edita_quadra( id ) {
     
     let reservas = vio.reservas || [];
 
-    log(reservas);
-    log(agenda);
-
     let time    = new Date();
     let hora    = time.getHours();
     let minutos = time.getMinutes();
@@ -275,6 +272,10 @@ function edita_quadra( id ) {
         let elementor = query(`#b${x.id}`);
         
         if( elementor ) {
+            elementor.removeAttribute('onclick');
+            elementor.removeAttribute('for');
+            elementor.setAttribute('for',"pop-agenda-ocupado");
+            // aqui
            
             elementor.for = "pop-agenda-ocupado";
             elementor.classList.add('agenda-ocupado');
@@ -294,7 +295,7 @@ function edita_quadra( id ) {
             }
             elementor.innerHTML = `
                 <span class="descktop">
-                    <b>${x.contratante_nome}</b>
+                    <b>${x.user_nome}</b>
                     <i>${x.tipo_contatacao == 1 ? 'Diaria' : 'Mensal'}</i>
                 </span> 
             `;            
@@ -630,7 +631,6 @@ function busca_os_contratante() {
             x.valor            = qd.mensalidade || '0,00';
         }
     } );
-    log( lista );
     let arr   = lista.filter( x => x.contratante_nome.indexOf(valor) != -1 && status == x.status_compra  );
     query( '#historico__table_body' ).innerHTML = tpl_array( arr, '#tpl_historico' );
 }

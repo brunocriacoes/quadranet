@@ -233,7 +233,6 @@ var vio = {
 
     set agenda(cont) {
         _vio.agenda = cont;
-        log( cont );
         query('#agenda__title').innerHTML = cont.name;
         query('#agenda__modalidade').innerHTML = cont.modalidade;
         query('#agenda__data').innerHTML = cont.date;

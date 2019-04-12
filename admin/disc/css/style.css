@@ -745,3 +745,35 @@ option {
 label img {
     cursor: pointer;
 }
+.header_reserva {
+    border-bottom: 2px solid #DDD;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    grid-template-columns: 1fr 100px 150px !important;
+}
+.header_reserva span {
+    height: 20px;
+}
+#reserva_quadra {
+    font-weight: bold;
+    font-size: 18px;
+    background-image: url('../ico/field.png');
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 30px;
+    background-size: 16px;
+}
+#reserva_modalidade {}
+#reserva_modalidade i {
+    background: var(--theme);
+    color: #FFF;
+    border-radius: 20px;
+    padding: 7px 12px;
+}
+#reserva_horario {
+    background-image: url('../ico/time.png');
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 30px;
+    background-size: 16px;
+}
