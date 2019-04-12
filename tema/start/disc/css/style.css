@@ -608,7 +608,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
 }
 .btn-sucess, .btn-finalizar {
-    background: var(--theme);
+    background: var(--sucess);
     color: #FFF;
     text-transform: uppercase;
     text-decoration: none;
@@ -1344,7 +1344,7 @@ iframe {
 
 .grid_historico {
     display: block;
-    width: 300px;
+    width: 90%;
     margin: 0 auto !important;
     text-align: center;
 }

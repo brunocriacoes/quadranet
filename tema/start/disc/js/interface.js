@@ -78,7 +78,8 @@ var vio = {
                 <td>${ x.data || '--/--/----'}</td>
                 <td>R$ ${ x.preco || '00,00'}</td>
                 <td>${ (x.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
-                <td><img src="${base}/tema/start/disc/ico/credit-card.png"></td>
+                <td><img src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento"></td>
+                <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${x.id}">Pagamento Jogadores</a></td>
             </tr>
             `;
             }).join('');

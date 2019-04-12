@@ -18,7 +18,7 @@ fetch(app)
             loop = loop.filter(f => f.usuario_id == _profile.id);
             vio.historico = loop;
         });
-        
+
 
         router('agenda', x => {
             if (y.reservas != undefined) {
@@ -99,23 +99,31 @@ router('detalhe', z => {
         });
 });
 
-router('historico-jogador', h => {
+var _pagos = '';
+if (document.querySelector('#historico__pagamento_jogador')) {
     fetch(app)
         .then(x => x.json())
         .then(y => {
             let time = y.time;
-            document.querySelector( '#historico__pagamento_jogador' ).innerHTML = time.map( l => {
+            let parametro = parametros();
+            let reservas = y.reservas || [];
+            let os = reservas.find( x => x.id == parametro.id || '' );
+            let quadra = y.quadra;
+            log(os);
+            os.pagos = os.pagos || '';
+            _pagos = os.pagos;
+            document.querySelector('#historico__pagamento_jogador').innerHTML = time.map(l => {
                 return `
                     <tr>
                         <td>${l.nome}</td>
                         <td>${l.tel}</td>
                         <td>${l.email}</td>
-                        <th><input type="checkbox" ${ (l.pagou == 1) ? 'checked' : ''} onclick="join_payment( '${l.id}' )"></th>
+                        <th><label class="select_termos"><input type="checkbox" ${ (os.pagos.indexOf( `${l.id}` ) != -1) ? 'checked' : ''} onclick="contribuiu( '${os.id}', '${l.id}' )"><span></span><label></th>
                     </tr>
                 `;
-            } );
+            });
         });
-});
+}
 
 fetch(`${app}/auth2?profile=${localStorage.token_site}`)
     .then(j => j.json())

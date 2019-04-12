@@ -321,16 +321,13 @@ function add_player() {
 
 function send_mail() {
     let form = get_form('#send_mail');
-    let url = `${app}/mail/contato@quadranet.com.br/${form.email}/${form.assunto}/${form.mensagem} telefone: ${form.telefone}`;
-    url = encodeURI(url);
-    disabled_form('#send_mail');
-    fetch(url)
-        .then(j => j.json())
-        .then(x => {
-            abled_form('#send_mail');
-            query('#alert_send_mail').style.display = 'block';
-            query('#send_mail').reset();
-        });
+    form.to = 'contato@quadranet.com.br';
+    form.subject = form.assunto;
+    post_api( 'fnc/mail', form, x =>{
+        log(x);
+        alerta('Enviado com sucesso');
+        document.querySelector( '#send_mail' ).reset();
+    } );
 }
 
 function recuperarSenha() {
@@ -434,6 +431,7 @@ async function buy() {
             inicio: x.inicio,
             final: x.final,
             preco: (x.tipocontratacao == 0) ? x.mensalidade : x.diaria,
+            site: 1,
             ...cart
         };
 
@@ -742,4 +740,14 @@ function dataCompra(data) {
                 `;
             }).join('');
         });
+}
+
+function contribuiu( idOS, idJogador ) {
+    if( _pagos.indexOf( `${idJogador}` ) == -1 ) {
+        _pagos = _pagos + `,${idJogador}`;
+    }else{
+        _pagos = _pagos.replace( `,${idJogador}`, '' );
+    }
+    let obj = { id: idOS, pagos: _pagos };
+    post_api( 'reservas', obj, x => { log(x); } );
 }
