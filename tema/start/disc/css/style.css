@@ -995,6 +995,11 @@ p {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
 }
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
 .grid-6 {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -1251,13 +1256,13 @@ iframe {
 
 .select_termos > input:checked,
 .select_termos > input:indeterminate {
-    background-color: rgb(33, 150, 243);
+    background-color: var(--sucess);
 }
 
 .select_termos > input:checked + span::before,
 .select_termos > input:indeterminate + span::before {
-    border-color: rgb(33, 150, 243);
-    background-color: rgb(33, 150, 243);
+    border-color: var(--sucess);
+    background-color: var(--sucess);
 }
 
 .select_termos > input:checked + span::after,
@@ -1289,7 +1294,7 @@ iframe {
 }
 
 .select_termos > input:active + span::before {
-    border-color: rgb(33, 150, 243));
+    border-color: var(--sucess);
 }
 
 .select_termos > input:checked:active + span::before {
@@ -1342,4 +1347,12 @@ iframe {
     width: 300px;
     margin: 0 auto !important;
     text-align: center;
+}
+
+#add-jogador {
+    margin-bottom: 20px;
+}
+
+.btn_meu_time {
+    height: 40px !important;
 }

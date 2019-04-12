@@ -5,6 +5,7 @@ var dataSemana = hoje().data_sisten;
 fetch(app)
     .then(x => x.json())
     .then(y => {
+        log(y);
         if (y.length == 0) {
             window.location.href = './manutencao.html';
         }
@@ -95,6 +96,24 @@ router('detalhe', z => {
             let conjunto = Object.values(quadra.results);
             let conjquadra = conjunto.find(p => p.ID == para.id);
             vio.detalhe = { title: conjquadra.title, text: conjquadra.resumo, img_1: conjquadra.foto, img_2: conjquadra.foto1, img_3: conjquadra.foto2, img_4: conjquadra.foto3, img_5: conjquadra.foto4, ID: conjquadra.ID };
+        });
+});
+
+router('historico-jogador', h => {
+    fetch(app)
+        .then(x => x.json())
+        .then(y => {
+            let time = y.time;
+            document.querySelector( '#historico__pagamento_jogador' ).innerHTML = time.map( l => {
+                return `
+                    <tr>
+                        <td>${l.nome}</td>
+                        <td>${l.tel}</td>
+                        <td>${l.email}</td>
+                        <th><input type="checkbox" ${ (l.pagou == 1) ? 'checked' : ''} onclick="join_payment( '${l.id}' )"></th>
+                    </tr>
+                `;
+            } );
         });
 });
 

@@ -311,7 +311,9 @@ function add_player() {
         email: query('#player_mail').value,
         id: time_stemp(),
         id_contratante: _profile.email,
-        pagou: 0
+        status: 1,
+        presenca: 0,
+        obs: ''
     });
     vio.time = _time;
     addJogador();
@@ -377,6 +379,7 @@ function mudarSenha() {
 function addJogador() {
     let time = _time || [];
     time.forEach(e => {
+        e.status = 1;
         post_api('time', e, x => { });
         alerta('Jogador adicionado com sucesso!');
         query('#add-jogador').reset();
@@ -385,9 +388,17 @@ function addJogador() {
 
 function join_payment(idJogador) {
     get_api(`time?id=${idJogador}`, p => {
-        let bombom = (p.pagou == 0) ? 1 : 0;
-        post_api('time', { id: idJogador, pagou: bombom }, x => { });
+        let bombom = (p.presenca == 0) ? 1 : 0;
+        post_api('time', { id: idJogador, presenca: bombom }, x => { });
     });
+}
+
+function autoSave( url, no, valor, indice ) {
+    let obj = { id: no };
+    obj[indice] = valor.value || valor.innerHTML;
+    obj[indice] = (obj[indice].length == 0) ? 'obs' : obj[indice];
+    log(obj[indice])
+    post_api( url, obj, x => {} );
 }
 
 async function buy() {

@@ -40,12 +40,13 @@ var vio = {
         _vio.time = arr;
         let loop = arr.map(iten => {
             return `
-            <tr id="vio_player_${iten.id}">
+            <tr class="meu_time_checkbox" id="vio_player_${iten.id}">
                 <th>${ iten.nome || '...'}</th>
                 <th>${ iten.tel || '...'}</th>
                 <th>${ iten.email || '...'}</th>
-                <th><input type="checkbox" ${ (iten.pagou == 1) ? 'checked' : ''} onclick="join_payment( '${iten.id}' )"></th>
-                <th class="termos__checkbox" onclick="trash( 'time', '${iten.id}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></th>
+                <th><label class="select_termos"><input type="checkbox" ${ (iten.presenca == 1) ? 'checked' : ''} onclick="join_payment( '${iten.id}' )"></<label><span><span></th>
+                <th><textarea rows="5" onblur="autoSave( 'time', ${iten.id}, this, 'obs' )" placeholder="Digite sua observação...">${iten.obs || ''}</textarea></th>
+                <th onclick="trash( 'time', '${iten.id}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></th>
             </tr>
             `;
         });
