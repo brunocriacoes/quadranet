@@ -733,9 +733,11 @@ function dataCompra(data) {
             document.querySelector('#vio_historico').innerHTML = reservas.map(t => {
                 return `     
                 <tr>
-                    <td>${ t.data || '--/--/----'}</td>
-                    <td>R$ ${ t.preco || '00,00'}</td>
-                    <td>${ (t.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
+                <td>${ t.data || '--/--/----'}</td>
+                <td>R$ ${ t.preco || '00,00'}</td>
+                <td>${ (t.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
+                <td><img src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento"></td>
+                <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Pagamento Jogadores</a></td>
                 </tr>
                 `;
             }).join('');
