@@ -348,11 +348,11 @@ function preencher( seletor, objeto )
 
 const hidden = seletor => { query( seletor ).setAttribute( 'hidden', '' ) };
 
-function dowload_csv( seletor, array_de_array, file_name )
+function dowload_csv(  array_de_array, file_name )
 {
-    let elemento      = document.querySelector( seletor );
+    let elemento      = document.querySelector( "#link_baixar" );
     let content_type  = `data:text/csv;charset=utf-8,`;
-    let data          = array_de_array.map( x => x.join(',') ).join("\n");
+    let data          = array_de_array.map( x => Object.values(x).join(';') ).join("\n");
     data              = encodeURI( data );
     elemento.href     = content_type + data; 
     elemento.download = file_name;
@@ -609,29 +609,26 @@ function set_quadra_contratar( id ) {
     query('#id_quadra_contratar').value = id;
 }
 
+var _csv = [];
 function busca_os_contratante() {
-    let e      = query('#termo-os-status');
-    let status = query('#busca-os-status').value;
-    
-    let valor =  e.value;
-    let lista = vio.reservas || [];
-    lista.forEach( x => {
-        if ( !x.status_compra ) {
-            x.status_compra = 0;
-        }
-        let tipo_pagamento = status_pagamento.find( y => y.id == x.status_compra  ) || {};
-        x.pagamento        = tipo_pagamento.nome || 'aguardando pagamento';
-        let id_quadra      = x.id.substr( 25, 34 );
-        let todas_quadra   = vio.quadra || [];
-        let qd             = todas_quadra.find( z => z.id == id_quadra );
-        if( x.tipo_contatacao == 1 ) {
+    let termo      = query('#termo-os-status').value;
+    let status     = query('#busca-os-status').value;
+    let mes        = query('#busca-os-mes').value;
+    let origem     = query('#busca-os-origen').value;
+    let contatacao = query('#busca-os-tipo-contratacao').value;
 
-            x.valor            = qd.diaria || '0,00';
-        } else {
-            x.valor            = qd.mensalidade || '0,00';
-        }
+    let lista = vio.reservas || [];
+    _csv      = lista;
+
+    log( origem );
+    log( lista );
+
+    let arr   = lista.filter( x => { 
+        let if_mes = mes == "00" ? true : x.id.indexOf(`-${mes}-`) != -1;
+        return x.status_compra == status && if_mes;
     } );
-    let arr   = lista.filter( x => x.contratante_nome.indexOf(valor) != -1 && status == x.status_compra  );
+
+    _csv = arr;
     query( '#historico__table_body' ).innerHTML = tpl_array( arr, '#tpl_historico' );
 }
 

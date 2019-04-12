@@ -896,17 +896,21 @@
             </section>
 
             <section id="historico" class="gap box">
-                <header class="grid-2 gap-bottom">
-                    <h5>Histórico de pagamentos</h5>
-                    <div class="text-right modalidade-lista">
-                        <select name="status_pagamento" id="busca-os-status" onblur="busca_os_contratante()"  class="input-field"></select>
+                <header class="gap-bottom">
+                    <h5>Histórico</h5>
+                    <div class="text-right modalidade-lista grid-historico">
+                        <select name="mes" id="busca-os-mes" onchange="busca_os_contratante()"  class="input-field"></select>
+                        <select name="status_pagamento" id="busca-os-status" onchange="busca_os_contratante()"  class="input-field"></select>
+                        <select name="site_sistema" id="busca-os-origen" onchange="busca_os_contratante()"  class="input-field"></select>
+                        <select name="mensal_avulso" id="busca-os-tipo-contratacao" onchange="busca_os_contratante()"  class="input-field"></select>
                         <form action="javascript:void(0)" method="POST" onsubmit="busca_os_contratante()" class="search">
-                            <input type="search" name="s" id="termo-os-status" placeholder="Nome Contratante" onkeyup="busca_os_contratante()" required>
+                            <input type="search" name="s" id="termo-os-status" placeholder="Contratante" onkeyup="busca_os_contratante()" required>
                             <label for="busca-capitao">
                                 <img src="./disc/ico/search.png">
                             </label>
-                            <input type="submit" id="busca-capitao" hidden>
+                            <input type="submit" id="busca-capitao" onkeyup="busca_os_contratante()" hidden>
                         </form>
+                        <img src="disc/ico/download.png" onclick="dowload_csv(  _csv, 'lista.csv' )">
                     </div>
                 </header>
                 <table class="table">
@@ -915,6 +919,8 @@
                             <th>nome</th>
                             <th>Telefone</th>
                             <th >Status compra</th>
+                            <th >Origem</th>
+                            <th >Contratacao</th>
                             <th width="50">Valor</th>
                             <th width="50"></th>
                         </tr>
@@ -925,10 +931,12 @@
                             <td>{{contratante_nome}}</td>
                             <td>{{contratante_Id}}</td>
                             <td>{{pagamento}}</td>
+                            <td>{{site}}</td>
+                            <td>{{tipocontratacao}}</td>
                             <td>{{valor}}</td>
                             <td>
                                 <a href="#os">
-                                    <img onclick="editar( 'reservas', '{{id}}', 'form-os', 'dash.html#os' )" src="./disc/ico/eye.png" class="ico-table">
+                                    <img onclick="editar( 'reservas', '{{id}}', 'form-os', 'dash.html#os' )" src="./disc/ico/edit.png" class="ico-table">
                                 </a>
                             </td>
                         </tr>
@@ -1103,48 +1111,16 @@
                 <img src="./disc/ico/x.png">
             </label>
             <div>
+                <span class="grid-3 header_reserva">
+                    <span id="ocupado_quadra">Nome quadra</span>
+                    <span id="ocupado_modalidade"><i>futebol</i></i></span>
+                    <span id="ocupado_horario">14:00 - 15:00</span>
+                </span>
                 <p><b>Nome</b>: Bolinha</p>
                 <p><b>Telefone</b>: +55 (00) 0 0000-0000</p>
                 <p><b>Tipo</b>: diaria</p>
-                <table class="table" width="100%">
-                    <thead>
-                        <tr>
-                            <th width="150">data</th>
-                            <th width="200">status</th>
-                            <th width="40"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>00/00/0000</td>
-                            <td>aguardando pagamento</td>
-                            <td>
-                                <a href="#detalhe-locacao">
-                                    <img src="./disc/ico/eye.png" class="ico-table">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>00/00/0000</td>
-                            <td>aguardando pagamento</td>
-                            <td>
-                                <a href="#detalhe-locacao">
-                                    <img src="./disc/ico/eye.png" class="ico-table">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>00/00/0000</td>
-                            <td>aguardando pagamento</td>
-                            <td>
-                                <a href="#detalhe-locacao">
-                                    <img src="./disc/ico/eye.png" class="ico-table">
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>                
-                <button class="btn gap-top">Cancelar Locação</button>
+                <p><b>Status pagamento</b>: aguardando pagamento</p>                              
+                <a class="btn gap-top">Editar</a>
             </div>
         </div>
         <template id="tr_usuario">
@@ -1196,6 +1172,8 @@
                 <td><img onclick="trash( 'blog','{{id}}' )" src="./disc/ico/trash.png" class="ico-table"></td>
             </tr>
         </template>
+
+        <a href="" download="lista.csv" id="link_baixar" hidden> baixar</a>
 
         <script src="./disc/js/data.js"></script>
         <script src="./disc/js/config.js"></script>

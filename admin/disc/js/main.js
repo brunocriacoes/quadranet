@@ -37,6 +37,9 @@ draw_select( sim_nao, 'juridico' );
 draw_select( is_admin, 'admin' );
 draw_select( estado, 'estado' );
 draw_select( status_pagamento, 'status_pagamento' );
+draw_select( mes, 'mes' );
+draw_select( site_sistema, 'site_sistema' );
+draw_select( mensal_avulso, 'mensal_avulso' );
 
 
 fetch( `${app}/auth/?profile=${window.localStorage.token_painel||''}` )

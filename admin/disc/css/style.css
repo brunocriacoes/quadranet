@@ -754,6 +754,7 @@ label img {
 .header_reserva span {
     height: 20px;
 }
+#ocupado_quadra,
 #reserva_quadra {
     font-weight: bold;
     font-size: 18px;
@@ -763,17 +764,25 @@ label img {
     padding-left: 30px;
     background-size: 16px;
 }
+#ocupado_modalidade,
 #reserva_modalidade {}
+#ocupado_modalidade i,
 #reserva_modalidade i {
     background: var(--theme);
     color: #FFF;
     border-radius: 20px;
     padding: 7px 12px;
 }
+#ocupado_horario,
 #reserva_horario {
     background-image: url('../ico/time.png');
     background-position: left center;
     background-repeat: no-repeat;
     padding-left: 30px;
     background-size: 16px;
+}
+.grid-historico {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) 36px;
+    grid-gap: 20px;
 }

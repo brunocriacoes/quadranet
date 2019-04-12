@@ -17,9 +17,11 @@ var is_admin = [
     { id: "2", nome: "Administrador"}
 ];
 var status_pagamento = [
+    { id: "0", nome: "Pagamento"},
     { id: "0", nome: "Aguardando pagamento"},
     { id: "1", nome: "Pago"},
-    { id: "2", nome: "Cancelado"}
+    { id: "2", nome: "Parcial"},
+    { id: "3", nome: "Cancelado"},
 ];
 
 var estado = [
@@ -50,4 +52,32 @@ var estado = [
     { id: "SP", nome: "São Paulo"},
     { id: "SE", nome: "Sergipe"},
     { id: "TO", nome: "Tocantins"}
+];
+
+var mes = [
+    { id: '00', nome: "Mês" },
+    { id: '01', nome: "Janeiro" },
+    { id: '02', nome: "Fevereiro" },
+    { id: '03', nome: "Março" },
+    { id: '04', nome: "Abril" },
+    { id: '05', nome: "Maio" },
+    { id: '06', nome: "Junho" },
+    { id: '07', nome: "Julho" },
+    { id: '08', nome: "Agosto" },
+    { id: '09', nome: "Setembro" },
+    { id: '10', nome: "Outubro" },
+    { id: '11', nome: "Novembro" },
+    { id: '12', nome: "Dezembro" }
+];
+
+var site_sistema = [
+    { id: 1, nome: "Origem " },
+    { id: 1, nome: "Site" },
+    { id: 2, nome: "Sistema" },    
+];
+
+var mensal_avulso = [
+    { id: 1, nome: "Tipo" },
+    { id: 1, nome: "Avulso" },
+    { id: 0, nome: "Mensal" },    
 ];
