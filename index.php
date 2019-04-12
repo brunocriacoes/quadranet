@@ -36,6 +36,9 @@
         return $x;
     }, $quadra );
 
+    if( !empty( urls[1] ) ) {
+        $single_blog = jsFind( $blog, function( $x ) { return $x->id == urls[1];  } );
+    }
 
     $html    = '';
     $header  = get_part( 'header' );
@@ -69,6 +72,7 @@
         [ "is_array" => true,  "flag" => "modalidade",  "data" => $modalidade,  "tpl" => "modalidade"  ],
         [ "is_array" => false,  "flag" => "menu_lateral",  "data" => [],  "tpl" => "menu_lateral"  ],
         [ "is_array" => false,  "flag" => "share",  "data" => [],  "tpl" => "share"  ],
+        [ "is_array" => false,  "flag" => "single_blog",  "data" => $single_blog ?? [],  "tpl" => "single_blog"  ],
     ];
 
     foreach( $componente as $e ) {
