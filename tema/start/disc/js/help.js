@@ -323,11 +323,14 @@ function send_mail() {
     let form = get_form('#send_mail');
     form.to = 'contato@quadranet.com.br';
     form.subject = form.assunto;
-    post_api( 'fnc/mail', form, x =>{
-        log(x);
+    post_api('fnc/mail', form, x => {
         alerta('Enviado com sucesso');
-        document.querySelector( '#send_mail' ).reset();
-    } );
+        document.querySelector('#send_mail').reset();
+    });
+}
+
+function mail(obj) {
+    post_api('fnc/mail', obj, x => { });
 }
 
 function recuperarSenha() {
@@ -390,12 +393,12 @@ function join_payment(idJogador) {
     });
 }
 
-function autoSave( url, no, valor, indice ) {
+function autoSave(url, no, valor, indice) {
     let obj = { id: no };
     obj[indice] = valor.value || valor.innerHTML;
     obj[indice] = (obj[indice].length == 0) ? 'obs' : obj[indice];
     log(obj[indice])
-    post_api( url, obj, x => {} );
+    post_api(url, obj, x => { });
 }
 
 async function buy() {
@@ -422,22 +425,42 @@ async function buy() {
         tipo_pagamento: 1
     };
 
+    mail( { to: cart.usuario_email, subject: 'Compra realizada', messagem: 'A sua compra foi realizada com sucesso!' } );
+    mail( { to: 'contato@quadranet.com.br', subject: 'Compra realizada Site', messagem: 'Mais uma compra realizada pelo site.' } );
     carrinho.forEach(x => {
-        let obj = {
-            _dominio: dominio,
-            id: x.id,
-            quadra_nome: x.nome,
-            tipocontratacao: x.tipocontratacao,
-            inicio: x.inicio,
-            final: x.final,
-            preco: (x.tipocontratacao == 0) ? x.mensalidade : x.diaria,
-            site: 1,
-            ...cart
-        };
+        if (x.tipocontratacao == 0) {
+            let bombom = x.id.split('-');
+            let loop = agendarMensal(bombom[7], bombom[8], x.inicio, x.final);
+            for (let index = 0; index < loop.length; index++) {
+                let obj = {
+                    _dominio: dominio,
+                    id: loop[index],
+                    quadra_nome: x.nome,
+                    tipocontratacao: x.tipocontratacao,
+                    inicio: x.inicio,
+                    final: x.final,
+                    preco: (x.tipocontratacao == 0) ? x.mensalidade : x.diaria,
+                    site: 1,
+                    ...cart
+                };
 
-        post_api('reservas', obj, o => {
+                post_api('reservas', obj, o => { });
+            }
+        } else {
+            let obj = {
+                _dominio: dominio,
+                id: x.id,
+                quadra_nome: x.nome,
+                tipocontratacao: x.tipocontratacao,
+                inicio: x.inicio,
+                final: x.final,
+                preco: (x.tipocontratacao == 0) ? x.mensalidade : x.diaria,
+                site: 1,
+                ...cart
+            };
 
-        })
+            post_api('reservas', obj, o => { })
+        }
     });
 
     post_api(`fnc/pagseguro`, carEstatico, p => {
@@ -729,27 +752,55 @@ function dataCompra(data) {
     fetch(app)
         .then(x => x.json())
         .then(y => {
-            let reservas = y.reservas.filter(r => +r.data.split('/')[1] == data.value);
+            let reservas = y.reservas.filter(r => +r.id.substr( 0, 10 ).indexOf( '-' + duasCasas(data.value) + '-' ) != -1);
             document.querySelector('#vio_historico').innerHTML = reservas.map(t => {
+                t.datacontratacao = t.id.substr( 0, 10 ).split( '-' ).reverse().join('/');
                 return `     
                 <tr>
-                <td>${ t.data || '--/--/----'}</td>
-                <td>R$ ${ t.preco || '00,00'}</td>
-                <td>${ (t.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
-                <td><img src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento"></td>
-                <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Pagamento Jogadores</a></td>
+                    <td>${ t.datacontratacao || '--/--/----'}</td>
+                    <td>R$ ${ t.preco || '00,00'}</td>
+                    <td>${ (t.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
+                    <td><img src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento"></td>
+                    <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Pagamento Jogadores</a></td>
                 </tr>
                 `;
             }).join('');
         });
 }
 
-function contribuiu( idOS, idJogador ) {
-    if( _pagos.indexOf( `${idJogador}` ) == -1 ) {
+function contribuiu(idOS, idJogador) {
+    if (_pagos.indexOf(`${idJogador}`) == -1) {
         _pagos = _pagos + `,${idJogador}`;
-    }else{
-        _pagos = _pagos.replace( `,${idJogador}`, '' );
+    } else {
+        _pagos = _pagos.replace(`,${idJogador}`, '');
     }
     let obj = { id: idOS, pagos: _pagos };
-    post_api( 'reservas', obj, x => { log(x); } );
+    post_api('reservas', obj, x => { log(x); });
+}
+
+function mensalidadeMensal(diaSemana) {
+    let data = new Date();
+    let quantidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30];
+    let mes = data.getMonth() + 1;
+    let ano = data.getFullYear();
+    let dias = [];
+    let meses = [];
+    for (let index = mes; index < 13; index++) {
+        meses.push(`${index}`);
+    }
+    meses.forEach(e => {
+        for (let index = 1; index <= quantidade_dias_mes[e]; index++) {
+            dias.push(`${ano}-${duasCasas(e)}-${duasCasas(index)}`);
+        }
+    });
+    return dias.filter(x => {
+        let d = new Date(x);
+        return d.getDay() + 1 == diaSemana;
+    });
+}
+
+function agendarMensal(diaSemana, idQuadra, horarioInicial, horarioFinal) {
+    let idBase = mensalidadeMensal(diaSemana);
+
+    return idBase.map(x => `${x}-${horarioInicial.replace(':', '-')}-${horarioFinal.replace(':', '-')}-${diaSemana}-${idQuadra}`);
 }
