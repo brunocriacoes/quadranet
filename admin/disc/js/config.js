@@ -27,6 +27,7 @@ var options =
     cache: 'default',
     body: null
 };
+var page = window.location.hash.replace('#','');
  
 var day           = '';
 var files         = {};

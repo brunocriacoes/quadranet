@@ -181,7 +181,7 @@ var vio = {
         query('#aside').innerHTML = quadra.map( x => {
             let modalidade = modalidades.find( z => z.id == x.modalidade  ) || {};
             return `
-                <div id="aside_quadra" class="box gap-aside text-center" onclick="edita_quadra( '${x.id}' )">
+                <div id="aside_quadra" class="box gap-aside text-center" onclick="edita_quadra( '${x.id}' );to('${admin}/dash.html#agenda')">
                     <svg
                         xmlns:dc="http://purl.org/dc/elements/1.1/"
                         xmlns:cc="http://creativecommons.org/ns#"
@@ -249,6 +249,7 @@ var vio = {
     },
     set reservas( arr ) {
         _vio.reservas = arr;
+        _csv          = arr;
         edita_quadra( quadra_sisten );
         arr.forEach( x => {
             if ( !x.status_compra ) {
@@ -260,7 +261,6 @@ var vio = {
             let todas_quadra   = vio.quadra;
             let qd             = todas_quadra.find( z => z.id == id_quadra ) || {};
             if( x.tipo_contatacao == 1 ) {
-
                 x.valor            = qd.diaria || '0,00';
             } else {
                 x.valor            = qd.mensalidade || '0,00';

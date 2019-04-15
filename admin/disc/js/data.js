@@ -23,6 +23,13 @@ var status_pagamento = [
     { id: "2", nome: "Parcial"},
     { id: "3", nome: "Cancelado"},
 ];
+var status_compra = [
+    { id: "0", nome: "Pagamento"},
+    { id: "0", nome: "Aguardando pagamento"},
+    { id: "1", nome: "Pago"},
+    { id: "2", nome: "Parcial"},
+    { id: "3", nome: "Cancelado"},
+];
 
 var estado = [
     { id: "AC", nome: "Acre"},
@@ -77,7 +84,7 @@ var site_sistema = [
 ];
 
 var mensal_avulso = [
-    { id: 1, nome: "Tipo" },
-    { id: 1, nome: "Avulso" },
-    { id: 0, nome: "Mensal" },    
+    { id: "1", nome: "Tipo" },
+    { id: "1", nome: "Avulso" },
+    { id: "0", nome: "Mensal" },    
 ];

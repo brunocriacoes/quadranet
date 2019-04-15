@@ -118,31 +118,40 @@
                  <header class="gap-bottom"> 
                     <h5>Detalhes de Locação</h5>
                 </header>
-                <table class="table gap-bottom">
-                    <thead>
-                        <tr>
-                            <th>Usuário</th>
-                            <th width="50"></th>
-                            <th width="120">Data compra</th>
-                            <th width="250">Status de Compras</th>
-                            <th width="250">Códico</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td> Bolinha </td>
-                            <td>
-                                <a href="#capitao-novo">
-                                    <img src="./disc/ico/eye.png" class="ico-table">
-                                </a>
-                            </td>
-                            <td>00/00/0000</td>
-                            <td>Aguardando pagamento</td>
-                            <td>QTYWEHIO678QWE98Q8WUEY</td>
-                            
-                        </tr>
-                    </tbody>
-                </table>
+                <form action="javascript:void(0)" id="form-locacao" onsubmit="post_api_form( 'reservas', 'form-locacao', 'dash.html#historico')" class="grid-2 grid-gap" method="POST">
+                    <input type="hidden" name="id" value="">
+                    <div>
+                        <label for="" class="input-label">Usuario</label>
+                        <input type="text" name="contratante_nome" value="" class="input-field" disabled>
+                    </div>
+                    <div>
+                        <label for="" class="input-label">Email</label>
+                        <input type="text" name="contratante_email" value="" class="input-field" disabled>
+                    </div>
+                    <div>
+                        <label for="" class="input-label">Celular</label>
+                        <input type="text" name="contratante_Id" value="" class="input-field" disabled>
+                    </div>
+                    <div>
+                        <label for="" class="input-label">CPF / CNPJ</label>
+                        <input type="text" name="user_cpf_cnpj" value="" class="input-field" disabled>
+                    </div>
+                    <div>
+                        <label for="" class="input-label">OBS</label>
+                        <textarea  name="obs" rows="3" class="input-field"></textarea>     
+                    </div>
+                    <div>
+                        <label for="" class="input-label">Data</label>
+                        <input type="text" name="data" value="" class="input-field" disabled>
+                        <label for="" class="input-label">Estatus de pagamento</label>
+                        <select name="status_compra" class="input-field"></select>        
+                    </div>
+                    <div>
+                        <input type="submit" value="salvar" class="btn btn-sucess">
+                    </div>
+                </form>
+                <br>
+                
                 <h3>Carrinho</h3>
                 <table class="table">
                     <thead>
@@ -165,6 +174,28 @@
                             <td>00:00</td>
                         </tr>
                     </tbody>
+                </table>
+                <br>
+                <hr>
+                <h3>Pagamento Jogadores</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Celular</th>
+                            <th>Pagou</th>                            
+                        </tr>
+                    </thead>
+                    <tbody id="table_time_os"></tbody>
+                    <template id="tpl_time_os">
+                            <tr>
+                                <td>{{nome}}</td>
+                                <td>{{email}}</td>
+                                <td>{{tel}}</td>
+                                <td><input type="checkbox" > </td>
+                            </tr>
+                    </template>
                 </table>
             </section>
 
@@ -918,9 +949,9 @@
                         <tr>
                             <th>nome</th>
                             <th>Telefone</th>
-                            <th >Status compra</th>
-                            <th >Origem</th>
-                            <th >Contratacao</th>
+                            <th>Status compra</th>
+                            <th>Origem</th>
+                            <th>Contratacao</th>
                             <th width="50">Valor</th>
                             <th width="50"></th>
                         </tr>
@@ -935,7 +966,7 @@
                             <td>{{tipocontratacao}}</td>
                             <td>{{valor}}</td>
                             <td>
-                                <a href="#os">
+                                <a href="?id={{id}}#os">
                                     <img onclick="editar( 'reservas', '{{id}}', 'form-os', 'dash.html#os' )" src="./disc/ico/edit.png" class="ico-table">
                                 </a>
                             </td>

@@ -28,6 +28,18 @@ fetch( `${app}` )
     preencher( 'visual__form__pag', x.site.find( y => y.id == 'pagseguro' ) || { id: 'pagseguro' } );
     preencher( 'servicos_form__quem-somos', x.pagina.find( y => y.id == 'sobre' ) || { id: 'sobre' } );
     preencher( 'servicos_form', x.pagina.find( y => y.id == 'servico' ) || { id: 'servico' } );
+
+    router( 'os', () => {
+        let { reservas } = vio;
+        let reserva = reservas.find( x => x.id == request.id );
+        log( reserva );
+        preencher( 'form-locacao', reserva );
+
+        query( "#table_time_os" ).innerHTML = tpl_array( vio.time, "#tpl_time_os" );
+        
+
+    } );
+
 } );
 
 
@@ -37,6 +49,7 @@ draw_select( sim_nao, 'juridico' );
 draw_select( is_admin, 'admin' );
 draw_select( estado, 'estado' );
 draw_select( status_pagamento, 'status_pagamento' );
+draw_select( status_compra, 'status_compra' );
 draw_select( mes, 'mes' );
 draw_select( site_sistema, 'site_sistema' );
 draw_select( mensal_avulso, 'mensal_avulso' );
@@ -99,3 +112,4 @@ queryAll('.ico-plus').forEach( x => {
         }        
     } );
 } );
+

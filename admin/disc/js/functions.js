@@ -204,7 +204,7 @@ function edita_quadra( id ) {
     quadra_sisten = id || tmp_quadra.id || '';
     let data_now  = hoje( day.replace(/\-/gi, '/') );
     let horario_temp = editar_agenda( id );
-    to(`${admin}/dash.html#agenda`);
+    // to(`${admin}/dash.html#agenda`);
     let quadra     = vio.quadra || [];
     quadra         = quadra.find( x => x.id == id ) || '';
     let modalidade = vio.modalidade || [];
@@ -379,7 +379,7 @@ function privado() {
 function publico()
 {
     if( window.localStorage.token_painel ) {
-        to( `${admin}/dash.html#agenda` );
+        // to( `${admin}/dash.html#agenda` );
     }
 }
 
@@ -619,13 +619,17 @@ function busca_os_contratante() {
 
     let lista = vio.reservas || [];
     _csv      = lista;
-
-    log( origem );
-    log( lista );
-
+    
     let arr   = lista.filter( x => { 
-        let if_mes = mes == "00" ? true : x.id.indexOf(`-${mes}-`) != -1;
-        return x.status_compra == status && if_mes;
+        x.tipocontratacao    = x.tipocontratacao || 0;
+        x.site               = x.site || 2;
+        let busca            = `${x.contratante_nome} ${x.contratante_Id} ${x.contratante_email}`;
+        let if_mes           = mes == "00" ? true : x.id.indexOf(`-${mes}-`) != -1;
+        let if_origem        = x.site == origem;
+        let if_pago          = x.status_compra == status;
+        let if_contratacacao = x.tipocontratacao == contatacao;
+        let if_termo         = termo.length > 1 ? true : busca.indexOf(termo) != -1;
+        return if_pago && if_mes && if_origem && if_contratacacao && if_termo;
     } );
 
     _csv = arr;
