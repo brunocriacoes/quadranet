@@ -30,13 +30,34 @@ fetch( `${app}` )
     preencher( 'servicos_form', x.pagina.find( y => y.id == 'servico' ) || { id: 'servico' } );
 
     router( 'os', () => {
-        let { reservas } = vio;
-        let reserva = reservas.find( x => x.id == request.id );
-        log( reserva );
-        preencher( 'form-locacao', reserva );
 
-        query( "#table_time_os" ).innerHTML = tpl_array( vio.time, "#tpl_time_os" );
+        let { reservas }    = vio;
+        let parciais        = vio.parcial || [];
+        let id              = request.id;
+        let ia              = id.split('-');
+        let reserva         = reservas.find( x => x.id == id );
+        _parcial_data.total = reserva.valor;
+
+        reservas         = reservas.map( x => {
+            x.data = x.id.substr(0, 10).split('-').reverse().join('/');
+            let contratacao   = x.tipocontratacao || 1;
+            x.tipocontratacao = contratacao == 1 ? "Avulço" : "mensal";
+            return x;
+        } );
+
+        _parcial = parciais.filter( x => x.quadra == request.id );
+
+        reservas = reservas.filter( x => {
+            let rx = new RegExp( `.{5}${ia[1]}.{4}${ia[3]}-${ia[4]}-${ia[5]}-${ia[6]}-${ia[7]}-${ia[8]}`, "gi" );
+            return x.id.search( rx ) != -1 ? true : false; 
+        } );
         
+        
+        preencher( 'form-locacao', reserva );
+        query( "#table_iten_os" ).innerHTML = tpl_array( reservas, "#tpl_iten_os" );
+        query( "#table_time_os" ).innerHTML = tpl_array( vio.time, "#tpl_time_os" );   
+
+        parcial();
 
     } );
 

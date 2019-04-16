@@ -29,11 +29,13 @@ var options =
 };
 var page = window.location.hash.replace('#','');
  
-var day           = '';
-var files         = {};
-var cart          = [];
-var edit          = {};
-var horario       = [];
-var agenda        = [];
-var quadra_sisten = '';
+var day            = '';
+var files          = {};
+var cart           = [];
+var edit           = {};
+var horario        = [];
+var agenda         = [];
+var quadra_sisten  = '';
+var _parcial       = [];
+var _parcial_data  = { sub:"00,00", total: "00,00" };
 

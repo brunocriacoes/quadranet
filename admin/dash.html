@@ -42,6 +42,7 @@
                 <a href="#servicos" class="link_menu">Serviços</a>
                 <a href="#blogs" class="link_menu">Blog</a>
                 <a href="#banner" class="link_menu">Banner</a>
+                <a href="#anuncios" class="link_menu">Anuncio</a>
             </div>
             <div class="menu_sistema">
                 <a href="#dominio" class="link_menu">Domínio</a>
@@ -151,29 +152,80 @@
                     </div>
                 </form>
                 <br>
+                <hr>
+                <br>
+
+                <div class="grid-2 grid-gap">
+                    <div>
+                        <form action="javascript:void(0)" id="form-parcial" onsubmit="add_parcial()" class="grid-2 grid-gap" method="POST">
+                            <input type="hidden" name="id" value="">
+                            <div>
+                                <label for="" class="input-label">Data</label>
+                                <input type="date" name="dia" value="" class="input-field" required>
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Valor</label>
+                                <input type="text" name="valor" value="" class="input-field" pattern="\w{2},\w{2}" title="ex: 15,50" required>
+                            </div>
+                            <div>
+                                <input type="submit" value="Add valor parcial" class="btn">
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <table class="table" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>data</th>
+                                    <th>valor recebido</th>
+                                    <th width="50"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_os_parcial"></tbody>
+                            <template id="tpl_os_parcial">
+                                <tr>
+                                    <td>{{dia}}</td>
+                                    <td>R$ {{valor}}</td>
+                                    <td><img onclick="remove_parcial('{{id}}')" class="ico-trash" src="{{uri}}/admin/disc/ico/trash.png"></td>
+                                </tr>
+                            </template>
+                            <tfooter>
+                                <tr>
+                                    <td>Faltando</td>
+                                    <td>R$ <small id="ui-falta">-00,00</small> </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>R$ <b id="ui-total">00,00</b> </td>
+                                    <td></td>
+                                </tr>
+                            </tfooter>                            
+                        </table>
+                    </div>
+                </div>
                 
                 <h3>Carrinho</h3>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Quadra</th>
-                            <th width="70">Data</th>
-                            <th width="70">Preço</th>
+                            <th>Data</th>
                             <th width="200">Tipo locação</th>
                             <th width="70">Horário inicial</th>
                             <th width="70">Horário final</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="table_iten_os"></tbody>
+                    <template id="tpl_iten_os">
                         <tr>
-                            <td>Tubarão</td>
-                            <td>00/00/000</td>
-                            <td>50,00</td>
-                            <td>Diaria</td>
-                            <td>00:00</td>
-                            <td>00:00</td>
+                            <td>{{quadra_nome}}</td>
+                            <td>{{data}}</td>
+                            <td>{{tipocontratacao}}</td>
+                            <td>{{inicio}}</td>
+                            <td>{{final}}</td>
                         </tr>
-                    </tbody>
+                    </template>
                 </table>
                 <br>
                 <hr>
@@ -868,16 +920,35 @@
                 </table>
             </section>
 
-            <section id="banner-novo" class="gap box">
-                 <header class="gap-bottom"> 
-                    <h5>Banner</h5>
+            <section id="anuncios" class="gap box">
+                 <header class="gap-bottom grid-2"> 
+                    <h5>Anuncio</h5>
+                    <div class="text-right">
+                        <a href="#anuncio" class="ico ico-plus theme circle"></a>
+                    </div>
                 </header>
-                <form action="javascript:void(0)" id="servicos_form__banner-novo" onsubmit="post_api_form( 'banner', 'servicos_form__banner-novo', 'dash.html#banner' )" method="POST">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th width="30"></th>
+                            <th width="30"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="anuncio__table_body"></tbody>
+                </table>
+            </section>
+
+            <section id="anuncio" class="gap box">
+                 <header class="gap-bottom"> 
+                    <h5>Anuncio</h5>
+                </header>
+                <form action="javascript:void(0)" id="form-anuncio" onsubmit="post_api_form( 'anuncio', 'form-anuncio', 'dash.html#anuncios' )" method="POST">
                     <input type="hidden" name="id" value="">
-                    <label for="" class="input-label">Nome</label>
-                    <input type="text" class="input-field" name="nome" required>
                     <div class="grid-2 grid-gap">
                         <div>                            
+                            <label for="" class="input-label">Nome</label>
+                            <input type="text" class="input-field" name="nome" required>
                             <label for="" class="input-label">link</label>
                             <input type="url" class="input-field" name="link" required>
                             <label for="" class="input-label">Status</label>
@@ -1192,6 +1263,15 @@
                     <img onclick="editar( 'banner', '{{id}}', 'servicos_form__banner-novo', 'dash.html#banner-novo' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
                 <td><img onclick="trash( 'banner','{{id}}' )" src="./disc/ico/trash.png" class="ico-table"></td>
+            </tr>
+        </template>
+        <template id="tr_anuncio">
+            <tr>
+                <td>{{nome}}</td>
+                <td>
+                    <img onclick="editar( 'anuncio', '{{id}}', 'form-anuncio', 'dash.html#anuncio' )" src="./disc/ico/edit.png" class="ico-table">
+                </td>
+                <td><img onclick="trash( 'anuncio','{{id}}' )" src="./disc/ico/trash.png" class="ico-table"></td>
             </tr>
         </template>
         <template id="tr_blog">

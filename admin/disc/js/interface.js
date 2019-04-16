@@ -150,6 +150,11 @@ var vio = {
         query('#banner__table_body').innerHTML = tpl_array( arr, '#tr_banner', 'banner' );
     },
 
+    set anuncio(arr) {
+        _vio.anuncio = arr || [];
+        query('#anuncio__table_body').innerHTML = tpl_array( arr, '#tr_anuncio', 'anuncio' );
+    },
+
     set blog(arr) {
         _vio.blog = arr || [];
         query('#blog__table_body').innerHTML = tpl_array( arr, '#tr_blog', 'blog' );
