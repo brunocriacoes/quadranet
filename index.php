@@ -71,8 +71,9 @@
         [ "is_array" => true,  "flag" => "categorias",  "data" => $modalidade,  "tpl" => "categoria"  ],
         [ "is_array" => true,  "flag" => "modalidade",  "data" => $modalidade,  "tpl" => "modalidade"  ],
         [ "is_array" => false,  "flag" => "menu_lateral",  "data" => [],  "tpl" => "menu_lateral"  ],
-        [ "is_array" => false,  "flag" => "share",  "data" => [],  "tpl" => "share"  ],
         [ "is_array" => false,  "flag" => "single_blog",  "data" => $single_blog ?? [],  "tpl" => "single_blog"  ],
+        [ "is_array" => false,  "flag" => "coment_facebook",  "data" => [],  "tpl" => "coment_facebook"  ],
+        [ "is_array" => false,  "flag" => "share",  "data" => [],  "tpl" => "share"  ],
     ];
 
     foreach( $componente as $e ) {

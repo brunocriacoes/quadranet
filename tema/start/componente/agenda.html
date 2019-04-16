@@ -3,7 +3,7 @@
     <img class="hours__img" src="{{uri}}/app/storage/{{foto_1}}">
     <h4>{{nome}}</h4>
 </div>
-<div class="gap-bottom tree">
+<div class="gap-bottom">
     <div class="text-right">
         <label for="date">Agendar uma data:</label>
         <input id="data__atual" type="date" onchange="set_date( this )" value="">
@@ -13,14 +13,14 @@
     <div class="agenda__horarios" id="reserva__horarios"></div>
     <div>
         <div class="agenda_reserva" id="agenda_semana"></div>
-        <div class="agenda_reserva">
-            <div>Domingo</div>
-            <div>Segunda</div>
-            <div>Terça</div>
-            <div>Quarta</div>
-            <div>Quinta</div>
-            <div>Sexta</div>
-            <div>Sábado</div>
+        <div class="agenda_reserva" id="agenda__reserva_diasSemanas">
+            <div id="lb_A-0-">Domingo</div>
+            <div id="lb_A-1-">Segunda</div>
+            <div id="lb_A-2-">Terça</div>
+            <div id="lb_A-3-">Quarta</div>
+            <div id="lb_A-4-">Quinta</div>
+            <div id="lb_A-5-">Sexta</div>
+            <div id="lb_A-6-">Sábado</div>
         </div>
         <div class="agenda_reserva" id="agenda_reserva"></div>
     </div>

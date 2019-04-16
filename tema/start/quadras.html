@@ -1,11 +1,9 @@
 <div id="mister-m"></div>
 <section class="fields container gap" id="quadras">
-    <div class="grid-2">
-        <h1 class="">Quadras</h1>
+    <div>
+        <h1 class="fields__title">Quadras</h1>
         <div class="fields_type">
-            <label class="fields_type_label" for="select">
-                <img src="disc/ico/settings.png">
-            </label>
+            <label class="fields_type_label" for="fields_type_select">Escolha a Modalidade:</label>
             <select class="fields_type_select" id="fields_type_select" onchange="filtro( this )">
                 <option value="A">Todas Modalidades</option>
                 {{categorias}}

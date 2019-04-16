@@ -17,18 +17,18 @@ var is_admin = [
     { id: "2", nome: "Administrador"}
 ];
 var status_pagamento = [
-    { id: "0", nome: "Pagamento"},
-    { id: "0", nome: "Aguardando pagamento"},
-    { id: "1", nome: "Pago"},
-    { id: "2", nome: "Parcial"},
-    { id: "3", nome: "Cancelado"},
+    { id: "1", nome: "Status pagamento"},
+    { id: "1", nome: "Aguardando pagamento"},
+    { id: "2", nome: "Pago"},
+    { id: "3", nome: "Parcial"},
+    { id: "4", nome: "Cancelado"},
 ];
 var status_compra = [
-    { id: "0", nome: "Pagamento"},
-    { id: "0", nome: "Aguardando pagamento"},
-    { id: "1", nome: "Pago"},
-    { id: "2", nome: "Parcial"},
-    { id: "3", nome: "Cancelado"},
+    { id: "1", nome: "Status pagamento"},
+    { id: "1", nome: "Aguardando pagamento"},
+    { id: "2", nome: "Pago"},
+    { id: "3", nome: "Parcial"},
+    { id: "4", nome: "Cancelado"},
 ];
 
 var estado = [

@@ -73,12 +73,14 @@ var vio = {
         _vio.historico = el;
         if (query('#vio_historico')) {
             query('#vio_historico').innerHTML = el.map(x => {
+                let img = `<img src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
+                let imgAvulso = ``;
                 return `
             <tr>
                 <td>${ x.data || '--/--/----'}</td>
                 <td>R$ ${ x.preco || '00,00'}</td>
                 <td>${ (x.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
-                <td><img src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento"></td>"
+                <td>${(x.tipocontratacao == 0 && x.status_compra == 1) ? img : imgAvulso}</td>
                 <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${x.id}">Pagamento Jogadores</a></td>
             </tr>
             `;

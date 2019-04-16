@@ -1,3 +1,5 @@
+@media screen and (max-width: 760px){
+
 .menu-vertical {
     display: none;
 }
@@ -64,28 +66,35 @@
     color: #fff;
     background-color: var( --blue-2 );
 }
+
+.menu-vertical__space a img {
+    width: 25px;
+    margin-right: 10px;
+    filter: invert(100%);
+}
+
 .menu-vertical__space a {
     display: block;
-    font-size: 20px;
-    margin: 30px;
+    font-size: 15px;
+    margin: 20px;
 }
 .menu-mobile {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
+    right: 0;
     width: 100vw;
     display: grid;
     grid-template-columns: 32px 32px 1fr 32px 32px;
     align-items: center;
     grid-gap: 30px;
-    background-color: var( --primary );
     z-index: 999;
 }
 .menu-mobile_link {
     filter: invert( 100% );
 }
 .menu-mobile_link:nth-child(3) {
-    text-align: center;
+    margin: 0 auto;
 }
 .footer {
     color: #fff;
@@ -157,11 +166,9 @@
     margin: 20px;
 }
 .menu-vertical__avatar img {
-    width: 150px;
+    width: 120px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
+    margin: 0 auto;
 }
 .box-link-menu {
     display: none;
@@ -232,4 +239,40 @@
 }
 .btn {
     padding: 12px 20px;
+}
+
+.grid-blog {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.banner {
+    height: 43vh;
+}
+
+.agenda_reserva {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.banner-iten img {
+    height: 100%;
+}
+
+[id*="lb_"] {
+    display: none !important;
+}
+
+[id*="-6-"] {
+    display: block !important;
+}
+
+.img__header__logo {
+    height: 50px !important;
+}
+
+.btn {
+    margin-bottom: 20px;
+}
+
 }

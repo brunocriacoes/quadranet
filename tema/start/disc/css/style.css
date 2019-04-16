@@ -60,6 +60,11 @@ h1, h2, h3, h4, h5, h6 {
     height: 40px;
     padding: 10px;
 }
+
+.img__header__logo {
+    height: 100px !important;
+}
+
 [for="menu"] {
     display: none;
 }
@@ -159,9 +164,18 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
     grid-gap: 30px;
 }
-.card__title, .cart__title, .fields__title, .servico_title, .title__carrinho {
+.card__title, .cart__title, .fields__title, .servico_title, .title__carrinho, .blog__title {
     text-align: center;
     text-transform: uppercase;
+}
+
+.fields__title {
+    display: block;
+}
+
+.blog__title {
+    font-size: 50px;
+    font-weight: bolder !important;
 }
 
 .card__title {
@@ -557,10 +571,8 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
 }
 .fields_type {
-    text-align: right;
+    text-align: center;
     margin: 20px;
-    display: flex;
-    justify-content: flex-end;
 }
 .fields_type_select {
     display: inline-block;
@@ -1355,4 +1367,25 @@ iframe {
 
 .btn_meu_time {
     height: 40px !important;
+}
+
+.img__blog {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.text__blog {
+    margin: 0 auto;
+    width: 80%;
+    font-size: 20px;
+    padding-bottom: 50px;
+}
+
+.box-link-menu a img {
+    display: none;
 }

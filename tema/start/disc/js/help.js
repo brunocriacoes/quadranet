@@ -755,14 +755,16 @@ function dataCompra(data) {
             let reservas = y.reservas.filter(r => +r.id.substr( 0, 10 ).indexOf( '-' + duasCasas(data.value) + '-' ) != -1);
             document.querySelector('#vio_historico').innerHTML = reservas.map(t => {
                 t.datacontratacao = t.id.substr( 0, 10 ).split( '-' ).reverse().join('/');
-                return `     
-                <tr>
-                    <td>${ t.datacontratacao || '--/--/----'}</td>
-                    <td>R$ ${ t.preco || '00,00'}</td>
-                    <td>${ (t.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
-                    <td><img src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento"></td>
-                    <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Pagamento Jogadores</a></td>
-                </tr>
+                let img = `<img src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
+                let imgAvulso = '';
+                return `
+                    <tr>
+                        <td>${ t.data || '--/--/----'}</td>
+                        <td>R$ ${ t.preco || '00,00'}</td>
+                        <td>${ (t.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
+                        <td>${(t.tipocontratacao == 0 && t.status_compra == 1) ? img : imgAvulso}</td>
+                        <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Pagamento Jogadores</a></td>
+                    </tr>
                 `;
             }).join('');
         });
