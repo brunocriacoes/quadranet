@@ -147,3 +147,27 @@ if (document.querySelector(`#mes__compras`)) {
     let diaCompra = hoje();
     document.querySelector(`#mes__compras option[value="${+diaCompra.mes}"]`).setAttribute('selected', 'selected');
 }
+
+let anuncios = queryAll( ".slider a" );
+var state_anuncio = 0 ;
+log(anuncios);
+anuncios[state_anuncio].style = "display:block";
+setInterval( () => {
+    anuncio_next()
+}, 3000 );
+
+function anuncio_play() {
+    state_anuncio = state_anuncio < anuncios.length && state_anuncio > -1 ? state_anuncio : 0;
+    anuncios.forEach( e => {
+        e.style = "display:none";
+    } );
+    anuncios[state_anuncio].style = "display:block";
+}
+function anuncio_next() {
+    state_anuncio++;
+    anuncio_play();
+}
+function anuncio_prev() {
+    state_anuncio--;
+    anuncio_play();
+}

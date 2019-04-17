@@ -13,7 +13,7 @@
     $data    = json_decode( file_get_contents( uri.'/app' ) );
 
     $anuncio = $data->anuncio ?? [];
-    $anuncio = $anuncio[0] ?? [];
+
 
     $sertvico = $data->pagina ?? [];
     $sertvico = jsFind( $sertvico, function($x) { return $x->id == 'servico' ; } );
@@ -74,6 +74,7 @@
         [ "is_array" => true,  "flag" => "quadra",  "data" => $quadra,  "tpl" => "quadra"  ],
         [ "is_array" => true,  "flag" => "categorias",  "data" => $modalidade,  "tpl" => "categoria"  ],
         [ "is_array" => true,  "flag" => "modalidade",  "data" => $modalidade,  "tpl" => "modalidade"  ],
+        [ "is_array" => true,  "flag" => "anuncio",  "data" => $anuncio,  "tpl" => "anuncio"  ],
         [ "is_array" => false,  "flag" => "menu_lateral",  "data" => [],  "tpl" => "menu_lateral"  ],
         [ "is_array" => false,  "flag" => "single_blog",  "data" => $single_blog ?? [],  "tpl" => "single_blog"  ],
         [ "is_array" => false,  "flag" => "coment_facebook",  "data" => [],  "tpl" => "coment_facebook"  ],
@@ -88,8 +89,7 @@
         }
     }
     
-    $html  = str_replace( '{{banner_link}}', $anuncio->link ?? '', $html );
-    $html  = str_replace( '{{banner_foto}}', $anuncio->foto ?? '', $html );
+
     $html  = str_replace( '{{uri}}', uri, $html );
     $html  = preg_replace( '/link .*href="(?!h)/', "link rel=\"stylesheet\" href=\"{$pasta}", $html );
     $html  = preg_replace( '/src="(?!h)/', "src=\"{$pasta}", $html );

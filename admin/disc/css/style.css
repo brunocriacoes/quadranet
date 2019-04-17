@@ -749,7 +749,8 @@ label img {
     border-bottom: 2px solid #DDD;
     margin-bottom: 25px;
     padding-bottom: 25px;
-    grid-template-columns: 1fr 100px 150px !important;
+    grid-template-columns:  200px repeat(2, 1fr) 100px;
+    font-size: 11px;
 }
 .header_reserva span {
     height: 20px;
@@ -758,10 +759,8 @@ label img {
 #reserva_quadra {
     font-weight: bold;
     font-size: 18px;
-    background-image: url('../ico/field.png');
     background-position: left center;
     background-repeat: no-repeat;
-    padding-left: 30px;
     background-size: 16px;
 }
 #ocupado_modalidade,

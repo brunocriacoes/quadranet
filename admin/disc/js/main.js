@@ -106,6 +106,10 @@ fetch( `${app}/auth` )
 
 
 day = hoje().data_sisten;
+
+query("#reserva_data").innerHTML = day.split('-').reverse().join('/');
+query("#ocupado_data").innerHTML = day.split('-').reverse().join('/');
+
 query('#set-date').value = day;
 
 setInterval( x => {

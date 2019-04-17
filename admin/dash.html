@@ -18,10 +18,10 @@
                 <select id="selecionar-dominio" name="dominio" class="set-domain" onchange="set_domain( this )"></select>
             </div>
             <div class="text-right text-mobol-center">
-                <label for="menu_quadra" class="ico ico-quadra invert"></label>
-                <label for="menu_theme" class="ico ico-theme invert"></label>
-                <label for="menu_sistema" class="ico ico-sistema invert"></label>
-                <label for="menu_user" class="ico ico-user invert"></label>
+                <label for="menu_quadra" class="ico ico-quadra invert" title="quadra"></label>
+                <label for="menu_theme" class="ico ico-theme invert" title="visual site"></label>
+                <label for="menu_sistema" class="ico ico-sistema invert" title="sistema"></label>
+                <label for="menu_user" class="ico ico-user invert" title="perfil"></label>
             </div>
         </header>
         <nav id="nav" class="text-center gap">
@@ -1142,7 +1142,8 @@
             <div>
                 <span class="grid-3 header_reserva">
                     <span id="reserva_quadra">Nome quadra</span>
-                    <span id="reserva_modalidade"><i>futebol</i></i></span>
+                    <span id="reserva_modalidade"><i>futebol</i></span>
+                    <span id="reserva_data">00/00/000</span>
                     <span id="reserva_horario">14:00 - 15:00</span>
                 </span>
                 
@@ -1216,13 +1217,14 @@
                 <span class="grid-3 header_reserva">
                     <span id="ocupado_quadra">Nome quadra</span>
                     <span id="ocupado_modalidade"><i>futebol</i></i></span>
+                    <span id="ocupado_data">00/00/000</span>
                     <span id="ocupado_horario">14:00 - 15:00</span>
                 </span>
-                <p><b>Nome</b>: Bolinha</p>
-                <p><b>Telefone</b>: +55 (00) 0 0000-0000</p>
-                <p><b>Tipo</b>: diaria</p>
-                <p><b>Status pagamento</b>: aguardando pagamento</p>                              
-                <a class="btn gap-top">Editar</a>
+                <p><b>Nome</b>: <span id="v-ocupado-nome"></span></p>
+                <p><b>Telefone</b>: <span id="v-ocupado-telefone"></span></p>
+                <p><b>Tipo</b>: <span id="v-ocupado-contratacao"></span></p>
+                <p><b>Status pagamento</b>: <span id="v-ocupado-pagamento"></span></p>                              
+                <a class="btn gap-top" target="_blank" id="v-ocupado-link" href="">Editar</a>
             </div>
         </div>
         <template id="tr_usuario">

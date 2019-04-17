@@ -154,8 +154,11 @@ function hoje( day = '' ) {
 
 function mudar_data( e ) {
     day = e.value;
+    query("#reserva_data").innerHTML = day.split('-').reverse().join('/');
+    query("#ocupado_data").innerHTML = day.split('-').reverse().join('/');
     edita_quadra( quadra_sisten );
 }
+
 
 function semana( dia, data )
 {
@@ -201,6 +204,10 @@ function edita_quadra( id ) {
     horario = [];
     let tmp_quadra = vio.quadra || []
     tmp_quadra     = tmp_quadra[0] || {};
+
+    query("#reserva_quadra").innerHTML = tmp_quadra.nome;
+    query("#ocupado_quadra").innerHTML = tmp_quadra.nome;
+
     quadra_sisten = id || tmp_quadra.id || '';
     let data_now  = hoje( day.replace(/\-/gi, '/') );
     let horario_temp = editar_agenda( id );
@@ -211,6 +218,8 @@ function edita_quadra( id ) {
     modalidade     = modalidade.find( x => x.id == quadra.modalidade || '' ) || [];
     query('#agenda__tile').innerHTML       = quadra.nome;
     query('#agenda__modalidade').innerHTML = modalidade.nome || '';
+    query("#reserva_modalidade i").innerHTML = modalidade.nome || '';
+    query("#ocupado_modalidade i").innerHTML = modalidade.nome || '';
     agenda = [];
     let id_base = horario_temp.map( x => {
         let hora = `${x.inicio}-${x.final}`;
@@ -275,7 +284,6 @@ function edita_quadra( id ) {
             elementor.removeAttribute('onclick');
             elementor.removeAttribute('for');
             elementor.setAttribute('for',"pop-agenda-ocupado");
-            // aqui
            
             elementor.for = "pop-agenda-ocupado";
             elementor.classList.add('agenda-ocupado');
@@ -294,13 +302,24 @@ function edita_quadra( id ) {
                 elementor.classList.add('agenda-jogando');
             }
             elementor.innerHTML = `
-                <span class="descktop">
-                    <b>${x.user_nome}</b>
+                <span class="descktop" onclick="pop_ocupado('${x.id}')">
+                    <b>${x.user_nome || ''}</b>
                     <i>${x.tipo_contatacao == 1 ? 'Diaria' : 'Mensal'}</i>
                 </span> 
             `;            
         }
     } );
+}
+
+function pop_ocupado( id ) {
+    let horario = id.substr(11,5).replace('-', ':') + " - " + id.substr(17,5).replace('-', ':');
+    query("#ocupado_horario").innerHTML = horario;
+    let reserva = vio.reservas.find( x => x.id == id );
+    query("#v-ocupado-nome").innerHTML = reserva.usuario_nome;
+    query("#v-ocupado-telefone").innerHTML = reserva.usuario_whatsapp;
+    query("#v-ocupado-contratacao").innerHTML = reserva.tipocontratacao == "1" ? "Avulso" : "mensal"; 
+    query("#v-ocupado-pagamento").innerHTML = status_compra.find( x => x.id == reserva.status_compra ).nome;
+    query("#v-ocupado-link").href = `${uri}/admin/dash.html?id=${id}#os`;
 }
 
 const trash = ( url, id  ) => {
@@ -605,6 +624,9 @@ function set_user_locacao( id, nome, telefone, email ) {
 
 function set_quadra_contratar( id ) {
     query('#id_quadra_contratar').value = id;
+    let horario = id.substr(11,5).replace('-', ':') + " - " + id.substr(17,5).replace('-', ':');
+    query("#reserva_horario").innerHTML = horario;
+    query("#ocupado_horario").innerHTML = horario;
 }
 
 var _csv = [];
