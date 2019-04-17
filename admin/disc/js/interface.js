@@ -162,6 +162,7 @@ var vio = {
 
     set dominio(arr) {
         _vio.dominio = arr || [];
+        draw_select( arr, 'dominio' );
         query('#dominio__table_body').innerHTML = tpl_array( arr, '#tr_default', 'dominio' );
     },
 
