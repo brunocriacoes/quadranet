@@ -1,69 +1,107 @@
+<div class="carousel__footer_anuncio">
+    <ul class="slides">
+        <input type="radio" name="radio-buttons" id="img-1" checked />
+        <li class="slide__container">
+            <div class="slide__image">
+                <a target="_blank" href="{{banner_link}}"><img src="{{uri}}/app/storage/{{banner_foto}}"></a>
+            </div>
+            <label for="img-3" class="prev_slide">
+                <span>&lsaquo;</span>
+            </label>
+            <label for="img-2" class="next_slide">
+                <span>&rsaquo;</span>
+            </label>
+        </li>
 
-    <a id="banner_footer" target="_blank" href="{{banner_link}}">
-        <img src="{{uri}}/app/storage/{{banner_foto}}" width="100%" >
-    </a>
+        <input type="radio" name="radio-buttons" id="img-2" />
+        <li class="slide__container">
+            <div class="slide__image">
+                <a target="_blank" href="{{banner_link}}"><img src="{{uri}}/app/storage/{{banner_foto}}"></a>
+            </div>
+            <label for="img-1" class="prev_slide">
+                <span>&lsaquo;</span>
+            </label>
+            <label for="img-3" class="next_slide">
+                <span>&rsaquo;</span>
+            </label>
+        </li>
 
-    <div id="alerta">
-        <span id="alerta_close" onclick="closeAlerta()">&times;</span>
-        <strong id="alerta_msg"></strong>
+        <input type="radio" name="radio-buttons" id="img-3" />
+        <li class="slide__container">
+            <div class="slide__image">
+                <a target="_blank" href="{{banner_link}}"><img src="{{uri}}/app/storage/{{banner_foto}}"></a>
+            </div>
+            <label for="img-2" class="prev_slide">
+                <span>&lsaquo;</span>
+            </label>
+            <label for="img-1" class="next_slide">
+                <span>&rsaquo;</span>
+            </label>
+        </li>
+    </ul>
+</div>
+
+<div id="alerta">
+    <span id="alerta_close" onclick="closeAlerta()">&times;</span>
+    <strong id="alerta_msg"></strong>
+</div>
+
+<footer class="footer">
+    <div class="footer__redes-sociais">
+        <a href="{{facebook}}" target="_blank"><img src="disc/ico/facebook.png"></a>
+        <a href="{{twitter}}" target="_blank"><img src="disc/ico/twitter.png"></a>
+        <a href="{{youtube}}" target="_blank"><img src="disc/ico/youtube.png"></a>
+        <a href="{{instagram}}" target="_blank"><img src="disc/ico/instagram.png"></a>
     </div>
-
-    <footer class="footer">
-        <div class="footer__redes-sociais">
-            <a href="{{facebook}}" target="_blank"><img src="disc/ico/facebook.png"></a>
-            <a href="{{twitter}}" target="_blank"><img src="disc/ico/twitter.png"></a>
-            <a href="{{youtube}}" target="_blank"><img src="disc/ico/youtube.png"></a>
-            <a href="{{instagram}}" target="_blank"><img src="disc/ico/instagram.png"></a>
+    <div class="container footer-info">
+        <div class="footer__about">
+            <h2>Quem Somos?</h2>
+            <p>
+                {{description}}
+            </p>
         </div>
-        <div class="container footer-info">
-            <div class="footer__about">
-                <h2>Quem Somos?</h2>
-                <p>
-                    {{description}}
-                </p>
-            </div>
-            <div class="footer__adress">
-                <div class="footer__adress__item">
-                    <h2>Endereço</h2>
-                    <a href="">
-                        <img src="disc/ico/map.png">
-                        <span id="adress"> 
-                            {{cep}}
-                            {{numero}}
-                            {{estado}}
-                        </span>
-                    </a>
-                </div>
-                <div class="footer__adress__item">
-                    <a href="tel:{{telefone}}">
-                        <img src="disc/ico/whatsapp.png">
-                        <span id="whatsapp">{{telefone}}</span>
-                    </a>
-                    <a href="mailto:{{email}}">
-                        <img src="disc/ico/mail.png">
-                        <span id="whatsapp">{{email}}</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        </div>
-        <div class="footer__dev">
-            <span>2018 Todos os Direitos Reservados a Dev</span>
-            <span>Desenvolvido por
-                <a href="http://www.sistemaquadralocacao.com.br/" target="_blank">
-                    quadranet.com.br
+        <div class="footer__adress">
+            <div class="footer__adress__item">
+                <h2>Endereço</h2>
+                <a href="">
+                    <img src="disc/ico/map.png">
+                    <span id="adress">
+                        {{cep}}
+                        {{numero}}
+                        {{estado}}
+                    </span>
                 </a>
-            </span>
+            </div>
+            <div class="footer__adress__item">
+                <a href="tel:{{telefone}}">
+                    <img src="disc/ico/whatsapp.png">
+                    <span id="whatsapp">{{telefone}}</span>
+                </a>
+                <a href="mailto:{{email}}">
+                    <img src="disc/ico/mail.png">
+                    <span id="whatsapp">{{email}}</span>
+                </a>
+            </div>
         </div>
-    </footer>
+    </div>
+    </div>
+    <div class="footer__dev">
+        <span>2018 Todos os Direitos Reservados a Dev</span>
+        <span>Desenvolvido por
+            <a href="http://www.sistemaquadralocacao.com.br/" target="_blank">
+                quadranet.com.br
+            </a>
+        </span>
+    </div>
+</footer>
 
-    <script src="disc/js/auth.js"></script>
-    <script src="disc/js/help.js"></script>
-    <script src="disc/js/interface.js"></script>
-    <script src="disc/js/todo.js"></script>
-    <script src="disc/js/cart.js"></script>
-    <script src="disc/js/main.js"></script>
+<script src="disc/js/auth.js"></script>
+<script src="disc/js/help.js"></script>
+<script src="disc/js/interface.js"></script>
+<script src="disc/js/todo.js"></script>
+<script src="disc/js/cart.js"></script>
+<script src="disc/js/main.js"></script>
 
 </body>
-</html>
 
+</html>
