@@ -13,7 +13,7 @@
     $data    = json_decode( file_get_contents( uri.'/app' ) );
 
     $anuncio = $data->anuncio ?? [];
-    $anuncio = $anuncio[0];
+    $anuncio = $anuncio[0] ?? [];
 
     $sertvico = $data->pagina ?? [];
     $sertvico = jsFind( $sertvico, function($x) { return $x->id == 'servico' ; } );
@@ -22,7 +22,8 @@
 
     $site = $data->site ?? [];
     $site = jsFind( $site, function($x) { return $x->id == 'info' ; } );
-    $site->map = str_replace('\\','', $site->map ?? '' );
+    $site = $site ?? (object) [];
+    $site->map = str_replace('\\','', $site->map ?? [] );
 
     $sobre = $data->pagina ?? [];
     $sobre = jsFind( $sobre, function($x) { return $x->id == 'sobre' ; } );

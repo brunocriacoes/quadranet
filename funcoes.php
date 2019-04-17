@@ -30,7 +30,7 @@ function single_print_content( $data, $componente, $html = null ) {
         return "{{".$p."}}";
     }, $keys );
     $keys_api = array_values( (array)$data );
-    $y = str_replace( $bombom , $keys_api, $path );
+    @$y = str_replace( $bombom , $keys_api, $path );
     return $y;
 }
 

@@ -452,13 +452,10 @@ function alerta( str ) {
     }, 2000 );
 }
 
-function set_domain( THIS ) {
-    let value = THIS.value || '';
-    localStorage.sistema = value;
+function set_domain( elemento ) {
+    let value = elemento.value || '';
     if( value != '' ) {
-        to( `${http}//${value}/${name_panel}/dash` );
-    }else {
-        beta.sistema = true;
+        to( `${http}//${value}/admin/dash.html#agenda` );
     }
 }
 
