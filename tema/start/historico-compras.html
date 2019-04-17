@@ -35,4 +35,11 @@
             <tbody id="vio_historico"></tbody>
         </table>
     </div>
+    <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post"
+        onsubmit="PagSeguroLightbox(this); return false;">
+        <input type="hidden" id="pag-code" name="code" value="" />
+        <input id="pag-send" hidden type="submit" />
+    </form>
+    <script type="text/javascript"
+        src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
 </section>

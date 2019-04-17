@@ -23,8 +23,6 @@ function parametros() {
     return uri;
 }
 
-const time_stemp = () => { let data = new Date(); return data.getTime(); };
-
 function preencher(seletor, objeto) {
     let formulario = queryAll(`#${seletor} input, #${seletor} textarea, #${seletor} select, #${seletor} img`);
     let lista_var = queryAll(`#${seletor} img:not([src*="ico"])`);
@@ -376,6 +374,11 @@ function mudarSenha() {
         });
 }
 
+const time_stemp = () => { 
+    let data = new Date();
+    return data.getTime();
+}
+
 function addJogador() {
     let time = _time || [];
     time.forEach(e => {
@@ -397,7 +400,6 @@ function autoSave(url, no, valor, indice) {
     let obj = { id: no };
     obj[indice] = valor.value || valor.innerHTML;
     obj[indice] = (obj[indice].length == 0) ? 'obs' : obj[indice];
-    log(obj[indice])
     post_api(url, obj, x => { });
 }
 
@@ -421,6 +423,7 @@ async function buy() {
         usuario_nome: _profile.name || '',
         usuario_email: _profile.email || '',
         usuario_whatsapp: _profile.whatsapp || '',
+        os: time_stemp(),
         status_compra: 1,
         tipo_pagamento: 1
     };
@@ -745,7 +748,6 @@ function termos() {
             document.querySelector('#termos__checados').innerHTML = '';
         }, 2000);
     }
-    log(termo);
 }
 
 function dataCompra(data) {
@@ -753,9 +755,15 @@ function dataCompra(data) {
         .then(x => x.json())
         .then(y => {
             let reservas = y.reservas.filter(r => +r.id.substr( 0, 10 ).indexOf( '-' + duasCasas(data.value) + '-' ) != -1);
-            document.querySelector('#vio_historico').innerHTML = reservas.map(t => {
+            let combo = [];
+            reservas.forEach(e => {
+                if( combo.find( y => y.os == e.os ) == undefined ) {
+                    combo.push(e);                    
+                }
+            });
+            document.querySelector('#vio_historico').innerHTML = combo.map(t => {
                 t.datacontratacao = t.id.substr( 0, 10 ).split( '-' ).reverse().join('/');
-                let img = `<img src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
+                let img = `<img onclick="gerarPagamento( '${t.id}' )" src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
                 let imgAvulso = '';
                 return `
                     <tr>
@@ -777,7 +785,7 @@ function contribuiu(idOS, idJogador) {
         _pagos = _pagos.replace(`,${idJogador}`, '');
     }
     let obj = { id: idOS, pagos: _pagos };
-    post_api('reservas', obj, x => { log(x); });
+    post_api('reservas', obj, x => {  });
 }
 
 function mensalidadeMensal(diaSemana) {
@@ -805,4 +813,34 @@ function agendarMensal(diaSemana, idQuadra, horarioInicial, horarioFinal) {
     let idBase = mensalidadeMensal(diaSemana);
 
     return idBase.map(x => `${x}-${horarioInicial.replace(':', '-')}-${horarioFinal.replace(':', '-')}-${diaSemana}-${idQuadra}`);
+}
+
+function objPag( arr ) {
+    let carEstatico = {};
+    for (let index = 0; index < arr.length; index++) {
+        carEstatico[`itemId${index + 1}`] = arr[index].id;
+        carEstatico[`itemDescription${index + 1}`] = arr[index].quadra_nome;
+        carEstatico[`itemAmount${index + 1}`] = arr[index].preco.replace(',', '.');
+        carEstatico[`itemQuantity${index + 1}`] = '1';
+        carEstatico[`itemWeight${index + 1}`] = '1000';
+    }
+
+    return carEstatico;
+}
+
+function gerarPagamento( id ) {
+    get_api('reservas', x => {
+        let locacao = x.filter( x => {
+            let ia = id.split('-');
+            let rx = new RegExp( `.{5}${ia[1]}.{4}${ia[3]}-${ia[4]}-${ia[5]}-${ia[6]}-${ia[7]}-${ia[8]}`, "gi" );
+            return x.id.search( rx ) != -1 ? true : false; 
+        } );
+        let carrinho = objPag( locacao.filter( p => p.id == id ) );
+        _vio.cart = locacao;
+
+        post_api('fnc/pagseguro', carrinho, y => { 
+            document.querySelector('#pag-code').value = y.code;
+            document.querySelector('#pag-send').click();
+         })
+    })
 }

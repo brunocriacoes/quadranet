@@ -73,7 +73,7 @@ var vio = {
         _vio.historico = el;
         if (query('#vio_historico')) {
             query('#vio_historico').innerHTML = el.map(x => {
-                let img = `<img src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
+                let img = `<img onclick="gerarPagamento( '${x.id}' )" src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
                 let imgAvulso = ``;
                 return `
             <tr>
