@@ -91,7 +91,7 @@
     z-index: 999;
 }
 .menu-mobile_link {
-    filter: invert( 100% );
+    /* filter: invert( 100% ); */
 }
 .menu-mobile_link:nth-child(3) {
     margin: 0 auto;

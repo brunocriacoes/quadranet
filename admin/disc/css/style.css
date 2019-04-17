@@ -786,3 +786,12 @@ label img {
     grid-template-columns: repeat(5, 1fr) 36px;
     grid-gap: 20px;
 }
+.ico-trash {
+    display: block;
+    height: 16px;
+    cursor: pointer;
+    filter: opacity(.5);
+}
+.ico-trash:hover {
+    filter: opacity(.7);
+}

@@ -12,6 +12,9 @@
     
     $data    = json_decode( file_get_contents( uri.'/app' ) );
 
+    $anuncio = $data->anuncio ?? [];
+    $anuncio = $anuncio[0];
+
     $sertvico = $data->pagina ?? [];
     $sertvico = jsFind( $sertvico, function($x) { return $x->id == 'servico' ; } );
 
@@ -84,6 +87,8 @@
         }
     }
     
+    $html  = str_replace( '{{banner_link}}', $anuncio->link ?? '', $html );
+    $html  = str_replace( '{{banner_foto}}', $anuncio->foto ?? '', $html );
     $html  = str_replace( '{{uri}}', uri, $html );
     $html  = preg_replace( '/link .*href="(?!h)/', "link rel=\"stylesheet\" href=\"{$pasta}", $html );
     $html  = preg_replace( '/src="(?!h)/', "src=\"{$pasta}", $html );

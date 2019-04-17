@@ -508,6 +508,7 @@ function tpl_array( arr, seletor, prefix = '' )
         let tpl = query( seletor ).innerHTML;
         let html = arr.map( x => {
             x.prefix     = prefix;
+            x.uri        = uri;
             x.ativo      = x.ativo || false ? 'Sim' : 'Não';
             let tpl_temp = tpl;
             let list     = Object.keys(x);
@@ -681,3 +682,43 @@ function delete_usuario( id, mail ) {
     })
 }
 
+function parcial() 
+{
+    query("#table_os_parcial").innerHTML = tpl_array( _parcial, "#tpl_os_parcial");
+    total_parcial();
+    query("#ui-falta").innerHTML = _parcial_data.sub;
+    query("#ui-total").innerHTML = _parcial_data.total;
+}
+
+function add_parcial()
+{
+    let obj = form_data( 'form-parcial' );
+    obj     = {...obj, id: time_stemp(), quadra: request.id, status: 1 };
+    _parcial.push(obj);
+    
+    query("#form-parcial").reset();
+    alerta('Adicionado com sucesso');
+    parcial();
+    post_api('parcial', obj, x => {} );
+}
+
+function total_parcial() {
+    // { sub:"00,00", total: "00,00" };
+    let total = _parcial_data.total.replace(',','.');
+    let sub   = _parcial.reduce( (acc, e ) => { 
+        let valor = e.valor.replace(',','.');
+        valor = valor == "00.00" ? 0 : valor;
+        acc = eval( `${+acc} + ${+valor}` )
+        return acc;
+    }, 0 );  
+    let falta = eval(` ${sub} - ${total}`);
+    _parcial_data.sub  = falta.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
+}
+
+function remove_parcial( id )
+{
+    _parcial = _parcial.filter( x => x.id != id );
+    alerta('Removido com sucesso');
+    trash( 'parcial', id );
+    parcial();
+}
