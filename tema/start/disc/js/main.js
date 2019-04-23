@@ -111,7 +111,6 @@ if (document.querySelector('#historico__pagamento_jogador')) {
             let reservas = y.reservas || [];
             let os = reservas.find( x => x.id == parametro.id || '' );
             let quadra = y.quadra;
-            log(os);
             os.pagos = os.pagos || '';
             _pagos = os.pagos;
             document.querySelector('#historico__pagamento_jogador').innerHTML = time.map(l => {
@@ -150,11 +149,10 @@ if (document.querySelector(`#mes__compras`)) {
 
 let anuncios = queryAll( ".slider a" );
 var state_anuncio = 0 ;
-log(anuncios);
 anuncios[state_anuncio].style = "display:block";
 setInterval( () => {
     anuncio_next()
-}, 3000 );
+}, 7000 );
 
 function anuncio_play() {
     state_anuncio = state_anuncio < anuncios.length && state_anuncio > -1 ? state_anuncio : 0;
@@ -168,6 +166,30 @@ function anuncio_next() {
     anuncio_play();
 }
 function anuncio_prev() {
-    state_anuncio--;
+    if(state_anuncio == 0){
+        state_anuncio = anuncios.length - 1;
+    }else{
+        state_anuncio--;
+    }
     anuncio_play();
+}
+
+let paginas = page();
+
+switch (paginas || '') {
+    case 'contato':
+    case 'quem-somos':
+    case 'quadras':
+    case 'blog':
+    case 'servicos':
+    case '':
+        document.querySelector('#slider').style = "display:block";
+        break;
+}
+
+diaSemana = newDay();
+
+if( mobileScreen ) {
+    let data = hoje();
+    set_date( {value: data.data_sisten} );
 }

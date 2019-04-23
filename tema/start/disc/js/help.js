@@ -93,6 +93,7 @@ function objToUrl(OBJ) {
 function page() {
     let hash = window.location.href.replace(`${base}`, '');
     hash = hash.split('/');;
+    
     return hash[1];
 }
 
@@ -209,6 +210,8 @@ function newDay() {
 }
 
 function set_date(now) {
+    let data = new Date(now.value);
+    diaSemana = (data.getDay() + 1 == 7) ? 0 : data.getDay() + 1 ;
     fetch(app)
         .then(x => x.json())
         .then(y => {
@@ -237,9 +240,10 @@ function set_date(now) {
                     agenda.push(`${m[0]}-${e}-${m[1]}-${quadra.id}`);
                 });
             });
+            let cont = 0;
             document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).join('');
             document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => `<label id="lb_${a}" onclick="setHorario( '${a}' )" for="pop-agenda-livre"><div class="agenda-disponivel" id="agenda_${a}">Disponivel</div></label>`).join('');
-            document.querySelector('#agenda_semana').innerHTML = week.map(a => `<div>${a.split('@')[0].split('-').reverse().join('/')}</div>`).join('');
+            document.querySelector('#agenda_semana').innerHTML = week.map(a => `<div id="lb_A-${cont++}-">${a.split('@')[0].split('-').reverse().join('/')}</div>`).join('');
             rese.forEach(r => {
                 if (document.querySelector(`#agenda_${r.id}`)) {
                     document.querySelector(`#agenda_${r.id}`).innerHTML = 'Ocupado';
@@ -248,6 +252,25 @@ function set_date(now) {
                     document.querySelector(`#lb_${r.id}`).removeAttribute('for');
                 }
             });
+
+            if(mobileScreen){
+                let lbCss = document.querySelectorAll( '[id*="lb_"]' );
+                let lbaCss = document.querySelectorAll( '[id*="lb_A"]' );
+                let lbadiaCss = document.querySelectorAll( `[id*="lb_A-${diaSemana}-"]` );
+                let diaCss = document.querySelectorAll( `[id*="-${diaSemana}-"]` );
+                for (let index = 0; index < lbaCss.length; index++) {
+                    lbaCss[index].style = "display:none";
+                }
+                for (let index = 0; index < lbCss.length; index++) {
+                    lbCss[index].style = "display:none";
+                }    
+                for (let index = 0; index < diaCss.length; index++) {
+                    diaCss[index].style = "display:block !important";
+                }
+                for (let index = 0; index < lbadiaCss.length; index++) {
+                    lbadiaCss[index].style = "display:block !important";
+                }
+            }
         });
 }
 
@@ -599,7 +622,16 @@ function semana(data) {
         result[index] = `${ano}-${duasCasas(mesPassado)}-${duasCasas(passado++)}@${index}`;
     }
     for (let index = dia; index < 7; index++) {
-        result[index] = `${ano}-${duasCasas(mes)}-${duasCasas(futuro++)}@${index}`;
+        futuro++;
+        if( futuro >= quandidade_dias_mes[+mes] ) {
+            futuro = 0;
+            mes = +mes + 1;
+        }
+        if( mes > 12 ){
+            mes = 1;
+            ano++;
+        }
+        result[index] = `${ano}-${duasCasas(mes)}-${duasCasas(futuro)}@${index}`;
     }
 
     result[dia] = data + `@${dia}`;

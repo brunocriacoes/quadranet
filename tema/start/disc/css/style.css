@@ -1091,6 +1091,10 @@ iframe {
     grid-template-columns: repeat(7, 1fr);
 }
 
+#agenda_semana div, #agenda__reserva_diasSemanas div {
+    background-color: #f2f2f2;
+}
+
 .agenda_reserva div, .agenda__horarios > div {
     display: block;
     border: 1px solid #ddd;
@@ -1107,6 +1111,11 @@ iframe {
 
 .agenda__horarios {
     display: grid;
+}
+
+.agenda__horarios div {
+    background-color: rgb(32, 53, 241);
+    color: #fff;
 }
 
 .agenda__horario_ocupado {
@@ -1395,13 +1404,12 @@ iframe {
 }
 
 .slider {
-    display: block;
+    display: none;
     position: relative;
     margin: 50px auto;
     width: 460px;
     height: 150px;
-    max-width: 90vw;
-    overflow: hidden;
+    max-width: calc( 90vw - 100px );
 }
 .slider a  {
     display: none;
@@ -1415,7 +1423,7 @@ iframe {
     display: block;
     position: absolute;
     top: 70px;
-    color: #FFF;
+    color: #000;
     font-weight: bold;
     width: 30px;
     height: 30px;
@@ -1426,8 +1434,12 @@ iframe {
     line-height: 30px;
 }
 .next {
-    right: 17px;
+    right: -50px;
 }
 .prev {
-    left: 17px;
+    left: -50px;
+}
+
+.select__quadra_agenda {
+    display: block;
 }
