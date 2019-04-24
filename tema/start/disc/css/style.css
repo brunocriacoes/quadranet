@@ -743,6 +743,8 @@ p {
 }
 .table {    
     display: table;
+    border-collapse: collapse;
+    table-layout: fixed;
     width: 100%;
     border-spacing: 0px;
     text-align: center !important;
@@ -774,7 +776,6 @@ p {
     width: 800px !important;
 }
 .trash {
-    display: block;
     height: 16px;
     cursor: pointer;
     margin: 10px;
@@ -1442,4 +1443,12 @@ iframe {
 
 .select__quadra_agenda {
     display: block;
+}
+
+#vio_historico img {
+    cursor: pointer;
+}
+
+.mobile {
+    display: none;
 }

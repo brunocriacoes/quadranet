@@ -271,4 +271,59 @@
     margin-bottom: 20px;
 }
 
+#servicos {
+    display: block !important;
+}
+
+.menu__lateral__user {
+    margin-bottom: 30px;
+}
+
+#add-jogador {
+    display: block;
+}
+
+.table__carrinho th {
+    display: none;
+}
+
+.table__carrinho tr {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+}
+
+.trash {
+    display: block;
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+}
+
+.grid-2 {
+    grid-template-columns: 1fr;
+}
+
+.table__meu_time thead {
+    display: none;
+}
+
+.table__meu_time tr {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.mobile {
+    display: block;
+}
+
+.table__historico_compras thead {
+    display: none;
+}
+
+.table__historico_compras tr {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
 }

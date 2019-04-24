@@ -44,7 +44,7 @@ var vio = {
                 <th>${ iten.nome || '...'}</th>
                 <th>${ iten.tel || '...'}</th>
                 <th>${ iten.email || '...'}</th>
-                <th><label class="select_termos"><input type="checkbox" ${ (iten.presenca == 1) ? 'checked' : ''} onclick="join_payment( '${iten.id}' )"></<label><span><span></th>
+                <th><label class="select_termos"><input type="checkbox" ${ (iten.presenca == 1) ? 'checked' : ''} onclick="join_payment( '${iten.id}' )"></<label><span>Presente</span></th>
                 <th><textarea rows="5" onblur="autoSave( 'time', ${iten.id}, this, 'obs' )" placeholder="Digite sua observação...">${iten.obs || ''}</textarea></th>
                 <th onclick="trash( 'time', '${iten.id}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></th>
             </tr>
@@ -79,6 +79,7 @@ var vio = {
             <tr>
                 <td>${ x.data || '--/--/----'}</td>
                 <td>R$ ${ x.preco || '00,00'}</td>
+                <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
                 <td>${ (x.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
                 <td>${(x.tipocontratacao == 0 && x.status_compra == 1) ? img : imgAvulso}</td>
                 <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${x.id}">Pagamento Jogadores</a></td>

@@ -801,6 +801,7 @@ function dataCompra(data) {
                     <tr>
                         <td>${ t.data || '--/--/----'}</td>
                         <td>R$ ${ t.preco || '00,00'}</td>
+                        <td>${ (t.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
                         <td>${ (t.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
                         <td>${(t.tipocontratacao == 0 && t.status_compra == 1) ? img : imgAvulso}</td>
                         <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Pagamento Jogadores</a></td>
