@@ -66,7 +66,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .img__header__logo {
     height: 80px !important;
-    filter: invert(0%);
 }
 
 [for="menu"] {
@@ -744,7 +743,6 @@ p {
 .table {    
     display: table;
     border-collapse: collapse;
-    table-layout: fixed;
     width: 100%;
     border-spacing: 0px;
     text-align: center !important;
@@ -1451,4 +1449,16 @@ iframe {
 
 .mobile {
     display: none;
+}
+
+.table__historico_compras thead tr th:nth-child(5) {
+    width: 10px;
+}
+
+.table__historico_compras thead tr th:nth-child(7) {
+    width: 30px;
+}
+
+#cabecalho__historico_jogador {
+    margin-bottom: 20px !important;
 }

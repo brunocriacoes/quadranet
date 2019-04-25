@@ -775,7 +775,8 @@ function termos() {
     if (termo) {
         window.location = 'finalizar';
     } else {
-        document.querySelector('#termos__checados').innerHTML = '<span>Aceitar os Termos para Continuar!</span>';
+        document.querySelector('#termos__checados').innerHTML = '<span>Aceite os Termos para Continuar!</span>';
+
         setTimeout(() => {
             document.querySelector('#termos__checados').innerHTML = '';
         }, 2000);
@@ -800,6 +801,7 @@ function dataCompra(data) {
                 return `
                     <tr>
                         <td>${ t.data || '--/--/----'}</td>
+                        <td>${t.quadra_nome}</td>
                         <td>R$ ${ t.preco || '00,00'}</td>
                         <td>${ (t.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
                         <td>${ (t.status) ? 'Aguardando Pagamento' : 'Pago'}</td>

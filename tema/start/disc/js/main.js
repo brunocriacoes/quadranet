@@ -17,7 +17,7 @@ fetch(app)
             let loop = _vio.reservas;
             loop = loop.filter(f => f.usuario_id == _profile.id);
             vio.historico = loop;
-            dataCompra( { value: hoje().mes } );
+            dataCompra({ value: hoje().mes });
         });
 
 
@@ -109,8 +109,15 @@ if (document.querySelector('#historico__pagamento_jogador')) {
             let time = y.time;
             let parametro = parametros();
             let reservas = y.reservas || [];
-            let os = reservas.find( x => x.id == parametro.id || '' );
+            let os = reservas.find(x => x.id == parametro.id || '');
             let quadra = y.quadra;
+            log(os);
+            document.querySelector('#cabecalho__historico_jogador').innerHTML =
+                `
+                <h2>${os.quadra_nome}</h2>
+                <span>Dia da locação: ${os.data}</span> <br>
+                <span>Horario: ${os.inicio} às ${os.final}</span><br>
+                `;
             os.pagos = os.pagos || '';
             _pagos = os.pagos;
             document.querySelector('#historico__pagamento_jogador').innerHTML = time.map(l => {
@@ -119,7 +126,7 @@ if (document.querySelector('#historico__pagamento_jogador')) {
                         <td>${l.nome}</td>
                         <td>${l.tel}</td>
                         <td>${l.email}</td>
-                        <th><label class="select_termos"><input type="checkbox" ${ (os.pagos.indexOf( `${l.id}` ) != -1) ? 'checked' : ''} onclick="contribuiu( '${os.id}', '${l.id}' )"><span></span><label></th>
+                        <th><label class="select_termos"><input type="checkbox" ${ (os.pagos.indexOf(`${l.id}`) != -1) ? 'checked' : ''} onclick="contribuiu( '${os.id}', '${l.id}' )"><span>Pagou</span><label></th>
                     </tr>
                 `;
             });
@@ -147,18 +154,18 @@ if (document.querySelector(`#mes__compras`)) {
     document.querySelector(`#mes__compras option[value="${+diaCompra.mes}"]`).setAttribute('selected', 'selected');
 }
 
-let anuncios = queryAll( ".slider a" );
-var state_anuncio = 0 ;
+let anuncios = queryAll(".slider a");
+var state_anuncio = 0;
 anuncios[state_anuncio].style = "display:block";
-setInterval( () => {
+setInterval(() => {
     anuncio_next()
-}, 7000 );
+}, 7000);
 
 function anuncio_play() {
     state_anuncio = state_anuncio < anuncios.length && state_anuncio > -1 ? state_anuncio : 0;
-    anuncios.forEach( e => {
+    anuncios.forEach(e => {
         e.style = "display:none";
-    } );
+    });
     anuncios[state_anuncio].style = "display:block";
 }
 function anuncio_next() {
@@ -166,9 +173,9 @@ function anuncio_next() {
     anuncio_play();
 }
 function anuncio_prev() {
-    if(state_anuncio == 0){
+    if (state_anuncio == 0) {
         state_anuncio = anuncios.length - 1;
-    }else{
+    } else {
         state_anuncio--;
     }
     anuncio_play();
@@ -189,7 +196,7 @@ switch (paginas || '') {
 
 diaSemana = newDay();
 
-if( mobileScreen ) {
+if (mobileScreen) {
     let data = hoje();
-    set_date( {value: data.data_sisten} );
+    set_date({ value: data.data_sisten });
 }

@@ -87,7 +87,7 @@
     display: grid;
     grid-template-columns: 32px 32px 1fr 32px 32px;
     align-items: center;
-    grid-gap: 30px;
+    grid-gap: 10px;
     z-index: 999;
 }
 .menu-mobile_link {
@@ -264,7 +264,7 @@
 }
 
 .img__header__logo {
-    height: 50px !important;
+    height: 45px !important;
 }
 
 .btn {
@@ -289,8 +289,32 @@
 
 .table__carrinho tr {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
+}
+
+#vio_cart {
+    position: relative;
+}
+
+#vio_cart tr td:first-child {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+#vio_cart tr td:last-child {
+    position: absolute;
+    right: 0;
+    margin: 10px !important;
+}
+
+#vio_cart tr td {
+    padding: 10px;
+}
+
+.trash__cart {
+    width: 20px !important;
+    height: 20px !important;
 }
 
 .trash {
@@ -311,6 +335,15 @@
 .table__meu_time tr {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+}
+
+#vio_time tr th:nth-child(3){
+    grid-column-start: 2;
+}
+
+#vio_time tr th:nth-child(2){
+    grid-row-start: 2;
 }
 
 .mobile {
@@ -324,6 +357,23 @@
 .table__historico_compras tr {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    grid-gap: 10px;
+}
+
+#vio_historico tr td {
+    padding: 20px;
+}
+
+.table__historico_jogador thead {
+    display: none;
+}
+
+.table__historico_jogador tr {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    grid-gap: 10px;
 }
 
 }
