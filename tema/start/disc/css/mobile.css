@@ -376,4 +376,15 @@
     grid-gap: 10px;
 }
 
+.table__finalizar thead {
+    display: none;
+}
+
+.table__finalizar tr {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    grid-gap: 10px;
+}
+
 }
