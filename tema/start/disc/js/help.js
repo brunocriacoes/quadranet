@@ -93,7 +93,7 @@ function objToUrl(OBJ) {
 function page() {
     let hash = window.location.href.replace(`${base}`, '');
     hash = hash.split('/');;
-    
+
     return hash[1];
 }
 
@@ -211,7 +211,7 @@ function newDay() {
 
 function set_date(now) {
     let data = new Date(now.value);
-    diaSemana = (data.getDay() + 1 == 7) ? 0 : data.getDay() + 1 ;
+    diaSemana = (data.getDay() + 1 == 7) ? 0 : data.getDay() + 1;
     fetch(app)
         .then(x => x.json())
         .then(y => {
@@ -253,17 +253,17 @@ function set_date(now) {
                 }
             });
 
-            if(mobileScreen){
-                let lbCss = document.querySelectorAll( '[id*="lb_"]' );
-                let lbaCss = document.querySelectorAll( '[id*="lb_A"]' );
-                let lbadiaCss = document.querySelectorAll( `[id*="lb_A-${diaSemana}-"]` );
-                let diaCss = document.querySelectorAll( `[id*="-${diaSemana}-"]` );
+            if (mobileScreen) {
+                let lbCss = document.querySelectorAll('[id*="lb_"]');
+                let lbaCss = document.querySelectorAll('[id*="lb_A"]');
+                let lbadiaCss = document.querySelectorAll(`[id*="lb_A-${diaSemana}-"]`);
+                let diaCss = document.querySelectorAll(`[id*="-${diaSemana}-"]`);
                 for (let index = 0; index < lbaCss.length; index++) {
                     lbaCss[index].style = "display:none";
                 }
                 for (let index = 0; index < lbCss.length; index++) {
                     lbCss[index].style = "display:none";
-                }    
+                }
                 for (let index = 0; index < diaCss.length; index++) {
                     diaCss[index].style = "display:block !important";
                 }
@@ -397,7 +397,7 @@ function mudarSenha() {
         });
 }
 
-const time_stemp = () => { 
+const time_stemp = () => {
     let data = new Date();
     return data.getTime();
 }
@@ -451,8 +451,8 @@ async function buy() {
         tipo_pagamento: 1
     };
 
-    mail( { to: cart.usuario_email, subject: 'Compra realizada', messagem: 'A sua compra foi realizada com sucesso!' } );
-    mail( { to: 'contato@quadranet.com.br', subject: 'Compra realizada Site', messagem: 'Mais uma compra realizada pelo site.' } );
+    mail({ to: cart.usuario_email, subject: 'Compra realizada', messagem: 'A sua compra foi realizada com sucesso!' });
+    mail({ to: 'contato@quadranet.com.br', subject: 'Compra realizada Site', messagem: 'Mais uma compra realizada pelo site.' });
     carrinho.forEach(x => {
         if (x.tipocontratacao == 0) {
             let bombom = x.id.split('-');
@@ -578,7 +578,6 @@ async function post_api_form(url, id_formulario, redirect = null, reset = 0) {
         if (reset == 0) {
             query(`#${id_formulario}`).reset();
         }
-        alerta('Cadastrado');
 
     });
     return true;
@@ -623,11 +622,11 @@ function semana(data) {
     }
     for (let index = dia; index < 7; index++) {
         futuro++;
-        if( futuro >= quandidade_dias_mes[+mes] ) {
+        if (futuro >= quandidade_dias_mes[+mes]) {
             futuro = 0;
             mes = +mes + 1;
         }
-        if( mes > 12 ){
+        if (mes > 12) {
             mes = 1;
             ano++;
         }
@@ -787,15 +786,15 @@ function dataCompra(data) {
     fetch(app)
         .then(x => x.json())
         .then(y => {
-            let reservas = y.reservas.filter(r => +r.id.substr( 0, 10 ).indexOf( '-' + duasCasas(data.value) + '-' ) != -1);
+            let reservas = y.reservas.filter(r => +r.id.substr(0, 10).indexOf('-' + duasCasas(data.value) + '-') != -1);
             let combo = [];
             reservas.forEach(e => {
-                if( combo.find( y => y.os == e.os ) == undefined ) {
-                    combo.push(e);                    
+                if (combo.find(y => y.os == e.os) == undefined) {
+                    combo.push(e);
                 }
             });
             document.querySelector('#vio_historico').innerHTML = combo.map(t => {
-                t.datacontratacao = t.id.substr( 0, 10 ).split( '-' ).reverse().join('/');
+                t.datacontratacao = t.id.substr(0, 10).split('-').reverse().join('/');
                 let img = `<img onclick="gerarPagamento( '${t.id}' )" src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
                 let imgAvulso = '';
                 return `
@@ -820,7 +819,7 @@ function contribuiu(idOS, idJogador) {
         _pagos = _pagos.replace(`,${idJogador}`, '');
     }
     let obj = { id: idOS, pagos: _pagos };
-    post_api('reservas', obj, x => {  });
+    post_api('reservas', obj, x => { });
 }
 
 function mensalidadeMensal(diaSemana) {
@@ -850,7 +849,7 @@ function agendarMensal(diaSemana, idQuadra, horarioInicial, horarioFinal) {
     return idBase.map(x => `${x}-${horarioInicial.replace(':', '-')}-${horarioFinal.replace(':', '-')}-${diaSemana}-${idQuadra}`);
 }
 
-function objPag( arr ) {
+function objPag(arr) {
     let carEstatico = {};
     for (let index = 0; index < arr.length; index++) {
         carEstatico[`itemId${index + 1}`] = arr[index].id;
@@ -863,24 +862,30 @@ function objPag( arr ) {
     return carEstatico;
 }
 
-function gerarPagamento( id ) {
+function gerarPagamento(id) {
     get_api('reservas', x => {
-        let locacao = x.filter( x => {
+        let locacao = x.filter(x => {
             let ia = id.split('-');
-            let rx = new RegExp( `.{5}${ia[1]}.{4}${ia[3]}-${ia[4]}-${ia[5]}-${ia[6]}-${ia[7]}-${ia[8]}`, "gi" );
-            return x.id.search( rx ) != -1 ? true : false; 
-        } );
-        let carrinho = objPag( locacao.filter( p => p.id == id ) );
+            let rx = new RegExp(`.{5}${ia[1]}.{4}${ia[3]}-${ia[4]}-${ia[5]}-${ia[6]}-${ia[7]}-${ia[8]}`, "gi");
+            return x.id.search(rx) != -1 ? true : false;
+        });
+        let carrinho = objPag(locacao.filter(p => p.id == id));
         _vio.cart = locacao;
 
-        post_api('fnc/pagseguro', carrinho, y => { 
+        post_api('fnc/pagseguro', carrinho, y => {
             document.querySelector('#pag-code').value = y.code;
             document.querySelector('#pag-send').click();
-         })
+        })
     })
 }
 
 function limparCarrinho() {
     localStorage.removeItem('cart');
     window.location.href = '';
+}
+
+function ToolTips(url, id_formulario, msg) {
+    post_api_form(url, id_formulario, null);
+    query('#alerta').style.display = 'block';
+    query('#alerta_msg').innerHTML = msg;
 }

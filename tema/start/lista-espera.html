@@ -3,36 +3,38 @@
 <br>
 <div class="container">
     <h1>Lista de Espera</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ullam suscipit consequatur.</p>
+    <p>Está procurando um time para jogar? Aqui na "NOME-ARENA" você pode se cadastrar em qualquer uma das nossas
+        quadras/modalidades e aguardar para ser chamado! Faça seu cadastro abaixo e envie seus dados.</p>
 
-    <form action="javascript:void(0)" method="post" id="espera-form" class="form" onsubmit="post_api_form( 'espera', 'espera-form', null )">
+    <form action="javascript:void(0)" method="post" id="espera-form" class="form"
+        onsubmit="ToolTips( 'espera', 'espera-form', 'teste1111' )">
         <label for="">Escolha modalidade</label>
         <div class="grid-6 modalidade-escolha">
             {{modalidade}}
         </div>
-        <br>            
-        <br>            
+        <br>
+        <br>
         <div class="grid-2">
             <div>
                 <label for="">Nome completo</label>
-                <input type="text" name="nome" class="field">        
+                <input type="text" name="nome" class="field">
                 <label for="">Idade</label>
-                <input type="text" name="idade" class="field">        
+                <input type="text" name="idade" class="field">
                 <label for="">Email</label>
-                <input type="text" name="email" class="field">        
+                <input type="text" name="email" class="field">
                 <label for="">Celular - WhatsApp</label>
-                <input type="text" name="celular" class="field">        
+                <input type="text" name="celular" class="field">
                 <label for="">Posição que joga </label>
                 <input type="text" name="posicao" class="field">
             </div>
-            <div>        
+            <div>
                 <label for="">OBS</label>
                 <textarea rows="3" name="obs" rows="10" class="field"></textarea>
                 <img class="lista__espera_img" src="./disc/img/bg.jpg">
             </div>
         </div>
         <div>
-            <input type="submit" class="btn btn-sucess" value="Cadastre se">
+            <input type="submit" class="btn btn-sucess" value="Cadastre-se">
         </div>
     </form>
 </div>
