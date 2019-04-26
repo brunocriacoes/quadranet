@@ -83,6 +83,7 @@
                     <label for="" class="input-label">Telefone</label>
                     <input type="text" class="input-field" name="telephone" required>
                     <input type="submit" value="salvar" class="btn btn-sucess">
+                    <input type="reset" hidden>
                 </form>
             </section>
 
@@ -99,6 +100,7 @@
                     <label for="" class="input-label">Confirmar nova senha</label>
                     <input type="password" class="input-field" name="password" required>           
                     <input type="submit" value="salvar" class="btn btn-sucess">
+                    <input type="reset" hidden>
                 </form>
             </section>
 
@@ -112,6 +114,7 @@
                     <label for="" class="input-label">Descrição</label>
                     <textarea  name="description" rows="6" class="input-field"></textarea>     
                     <input type="submit" value="salvar" class="btn btn-sucess">
+                    <input type="reset" hidden>
                 </form>
             </section>
 
@@ -149,6 +152,7 @@
                     </div>
                     <div>
                         <input type="submit" value="salvar" class="btn btn-sucess">
+                        <input type="reset" hidden>
                     </div>
                 </form>
                 <br>
@@ -169,6 +173,7 @@
                             </div>
                             <div>
                                 <input type="submit" value="Add valor parcial" class="btn">
+                                <input type="reset" hidden>
                             </div>
                         </form>
                     </div>
@@ -284,6 +289,7 @@
                     <label for="" class="input-label">Ativo</label>                  
                     <select name="ativo" class="input-field"></select>
                     <input type="submit" value="salvar" class="btn btn-sucess">
+                    <input type="reset" hidden>
                 </form>
             </section>
 
@@ -348,6 +354,7 @@
                         </div>
                     </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
+                    <input type="reset" hidden>
                 </form>
             </section>
 
@@ -410,6 +417,7 @@
                             </div>
                         </div>
                         <input type="submit" value="salvar" class="btn btn-sucess">
+                        <input type="reset" hidden>
                     </form>
                     <input type="file" hidden name="logo" onchange="previwew_img( 'info_logo', 'previa_info_logo' )" id="info_logo">  
                     <input type="file" hidden name="ico"  onchange="previwew_img( 'info_ico', 'previa_info_ico' )" id="info_ico">  
@@ -426,6 +434,7 @@
                         <label for="" class="input-label">Youtube</label>
                         <input type="url" name="youtube" class="input-field" placeholder="http://">
                         <input type="submit" value="salvar" class="btn btn-sucess">
+                        <input type="reset" hidden>
                     </form>
                 </div>
                 <div class="m-inicial m-info">
@@ -477,6 +486,7 @@
                         </div>
                         <div>
                             <input type="submit" value="salvar" class="btn btn-sucess">
+                            <input type="reset" hidden>
                         </div>
                     </form>
                 </div>
@@ -494,6 +504,7 @@
                             </div>
                         </div>
                         <input type="submit" value="salvar" class="btn btn-sucess">
+                        <input type="reset" hidden>
                     </form>
                 </div>
             </section>
@@ -546,6 +557,7 @@
                         </div>
                     </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
+                    <input type="reset" hidden>
                 </form>
                 <input id="foto_1" type="file" name="foto_1" onchange="previwew_img( 'foto_1', 'previa_foto_1' );previwew_img( 'foto_1', 'previa_foto_1B' )" hidden>
                 <input id="foto_2" type="file" name="foto_2" onchange="previwew_img( 'foto_2', 'previa_foto_2' )" hidden>
@@ -587,6 +599,7 @@
                         </div>
                     </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
+                    <input type="reset" hidden>
                 </form>
                 <input id="foto_blog" type="file" name="foto" onchange="previwew_img( 'foto_blog', 'previa_foto_blog' );" hidden>
             </section>
@@ -633,6 +646,7 @@
                         <div contenteditable="true" class="editor-local"></div>
                     </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
+                    <input type="reset" hidden>
                 </form>
             </section>
 
@@ -672,6 +686,7 @@
                         </div>
                     </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
+                    <input type="reset" hidden>
                 </form>
             </section>
 
@@ -734,6 +749,7 @@
                                 <input id="quadra__foto_5" type="file" onchange="getFile( '#quadra__foto_5', '#quadra-nova__form_5' )" hidden>
                             </div>
                             <input type="submit" value="salvar" class="btn btn-sucess">
+                            <input type="reset" hidden>
                         </div>                    
                         <div>
                             <label for="quadra_foto_1">
@@ -877,6 +893,7 @@
                     <label for="" class="input-label">OBS</label>
                     <textarea name="obs" class="input-field"></textarea>
                     <input type="submit" value="salvar" class="btn btn-sucess">
+                    <input type="reset" hidden>
                 </form>
                 <h4 class="gap-top gap-bottom">Time</h4>
                 <table class="table">
@@ -920,6 +937,36 @@
                 </table>
             </section>
 
+            <section id="banner-novo" class="gap box">
+                <header class="gap-bottom"> 
+                   <h5>Banner</h5>
+               </header>
+               <form action="javascript:void(0)" id="form-banner" onsubmit="post_api_form( 'banner', 'form-banner', 'dash.html#banner' )" method="POST">
+                   <input type="hidden" name="id" value="">
+                   <div class="grid-2 grid-gap">
+                       <div>                            
+                           <label for="" class="input-label">Nome</label>
+                           <input type="text" class="input-field" name="nome" required>
+                           <label for="" class="input-label">link</label>
+                           <input type="url" class="input-field" name="link" required>
+                           <label for="" class="input-label">Status</label>
+                           <select name="ativo" class="input-field"></select>
+                           <label for="" class="input-label">Texto</label>
+                           <textarea name="conteudo" rows="3" class="input-field" required></textarea>                    
+                       </div>
+                       <div>
+                           <label for="banner_foto" class="input-label">foto</label>
+                           <label for="banner_foto">
+                               <img src="./disc/img/default.jpg" id="previa_banner_foto" alt="foto" width="80%">
+                           </label>
+                       </div>
+                   </div>
+                   <input type="submit" value="salvar" class="btn btn-sucess">
+                   <input type="reset" hidden>
+               </form>
+               <input type="file" id="banner_foto" onchange="previwew_img( 'banner_foto', 'previa_banner_foto' )" hidden name="foto" required>
+            </section>
+
             <section id="anuncios" class="gap box">
                  <header class="gap-bottom grid-2"> 
                     <h5>Anuncio</h5>
@@ -957,15 +1004,16 @@
                             <textarea name="conteudo" rows="3" class="input-field" required></textarea>                    
                         </div>
                         <div>
-                            <label for="banner_foto" class="input-label">foto</label>
-                            <label for="banner_foto">
-                                <img src="./disc/img/default.jpg" id="previa_banner_foto" alt="foto" width="80%">
+                            <label for="anuncio_foto" class="input-label">foto</label>
+                            <label for="anuncio_foto">
+                                <img src="./disc/img/default.jpg" id="previa_anuncio_foto" alt="foto" width="80%">
                             </label>
                         </div>
                     </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
+                    <input type="reset" hidden>
                 </form>
-                <input type="file" id="banner_foto" onchange="previwew_img( 'banner_foto', 'previa_banner_foto' )" hidden name="foto" required>
+                <input type="file" id="anuncio_foto" onchange="previwew_img( 'anuncio_foto', 'previa_anuncio_foto' )" hidden name="foto" required>
             </section>
 
             <section id="lista-de-espera" class="gap box">
@@ -1011,6 +1059,7 @@
                                 <img src="./disc/ico/search.png">
                             </label>
                             <input type="submit" id="busca-capitao" onkeyup="busca_os_contratante()" hidden>
+                            <input type="reset" hidden>
                         </form>
                         <img src="disc/ico/download.png" onclick="dowload_csv(  _csv, 'lista.csv' )">
                     </div>
@@ -1168,6 +1217,7 @@
                         <label for="" class="input-label">Senha</label>
                         <input type="password" class="input-field" name="pass" required>
                         <input type="submit" class="btn btn-sucess text-center" value="Cadastrar">
+                        <input type="reset" hidden>
                         <label for="cad-change">Voltar</label>
                     </form>
                 </span>
@@ -1178,6 +1228,7 @@
                             <img src="./disc/ico/search.png">
                         </label>
                         <input type="submit" id="pop-busca-jogadores" hidden>
+                        <input type="reset" hidden>
                     </form>                  
                     <table class="table" width="100%">
                         <thead>
@@ -1262,7 +1313,7 @@
             <tr>
                 <td>{{nome}}</td>
                 <td>
-                    <img onclick="editar( 'banner', '{{id}}', 'servicos_form__banner-novo', 'dash.html#banner-novo' )" src="./disc/ico/edit.png" class="ico-table">
+                    <img onclick="editar( 'banner', '{{id}}', 'form-banner', 'dash.html#banner-novo' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
                 <td><img onclick="trash( 'banner','{{id}}' )" src="./disc/ico/trash.png" class="ico-table"></td>
             </tr>

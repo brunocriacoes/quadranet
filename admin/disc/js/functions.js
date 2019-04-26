@@ -741,3 +741,17 @@ function remove_parcial( id )
     trash( 'parcial', id );
     parcial();
 }
+
+function reset_form( seletor ) {
+    let btnReset = query(`${seletor} [type="reset"]`);
+    if( btnReset ) { btnReset.click(); }        
+    let editor   = query( `${seletor} .editor-local` );
+    if( editor ) { editor.innerHTML = ''; }
+    queryAll( `${seletor} textarea` ).forEach( x => { x.innerHTML = ""; } );
+    queryAll( `${seletor} option` ).forEach( x => { x.removeAttribute("selected"); } );
+    queryAll( `${seletor} [type="checkbox"]` ).forEach( x => { x.removeAttribute("checked"); } );
+    queryAll( `${seletor} [type="radio"]` ).forEach( x => { x.removeAttribute("checked"); } );
+    queryAll(`${seletor} img:not([src*="/ico"])`).forEach( x => { x.src = 'disc/img/default.jpg'; } );
+    let id_post = query( `${seletor} [name="id"]` );
+    if(id_post) { id_post.value = ""; }     
+}
