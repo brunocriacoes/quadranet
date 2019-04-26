@@ -124,17 +124,7 @@ setInterval( x => {
 queryAll('.ico-plus').forEach( x => {
     x.addEventListener('click', function() {
         let id = this.href.split('#')[1];
-        let id_form = query(`#${id} form`);
-        query(`#${id} form`).reset();
-        if( query(`#${id} form .editor-local`) ) {
-            query(`#${id} form .editor-local`).innerHTML = '';
-        }
-        horario   = [];
-        vio.mostrar_horarios = 1;
-        let lista_var = queryAll(`#${id} form img:not([src*="ico"])`);
-        for (let index = 0; index < lista_var.length; index++) {
-            lista_var[index].src = 'disc/img/default.jpg';
-        }        
+        reset_form( `#${id}` );      
     } );
 } );
 
