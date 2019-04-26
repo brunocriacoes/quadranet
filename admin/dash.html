@@ -920,6 +920,35 @@
                 </table>
             </section>
 
+            <section id="banner-novo" class="gap box">
+                <header class="gap-bottom"> 
+                   <h5>Banner</h5>
+               </header>
+               <form action="javascript:void(0)" id="form-banner" onsubmit="post_api_form( 'banner', 'form-banner', 'dash.html#banner' )" method="POST">
+                   <input type="hidden" name="id" value="">
+                   <div class="grid-2 grid-gap">
+                       <div>                            
+                           <label for="" class="input-label">Nome</label>
+                           <input type="text" class="input-field" name="nome" required>
+                           <label for="" class="input-label">link</label>
+                           <input type="url" class="input-field" name="link" required>
+                           <label for="" class="input-label">Status</label>
+                           <select name="ativo" class="input-field"></select>
+                           <label for="" class="input-label">Texto</label>
+                           <textarea name="conteudo" rows="3" class="input-field" required></textarea>                    
+                       </div>
+                       <div>
+                           <label for="banner_foto" class="input-label">foto</label>
+                           <label for="banner_foto">
+                               <img src="./disc/img/default.jpg" id="previa_banner_foto" alt="foto" width="80%">
+                           </label>
+                       </div>
+                   </div>
+                   <input type="submit" value="salvar" class="btn btn-sucess">
+               </form>
+               <input type="file" id="banner_foto" onchange="previwew_img( 'banner_foto', 'previa_banner_foto' )" hidden name="foto" required>
+            </section>
+
             <section id="anuncios" class="gap box">
                  <header class="gap-bottom grid-2"> 
                     <h5>Anuncio</h5>
@@ -957,15 +986,15 @@
                             <textarea name="conteudo" rows="3" class="input-field" required></textarea>                    
                         </div>
                         <div>
-                            <label for="banner_foto" class="input-label">foto</label>
-                            <label for="banner_foto">
-                                <img src="./disc/img/default.jpg" id="previa_banner_foto" alt="foto" width="80%">
+                            <label for="anuncio_foto" class="input-label">foto</label>
+                            <label for="anuncio_foto">
+                                <img src="./disc/img/default.jpg" id="previa_anuncio_foto" alt="foto" width="80%">
                             </label>
                         </div>
                     </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                 </form>
-                <input type="file" id="banner_foto" onchange="previwew_img( 'banner_foto', 'previa_banner_foto' )" hidden name="foto" required>
+                <input type="file" id="anuncio_foto" onchange="previwew_img( 'anuncio_foto', 'previa_anuncio_foto' )" hidden name="foto" required>
             </section>
 
             <section id="lista-de-espera" class="gap box">
