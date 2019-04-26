@@ -3,7 +3,6 @@
 <br>
 <section class="container" id="carrinho">
     <h2 class="title__carrinho">Meus Horários Reservados</h2>
-    <button class="btn__clean__cart" onclick="limparCarrinho()">Limpar Carrinho</button>
     <table class="table table__carrinho">
         <thead>
             <tr class="table__head__carrinho">
@@ -45,9 +44,10 @@
         </div>
     </div>
 
-    <div class="or">
-        <a href="{{uri}}/quadras" class="btn btn-center gap-top gap-bottom">Continuar comprando</a>
-        <a href="javascript:void(0)" onclick="termos()" class="btn btn-sucess btn-center gap-top gap-bottom">Finalizar a Compra</a>
+    <div class="grid-3 btn__container__cart">
+        <a href="{{uri}}/quadras" class="btn__bombom btn__cart_continuar">Continuar comprando</a>
+        <button class="btn__bombom" onclick="limparCarrinho()">Limpar Carrinho</button>
+        <a href="javascript:void(0)" onclick="termos()" class="btn__bombom btn__cart__finalizar">Finalizar a Compra</a>
         <div></div>
         <div id="termos__checados"></div>
     </div>

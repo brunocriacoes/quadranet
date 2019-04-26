@@ -387,4 +387,13 @@
     grid-gap: 10px;
 }
 
+.btn__container__cart {
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+}
+
+.lista__espera_img {
+    display: none;
+}
+
 }
