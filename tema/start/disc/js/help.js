@@ -241,7 +241,7 @@ function set_date(now) {
                 });
             });
             let cont = 0;
-            document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).join('');
+            document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios / Dia da Semana</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).join('');
             document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => `<label id="lb_${a}" onclick="setHorario( '${a}' )" for="pop-agenda-livre"><div class="agenda-disponivel" id="agenda_${a}">Disponivel</div></label>`).join('');
             document.querySelector('#agenda_semana').innerHTML = week.map(a => `<div id="lb_A-${cont++}-">${a.split('@')[0].split('-').reverse().join('/')}</div>`).join('');
             rese.forEach(r => {
@@ -878,4 +878,9 @@ function gerarPagamento( id ) {
             document.querySelector('#pag-send').click();
          })
     })
+}
+
+function limparCarrinho() {
+    localStorage.removeItem('cart');
+    window.location.href = '';
 }

@@ -48,7 +48,7 @@ fetch(app)
                     });
                 });
                 let cont = 0;
-                document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).join('');
+                document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horário / Dia da Semana</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).sort().join('');
                 document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => `<label id="lb_${a}" onclick="setHorario( '${a}' )" for="pop-agenda-livre"><div class="agenda-disponivel" id="agenda_${a}">Disponivel</div></label>`).join('');
                 document.querySelector('#agenda_semana').innerHTML = week.map(a => `<div id="lb_A-${cont++}-">${a.split('@')[0].split('-').reverse().join('/')}</div>`).join('');
                 rese.forEach(r => {
@@ -199,4 +199,11 @@ diaSemana = newDay();
 if (mobileScreen) {
     let data = hoje();
     set_date({ value: data.data_sisten });
+}
+
+let linkAtivo = document.querySelectorAll(`.link-menu[href="${window.location.href}"`);
+if(linkAtivo) {
+    linkAtivo.forEach( e => {
+        e.setAttribute('class', 'link-menu ativo');
+    } );
 }

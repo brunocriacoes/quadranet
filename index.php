@@ -59,6 +59,8 @@
 
     if( !empty( urls[1] ) ) {
         $single  =  jsFind( $quadra, function( $x ) { return $x->id == urls[1]; } );
+        $modalidade_obj = jsFind( $modalidade, function($m) use($single) { return $m->id == $single->modalidade; } );
+        $single->modalidade_nome = $modalidade_obj->nome ?? '';
     }
 
     $pasta = uri . "/tema/".tema."/";
