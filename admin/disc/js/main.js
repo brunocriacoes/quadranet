@@ -57,9 +57,14 @@ fetch( `${app}` )
         query( "#table_iten_os" ).innerHTML = tpl_array( reservas, "#tpl_iten_os" );
         query( "#table_time_os" ).innerHTML = tpl_array( vio.time, "#tpl_time_os" );   
 
-        parcial();
-
+        parcial();        
+        
     } );
+
+    let selected_dominio = query(`#selecionar-dominio [value='${dominio}']`);
+    if( selected_dominio ) {
+        selected_dominio.selected = true;
+    }
 
 } );
 
