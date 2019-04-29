@@ -404,16 +404,33 @@
                                 <textarea name="description" rows="3" class="input-field"></textarea>
                             </div>
                             <div>
-                                <label for="" class="input-label">Cor site</label>
-                                <input type="color" name="color" class="input-field">
-                                <label for="info_logo" class="input-label">Logo</label>
-                                <label for="info_logo">
-                                    <img src="./disc/img/default.jpg" height="200" alt="logo" id="previa_info_logo">
-                                </label>
-                                <label for="info_ico" class="input-label">icone</label>
-                                <label for="info_ico">
-                                    <img src="./disc/img/default.jpg" height="32" alt="ico" id="previa_info_ico">
-                                </label>
+                                <div class="grid-2">
+                                    <div>
+                                        <label for="" class="input-label">Cor site</label>
+                                        <input type="color" name="color" class="input-field">
+                                    </div>
+                                    <div>
+                                        <label for="info_ico" class="input-label">icone</label>
+                                        <label for="info_ico">
+                                            <img src="./disc/img/default.jpg" height="32" alt="ico" id="previa_info_ico">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="grid-2">
+                                    <div>
+                                        <label for="info_logo" class="input-label">Logo</label>
+                                        <label for="info_logo">
+                                            <img src="./disc/img/default.jpg" width="90%" alt="logo" id="previa_info_logo">
+                                        </label>                                       
+                                    </div>
+                                    <div>
+                                        <label for="info_criativo" class="input-label">Criativo</label>
+                                        <label for="info_criativo">
+                                            <img src="./disc/img/default.jpg" width="90%" alt="criativo" id="previa_info_criativo">
+                                        </label>
+                                        <smal class="input-label">Tamanho da imagem  2000x450px</smal>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <input type="submit" value="salvar" class="btn btn-sucess">
@@ -421,6 +438,7 @@
                     </form>
                     <input type="file" hidden name="logo" onchange="previwew_img( 'info_logo', 'previa_info_logo' )" id="info_logo">  
                     <input type="file" hidden name="ico"  onchange="previwew_img( 'info_ico', 'previa_info_ico' )" id="info_ico">  
+                    <input type="file" hidden name="criativo"  onchange="previwew_img( 'info_criativo', 'previa_info_criativo' )" id="info_criativo">  
                 </div>
                 <div class="m-inicial m-rede-social">
                     <form action="javascript:void(0)" id="visual__form__social" onsubmit="post_api_form( 'site', 'visual__form__social', 'dash.html#visual', 1 )" method="POST">
