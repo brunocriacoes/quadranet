@@ -74,3 +74,7 @@ function dominio_valid() {
         return 'construcao';
     }
 }
+
+function completaTitulo() {
+    return urls[0] ?? '';
+}

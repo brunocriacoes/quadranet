@@ -883,9 +883,3 @@ function limparCarrinho() {
     localStorage.removeItem('cart');
     window.location.href = '';
 }
-
-function ToolTips(url, id_formulario, msg) {
-    post_api_form(url, id_formulario, null);
-    query('#alerta').style.display = 'block';
-    query('#alerta_msg').innerHTML = msg;
-}

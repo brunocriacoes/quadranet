@@ -93,6 +93,7 @@
     
 
     $html  = str_replace( '{{uri}}', uri, $html );
+    $html  = str_replace( '{{completaTitulo}}', completaTitulo(), $html );
     $html  = preg_replace( '/link .*href="(?!h)/', "link rel=\"stylesheet\" href=\"{$pasta}", $html );
     $html  = preg_replace( '/src="(?!h)/', "src=\"{$pasta}", $html );
     $html  = single_print_content( $site, '', $html );
