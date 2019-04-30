@@ -27,7 +27,11 @@ function login(MAIL, PASS, HOF) {
                 alerta('Senha ou E-mail Incorretos');
             } else {
                 localStorage.token_site = x.token;
-                window.location.href = `${base}/perfil`;
+                if( localStorage.cart.length > 10 ) {
+                    window.location.href = `${base}/finalizar`;
+                }else{
+                    window.location.href = `${base}/perfil`;
+                }
             }
         });
 }

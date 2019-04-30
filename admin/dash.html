@@ -30,19 +30,19 @@
             <input type="radio" name="sub_menus" id="menu_sistema" hidden>
             <input type="radio" name="sub_menus" id="menu_user" hidden>
             <div class="menu_quadra">
-                <a href="#modalidade" class="link_menu">Modalidade</a>
-                <a href="#quadra" class="link_menu">Quadra</a>
+                <a href="#modalidade" class="link_menu">Modalidades</a>
+                <a href="#quadra" class="link_menu">Quadras</a>
                 <a href="#contratantes" class="link_menu">Contratantes</a>
-                <a href="#lista-de-espera" class="link_menu">lista de espera</a>
-                <a href="#historico" class="link_menu">Histórico de pagamento</a>
+                <a href="#lista-de-espera" class="link_menu">Lista de Espera</a>
+                <a href="#historico" class="link_menu">Financeiro</a>
             </div>
             <div class="menu_theme">
                 <a href="#visual" class="link_menu">Visual</a>
                 <a href="#quem-somos" class="link_menu">Quem somos</a>
                 <a href="#servicos" class="link_menu">Serviços</a>
                 <a href="#blogs" class="link_menu">Blog</a>
-                <a href="#banner" class="link_menu">Banner</a>
-                <a href="#anuncios" class="link_menu">Anuncio</a>
+                <a href="#banner" class="link_menu">Capa/Site</a>
+                <a href="#anuncios" class="link_menu">Banner/Anúncio</a>
             </div>
             <div class="menu_sistema">
                 <a href="#dominio" class="link_menu">Domínio</a>
@@ -424,7 +424,7 @@
                                         </label>                                       
                                     </div>
                                     <div>
-                                        <label for="info_criativo" class="input-label">Criativo</label>
+                                        <label for="info_criativo" class="input-label">Cabeçalho</label>
                                         <label for="info_criativo">
                                             <img src="./disc/img/default.jpg" width="90%" alt="criativo" id="previa_info_criativo">
                                         </label>
@@ -670,7 +670,7 @@
 
             <section id="modalidade" class="gap box">
                  <header class="gap-bottom grid-2"> 
-                    <h5>Lista de modalidades</h5>
+                    <h5>Lista de Modalidades</h5>
                     <div class="text-right">
                         <a href="#modalidade-nova" class="ico ico-plus theme circle"></a>
                     </div>
@@ -766,7 +766,7 @@
                                 <input id="quadra__foto_4" type="file" onchange="getFile( '#quadra__foto_4', '#quadra-nova__form_4' )" hidden>
                                 <input id="quadra__foto_5" type="file" onchange="getFile( '#quadra__foto_5', '#quadra-nova__form_5' )" hidden>
                             </div>
-                            <input type="submit" value="salvar" class="btn btn-sucess">
+                            <input type="submit" value="salvar" id="btn__cadastro_quadra" hidden>
                             <input type="reset" hidden>
                         </div>                    
                         <div>
@@ -818,8 +818,11 @@
                 <div>
                     <span class="btn-horario" onclick="add_horario()"> + Adicionar Horario</span>
                 </div>
+                <div>
+                    <label class="btn btn-sucess btn__sucesso_quadra" for="btn__cadastro_quadra">Salvar</label>
+                </div>
             </section>           
-       
+            
             <section id="contratantes" class="gap box">
                  <header class="gap-bottom grid-2"> 
                     <h5>Contratantes</h5>
@@ -912,33 +915,12 @@
                     <textarea name="obs" class="input-field"></textarea>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                     <input type="reset" hidden>
-                </form>
-                <h4 class="gap-top gap-bottom">Time</h4>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Apelido</th>
-                            <th width="200">Telefone</th>
-                            <th width="200">Email</th>
-                            <th width="100">Pago</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="capitao-novo__table__time_nome">Gabriel</td>
-                            <td id="capitao-novo__table__time_apelido">Bolinha</td>
-                            <td id="capitao-novo__table__time_tel">+55 (00) 0 0000-00000</td>
-                            <td id="capitao-novo__table__time_email">user@gmail.com</td>
-                            <td><input type="checkbox" checked disabled></td>
-                        </tr>
-                    </tbody>
-                </table>               
+                </form>             
             </section>
 
             <section id="banner" class="gap box">
                  <header class="gap-bottom grid-2"> 
-                    <h5>Banners</h5>
+                    <h5>Capa/Site</h5>
                     <div class="text-right">
                         <a href="#banner-novo" class="ico ico-plus theme circle"></a>
                     </div>
@@ -957,7 +939,7 @@
 
             <section id="banner-novo" class="gap box">
                 <header class="gap-bottom"> 
-                   <h5>Banner</h5>
+                   <h5>Capa/Site</h5>
                </header>
                <form action="javascript:void(0)" id="form-banner" onsubmit="post_api_form( 'banner', 'form-banner', 'dash.html#banner' )" method="POST">
                    <input type="hidden" name="id" value="">
@@ -987,7 +969,7 @@
 
             <section id="anuncios" class="gap box">
                  <header class="gap-bottom grid-2"> 
-                    <h5>Anuncio</h5>
+                    <h5>Banner/Anúncio</h5>
                     <div class="text-right">
                         <a href="#anuncio" class="ico ico-plus theme circle"></a>
                     </div>
@@ -1006,7 +988,7 @@
 
             <section id="anuncio" class="gap box">
                  <header class="gap-bottom"> 
-                    <h5>Anuncio</h5>
+                    <h5>Banner/Anúncio</h5>
                 </header>
                 <form action="javascript:void(0)" id="form-anuncio" onsubmit="post_api_form( 'anuncio', 'form-anuncio', 'dash.html#anuncios' )" method="POST">
                     <input type="hidden" name="id" value="">
@@ -1036,7 +1018,7 @@
 
             <section id="lista-de-espera" class="gap box">
                 <header class="grid-2 gap-bottom">
-                    <h5>Lista de espera</h5>
+                    <h5>Lista de Espera</h5>
                     <div class="text-right modalidade-lista">
                         <select name="modalidade" class="input-field " id="espera-modalidade" onchange="lista_espera()"></select>
                         <form action="javascript:void(0)" method="POST" onsubmit="lista_espera()" class="search">
@@ -1046,6 +1028,7 @@
                             </label>
                             <input type="submit" id="busca-jogadores" hidden>
                         </form>
+                        <a href="#lista-espera-nova" class="ico ico-plus theme circle"></a>
                     </div>
                 </header>
                 <table class="table">
@@ -1053,7 +1036,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Idade</th>
-                            <th>Posicao</th>
+                            <th>Posição</th>
                             <th>Celular</th>
                             <th>Email</th>
                             <th width="30"></th>
@@ -1063,9 +1046,50 @@
                 </table>                
             </section>
 
+            <section id="lista-espera-nova" class="gap box">
+                    <header class="gap-bottom"> 
+                       <h5>Cadastro de Espera</h5>
+                   </header>
+                   <form action="javascript:void(0)" id="lista_espera_novo_form" onsubmit="post_api_form( 'espera', 'lista_espera_novo_form', 'dash.html#lista-de-espera' )" method="POST">
+                       <input type="hidden" name="id">
+                       <div class="grid-2 grid-gap">
+                            <div>
+                               <label for="" class="input-label">Modalidade</label>
+                               <select class="input-field" name="modalidade" id=""></select>
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Nome completo</label>
+                                <input type="text" name="nome" class="input-field">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Idade</label>
+                                <input type="text" name="idade" class="input-field">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Email</label>
+                                <input type="text" name="email" class="input-field">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Celular - WhatsApp</label>
+                                <input type="text" name="celular" class="input-field">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">Posição que joga </label>
+                                <input type="text" name="posicao" class="input-field">
+                            </div>
+                            <div>
+                                <label for="" class="input-label">OBS</label>
+                                <textarea rows="3" name="obs" rows="10" class="input-field"></textarea>
+                            </div>
+                       </div>
+                       <input type="submit" value="salvar" class="btn btn-sucess">
+                       <input type="reset" hidden>
+                   </form>
+               </section>
+
             <section id="historico" class="gap box">
                 <header class="gap-bottom">
-                    <h5>Histórico</h5>
+                    <h5>Financeiro</h5>
                     <div class="text-right modalidade-lista grid-historico">
                         <select name="mes" id="busca-os-mes" onchange="busca_os_contratante()"  class="input-field"></select>
                         <select name="status_pagamento" id="busca-os-status" onchange="busca_os_contratante()"  class="input-field"></select>
@@ -1089,7 +1113,7 @@
                             <th>Telefone</th>
                             <th>Status compra</th>
                             <th>Origem</th>
-                            <th>Contratacao</th>
+                            <th>Contratação</th>
                             <th width="50">Valor</th>
                             <th width="50"></th>
                         </tr>
@@ -1185,7 +1209,7 @@
                         </label>
                 </template>
                 <div class="legendas gap-top ">
-                    <div></div>
+                    <div><a id="editar_quadra__agenda" href="#quadra-nova" class="btn btn-sucess">+ Adicionar Horário</a></div>
                     <div></div>
                     <div class="text-right">jogando agora</div> <span class="legenda lg-now"></span>
                     <div class="text-right">livre</div>  <span class="legenda lg-livre"></span>
@@ -1220,8 +1244,8 @@
                 <input type="radio" name="escolha-cad" id="cad-create" hidden>
                 <span class="cad cad-change">
                     <span class="grid-2 grid-gap">
-                        <label for="cad-create" class="btn text-center">Cadastrar capitão</label>
-                        <label for="cad-search" class="btn btn-sucess text-center">Buscar capitão</label>
+                        <label for="cad-create" class="btn text-center">Cadastrar Contratante</label>
+                        <label for="cad-search" class="btn btn-sucess text-center">Buscar Contratante</label>
                     </span>
                 </span>
                 <span class="cad cad-create">
@@ -1234,9 +1258,9 @@
                         <input type="email" class="input-field" name="email" required>
                         <label for="" class="input-label">Senha</label>
                         <input type="password" class="input-field" name="pass" required>
+                        <label for="cad-change">Voltar</label>
                         <input type="submit" class="btn btn-sucess text-center" value="Cadastrar">
                         <input type="reset" hidden>
-                        <label for="cad-change">Voltar</label>
                     </form>
                 </span>
                 <span class="cad cad-search" >
@@ -1272,8 +1296,8 @@
                         <option value="1">Diária</option>
                         <option value="2">Mensal</option>
                     </select>
-                    <input type="submit" value="criar reserva" class="btn btn-sucess"> 
                     <label for="cad-change">Voltar</label>
+                    <input type="submit" value="criar reserva" class="btn btn-sucess"> 
                 </form>
             </div>
         </div>
@@ -1289,7 +1313,7 @@
                     <span id="ocupado_data">00/00/000</span>
                     <span id="ocupado_horario">14:00 - 15:00</span>
                 </span>
-                <p><b>Nome</b>: <span id="v-ocupado-nome"></span></p>
+                <p><b>Nome/Contrante</b>: <span id="v-ocupado-nome"></span></p>
                 <p><b>Telefone</b>: <span id="v-ocupado-telefone"></span></p>
                 <p><b>Tipo</b>: <span id="v-ocupado-contratacao"></span></p>
                 <p><b>Status pagamento</b>: <span id="v-ocupado-pagamento"></span></p>                              

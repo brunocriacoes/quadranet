@@ -154,8 +154,6 @@ function hoje( day = '' ) {
 
 function mudar_data( e ) {
     day = e.value;
-    query("#reserva_data").innerHTML = day.split('-').reverse().join('/');
-    query("#ocupado_data").innerHTML = day.split('-').reverse().join('/');
     edita_quadra( quadra_sisten );
 }
 
@@ -203,10 +201,12 @@ function edita_quadra( id ) {
     query('#agenda_contador span').innerHTML = 0;   
     horario = [];
     let tmp_quadra = vio.quadra || []
-    tmp_quadra     = tmp_quadra[0] || {};
+    tmp_quadra     = tmp_quadra.find( q => q.id == id );
 
     query("#reserva_quadra").innerHTML = tmp_quadra.nome;
     query("#ocupado_quadra").innerHTML = tmp_quadra.nome;
+
+    query("#editar_quadra__agenda").onclick = editar( 'quadra', `${id}`, 'quadra_nova__form', 'dash.html#quadra-nova' );
 
     quadra_sisten = id || tmp_quadra.id || '';
     let data_now  = hoje( day.replace(/\-/gi, '/') );
@@ -559,22 +559,24 @@ function save_horario( elemento, id ) {
 }
 
 function gravar_horario( id ) {
-    horario.forEach( x => {
-        let obj = {
-            id: x.id,
-            quadra: id,
-            inicio: x.inicio,
-            final: x.final,
-            status: 1,
-            ativo: 1
-        };
-        post_api( 'horario', obj, z => {
-            let horarios =  vio.horario || [];
-            horarios = horarios.filter( x => z.id  != x.id  );
-            horarios.push( z );
-            vio.horario = horarios;
-        } );
-    } );
+    if( id.length < 36 ) {
+        horario.forEach( x => {
+            let obj = {
+                id: x.id,
+                quadra: id,
+                inicio: x.inicio,
+                final: x.final,
+                status: 1,
+                ativo: 1
+            };
+            post_api( 'horario', obj, z => {
+                let horarios =  vio.horario || [];
+                horarios = horarios.filter( x => z.id  != x.id  );
+                horarios.push( z );
+                vio.horario = horarios;
+            } );
+        } );        
+    }
 }
 function editar_horarios( id ) {
     let times =  vio.horario || [];
@@ -592,10 +594,10 @@ function click( id , id_2 = null ) {
 }
 
 function busca_capiao( e ) {
-    let valor = e.value;
+    let valor = e.value.toLowerCase();
     let arr  = vio._user;
     arr      = arr.filter( x => {
-        if( valor != '' && x.nome.indexOf( valor ) != -1  ) {
+        if( valor != '' && x.nome.toLowerCase().indexOf( valor ) != -1  ) {
             return true;
         } else {
             return  false;
@@ -627,6 +629,8 @@ function set_quadra_contratar( id ) {
     let horario = id.substr(11,5).replace('-', ':') + " - " + id.substr(17,5).replace('-', ':');
     query("#reserva_horario").innerHTML = horario;
     query("#ocupado_horario").innerHTML = horario;
+    query("#reserva_data").innerHTML = id.substr( 0,10 ).split('-').reverse().join('/');
+    query("#ocupado_data").innerHTML = id.substr( 0,10 ).split('-').reverse().join('/');
 }
 
 var _csv = [];

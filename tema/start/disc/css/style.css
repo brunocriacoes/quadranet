@@ -1560,7 +1560,7 @@ iframe {
     color: #fff;
 }
 
-.btn__cart__finalizar {
+.btn__cart__finalizar, .btn__sucesso_cadastro {
     background-color: var(--sucess);
     color: #fff;
 }
@@ -1573,4 +1573,18 @@ iframe {
 .lista__espera_img {
     width: 700px;
     height: 250px;
+}
+
+.field__cadastro_nome {
+    width: 100% !important;
+}
+
+#img_pague {
+    width: 202px !important;
+    margin: 15px;
+}
+
+.grid__bottom_finalizar {
+    display: grid;
+    justify-items: center
 }

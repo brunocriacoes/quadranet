@@ -4,27 +4,29 @@
 <section id="me-cadastrar">
     <form action="javascript:void(0)" method="POST" onsubmit="meCadastrar()" id="formulario_me-cadastrar">
         <h2 class="text-center">Cadastro</h2>
-        <div class="grid-3">
+        <div class="grid-2">
             <select class="field" name="pessoa">
                 <option value="0">Pessoa Fisica</option>
                 <option value="1">Pessoa Jurídica</option>
             </select>
-            <input type="text" class="field" placeholder="Nome Completo" name="nome" required>
+            <input type="text" class="field field__cadastro_nome" placeholder="Nome Completo" name="nome" required>
+        </div>
+        <div class="grid-3">
             <input type="email" class="field" placeholder="Email" name="email" required>
             <input type="text" class="field" placeholder="CPF/CNPJ" name="cpf_cnpj" required>
-            <input type="text" class="field" placeholder="CEP" onblur="query_cep( this, 'formulario_me-cadastrar' )" name="cep" required>
+            <input type="text" class="field" placeholder="CEP" onblur="query_cep( this, 'formulario_me-cadastrar' )"
+                name="cep" required>
             <input type="text" class="field" placeholder="Estado" name="estado" disabled required>
             <input type="text" class="field" placeholder="Cidade" name="cidade" disabled required>
             <input type="text" class="field" placeholder="Bairro" name="bairro" required>
             <input type="text" class="field" placeholder="Rua" name="rua" required>
             <input type="text" class="field" placeholder="Número" name="numero" required>
+            <input type="tel" class="field" name="whatsapp" placeholder="Celular (WhatsApp)" required>
             <input type="password" class="field" placeholder="Senha" name="password" required>
             <input type="password" class="field" placeholder="Confirmar Senha" name="pass" required>
-            <input type="tel" class="field" name="whatsapp" placeholder="Whatsapp" required>
         </div>
         <div>
-            <input type="submit" value="me cadastrar" class="btn btn-sucess btn-center">
-            <a href="#entrar" class="link link-small text-center gap-top">Entrar</a>
+            <input type="submit" value="Enviar Cadastro" class="btn__bombom btn__sucesso_cadastro">
         </div>
     </form>
 </section>

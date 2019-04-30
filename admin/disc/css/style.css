@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5, h6 {
 .ico-theme      { background-image: url( '../ico/theme.png' ); }
 .ico-sistema    { background-image: url( '../ico/website.png' ); }
 .ico-user       { background-image: url( '../ico/user.png' ); }
-.ico-plus       { background-image: url( '../ico/plus.png' ); background-size: 17px; background-position: center center; }
+.ico-plus       { background-image: url( '../ico/plus.png' ); background-size: 17px; background-position: center center; width: 30px; height: 30px; }
 .ico-plus:hover { background-color: #0000ff; }
 .ico-close      { background-image: url( '../ico/x.png' ); }
 .ico-pass       { background-image: url( '../ico/key.png' ); }
@@ -137,6 +137,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 4px;
     cursor: pointer;
     filter: saturate(70%);
+    text-decoration: none;
 }
 
 .btn:hover {
@@ -501,7 +502,7 @@ option {
 }
 .pop-box div {
     display: block;
-    width: 500px;
+    width: 650px;
     max-width: 90vw;
     background: #FFF;
     margin: 0 auto;
@@ -523,6 +524,10 @@ option {
 #cad-change:checked ~ .cad-change,
 #cad-create:checked ~ .cad-create{
     display: block;
+}
+[for="cad-change"] {
+    cursor: pointer !important;
+    margin-right: 10px;
 }
 .login {
     font-family: var(--font);
@@ -690,7 +695,7 @@ option {
 }
 .modalidade-lista {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) 40px;
     grid-gap: 30px;
 }
 .modalidade-lista input {
@@ -793,4 +798,8 @@ label img {
 }
 .ico-trash:hover {
     filter: opacity(.7);
+}
+
+.btn__sucesso_quadra {
+    margin-top: 20px;
 }
