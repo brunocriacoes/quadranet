@@ -505,7 +505,7 @@ async function buy() {
         } else {
             btn.click();
             query('#img_pague').style.display = 'none';
-            localStorage.setItem('cart', '[]');
+            sessionStorage.setItem('cart', '[]');
         }
         query('#lds-ring').style.display = 'inline-block';
         query('#lds-ring').style.display = 'none';
@@ -894,7 +894,7 @@ function gerarPagamento(id) {
 }
 
 function limparCarrinho() {
-    localStorage.removeItem('cart');
+    sessionStorage.removeItem('cart');
     window.location.href = '';
 }
 

@@ -72,7 +72,7 @@ fetch(app)
             }
         });
 
-        let items = localStorage.cart;
+        let items = sessionStorage.cart;
         items = JSON.parse(items);
         vio.cart = items;
 
@@ -217,8 +217,3 @@ if (linkAtivo) {
         e.setAttribute('class', 'link-menu ativo');
     });
 }
-
-window.addEventListener("close", function (event) {
-    localStorage.removeItem('cart');
-    event.preventDefault();
-}, false)

@@ -1,5 +1,5 @@
-if (localStorage.cart == undefined) {
-    localStorage.setItem('cart', '[]');
+if (sessionStorage.cart == undefined) {
+    sessionStorage.setItem('cart', '[]');
 }
 
 function addCart(obj) {
@@ -15,12 +15,12 @@ function addCart(obj) {
 }
 
 function removeItem(id) {
-    let items = localStorage.cart;
+    let items = sessionStorage.cart;
     items = JSON.parse(items);
     let indice = items.findIndex(x => { return x.id == id });
     if (items[indice] > 1) {
         let remove = items;
-        localStorage.cart = JSON.stringify(remove);
+        sessionStorage.cart = JSON.stringify(remove);
         vio.cart = remove;
     } else {
         let remove = items.filter(y => {
@@ -29,15 +29,15 @@ function removeItem(id) {
             }
             return true;
         });
-        localStorage.cart = JSON.stringify(remove);
+        sessionStorage.cart = JSON.stringify(remove);
         vio.cart = remove;
     }
 }
 
 function get_cart() {
-    let cart = window.localStorage.cart || '[]';
+    let cart = window.sessionStorage.cart || '[]';
     return JSON.parse(cart);
 }
 function save_cart(obj) {
-    window.localStorage.setItem('cart', JSON.stringify(obj));
+    window.sessionStorage.setItem('cart', JSON.stringify(obj));
 }
