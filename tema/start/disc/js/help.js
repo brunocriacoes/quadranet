@@ -242,7 +242,16 @@ function set_date(now) {
             });
             let cont = 0;
             document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios / Dia da Semana</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).join('');
-            document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => `<label id="lb_${a}" onclick="setHorario( '${a}' )" for="pop-agenda-livre"><div class="agenda-disponivel" id="agenda_${a}">Disponivel</div></label>`).join('');
+            document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => {
+                let onclick = '';
+                let classe  = '';
+                if( diasAnteriores( a.substr(0,10) ) ) {
+                    onclick = `onclick="setHorario( '${a}' )" for="pop-agenda-livre"`;
+                }else{
+                    classe = 'disabled';
+                }
+                return `<label id="lb_${a}" ${classe} ${onclick || ''} ><div class="agenda-disponivel" id="agenda_${a}">Disponivel</div></label>`;
+            }).join('');
             document.querySelector('#agenda_semana').innerHTML = week.map(a => `<div id="lb_A-${cont++}-">${a.split('@')[0].split('-').reverse().join('/')}</div>`).join('');
             rese.forEach(r => {
                 if (document.querySelector(`#agenda_${r.id}`)) {
@@ -609,19 +618,23 @@ function duasCasas(data) {
 }
 
 function semana(data) {
-    let result = ['2019-03-31', '2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04', '2019-04-05', '2019-04-06'];
+    let result = [];
     let hoje = new Date(data);
     let dia = (hoje.getDay() == 6) ? 0 : hoje.getDay() + 1;
     let [ano, mes, diaMes] = data.split('-');
     let quandidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30];
     let futuro = +diaMes;
-    let passado = (+diaMes - 1 == 0) ? quandidade_dias_mes[+mes - 1] - dia + 1 : +diaMes - dia;
-    let mesPassado = (+diaMes - 1 == 0) ? +mes - 1 : +mes;
-    for (let index = 0; index < dia; index++) {
-        result[index] = `${ano}-${duasCasas(mesPassado)}-${duasCasas(passado++)}@${index}`;
+    let passado = +diaMes - 1;
+    let mesPassado = +mes;
+    for (let index = dia - 1; index > -1; index--) {
+        if(passado <= 1) {
+            mesPassado = +mes - 1;
+        }
+        passado = (passado <= 0) ? quandidade_dias_mes[+mesPassado]: passado;
+        result[index] = `${ano}-${duasCasas(mesPassado)}-${duasCasas(passado)}@${index}`;
+        passado--;
     }
     for (let index = dia; index < 7; index++) {
-        futuro++;
         if (futuro >= quandidade_dias_mes[+mes]) {
             futuro = 0;
             mes = +mes + 1;
@@ -631,8 +644,9 @@ function semana(data) {
             ano++;
         }
         result[index] = `${ano}-${duasCasas(mes)}-${duasCasas(futuro)}@${index}`;
+        futuro++;
     }
-
+    
     result[dia] = data + `@${dia}`;
     return result;
 }
@@ -882,4 +896,18 @@ function gerarPagamento(id) {
 function limparCarrinho() {
     localStorage.removeItem('cart');
     window.location.href = '';
+}
+
+function diasAnteriores( data ) {
+    let dataConvertida = new Date(data);
+    let dataBombom = dataConvertida.getTime();
+
+    let dataHoje = new Date(hoje().data_sisten);
+    let dataHojeConver = dataHoje.getTime();
+
+    if( dataBombom >= dataHojeConver ) {
+        return true;
+    }else{
+        return false;
+    }
 }

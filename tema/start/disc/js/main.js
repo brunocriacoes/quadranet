@@ -50,7 +50,16 @@ fetch(app)
                 let cont = 0;
                 document.querySelector('#data__atual').value = dataSemana;
                 document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horários/Dias</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).sort().join('');
-                document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => `<label id="lb_${a}" onclick="setHorario( '${a}' )" for="pop-agenda-livre"><div class="agenda-disponivel" id="agenda_${a}">Disponivel</div></label>`).join('');
+                document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => {
+                    let onclick = '';
+                    let classe = '';
+                    if (diasAnteriores(a.substr(0, 10))) {
+                        onclick = `onclick="setHorario( '${a}' )" for="pop-agenda-livre"`;
+                    } else {
+                        classe = 'disabled';
+                    }
+                    return `<label id="lb_${a}" ${classe} ${onclick || ''} ><div class="agenda-disponivel" id="agenda_${a}">Disponivel</div></label>`;
+                }).join('');
                 document.querySelector('#agenda_semana').innerHTML = week.map(a => `<div id="lb_A-${cont++}-">${a.split('@')[0].split('-').reverse().join('/')}</div>`).join('');
                 rese.forEach(r => {
                     if (document.querySelector(`#agenda_${r.id}`)) {
@@ -203,8 +212,13 @@ if (mobileScreen) {
 }
 
 let linkAtivo = document.querySelectorAll(`.link-menu[href="${window.location.href}"`);
-if(linkAtivo) {
-    linkAtivo.forEach( e => {
+if (linkAtivo) {
+    linkAtivo.forEach(e => {
         e.setAttribute('class', 'link-menu ativo');
-    } );
+    });
 }
+
+window.addEventListener("close", function (event) {
+    localStorage.removeItem('cart');
+    event.preventDefault();
+}, false)
