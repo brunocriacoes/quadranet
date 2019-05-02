@@ -107,6 +107,7 @@ fetch( `${app}/auth` )
 .then( x => x.json() )
 .then( x => {
     vio.usuario = x;
+    vio.auth = x;
 } );
 
 
