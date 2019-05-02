@@ -196,12 +196,20 @@ function semana( dia, data )
     semana[dia] = data;
     return semana;
 }
-
+function quadra_em_edicao( id ) {
+    queryAll(`[class*="ativa_quadra_"]`).forEach( x => x.classList.remove('ativa') );
+    let quadra_a_ativar = query(`[class*="ativa_quadra_${id}"]`);
+    if( quadra_a_ativar ) {
+        quadra_a_ativar.classList.add('ativa');
+    }
+}
 function edita_quadra( id ) {
     query('#agenda_contador span').innerHTML = 0;   
     horario = [];
-    let tmp_quadra = vio.quadra || []
-    tmp_quadra     = tmp_quadra.find( q => q.id == id );
+    let tmp_quadra  = vio.quadra || []
+    tmp_quadra      = tmp_quadra.find( q => q.id == id );
+    tmp_quadra      = tmp_quadra || vio.quadra[0];
+    quadra_em_edicao( tmp_quadra.id );
 
     query("#reserva_quadra").innerHTML = tmp_quadra.nome;
     query("#ocupado_quadra").innerHTML = tmp_quadra.nome;
@@ -525,7 +533,7 @@ function tpl_array( arr, seletor, prefix = '' )
         let html = arr.map( x => {
             x.prefix     = prefix;
             x.uri        = uri;
-            x.ativo      = x.ativo || false ? 'Sim' : 'Não';
+            x.ativo      = x.ativo == "1" ? 'Sim' : 'Não';
             let tpl_temp = tpl;
             let list     = Object.keys(x);
             for( let i = 0; i < list.length; i++) {

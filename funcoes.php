@@ -64,8 +64,8 @@ function dominio_valid() {
     if( file_exists( $file ) ) {
         $json = file_get_contents( $file );
         $json = json_decode( $json );
-        $status = $json->status ?? false;
-        if( $status ) {
+        $status = $json->ativo ?? false;
+        if( $status == "1" ) {
             return 'start';
         } else {
             return 'construcao';

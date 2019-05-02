@@ -166,6 +166,10 @@ var vio = {
         query('#dominio__table_body').innerHTML = tpl_array( arr, '#tr_default', 'dominio' );
     },
 
+    set auth(arr) {
+        _vio.auth = arr;
+        this.usuario = arr;
+    },
     set usuario(arr) {
         _vio.usuario = arr || [];
         query('#usuario__table_body').innerHTML = tpl_array( arr, '#tr_usuario', 'usuario' );
@@ -187,7 +191,7 @@ var vio = {
         query('#aside').innerHTML = quadra.map( x => {
             let modalidade = modalidades.find( z => z.id == x.modalidade  ) || {};
             return `
-                <div id="aside_quadra" class="box gap-aside text-center" onclick="edita_quadra( '${x.id}' );to('${admin}/dash.html#agenda')">
+                <div id="aside_quadra" class="ativa_quadra_${x.id} box gap-aside text-center" onclick="edita_quadra( '${x.id}' );to('${admin}/dash.html#agenda')">
                     <svg
                         xmlns:dc="http://purl.org/dc/elements/1.1/"
                         xmlns:cc="http://creativecommons.org/ns#"

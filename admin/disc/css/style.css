@@ -803,3 +803,14 @@ label img {
 .btn__sucesso_quadra {
     margin-top: 20px;
 }
+.ativa {
+    background: var(--theme) !important;
+    color: #FFF !important;
+}
+.ativa small {
+    color: #FFF !important;
+}
+.ativa svg {
+    fill: #FFF !important;
+    filter: invert(100%) grayscale(1) contrast(10);
+}
