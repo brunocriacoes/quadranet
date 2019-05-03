@@ -88,6 +88,9 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 50%;
     overflow: hidden;
 }
+[hidden] {
+    display: none !important;
+}
 .center { margin: 0 auto; }
 .theme { background-color: var(--theme); }
 .theme-text { color: var(--theme); }

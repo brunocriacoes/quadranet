@@ -85,8 +85,15 @@ fetch( `${app}/auth/?profile=${window.localStorage.token_painel||''}` )
 .then( x => x.json() )
 .then( x => {
     x.update = 1;
+    log(x)
     preencher( 'form-perfil', x );
     preencher( 'form-mudar', x );
+    if( x.admin == "2" ) {
+        let selectDominio = query('#selecionar-dominio')
+        let someneteAdmin = query("#somente-admin")
+        if( selectDominio ) { selectDominio.removeAttribute('disabled') }
+        if(someneteAdmin) { someneteAdmin.removeAttribute('hidden') }
+    }
 } );
 
 fetch( `${app}/dominio` )

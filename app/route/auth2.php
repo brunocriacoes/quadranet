@@ -12,7 +12,7 @@
         "pass"        => sha1( '123' ),
         "email"        => 'user@gmail.com',
         "id"          => sha1( 'user@gmail.com' ),
-        "admin"       => 1,
+        "admin"       => 2,
         "domain"      => 1,
         "ativo"       => 1,
         "status"      => true,
