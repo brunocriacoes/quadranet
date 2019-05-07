@@ -214,7 +214,7 @@ function edita_quadra( id ) {
     query("#reserva_quadra").innerHTML = tmp_quadra.nome;
     query("#ocupado_quadra").innerHTML = tmp_quadra.nome;
 
-    query("#editar_quadra__agenda").onclick = editar( 'quadra', `${id}`, 'quadra_nova__form', 'dash.html#quadra-nova' );
+    query("#editar_quadra__agenda").onclick = editar( 'quadra', `${id}`, 'quadra_nova__form', 'dash.html#quadra-agenda' );
 
     quadra_sisten = id || tmp_quadra.id || '';
     let data_now  = hoje( day.replace(/\-/gi, '/') );

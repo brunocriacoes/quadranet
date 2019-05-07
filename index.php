@@ -34,6 +34,11 @@
         return $x;
     }, $blog );
 
+    if( urls[0] != 'novidades' ) {
+        $blog = array_slice(array_reverse($blog ?? []),0,4);
+    }
+
+
     $quadra = $data->quadra ?? [];
     $quadra = array_map( function($x) {
         $x->resumo = substr( trim( strip_tags( $x->html ?? '' ) ), 0, 75 ) . "..."; 
