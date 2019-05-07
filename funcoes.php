@@ -76,5 +76,8 @@ function dominio_valid() {
 }
 
 function completaTitulo() {
-    return urls[0] ?? '';
+    $titulo = urls[0] ?? '';
+    $titulo = str_replace('-', ' ', $titulo);
+    $titulo = ucwords($titulo);
+    return $titulo;
 }

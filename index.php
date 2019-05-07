@@ -34,11 +34,6 @@
         return $x;
     }, $blog );
 
-    if( urls[0] != 'novidades' ) {
-        $blog = array_slice(array_reverse($blog ?? []),0,4);
-    }
-
-
     $quadra = $data->quadra ?? [];
     $quadra = array_map( function($x) {
         $x->resumo = substr( trim( strip_tags( $x->html ?? '' ) ), 0, 75 ) . "..."; 
@@ -54,8 +49,10 @@
     $footer  = get_part( 'footer' );
 
     if( empty( urls[0] ) ) {
-        $html  = get_part( 'index' );
-        $html  = $header . $html . $footer;
+        $QuadraNet = 'QuadraNet - ';
+        $blog      = array_slice(array_reverse($blog ?? []),0,4);
+        $html      = get_part( 'index' );
+        $html      = $header . $html . $footer;
 
     } else {
         $html  = get_part( urls[0] );
@@ -98,6 +95,7 @@
     
 
     $html  = str_replace( '{{uri}}', uri, $html );
+    $html  = str_replace( '{{QuadraNet}}', $QuadraNet ?? '', $html );
     $html  = str_replace( '{{completaTitulo}}', completaTitulo(), $html );
     $html  = preg_replace( '/link .*href="(?!h)/', "link rel=\"stylesheet\" href=\"{$pasta}", $html );
     $html  = preg_replace( '/src="(?!h)/', "src=\"{$pasta}", $html );

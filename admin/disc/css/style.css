@@ -817,3 +817,30 @@ label img {
     fill: #FFF !important;
     filter: invert(100%) grayscale(1) contrast(10);
 }
+.grid-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 30px;
+}
+.balanco {
+    margin-bottom: 30px;
+}
+.balanco div {
+    display: block;
+    padding: 20px;
+    text-align: center;
+    color: var(--theme);
+    background-color: #DDD;
+    border-radius: 10px;
+}
+.balanco  div b{
+    display: block;
+    font-weight: lighter;
+}
+.balanco  div strong{}
+.balanco div:nth-child(4) strong {
+    color: #C00 !important;
+}
+.balanco div:nth-child(5) strong {
+    color: #050 !important;
+}

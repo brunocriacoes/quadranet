@@ -586,6 +586,7 @@ async function post_api_form(url, id_formulario, redirect = null, reset = 0) {
         }
         if (reset == 0) {
             query(`#${id_formulario}`).reset();
+            alerta('Enviado com sucesso')
         }
 
     });

@@ -66,6 +66,11 @@ fetch( `${app}` )
         selected_dominio.selected = true;
     }
 
+    let seletor = query(`#selecionar-dominio option[value='${dominio}']`);
+    if(  seletor  ){
+        seletor.setAttribute( 'selected', '' );
+    }
+
 } );
 
 
@@ -85,7 +90,6 @@ fetch( `${app}/auth/?profile=${window.localStorage.token_painel||''}` )
 .then( x => x.json() )
 .then( x => {
     x.update = 1;
-    log(x)
     preencher( 'form-perfil', x );
     preencher( 'form-mudar', x );
     if( x.admin == "2" ) {
@@ -136,8 +140,12 @@ setInterval( x => {
 
 queryAll('.ico-plus').forEach( x => {
     x.addEventListener('click', function() {
-        let id = this.href.split('#')[1];
+        let id               = this.href.split('#')[1];
+        horario              = []
+        vio.mostrar_horarios = 1;
         reset_form( `#${id}` );      
     } );
+    let nome = x.href.split('#')[1].replace(/\-/gi,' ').toUpperCase();
+    x.setAttribute('title', `ADICIONAR ${nome}`)
 } );
 

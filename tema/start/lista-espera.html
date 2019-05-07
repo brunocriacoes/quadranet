@@ -6,7 +6,7 @@
     <p>Está procurando um time para jogar? Aqui na "NOME-ARENA" você pode se cadastrar em qualquer uma das nossas
         quadras/modalidades e aguardar para ser chamado! Faça seu cadastro abaixo e envie seus dados.</p>
 
-    <form action="javascript:void(0)" method="post" id="espera-form" class="form">
+    <form action="javascript:void(0)" method="post" id="espera-form" class="form" onsubmit="post_api_form('espera','espera-form', '#')">
         <label for="">Escolha modalidade</label>
         <div class="grid-6 modalidade-escolha">
             {{modalidade}}
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div>
-            <input type="submit" class="btn btn-sucess" value="Cadastre-se">
+            <input type="submit" class="btn__bombom btn__cart__finalizar" value="Cadastre-se">
         </div>
     </form>
 </div>

@@ -475,11 +475,11 @@
                         <div class="grid-2 grid-gap">
                             <div>
                                 <label for="" class="input-label">Cep</label>
-                                <input type="text" name="cep" class="input-field" onblur="query_cep( this, 'visual__form__contato' )" placeholder="00000-000">
+                                <input type="text" maxlength="8" name="cep" class="input-field" onblur="query_cep( this, 'visual__form__contato' )" placeholder="00000-000">
                             </div>
                             <div>
                                 <label for="" class="input-label">Rua</label>
-                                <input type="text" name="rua" class="input-field" disabled >
+                                <input type="text" name="rua" class="input-field"  >
                             </div>
                             <div>
                                 <label for="" class="input-label">Número</label>
@@ -487,7 +487,7 @@
                             </div>
                             <div>
                                 <label for="" class="input-label">Bairro</label>
-                                <input type="text" name="bairro" class="input-field" disabled>
+                                <input type="text" name="bairro" class="input-field" >
                             </div>
                             <div>
                                 <label for="" class="input-label">Cidade</label>
@@ -646,26 +646,58 @@
                     <h5>Página serviços</h5>
                 </header>
                 <form action="javascript:void(0)" id="servicos_form" onsubmit="post_api_form( 'pagina', 'servicos_form', 'dash.html#servicos', 1 )" method="POST">
-                    <input type="hidden" name="id" value="servico">
-                    <label for="" class="input-label">Titulo</label>
-                    <input type="text" name="nome" class="input-field">     
-                    <label for="" class="input-label">Descrição</label>
-                    <div class="editor-box gap-bottom">
-                        <div class="editor-nav">
-                            <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
-                            <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
-                            <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
-                            <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
-                            <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
-                            <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
-                            <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
-                            <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
+                    <div class="grid-2">
+                        <div>
+                            <input type="hidden" name="id" value="servico">
+                            <label for="" class="input-label">Titulo</label>
+                            <input type="text" name="nome" class="input-field">     
+                            <label for="" class="input-label">Descrição</label>
+                            <div class="editor-box gap-bottom">
+                                <div class="editor-nav">
+                                    <img src="disc/ico/bold.png" onclick="document.execCommand('bold');">
+                                    <img src="disc/ico/italic.png" onclick="document.execCommand('italic');">
+                                    <img src="disc/ico/underline.png" onclick="document.execCommand('underline');">
+                                    <img src="disc/ico/justifyCenter.png" onclick="document.execCommand('justifyCenter');">
+                                    <img src="disc/ico/justifyFull.png" onclick="document.execCommand('justifyFull');">
+                                    <img src="disc/ico/justifyRight.png" onclick="document.execCommand('justifyRight');">
+                                    <img src="disc/ico/justifyLeft.png" onclick="document.execCommand('justifyLeft');">
+                                    <img src="disc/ico/insertUnorderedList.png" onclick="document.execCommand('insertUnorderedList');">
+                                </div>
+                                <div contenteditable="true" class="editor-local"></div>
+                            </div>
+                        </div>                    
+                        <div>
+                            <label for="servico__foto_1">
+                                <img id="servico__previa_foto_1B" alt="foto_1" src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                            <div class="grid-5">
+                                <label for="servico__foto_1">
+                                    <img src="./disc/img/default.jpg" alt="foto_1" id="servico__previa_foto_1" class="responsive img-galery">
+                                </label>
+                                <label for="servico__foto_2">
+                                    <img src="./disc/img/default.jpg" alt="foto_2" id="servico__previa_foto_2" class="responsive img-galery">
+                                </label>
+                                <label for="servico__foto_3">
+                                    <img src="./disc/img/default.jpg" alt="foto_3" id="servico__previa_foto_3" class="responsive img-galery">
+                                </label>
+                                <label for="servico__foto_4">
+                                    <img src="./disc/img/default.jpg" alt="foto_4" id="servico__previa_foto_4" class="responsive img-galery">
+                                </label>
+                                <label for="servico__foto_5">
+                                    <img src="./disc/img/default.jpg" alt="foto_5" id="servico__previa_foto_5" class="responsive img-galery">
+                                </label>
+                            </div>
                         </div>
-                        <div contenteditable="true" class="editor-local"></div>
+                        
                     </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                     <input type="reset" hidden>
                 </form>
+                <input id="servico__foto_1" type="file" name="foto_1" onchange="previwew_img( 'servico__foto_1', 'servico__previa_foto_1' );previwew_img( 'servico__foto_1', 'servico__previa_foto_1B' )" hidden>
+                <input id="servico__foto_2" type="file" name="foto_2" onchange="previwew_img( 'servico__foto_2', 'servico__previa_foto_2' )" hidden>
+                <input id="servico__foto_3" type="file" name="foto_3" onchange="previwew_img( 'servico__foto_3', 'servico__previa_foto_3' )" hidden>
+                <input id="servico__foto_4" type="file" name="foto_4" onchange="previwew_img( 'servico__foto_4', 'servico__previa_foto_4' )" hidden>
+                <input id="servico__foto_5" type="file" name="foto_5" onchange="previwew_img( 'servico__foto_5', 'servico__previa_foto_5' )" hidden>
             </section>
 
             <section id="modalidade" class="gap box">
@@ -1106,6 +1138,28 @@
                         <img src="disc/ico/download.png" onclick="dowload_csv(  _csv, 'lista.csv' )">
                     </div>
                 </header>
+                <div class="grid-5 balanco">
+                    <div>
+                        <b>Total</b>
+                        <strong id="">R$ 500,00</strong>
+                    </div>
+                    <div>
+                        <b>Mensalista</b>
+                        <strong id="">R$ 200,00</strong>
+                    </div>
+                    <div>
+                        <b>Avulso</b>
+                        <strong id=""> R$ 700,00 </strong>
+                    </div>
+                    <div>
+                        <b>Valor Devido</b>
+                        <strong id=""> R$ 200,00</strong>
+                    </div>
+                    <div>
+                        <b>Valor Pago</b>
+                        <strong id="">R$ 500,00</strong>
+                    </div>
+                </div>
                 <table class="table">
                     <thead>
                         <tr>
@@ -1128,8 +1182,8 @@
                             <td>{{tipocontratacao}}</td>
                             <td>{{valor}}</td>
                             <td>
-                                <a href="?id={{id}}#os">
-                                    <img onclick="editar( 'reservas', '{{id}}', 'form-os', 'dash.html#os' )" src="./disc/ico/edit.png" class="ico-table">
+                                <a href="?id={{id}}#os" target="_blank">
+                                    <img  src="./disc/ico/edit.png" class="ico-table">
                                 </a>
                             </td>
                         </tr>

@@ -208,18 +208,18 @@ function edita_quadra( id ) {
     horario = [];
     let tmp_quadra  = vio.quadra || []
     tmp_quadra      = tmp_quadra.find( q => q.id == id );
-    tmp_quadra      = tmp_quadra || vio.quadra[0];
-    quadra_em_edicao( tmp_quadra.id );
+    // tmp_quadra      = tmp_quadra || vio.quadra[0] || [];
+    tmp_quadra      = tmp_quadra || {};
+    quadra_em_edicao( tmp_quadra.id || '');
 
     query("#reserva_quadra").innerHTML = tmp_quadra.nome;
     query("#ocupado_quadra").innerHTML = tmp_quadra.nome;
 
-    query("#editar_quadra__agenda").onclick = editar( 'quadra', `${id}`, 'quadra_nova__form', 'dash.html#quadra-agenda' );
+    query("#editar_quadra__agenda").setAttribute( 'onclick', `editar( 'quadra', '${id}', 'quadra_nova__form', 'dash.html#quadra-agenda' )` );
 
     quadra_sisten = id || tmp_quadra.id || '';
     let data_now  = hoje( day.replace(/\-/gi, '/') );
     let horario_temp = editar_agenda( id );
-    // to(`${admin}/dash.html#agenda`);
     let quadra     = vio.quadra || [];
     quadra         = quadra.find( x => x.id == id ) || '';
     let modalidade = vio.modalidade || [];
@@ -360,8 +360,10 @@ function preencher( seletor, objeto )
                     temp_element.setAttribute('selected','');
                 }
             break;
-            case 'textarea':                
-                formulario[i].innerHTML = objeto[tmp_name] || '';
+            case 'textarea': 
+                let texto = objeto[tmp_name] || ''
+                texto     = texto.replace(/\\/gi, '')       
+                formulario[i].innerHTML = texto;
             break;        
             case 'file':                
             case 'submit':                
@@ -669,8 +671,9 @@ function busca_os_contratante() {
 }
 
 function query_cep( elemento, seletor = null ) {
-    let cep   = elemento.value;
+    let cep   = elemento.value || '';
     cep       = cep.replace( /\-/gi, '' );
+    
     let total = cep.length;
     if( total == 8 ) {
         fetch( `https://viacep.com.br/ws/${cep}/json/` )
@@ -678,16 +681,18 @@ function query_cep( elemento, seletor = null ) {
         .then( x => {
             let obj = x;
             obj.id = 'endereco';
-            obj.rua = x.logradouro;
-            obj.cidade = x.localidade;
-            obj.estado = x.uf;
+            obj.rua = x.logradouro || '';
+            obj.bairro = x.bairro || '';
+            obj.cidade = x.localidade || '';
+            obj.estado = x.uf || '';
             if( seletor == null ) {
                 preencher( 'form-endereco', { ...edit, ...obj, id: edit.id } );
             } else {
                 let form = form_data( seletor );
-                preencher( seletor, { ...edit, ...obj, id: edit.id, ...form } );
+                preencher( seletor, { ...form, ...edit, ...obj, id: edit.id  } );
             }
-        } );
+        } )
+        
     }
 }
 
