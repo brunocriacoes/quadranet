@@ -306,17 +306,29 @@ h1, h2, h3, h4, h5, h6 {
 #iten-1:checked ~ .banner-inner .banner-iten:nth-child(1),
 #iten-2:checked ~ .banner-inner .banner-iten:nth-child(2),
 #iten-3:checked ~ .banner-inner .banner-iten:nth-child(3),
-#iten-1:checked ~ .banner-inner .banner-iten:nth-child(4),
-#iten-2:checked ~ .banner-inner .banner-iten:nth-child(5),
-#iten-3:checked ~ .banner-inner .banner-iten:nth-child(6){
+#iten-4:checked ~ .banner-inner .banner-iten:nth-child(4),
+#iten-5:checked ~ .banner-inner .banner-iten:nth-child(5),
+#iten-6:checked ~ .banner-inner .banner-iten:nth-child(6),
+#iten-7:checked ~ .banner-inner .banner-iten:nth-child(7),
+#iten-8:checked ~ .banner-inner .banner-iten:nth-child(8),
+#iten-9:checked ~ .banner-inner .banner-iten:nth-child(9),
+#iten-10:checked ~ .banner-inner .banner-iten:nth-child(10),
+#iten-11:checked ~ .banner-inner .banner-iten:nth-child(11),
+#iten-12:checked ~ .banner-inner .banner-iten:nth-child(12){
     left: 0%;
 }
 #iten-1:checked ~ .banner-boletes label:nth-child(1),
 #iten-2:checked ~ .banner-boletes label:nth-child(2),
 #iten-3:checked ~ .banner-boletes label:nth-child(3),
-#iten-1:checked ~ .banner-boletes label:nth-child(4),
-#iten-2:checked ~ .banner-boletes label:nth-child(5),
-#iten-3:checked ~ .banner-boletes label:nth-child(6){
+#iten-4:checked ~ .banner-boletes label:nth-child(4),
+#iten-5:checked ~ .banner-boletes label:nth-child(5),
+#iten-6:checked ~ .banner-boletes label:nth-child(6),
+#iten-7:checked ~ .banner-boletes label:nth-child(7),
+#iten-8:checked ~ .banner-boletes label:nth-child(8),
+#iten-9:checked ~ .banner-boletes label:nth-child(9),
+#iten-10:checked ~ .banner-boletes label:nth-child(10),
+#iten-11:checked ~ .banner-boletes label:nth-child(11),
+#iten-12:checked ~ .banner-boletes label:nth-child(12){
     background: #0f1;
 }
 

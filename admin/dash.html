@@ -15,12 +15,12 @@
                 <img src="./disc/logo/logo-header-black.png" class="logo">
             </a>
             <div class="text-center select_domain">
-                <select id="selecionar-dominio" name="dominio" class="set-domain" onchange="set_domain( this )"></select>
+                <select id="selecionar-dominio" disabled name="dominio" class="set-domain" onchange="set_domain( this )"></select>
             </div>
             <div class="text-right text-mobol-center">
                 <label for="menu_quadra" class="ico ico-quadra invert" title="quadra"></label>
                 <label for="menu_theme" class="ico ico-theme invert" title="visual site"></label>
-                <label for="menu_sistema" class="ico ico-sistema invert" title="sistema"></label>
+                <label for="menu_sistema" id="somente-admin" hidden class="ico ico-sistema invert" title="sistema"></label>
                 <label for="menu_user" class="ico ico-user invert" title="perfil"></label>
             </div>
         </header>
