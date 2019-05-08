@@ -323,18 +323,30 @@ function pop_ocupado( id ) {
     let horario = id.substr(11,5).replace('-', ':') + " - " + id.substr(17,5).replace('-', ':');
     query("#ocupado_horario").innerHTML = horario;
     let reserva = vio.reservas.find( x => x.id == id );
-    query("#v-ocupado-nome").innerHTML = reserva.usuario_nome;
-    query("#v-ocupado-telefone").innerHTML = reserva.usuario_whatsapp;
+    query("#v-ocupado-nome").innerHTML = reserva.contratante_nome;
+    query("#v-ocupado-telefone").innerHTML = reserva.contratante_Id;
     query("#v-ocupado-contratacao").innerHTML = reserva.tipocontratacao == "1" ? "Avulso" : "mensal"; 
-    query("#v-ocupado-pagamento").innerHTML = status_compra.find( x => x.id == reserva.status_compra ).nome;
-    query("#v-ocupado-link").href = `${uri}/admin/dash.html?id=${id}#os`;
+    query("#v-ocupado-pagamento").innerHTML = reserva.pagamento;
+    query("#v-ocupado-link").setAttribute('href',`${uri}/admin/dash.html?id=${id}#os` );
 }
 
-const trash = ( url, id  ) => {
+const trash = ( url, id, fnc = nul  ) => {
+    let elemento = vio[url] || []
+    elemento     = elemento.find( x => x.id == id )
+    query("#deletar_nome").innerHTML = elemento.nome || 'Reserva'
+    query("#confirmar_delete").click()
+    query("#btn_deletar_confirmar").setAttribute('onclick', `trashConfirmado( '${url}', '${id}', ${fnc || null} )`)
+};
+
+function trashConfirmado( url, id, fnc = null ) {
     post_api( url, { 'id': id, status: 0 }, x => {
         vio[url] = _vio[url].filter( x => id != x.id );
+        if( fnc != null ) {
+            fnc()
+        }
     } )
-};
+    alerta('Removido com sucesso')
+}
 
 function preencher( seletor, objeto )
 {
@@ -606,13 +618,15 @@ function click( id , id_2 = null ) {
 function busca_capiao( e ) {
     let valor = e.value.toLowerCase();
     let arr  = vio._user;
-    arr      = arr.filter( x => {
-        if( valor != '' && x.nome.toLowerCase().indexOf( valor ) != -1  ) {
-            return true;
-        } else {
-            return  false;
-        }
-    } );
+    if( valor.length > 0 ) {
+        arr      = arr.filter( x => {
+            if( valor != '' && x.nome.toLowerCase().indexOf( valor ) != -1  ) {
+                return true;
+            } else {
+                return  false;
+            }
+        } );
+    }
     let html = arr.map( x => `
         <tr>
             <td>${x.nome}</td>
@@ -689,7 +703,7 @@ function query_cep( elemento, seletor = null ) {
                 preencher( 'form-endereco', { ...edit, ...obj, id: edit.id } );
             } else {
                 let form = form_data( seletor );
-                preencher( seletor, { ...form, ...edit, ...obj, id: edit.id  } );
+                preencher( seletor, { ...form, ...edit, ...obj, id: form.id  } );
             }
         } )
         
@@ -771,4 +785,29 @@ function reset_form( seletor ) {
     queryAll(`${seletor} img:not([src*="/ico"])`).forEach( x => { x.src = 'disc/img/default.jpg'; } );
     let id_post = query( `${seletor} [name="id"]` );
     if(id_post) { id_post.value = ""; }     
+}
+
+function saveSession( nomeSession ) {
+    localStorage.setItem( 'sessionSite', nomeSession )
+}
+
+function evidenciaSession() {
+    let paginaAtual = window.location.hash
+    let listaLinks  = queryAll( "#nav a" ) 
+    listaLinks.forEach( x => {
+        x.classList.remove('ativo')
+    } )
+    let sessionSite = query( `#nav [href="${paginaAtual}"]` )
+    if( sessionSite ) {
+        sessionSite.classList.add( 'ativo' )
+    }
+}
+
+function removerReserva() {
+    let link = query("#remover_reserva")
+    let id   = request.id || ''
+    if( id ) {
+        link.setAttribute('onclick', `trash( 'reservas', '${id}', () => {window.close()} )`)
+    }
+    log(id)
 }

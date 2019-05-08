@@ -3,8 +3,10 @@
 window.onpopstate = function() {
     // search = params();
     // page   = window.location.hash.replace('#', '');
+    evidenciaSession()
 }
 
+evidenciaSession()
 
 fetch( `${app}` )
 .then( j => j.json() )
@@ -148,4 +150,10 @@ queryAll('.ico-plus').forEach( x => {
     let nome = x.href.split('#')[1].replace(/\-/gi,' ').toUpperCase();
     x.setAttribute('title', `ADICIONAR ${nome}`)
 } );
+let nomeSessionSite = localStorage.sessionSite || 'menu_quadra'
+let sessaoAtiva     = query( `[for="${nomeSessionSite}"]` )
+if( sessaoAtiva ) {
+    sessaoAtiva.click()
+}
 
+removerReserva()

@@ -150,6 +150,10 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--theme);
     color: #FFF;
 }
+.btn-danger {
+    background: #C00;
+    color: #FFF;
+}
 .load {
     display: block;
     filter: opacity(.5);
@@ -164,7 +168,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 main section#agenda { display: block; }
 main section:target ~ #agenda { display: none; }
-main section { display: none; }
+main section { 
+    display: none; 
+    padding-top: 150px !important;
+    margin-bottom: 30px;
+}
+#aside {
+    padding-top: 150px !important;
+}
+main {
+    padding: 0 var(--gap);
+}
 main section:target {
     display: grid;
 }
@@ -199,6 +213,20 @@ body {
     color: #FFF;
     background-image: linear-gradient(to left, var(--theme) , #0077ff);
 }
+#header {
+    /* display: none; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+#nav {
+    /* display: none; */
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+}
 .link_menu {
     display: inline-block;
     line-height: 30px;
@@ -212,9 +240,10 @@ body {
     box-shadow: 1px 1px 0px rgba(0, 0, 0, .2);
     font-family: var(--font);
 }
+.ativo,
 .link_menu:hover {
     text-decoration: none;
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .3) !important;
 }
 .logo {
     display: inline-block;
@@ -352,9 +381,9 @@ option {
 }
 .ico-table:hover { filter: opacity(.7); }
 .search {
-    display: inline-grid;
+    display: grid;
     align-items: center;
-    grid-template-columns: 1fr 40px;
+    grid-template-columns: 1fr 40px 40px;
     border: 1px solid #DDD;
     border-radius: 40px;
     height: 40px;
@@ -843,4 +872,54 @@ label img {
 }
 .balanco div:nth-child(5) strong {
     color: #050 !important;
+}
+#confirmar_delete:checked ~ .confirmar_delete {
+    display: grid;
+}
+.confirmar_delete {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .9);
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.confirmar_delete > div {
+    display: block;
+    text-align: center;
+    background: #FFF;
+    border-radius: 5px;
+    padding: 20px;
+    width: 500px;
+    max-width: 90vw;
+}
+.confirmar_delete > div > div {
+    display: grid;
+    grid-template-columns: repeat( 2, 1fr ) !important;
+}
+.confirmar_delete label {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid var(--theme);
+    padding: 12px;
+    color: var(--theme);
+    border-radius: 5px;
+}
+.confirmar_delete label:nth-child(2) {
+    background: var(--theme);
+    color: #FFF;
+}
+.btn_novo_contratante {
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #FFF;
+    background-color: var(--theme);
+    border-radius: 50px;
 }

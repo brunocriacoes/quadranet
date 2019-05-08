@@ -18,10 +18,10 @@
                 <select id="selecionar-dominio" disabled name="dominio" class="set-domain" onchange="set_domain( this )"></select>
             </div>
             <div class="text-right text-mobol-center">
-                <label for="menu_quadra" class="ico ico-quadra invert" title="quadra"></label>
-                <label for="menu_theme" class="ico ico-theme invert" title="visual site"></label>
-                <label for="menu_sistema" id="somente-admin" hidden class="ico ico-sistema invert" title="sistema"></label>
-                <label for="menu_user" class="ico ico-user invert" title="perfil"></label>
+                <label for="menu_quadra" onclick="saveSession('menu_quadra')" class="ico ico-quadra invert" title="quadra"></label>
+                <label for="menu_theme" onclick="saveSession('menu_theme')" class="ico ico-theme invert" title="visual site"></label>
+                <label for="menu_sistema" onclick="saveSession('menu_sistema')" id="somente-admin" hidden class="ico ico-sistema invert" title="sistema"></label>
+                <label for="menu_user" onclick="saveSession('menu_user')" class="ico ico-user invert" title="perfil"></label>
             </div>
         </header>
         <nav id="nav" class="text-center gap">
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </aside>
-        <main id="main" class="gap">
+        <main id="main">
 
             <section id="perfil" class="gap box">
                  <header class="gap-bottom"> 
@@ -153,6 +153,9 @@
                     <div>
                         <input type="submit" value="salvar" class="btn btn-sucess">
                         <input type="reset" hidden>
+                    </div>
+                    <div>
+                        <span class="btn btn-danger" id="remover_reserva">Remover Reserva</span>
                     </div>
                 </form>
                 <br>
@@ -475,27 +478,27 @@
                         <div class="grid-2 grid-gap">
                             <div>
                                 <label for="" class="input-label">Cep</label>
-                                <input type="text" maxlength="8" name="cep" class="input-field" onblur="query_cep( this, 'visual__form__contato' )" placeholder="00000-000">
+                                <input type="text" maxlength="9" name="cep" class="input-field" onblur="query_cep( this, 'visual__form__contato' )" placeholder="00000-000">
                             </div>
                             <div>
                                 <label for="" class="input-label">Rua</label>
-                                <input type="text" name="rua" class="input-field"  >
+                                <input type="text" name="rua" class="input-field" required>
                             </div>
                             <div>
                                 <label for="" class="input-label">Número</label>
-                                <input type="text" name="numero" class="input-field" placeholder="0" >
+                                <input type="text" name="numero" class="input-field" placeholder="0" required>
                             </div>
                             <div>
                                 <label for="" class="input-label">Bairro</label>
-                                <input type="text" name="bairro" class="input-field" >
+                                <input type="text" name="bairro" class="input-field" required>
                             </div>
                             <div>
                                 <label for="" class="input-label">Cidade</label>
-                                <input type="text" name="cidade" class="input-field" disabled>
+                                <input type="text" name="cidade" class="input-field" required>
                             </div>
                             <div>                            
                                 <label for="" class="input-label">Estado</label>
-                                <select name="estado" class="input-field" disabled></select>
+                                <select name="estado" class="input-field" required></select>
                             </div>
                         </div>
                         <div>
@@ -775,9 +778,9 @@
                             <label for="" class="input-label">Nome *</label>
                             <input type="text" class="input-field" name="nome" required>
                             <label for="" class="input-label">Valor diária *</label>
-                            <input type="text" class="input-field" name="diaria" placeholder="0,00" required>
+                            <input type="text" class="input-field" pattern="\d{1,},\d{2}" title="ex: 5,00" name="diaria" placeholder="0,00" required>
                             <label for="" class="input-label">Valor mensalidade *</label>
-                            <input type="text" class="input-field" name="mensalidade"  placeholder="0,00" required>
+                            <input type="text" class="input-field" name="mensalidade" pattern="\d{1,},\d{2}" title="ex: 5,00" placeholder="0,00" required>
                             <label for="" class="input-label">Publicado</label>
                             <select name="ativo" class="input-field"></select>
                             <div class="editor-box gap-bottom">
@@ -898,7 +901,7 @@
                         </div>
                         <div>                            
                             <label for="" class="input-label">Razão social</label>
-                            <select name="razao" class="input-field"></select>
+                            <input type="text" class="input-field" name="razao" >
                         </div>
                     </div>
                     <div class="grid-2 grid-gap">
@@ -1296,11 +1299,27 @@
                 <input type="radio" name="escolha-cad" id="cad-search" hidden>
                 <input type="radio" name="escolha-cad" id="cad-finalizar" hidden>
                 <input type="radio" name="escolha-cad" id="cad-create" hidden>
+                
                 <span class="cad cad-change">
-                    <span class="grid-2 grid-gap">
-                        <label for="cad-create" class="btn text-center">Cadastrar Contratante</label>
-                        <label for="cad-search" class="btn btn-sucess text-center">Buscar Contratante</label>
-                    </span>
+                    <form action="javascript:void(0)" method="POST" onsubmit="query('#click_falso').click()" class="search">
+                        <input type="search" id="click_falso" onclick="busca_capiao(this)" onkeyup="busca_capiao(this)" >
+                        <label for="pop-busca-jogadores">
+                            <img src="./disc/ico/search.png">
+                        </label>
+                        <input type="submit" id="pop-busca-jogadores" hidden>
+                        <input type="reset" hidden>
+                        <label for="cad-create" title="Cadastrar Contratante" class="btn_novo_contratante">+</label>
+                    </form>                  
+                    <table class="table" width="100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th width="50"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-de-capitao"></tbody>
+                    </table>
                 </span>
                 <span class="cad cad-create">
                     <form action="javascript:click('cad-search')" id="pop-cadastrar-contratante" onsubmit="post_api_form( '_user', 'pop-cadastrar-contratante', 'dash.html#agenda')" method="POST">
@@ -1318,26 +1337,7 @@
                     </form>
                 </span>
                 <span class="cad cad-search" >
-                    <form action="javascript:void(0)" method="POST" onsubmit="" class="search">
-                        <input type="search" onkeyup="busca_capiao(this)" required>
-                        <label for="pop-busca-jogadores">
-                            <img src="./disc/ico/search.png">
-                        </label>
-                        <input type="submit" id="pop-busca-jogadores" hidden>
-                        <input type="reset" hidden>
-                    </form>                  
-                    <table class="table" width="100%">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th width="50"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="lista-de-capitao"></tbody>
-                    </table>
-                    <br>
-                    <label for="cad-change">Voltar</label>
+                    
                 </span>
                 <form action="javascript:click( 'pop-agenda-livre', 'cad-change' )" id="form-reservas" method="POST" onsubmit="post_api_form( 'reservas', 'form-reservas', 'dash.html#agenda')" class="cad cad-finalizar">
                     <input type="hidden" name="contratante" id="contratante-id-locacao">
@@ -1372,6 +1372,16 @@
                 <p><b>Tipo</b>: <span id="v-ocupado-contratacao"></span></p>
                 <p><b>Status pagamento</b>: <span id="v-ocupado-pagamento"></span></p>                              
                 <a class="btn gap-top" target="_blank" id="v-ocupado-link" href="">Editar</a>
+            </div>
+        </div>
+        <input type="checkbox" id="confirmar_delete" hidden>
+        <div class="confirmar_delete">
+            <div>
+                <p>Ao remover permanentimente <b id="deletar_nome">Elemento</b> você perderar todos os dados referente a ele</p>
+                <div class="gid-2 grid-gap">
+                    <label for="confirmar_delete">Cancelar</label>
+                    <label for="confirmar_delete" id="btn_deletar_confirmar">Confirnar</label>
+                </div>
             </div>
         </div>
         <template id="tr_usuario">
