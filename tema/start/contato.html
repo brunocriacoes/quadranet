@@ -31,12 +31,16 @@
         <br>
         <br>
         <a href="tel:{{telefone}}" class="link-contact">
+            <img src="disc/ico/phone-call.png">
+            <span id="telefone">{{telefone}}</span>
+        </a>
+        <a href="https://api.whatsapp.com/send?phone={{whatapp}}&text=o{{mensagem}}" class="link-contact">
             <img src="disc/ico/whatsapp.png">
-            <span id="whatsapp">{{telefone}}</span>
+            <span id="whatsapp">{{whatsapp}}</span>
         </a>
         <a href="mailto:{{email}}" class="link-contact">
             <img src="disc/ico/mail.png">
-            <span id="whatsapp">{{email}}</span>
+            <span id="email">{{email}}</span>
         </a>
         <br>
         {{map}}

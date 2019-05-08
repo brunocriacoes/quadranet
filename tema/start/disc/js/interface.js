@@ -44,7 +44,7 @@ var vio = {
                 <th>${ iten.nome || '...'}</th>
                 <th>${ iten.tel || '...'}</th>
                 <th>${ iten.email || '...'}</th>
-                <th><label class="select_termos"><input type="checkbox" ${ (iten.presenca == 1) ? 'checked' : ''} onclick="join_payment( '${iten.id}' )"></<label><span>Presente</span></th>
+                <th><label class="select_termos"><input type="checkbox" ${ (iten.presenca == 1) ? 'checked' : ''} onclick="join_payment( '${iten.id}' )"></<label><span>Confirmado</span></th>
                 <th><textarea rows="5" onblur="autoSave( 'time', ${iten.id}, this, 'obs' )" placeholder="Digite sua observação...">${iten.obs || ''}</textarea></th>
                 <th onclick="trash( 'time', '${iten.id}' )"><img src="${base}/tema/start/disc/ico/delete.png" class="trash"></th>
             </tr>

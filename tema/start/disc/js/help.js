@@ -217,7 +217,7 @@ function set_date(now) {
         .then(y => {
             let quadra = y.quadra.find(y => {
                 let quadraFiltrada = window.location.pathname.split('/');
-                return quadraFiltrada[2] == y.id;
+                return (quadraFiltrada[2] != undefined) ? quadraFiltrada[2] == y.id : [];
             });
             let horario = y.horario.filter(h => {
                 return h.quadra == quadra.id;
@@ -793,7 +793,7 @@ function termos() {
 
         setTimeout(() => {
             document.querySelector('#termos__checados').innerHTML = '';
-        }, 2000);
+        }, 3000);
     }
 }
 

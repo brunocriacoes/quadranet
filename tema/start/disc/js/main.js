@@ -143,21 +143,23 @@ if (document.querySelector('#historico__pagamento_jogador')) {
         });
 }
 
-fetch(`${app}/auth2?profile=${localStorage.token_site}`)
-    .then(j => j.json())
-    .then(x => {
-        fetch(`${app}/time`)
-            .then(p => p.json())
-            .then(b => {
-                vio.time = b;
-                _time = b;
-            });
-        x.pass = '';
-        x.password = '';
-        _profile = x;
-        preencher('atualizar_perfil', x);
-        preencher('mudar_senha', x);
-    });
+if( localStorage.token_site == undefined || window.location.pathname.split('/')[1] == 'perfil' || window.location.pathname.split('/')[1] == 'trocar-senha' ) {
+    fetch(`${app}/auth2?profile=${localStorage.token_site}`)
+        .then(j => j.json())
+        .then(x => {
+            fetch(`${app}/time`)
+                .then(p => p.json())
+                .then(b => {
+                    vio.time = b;
+                    _time = b;
+                });
+            x.pass = '';
+            x.password = '';
+            _profile = x;
+            preencher('atualizar_perfil', x);
+            preencher('mudar_senha', x);
+        });
+}
 
 if (document.querySelector(`#mes__compras`)) {
     let diaCompra = hoje();

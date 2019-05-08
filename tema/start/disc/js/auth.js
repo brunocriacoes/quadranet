@@ -19,17 +19,20 @@ function login(MAIL, PASS, HOF) {
         .then(j => j.json())
         .then(x => {
             HOF(x);
-            if (x.error) {
+            if (!x.login) {
                 localStorage.token_site = "";
                 localStorage.profile = "";
                 _profile = {};
-                window.location.href = "entrar";
-                alerta('Senha ou E-mail Incorretos');
+                document.querySelector('#termos__checados').innerHTML = '<span>Senha ou E-mail Errados!</span>';
+
+                setTimeout(() => {
+                    document.querySelector('#termos__checados').innerHTML = '';
+                }, 2000);
             } else {
                 localStorage.token_site = x.token;
-                if( localStorage.cart.length > 10 ) {
+                if (sessionStorage.cart.length > 10) {
                     window.location.href = `${base}/finalizar`;
-                }else{
+                } else {
                     window.location.href = `${base}/perfil`;
                 }
             }
@@ -49,6 +52,6 @@ function profile() {
     fetch(`${app}/auth2?profile=${localStorage.token_site}`)
         .then(j => j.json())
         .then(x => {
-            preencher( 'atualizar_perfil', x );
+            preencher('atualizar_perfil', x);
         });
 }
