@@ -793,7 +793,7 @@ function termos() {
 
         setTimeout(() => {
             document.querySelector('#termos__checados').innerHTML = '';
-        }, 2000);
+        }, 3000);
     }
 }
 

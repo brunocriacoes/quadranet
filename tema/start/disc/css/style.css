@@ -1369,14 +1369,12 @@ iframe {
 }
 
 #termos__checados {
-    color: #fff;
+    color: var(--danger);
     text-align: center;
 }
 
 #termos__checados span {
     padding: 14px !important;
-    background-color: var(--danger);
-    border-radius: 6px;
 }
 
 .agenda-disponivel {
