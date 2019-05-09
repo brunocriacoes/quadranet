@@ -5,7 +5,6 @@ var dataSemana = hoje().data_sisten;
 fetch(app)
     .then(x => x.json())
     .then(y => {
-        log(y);
         if (y.length == 0) {
             window.location.href = './manutencao.html';
         }
@@ -19,7 +18,6 @@ fetch(app)
             vio.historico = loop;
             dataCompra({ value: hoje().mes });
         });
-
 
         router('agenda', x => {
             if (y.reservas != undefined) {
@@ -121,7 +119,6 @@ if (document.querySelector('#historico__pagamento_jogador')) {
             let reservas = y.reservas || [];
             let os = reservas.find(x => x.id == parametro.id || '');
             let quadra = y.quadra;
-            log(os);
             document.querySelector('#cabecalho__historico_jogador').innerHTML =
                 `
                 <h2>${os.quadra_nome}</h2>

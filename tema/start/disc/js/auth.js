@@ -23,11 +23,7 @@ function login(MAIL, PASS, HOF) {
                 localStorage.token_site = "";
                 localStorage.profile = "";
                 _profile = {};
-                document.querySelector('#termos__checados').innerHTML = '<span>Senha ou E-mail Errados!</span>';
-
-                setTimeout(() => {
-                    document.querySelector('#termos__checados').innerHTML = '';
-                }, 2000);
+                msgAlerta('Senha ou E-mail Errados!');
             } else {
                 localStorage.token_site = x.token;
                 if (sessionStorage.cart.length > 10) {

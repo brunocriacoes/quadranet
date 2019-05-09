@@ -115,6 +115,14 @@ function alerta(str) {
     query('#alerta_msg').innerHTML = str;
 }
 
+function msgAlerta(msg) {
+    document.querySelector('#termos__checados').innerHTML = `<span>${msg}</span>`;
+
+    setTimeout(() => {
+        document.querySelector('#termos__checados').innerHTML = '';
+    }, 2000);
+}
+
 function closeAlerta() {
     query('#alerta').style.display = 'none';
 }
@@ -244,10 +252,10 @@ function set_date(now) {
             document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios / Dia da Semana</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).join('');
             document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => {
                 let onclick = '';
-                let classe  = '';
-                if( diasAnteriores( a.substr(0,10) ) ) {
+                let classe = '';
+                if (diasAnteriores(a.substr(0, 10))) {
                     onclick = `onclick="setHorario( '${a}' )" for="pop-agenda-livre"`;
-                }else{
+                } else {
                     classe = 'disabled';
                 }
                 return `<label id="lb_${a}" ${classe} ${onclick || ''} ><div class="agenda-disponivel" id="agenda_${a}">Disponivel</div></label>`;
@@ -402,7 +410,7 @@ function mudarSenha() {
     fetch(`${app}/auth2/?alter-pass=${form.email},${form.pass}${trol}`)
         .then(j => j.json())
         .then(x => {
-            alerta('Senha Alterada com Sucesso');
+            msgAlerta('Senha Alterada com Sucesso!');
         });
 }
 
@@ -628,16 +636,16 @@ function semana(data) {
     let passado = +diaMes - 1;
     let mesPassado = +mes;
     for (let index = dia - 1; index > -1; index--) {
-        if(passado <= 1) {
+        if (passado <= 1) {
             mesPassado = +mes - 1;
         }
-        passado = (passado <= 0) ? quandidade_dias_mes[+mesPassado]: passado;
+        passado = (passado <= 0) ? quandidade_dias_mes[+mesPassado] : passado;
         result[index] = `${ano}-${duasCasas(mesPassado)}-${duasCasas(passado)}@${index}`;
         passado--;
     }
     for (let index = dia; index < 7; index++) {
-        if (futuro >= quandidade_dias_mes[+mes]) {
-            futuro = 0;
+        if (futuro > quandidade_dias_mes[+mes]) {
+            futuro = 1;
             mes = +mes + 1;
         }
         if (mes > 12) {
@@ -647,7 +655,7 @@ function semana(data) {
         result[index] = `${ano}-${duasCasas(mes)}-${duasCasas(futuro)}@${index}`;
         futuro++;
     }
-    
+
     result[dia] = data + `@${dia}`;
     return result;
 }
@@ -789,11 +797,7 @@ function termos() {
     if (termo) {
         window.location = 'finalizar';
     } else {
-        document.querySelector('#termos__checados').innerHTML = '<span>Aceite os Termos para Continuar!</span>';
-
-        setTimeout(() => {
-            document.querySelector('#termos__checados').innerHTML = '';
-        }, 3000);
+        msgAlerta('Aceite os Termos para Continuar!');
     }
 }
 
@@ -814,7 +818,7 @@ function dataCompra(data) {
                 let imgAvulso = '';
                 return `
                     <tr>
-                        <td>${ t.data || '--/--/----'}</td>
+                        <td>${ t.id.substr(0,10).split('-').reverse().join('/') || '--/--/----'}</td>
                         <td>${t.quadra_nome}</td>
                         <td>R$ ${ t.preco || '00,00'}</td>
                         <td>${ (t.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
@@ -899,16 +903,16 @@ function limparCarrinho() {
     window.location.href = '';
 }
 
-function diasAnteriores( data ) {
+function diasAnteriores(data) {
     let dataConvertida = new Date(data);
     let dataBombom = dataConvertida.getTime();
 
     let dataHoje = new Date(hoje().data_sisten);
     let dataHojeConver = dataHoje.getTime();
 
-    if( dataBombom >= dataHojeConver ) {
+    if (dataBombom >= dataHojeConver) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
