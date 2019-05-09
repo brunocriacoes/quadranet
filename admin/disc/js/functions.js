@@ -67,6 +67,22 @@ async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
 {
     let formulario    = form_data( id_formulario );
     let send          = await sendImage();
+
+    let tipoContrataca = formulario.tipo_contatacao || 1
+    if( tipoContrataca == "2" ) {
+        let ID                 = formulario.id
+        let dataLocacao        = ID.substr(0,10) 
+        let idQuadra           = ID.substr(25,34)
+        let inicioHs           = ID.substr(11,5).replace('-', ':')
+        let finalHs            = ID.substr(17,5).replace('-', ':')
+        let pegaData           = new Date(dataLocacao)
+        let tradaDia           = pegaData.getDay() + 1;
+        tradaDia               = tradaDia < 7 ? tradaDia : 0        
+        let ListaReservaMensal = agendarMensal( tradaDia, idQuadra, inicioHs, finalHs )
+        ListaReservaMensal.forEach( idReserva => {
+            post_api( url, {...formulario, id: idReserva}, () =>{} )
+        } )
+    }
     
     formulario        = { ... formulario, ... send };
     vio.aside_quadra  = 1;
@@ -330,15 +346,34 @@ function pop_ocupado( id ) {
     query("#v-ocupado-link").setAttribute('href',`${uri}/admin/dash.html?id=${id}#os` );
 }
 
-const trash = ( url, id, fnc = nul  ) => {
+const trash = ( url, id, fnc = null  ) => {
     let elemento = vio[url] || []
-    elemento     = elemento.find( x => x.id == id )
+    elemento     = elemento.find( x => x.id == id ) || {}
     query("#deletar_nome").innerHTML = elemento.nome || 'Reserva'
     query("#confirmar_delete").click()
     query("#btn_deletar_confirmar").setAttribute('onclick', `trashConfirmado( '${url}', '${id}', ${fnc || null} )`)
 };
 
 function trashConfirmado( url, id, fnc = null ) {
+    let elemento = vio[url] || []
+    elemento     = elemento.find( x => x.id == id ) || {}
+    let tipoContratacao = elemento.tipo_contatacao || 1
+    let estaPago        = elemento.status_compra || 1
+    if( tipoContratacao == "2" && estaPago == "2" ) {
+        let listaReservas    = vio.reservas  || []
+        let reservasNaoPagas = listaReservas
+            .filter( p => p.status_compra != "2" )
+            .filter( u => u.usuario_id == elemento.usuario_id )
+        log( reservasNaoPagas )
+        reservasNaoPagas.forEach( reservas => {
+            post_api( url, { 'id': reservas.id, status: 0 }, x => {
+                vio[url] = _vio[url].filter( x => id != x.id );
+                if( fnc != null ) {
+                    fnc()
+                }
+            } )
+        } )
+    }
     post_api( url, { 'id': id, status: 0 }, x => {
         vio[url] = _vio[url].filter( x => id != x.id );
         if( fnc != null ) {
@@ -809,5 +844,36 @@ function removerReserva() {
     if( id ) {
         link.setAttribute('onclick', `trash( 'reservas', '${id}', () => {window.close()} )`)
     }
-    log(id)
 }
+
+function mensalidadeMensal(diaSemana) {
+    let data = new Date();
+    let quantidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30];
+    let mes = data.getMonth() + 1;
+    let ano = data.getFullYear();
+    let dias = [];
+    let meses = [];
+    for (let index = mes; index < 13; index++) {
+        meses.push(`${index}`);
+    }
+    meses.forEach(e => {
+        for (let index = 1; index <= quantidade_dias_mes[e]; index++) {
+            dias.push(`${ano}-${duasCasas(e)}-${duasCasas(index)}`);
+        }
+    });
+    return dias.filter(x => {
+        let d = new Date(x);
+        return d.getDay() + 1 == diaSemana;
+    });
+}
+function agendarMensal(diaSemana, idQuadra, horarioInicial, horarioFinal) {
+    let idBase = mensalidadeMensal(diaSemana);
+
+    return idBase.map(x => `${x}-${horarioInicial.replace(':', '-')}-${horarioFinal.replace(':', '-')}-${diaSemana}-${idQuadra}`);
+}
+function duasCasas(data) {
+    data = data + '';
+    return (data.length == 1) ? '0' + data : data;
+}
+
+
