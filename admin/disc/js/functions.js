@@ -173,7 +173,6 @@ function mudar_data( e ) {
     edita_quadra( quadra_sisten );
 }
 
-
 function semana( dia, data )
 {
     let data_arr            = data.split('-');
@@ -357,14 +356,16 @@ const trash = ( url, id, fnc = null  ) => {
 function trashConfirmado( url, id, fnc = null ) {
     let elemento = vio[url] || []
     elemento     = elemento.find( x => x.id == id ) || {}
+    let quadraId = elemento.id.substr(25, 32)
+    let diaSema  = elemento.id.substr(23, 1)
     let tipoContratacao = elemento.tipo_contatacao || 1
-    let estaPago        = elemento.status_compra || 1
-    if( tipoContratacao == "2" && estaPago == "2" ) {
+    if( tipoContratacao == "2" ) {
         let listaReservas    = vio.reservas  || []
         let reservasNaoPagas = listaReservas
             .filter( p => p.status_compra != "2" )
             .filter( u => u.usuario_id == elemento.usuario_id )
-        log( reservasNaoPagas )
+            .filter( u => u.id.substr(25, 32) == quadraId )
+            .filter( u => u.id.substr(23, 1) == diaSema )
         reservasNaoPagas.forEach( reservas => {
             post_api( url, { 'id': reservas.id, status: 0 }, x => {
                 vio[url] = _vio[url].filter( x => id != x.id );
@@ -866,14 +867,14 @@ function mensalidadeMensal(diaSemana) {
         return d.getDay() + 1 == diaSemana;
     });
 }
+
 function agendarMensal(diaSemana, idQuadra, horarioInicial, horarioFinal) {
     let idBase = mensalidadeMensal(diaSemana);
 
     return idBase.map(x => `${x}-${horarioInicial.replace(':', '-')}-${horarioFinal.replace(':', '-')}-${diaSemana}-${idQuadra}`);
 }
+
 function duasCasas(data) {
     data = data + '';
     return (data.length == 1) ? '0' + data : data;
 }
-
-

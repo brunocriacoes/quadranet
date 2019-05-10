@@ -35,10 +35,10 @@ fetch( `${app}` )
 
         let { reservas }    = vio;
         let parciais        = vio.parcial || [];
-        let id              = request.id;
-        let ia              = id.split('-');
-        let reserva         = reservas.find( x => x.id == id );
-        _parcial_data.total = reserva.valor;
+        let id              = request.id || '';
+        let ia              = id.split('-') || '';
+        let reserva         = reservas.find( x => x.id == id ) || {};
+        _parcial_data.total = reserva.valor || '';
 
         reservas         = reservas.map( x => {
             x.data = x.id.substr(0, 10).split('-').reverse().join('/');
