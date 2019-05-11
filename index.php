@@ -33,6 +33,7 @@
         $x->resumo = substr( trim( strip_tags( $x->html ?? '' ) ), 0, 75 ) . "..."; 
         return $x;
     }, $blog );
+    $blog = array_reverse($blog);
 
     $quadra = $data->quadra ?? [];
     $quadra = array_map( function($x) {

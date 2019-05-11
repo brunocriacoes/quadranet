@@ -2,7 +2,7 @@
 <section id="contato" class="container grid-2">
     <form action="javascript:void(0)" method="POST" class="form" id="send_mail" onsubmit="send_mail()">
         <h1>Contato</h1>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa dolorum atque consectetur quae.</p>
+        <p>Digite abaixo sua mensagem e entre em contato conosco:</p>
 
         <input type="text" id="nome" name="nome" value="" placeholder="Digite seu nome" required="required"
             class="field">
@@ -45,8 +45,6 @@
         <br>
         {{map}}
         <br>
-        {{cep}}
-        {{numero}}
-        {{estado}}
+        {{estado}}, {{cidade}}, {{bairro}}, {{rua}} - {{numero}}
     </div>
 </section>
