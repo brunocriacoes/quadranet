@@ -276,6 +276,11 @@ var vio = {
                 x.valor            = qd.mensalidade || '0,00';
             }
         } );
+        arr = arr.map( item => ( {
+            ...item,
+            tipocontratacao_print: item.tipocontratacao == "1" ? "Avulço" : "Mensal",
+            site_print: item.site == 1 ? "Site" : "Sistema"
+        } ) )
         query('#historico__table_body').innerHTML = tpl_array( arr, '#tpl_historico' );
     },
     set espera( arr ) {

@@ -119,8 +119,8 @@
             </section>
 
             <section id="os" class="gap box">
-                 <header class="gap-bottom"> 
-                    <h5>Detalhes de Locação</h5>
+                <header class="gap-bottom"> 
+                    <h5>Dados do Contratante</h5>
                 </header>
                 <form action="javascript:void(0)" id="form-locacao" onsubmit="post_api_form( 'reservas', 'form-locacao', 'dash.html#historico')" class="grid-2 grid-gap" method="POST">
                     <input type="hidden" name="id" value="">
@@ -151,31 +151,27 @@
                         <select name="status_compra" class="input-field"></select>        
                     </div>
                     <div>
-                        <input type="submit" value="salvar" class="btn btn-sucess">
+                        <input type="submit" id="salvar_detalhes_reserva" value="salvar" hidden>
                         <input type="reset" hidden>
                     </div>
-                    <div>
-                        <span class="btn btn-danger" id="remover_reserva">Remover Reserva</span>
-                    </div>
+                    
                 </form>
-                <br>
-                <hr>
-                <br>
-
-                <div class="grid-2 grid-gap">
+                <h3>Pagamento</h3>
+                <div class=" grid-gap">
                     <div>
-                        <form action="javascript:void(0)" id="form-parcial" onsubmit="add_parcial()" class="grid-2 grid-gap" method="POST">
+                        <form action="javascript:void(0)" id="form-parcial" onsubmit="add_parcial()" class="grid-3 grid-gap" method="POST">
                             <input type="hidden" name="id" value="">
                             <div>
                                 <label for="" class="input-label">Data</label>
-                                <input type="date" name="dia" value="" class="input-field" required>
+                                <input type="date" name="dia" id="dia_atual" value="" class="input-field" required>
                             </div>
                             <div>
                                 <label for="" class="input-label">Valor</label>
                                 <input type="text" name="valor" value="" class="input-field" pattern="\w{2},\w{2}" title="ex: 15,50" required>
                             </div>
                             <div>
-                                <input type="submit" value="Add valor parcial" class="btn">
+                                <label for=""></label><br>
+                                <input type="submit" value="Add Pagamento R$" class="btn">
                                 <input type="reset" hidden>
                             </div>
                         </form>
@@ -212,8 +208,10 @@
                         </table>
                     </div>
                 </div>
+                <br>
+                <br>
                 
-                <h3>Carrinho</h3>
+                <h3>RESERVA/HORÁRIO</h3>
                 <table class="table">
                     <thead>
                         <tr>
@@ -237,7 +235,7 @@
                 </table>
                 <br>
                 <hr>
-                <h3>Pagamento Jogadores</h3>
+                <h3>Lista de Jogadores</h3>
                 <table class="table">
                     <thead>
                         <tr>
@@ -257,6 +255,18 @@
                             </tr>
                     </template>
                 </table>
+                <br>
+                <br>
+                <div class="grid-2">
+                    <div>
+                        <label for="salvar_detalhes_reserva" class="btn btn-sucess">
+                            salvar
+                        </label>
+                    </div>
+                    <div>
+                        <span class="btn btn-danger" id="remover_reserva">Remover Reserva</span>
+                    </div>
+                </div>
             </section>
 
             <section id="dominio" class="gap box">
@@ -616,6 +626,9 @@
                         <div>
                             <label for="foto_blog">
                                 <img id="previa_foto_blog" alt="foto" src="./disc/img/default.jpg" class="responsive img-galery">
+                            </label>
+                            <label for="foto_blog">
+                                A imagem deve ter 500x500px RGB 72dpi
                             </label>
                         </div>
                     </div>
@@ -1126,19 +1139,41 @@
                 <header class="gap-bottom">
                     <h5>Financeiro</h5>
                     <div class="text-right modalidade-lista grid-historico">
-                        <select name="mes" id="busca-os-mes" onchange="busca_os_contratante()"  class="input-field"></select>
-                        <select name="status_pagamento" id="busca-os-status" onchange="busca_os_contratante()"  class="input-field"></select>
-                        <select name="site_sistema" id="busca-os-origen" onchange="busca_os_contratante()"  class="input-field"></select>
-                        <select name="mensal_avulso" id="busca-os-tipo-contratacao" onchange="busca_os_contratante()"  class="input-field"></select>
-                        <form action="javascript:void(0)" method="POST" onsubmit="busca_os_contratante()" class="search">
-                            <input type="search" name="s" id="termo-os-status" placeholder="Contratante" onkeyup="busca_os_contratante()" required>
-                            <label for="busca-capitao">
-                                <img src="./disc/ico/search.png">
-                            </label>
-                            <input type="submit" id="busca-capitao" onkeyup="busca_os_contratante()" hidden>
-                            <input type="reset" hidden>
-                        </form>
-                        <img src="disc/ico/download.png" onclick="dowload_csv(  _csv, 'lista.csv' )">
+                        <div>
+                            <label for="">Ano</label>
+                            <select name="anos" id="busca-os-ano" onchange="busca_os_contratante()"  class="input-field"></select>
+                        </div>
+                        <div>
+                            <label for="">Mes</label>
+                            <select name="mes" id="busca-os-mes" onchange="busca_os_contratante()"  class="input-field"></select>
+                        </div>
+                        <div>
+                            <label for="">Status</label>
+                            <select name="status_pagamento" id="busca-os-status" onchange="busca_os_contratante()"  class="input-field"></select>
+                        </div>
+                        <div>
+                            <label for="">Origem</label>
+                            <select name="site_sistema" id="busca-os-origen" onchange="busca_os_contratante()"  class="input-field"></select>
+                        </div>
+                        <div>
+                            <label for="">Contratação</label>
+                            <select name="mensal_avulso" id="busca-os-tipo-contratacao" onchange="busca_os_contratante()"  class="input-field"></select>
+                        </div>
+                        <div>
+                            <label for="">Buscar</label>
+                            <form action="javascript:void(0)" method="POST" onsubmit="busca_os_contratante()" class="search">
+                                <input type="search" name="s" id="termo-os-status" placeholder="Contratante" onkeyup="busca_os_contratante()">
+                                <label for="busca-capitao">
+                                    <img src="./disc/ico/search.png">
+                                </label>
+                                <input type="submit" id="busca-capitao" onkeyup="busca_os_contratante()" hidden>
+                                <input type="reset" hidden>
+                            </form>
+                        </div>
+                        <div>
+                            <label for="">Baixar</label>
+                            <img src="disc/ico/download.png" class="baixar" title="baixar Relatorio" onclick="baixar_balanco()">
+                        </div>
                     </div>
                 </header>
                 <div class="grid-5 balanco">
@@ -1181,11 +1216,11 @@
                             <td>{{contratante_nome}}</td>
                             <td>{{contratante_Id}}</td>
                             <td>{{pagamento}}</td>
-                            <td>{{site}}</td>
-                            <td>{{tipocontratacao}}</td>
+                            <td>{{site_print}}</td>
+                            <td>{{tipocontratacao_print}}</td>
                             <td>{{valor}}</td>
                             <td>
-                                <a href="?id={{id}}#os" target="_blank">
+                                <a href="?id={{id}}#os" title="Editar" target="_blank">
                                     <img  src="./disc/ico/edit.png" class="ico-table">
                                 </a>
                             </td>
