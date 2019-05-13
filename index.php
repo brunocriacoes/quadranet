@@ -51,7 +51,7 @@
 
     if( empty( urls[0] ) ) {
         $QuadraNet = 'QuadraNet - ';
-        $blog      = array_slice(array_reverse($blog ?? []),0,4);
+        $blog      = array_slice($blog ?? [],0,4);
         $html      = get_part( 'index' );
         $html      = $header . $html . $footer;
 
