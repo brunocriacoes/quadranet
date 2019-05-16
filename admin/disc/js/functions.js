@@ -349,7 +349,7 @@ function pop_ocupado( id ) {
 const trash = ( url, id, fnc = null  ) => {
     let elemento = vio[url] || []
     elemento     = elemento.find( x => x.id == id ) || {}
-    query("#deletar_nome").innerHTML = elemento.nome || 'Reserva'
+    query("#deletar_nome").innerHTML = elemento.nome || ''
     query("#confirmar_delete").click()
     query("#btn_deletar_confirmar").setAttribute('onclick', `trashConfirmado( '${url}', '${id}', ${fnc || null} )`)
 };
@@ -696,6 +696,7 @@ function set_quadra_contratar( id ) {
 
 var _csv = [];
 function busca_os_contratante() {
+    let ano      = query('#busca-os-ano').value;
     let termo      = query('#termo-os-status').value;
     let status     = query('#busca-os-status').value;
     let mes        = query('#busca-os-mes').value;
@@ -898,7 +899,12 @@ function baixar_balanco() {
         tipoContratacao: "MENSAL/AVULSO",
         statusCompra : "PAGO/NÃO PAGO",
         valor: "VALOR R$"
-    },...csvFiltrado, {
+    },...csvFiltrado, 
+    { pulo: ''},
+    { pulo: ''},
+    {
+        ano: "2019",
+        mes: "Janeiro",
         total: "Total R$ 500,00",
         mensalidade: "Mensalista R$ 200,00",
         avulso:"Avulso R$ 700,00",

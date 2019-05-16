@@ -43,7 +43,7 @@ fetch( `${app}` )
         reservas         = reservas.map( x => {
             x.data = x.id.substr(0, 10).split('-').reverse().join('/');
             let contratacao   = x.tipocontratacao || 1;
-            x.tipocontratacao = contratacao == 1 ? "Avulço" : "mensal";
+            x.tipocontratacao = contratacao == 1 ? "Avulso" : "Mensal";
             return x;
         } );
 

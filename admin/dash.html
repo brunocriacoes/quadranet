@@ -68,7 +68,6 @@
             </div>
         </aside>
         <main id="main">
-
             <section id="perfil" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Meu perfil</h5>
@@ -86,7 +85,6 @@
                     <input type="reset" hidden>
                 </form>
             </section>
-
             <section id="mudar-senha" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Mudar minha senha</h5>
@@ -103,7 +101,6 @@
                     <input type="reset" hidden>
                 </form>
             </section>
-
             <section id="relar-problema" class="gap box">
                  <header class="gap-bottom"> 
                     <h5>Relatar problema ou dica</h5>
@@ -117,154 +114,155 @@
                     <input type="reset" hidden>
                 </form>
             </section>
-
-            <section id="os" class="gap box">
-                <header class="gap-bottom"> 
-                    <h5>Dados do Contratante</h5>
-                </header>
-                <form action="javascript:void(0)" id="form-locacao" onsubmit="post_api_form( 'reservas', 'form-locacao', 'dash.html#historico')" class="grid-2 grid-gap" method="POST">
-                    <input type="hidden" name="id" value="">
-                    <div>
-                        <label for="" class="input-label">Usuario</label>
-                        <input type="text" name="contratante_nome" value="" class="input-field" disabled>
-                    </div>
-                    <div>
-                        <label for="" class="input-label">Email</label>
-                        <input type="text" name="contratante_email" value="" class="input-field" disabled>
-                    </div>
-                    <div>
-                        <label for="" class="input-label">Celular</label>
-                        <input type="text" name="contratante_Id" value="" class="input-field" disabled>
-                    </div>
-                    <div>
-                        <label for="" class="input-label">CPF / CNPJ</label>
-                        <input type="text" name="user_cpf_cnpj" value="" class="input-field" disabled>
-                    </div>
-                    <div>
-                        <label for="" class="input-label">OBS</label>
-                        <textarea  name="obs" rows="3" class="input-field"></textarea>     
-                    </div>
-                    <div>
-                        <label for="" class="input-label">Data</label>
-                        <input type="text" name="data" value="" class="input-field" disabled>
-                        <label for="" class="input-label">Estatus de pagamento</label>
-                        <select name="status_compra" class="input-field"></select>        
-                    </div>
-                    <div>
-                        <input type="submit" id="salvar_detalhes_reserva" value="salvar" hidden>
-                        <input type="reset" hidden>
-                    </div>
-                    
-                </form>
-                <h3>Pagamento</h3>
-                <div class=" grid-gap">
-                    <div>
-                        <form action="javascript:void(0)" id="form-parcial" onsubmit="add_parcial()" class="grid-3 grid-gap" method="POST">
-                            <input type="hidden" name="id" value="">
-                            <div>
-                                <label for="" class="input-label">Data</label>
-                                <input type="date" name="dia" id="dia_atual" value="" class="input-field" required>
-                            </div>
-                            <div>
-                                <label for="" class="input-label">Valor</label>
-                                <input type="text" name="valor" value="" class="input-field" pattern="\w{2},\w{2}" title="ex: 15,50" required>
-                            </div>
-                            <div>
-                                <label for=""></label><br>
-                                <input type="submit" value="Add Pagamento R$" class="btn">
-                                <input type="reset" hidden>
-                            </div>
-                        </form>
-                    </div>
-                    <div>
-                        <table class="table" style="width:100%">
-                            <thead>
+            <section id="os" class="grid-os">
+                <div class="gap box">
+                    <header class="gap-bottom"> 
+                        <h5>Dados do Contratante</h5>
+                    </header>
+                    <form action="javascript:void(0)" id="form-locacao" onsubmit="post_api_form( 'reservas', 'form-locacao', 'dash.html#historico')" class="grid-2 grid-gap" method="POST">
+                        <input type="hidden" name="id" value="">
+                        <div>
+                            <label for="" class="input-label">Usuario</label>
+                            <input type="text" name="contratante_nome" value="" class="input-field" disabled>
+                        </div>
+                        <div>
+                            <label for="" class="input-label">Email</label>
+                            <input type="text" name="contratante_email" value="" class="input-field" disabled>
+                        </div>
+                        <div>
+                            <label for="" class="input-label">Celular</label>
+                            <input type="text" name="contratante_Id" value="" class="input-field" disabled>
+                        </div>
+                        <div>
+                            <label for="" class="input-label">CPF / CNPJ</label>
+                            <input type="text" name="user_cpf_cnpj" value="" class="input-field" disabled>
+                        </div>
+                        <div>
+                            <label for="" class="input-label">OBS</label>
+                            <textarea  name="obs" rows="3" class="input-field"></textarea>     
+                        </div>
+                        <div>
+                            <label for="" class="input-label">Data</label>
+                            <input type="text" name="data" value="" class="input-field" disabled>
+                            <label for="" class="input-label">Status de Pagamento</label>
+                            <select name="status_compra" class="input-field"></select>        
+                        </div>
+                        <div>
+                            <input type="submit" id="salvar_detalhes_reserva" value="salvar" hidden>
+                            <input type="reset" hidden>
+                        </div>                        
+                    </form>
+                </div>
+                <div class="gap box">
+                    <h3>RESERVA/HORÁRIO</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Quadra</th>
+                                <th>Data</th>
+                                <th width="200">Tipo locação</th>
+                                <th width="70">Horário inicial</th>
+                                <th width="70">Horário final</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table_iten_os"></tbody>
+                        <template id="tpl_iten_os">
+                            <tr>
+                                <td>{{quadra_nome}}</td>
+                                <td>{{data}}</td>
+                                <td>{{tipocontratacao}}</td>
+                                <td>{{inicio}}</td>
+                                <td>{{final}}</td>
+                            </tr>
+                        </template>
+                    </table>
+                </div>
+                <div class="gap box">
+                    <h3>Lista de Jogadores</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Celular</th>
+                                <th>Pagou</th>                            
+                            </tr>
+                        </thead>
+                        <tbody id="table_time_os"></tbody>
+                        <template id="tpl_time_os">
                                 <tr>
-                                    <th>data</th>
-                                    <th>valor recebido</th>
-                                    <th width="50"></th>
+                                    <td>{{nome}}</td>
+                                    <td>{{email}}</td>
+                                    <td>{{tel}}</td>
+                                    <td><input type="checkbox" > </td>
                                 </tr>
-                            </thead>
-                            <tbody id="table_os_parcial"></tbody>
-                            <template id="tpl_os_parcial">
-                                <tr>
-                                    <td>{{dia}}</td>
-                                    <td>R$ {{valor}}</td>
-                                    <td><img onclick="remove_parcial('{{id}}')" class="ico-trash" src="{{uri}}/admin/disc/ico/trash.png"></td>
-                                </tr>
-                            </template>
-                            <tfooter>
-                                <tr>
-                                    <td>Faltando</td>
-                                    <td>R$ <small id="ui-falta">-00,00</small> </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Total</td>
-                                    <td>R$ <b id="ui-total">00,00</b> </td>
-                                    <td></td>
-                                </tr>
-                            </tfooter>                            
-                        </table>
+                        </template>
+                    </table>
+                </div>
+                <div class="gap box">
+                    <h3>Pagamento</h3>
+                    <div class=" grid-gap">
+                        <div>
+                            <form action="javascript:void(0)" id="form-parcial" onsubmit="add_parcial()" class="grid-3 grid-gap" method="POST">
+                                <input type="hidden" name="id" value="">
+                                <div>
+                                    <label for="" class="input-label">Data</label>
+                                    <input type="date" name="dia" id="dia_atual" value="" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="" class="input-label">Valor</label>
+                                    <input type="text" name="valor" value="" class="input-field" pattern="\w{2,},\w{2}" title="ex: 15,50" required>
+                                </div>
+                                <div>
+                                    <label for=""></label><br>
+                                    <input type="submit" value="Add Pagamento R$" class="btn">
+                                    <input type="reset" hidden>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
+                            <table class="table" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>data</th>
+                                        <th>valor recebido</th>
+                                        <th width="50"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table_os_parcial"></tbody>
+                                <template id="tpl_os_parcial">
+                                    <tr>
+                                        <td>{{dia}}</td>
+                                        <td>R$ {{valor}}</td>
+                                        <td><img onclick="remove_parcial('{{id}}')" class="ico-trash" src="{{uri}}/admin/disc/ico/trash.png"></td>
+                                    </tr>
+                                </template>
+                                <tfooter>
+                                    <tr>
+                                        <td>Faltando</td>
+                                        <td>R$ <small id="ui-falta">-00,00</small> </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>R$ <b id="ui-total">00,00</b> </td>
+                                        <td></td>
+                                    </tr>
+                                </tfooter>                            
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <br>
-                <br>
-                
-                <h3>RESERVA/HORÁRIO</h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Quadra</th>
-                            <th>Data</th>
-                            <th width="200">Tipo locação</th>
-                            <th width="70">Horário inicial</th>
-                            <th width="70">Horário final</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table_iten_os"></tbody>
-                    <template id="tpl_iten_os">
-                        <tr>
-                            <td>{{quadra_nome}}</td>
-                            <td>{{data}}</td>
-                            <td>{{tipocontratacao}}</td>
-                            <td>{{inicio}}</td>
-                            <td>{{final}}</td>
-                        </tr>
-                    </template>
-                </table>
-                <br>
-                <hr>
-                <h3>Lista de Jogadores</h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Celular</th>
-                            <th>Pagou</th>                            
-                        </tr>
-                    </thead>
-                    <tbody id="table_time_os"></tbody>
-                    <template id="tpl_time_os">
-                            <tr>
-                                <td>{{nome}}</td>
-                                <td>{{email}}</td>
-                                <td>{{tel}}</td>
-                                <td><input type="checkbox" > </td>
-                            </tr>
-                    </template>
-                </table>
-                <br>
-                <br>
-                <div class="grid-2">
-                    <div>
-                        <label for="salvar_detalhes_reserva" class="btn btn-sucess">
-                            salvar
-                        </label>
-                    </div>
-                    <div>
-                        <span class="btn btn-danger" id="remover_reserva">Remover Reserva</span>
+                <div class="">
+                    <div class="grid-2">
+                        <div>
+                            <span class="btn btn-danger" id="remover_reserva">Remover Reserva</span>
+                        </div>
+                        <div>
+                            <label for="salvar_detalhes_reserva" class="btn btn-sucess">
+                                salvar
+                            </label>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1171,14 +1169,14 @@
                             </form>
                         </div>
                         <div>
-                            <label for="">Baixar</label>
-                            <img src="disc/ico/download.png" class="baixar" title="baixar Relatorio" onclick="baixar_balanco()">
+                            <label for="">Balanço</label>
+                            <img src="disc/ico/download.png" class="baixar" title="Baixar Relatorio" onclick="baixar_balanco()">
                         </div>
                     </div>
                 </header>
                 <div class="grid-5 balanco">
                     <div>
-                        <b>Total</b>
+                        <b>Total Gerado</b>
                         <strong id="">R$ 500,00</strong>
                     </div>
                     <div>

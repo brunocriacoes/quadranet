@@ -300,7 +300,7 @@ option {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: var(--vermelho);
+    background-color: green;
     color: #FFF;
     padding-left: 16px;
     border-radius: 4px;
@@ -930,4 +930,10 @@ label img {
     color: #FFF;
     background-color: var(--theme);
     border-radius: 50px;
+}
+.grid-os {
+    grid-gap: 30px;
+}
+.grid-os table {
+    width: 100%;
 }
