@@ -1,7 +1,7 @@
 <div id="mister-m" style="background-image: url( '{{uri}}/app/storage/{{criativo}}' )"></div>
 <section id="contato" class="container grid-2">
     <form action="javascript:void(0)" method="POST" class="form" id="send_mail" onsubmit="send_mail()">
-        <h1>Contato</h1>
+        <h1 class="contato__title">Contato</h1>
         <p>Digite abaixo sua mensagem e entre em contato conosco:</p>
 
         <input type="text" id="nome" name="nome" value="" placeholder="Digite seu nome" required="required"
@@ -45,6 +45,6 @@
         <br>
         {{map}}
         <br>
-        {{rua}} - {{cidade}} - {{bairro}} - {{estado}}
+        {{rua}}, {{numero}} - {{cidade}} - {{bairro}} - {{estado}}
     </div>
 </section>
