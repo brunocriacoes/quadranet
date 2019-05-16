@@ -819,8 +819,16 @@ label img {
 }
 .grid-historico {
     display: grid;
-    grid-template-columns: repeat(5, 1fr) 36px;
+    grid-template-columns: repeat(6, 1fr) 36px;
     grid-gap: 20px;
+    text-align: left;
+}
+.grid-historico label {
+    color: #777;
+    font-size: 10px;
+}
+.baixar {
+    cursor: pointer;
 }
 .ico-trash {
     display: block;

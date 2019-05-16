@@ -30,6 +30,7 @@ function form_data( id )
         }
     }
     if( html.length > 0 ) {
+        html      = html.replace(/"/gi, '\"')
         data.html = html;
     }
     return data;
@@ -877,4 +878,33 @@ function agendarMensal(diaSemana, idQuadra, horarioInicial, horarioFinal) {
 function duasCasas(data) {
     data = data + '';
     return (data.length == 1) ? '0' + data : data;
+}
+
+function baixar_balanco() {
+
+    let csvFiltrado = _csv.map( cs => ( {
+        contratante: cs.contratante_nome,
+        contratanteEmail: cs.contratante_email,
+        data: cs.data,
+        tipoContratacao: cs.tipo_contatacao == "1" ? "Avulso" : "mensal",
+        statusCompra : cs.status_compra == "2" ? "Pago" : "Não pago",
+        valor: cs.valor
+    } ) );
+
+    csvFiltrado = [ {
+        contratante: "CONTRATANTE",
+        contratanteEmail: "EMAIL",
+        data: "DATA",
+        tipoContratacao: "MENSAL/AVULSO",
+        statusCompra : "PAGO/NÃO PAGO",
+        valor: "VALOR R$"
+    },...csvFiltrado, {
+        total: "Total R$ 500,00",
+        mensalidade: "Mensalista R$ 200,00",
+        avulso:"Avulso R$ 700,00",
+        valorDevido: "Valor Devido R$ 200,00",
+        valorPago: "Valor Pago R$ 500,00"
+    } ]
+
+    dowload_csv(  csvFiltrado, 'lista.csv' )
 }

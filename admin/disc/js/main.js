@@ -84,6 +84,7 @@ draw_select( estado, 'estado' );
 draw_select( status_pagamento, 'status_pagamento' );
 draw_select( status_compra, 'status_compra' );
 draw_select( mes, 'mes' );
+draw_select( anos, 'anos' );
 draw_select( site_sistema, 'site_sistema' );
 draw_select( mensal_avulso, 'mensal_avulso' );
 
@@ -155,5 +156,9 @@ let sessaoAtiva     = query( `[for="${nomeSessionSite}"]` )
 if( sessaoAtiva ) {
     sessaoAtiva.click()
 }
-
+let dataAtual = query('#dia_atual')
+if( dataAtual ) {
+    let data_tmp    = hoje()
+    dataAtual.value = data_tmp.data_sisten
+}
 removerReserva()

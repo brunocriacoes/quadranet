@@ -17,14 +17,14 @@ var is_admin = [
     { id: "2", nome: "Administrador"}
 ];
 var status_pagamento = [
-    { id: "1", nome: "Status pagamento"},
+    { id: "1", nome: "Todos"},
     { id: "1", nome: "Aguardando pagamento"},
     { id: "2", nome: "Pago"},
     { id: "3", nome: "Parcial"},
     { id: "4", nome: "Cancelado"},
 ];
 var status_compra = [
-    { id: "1", nome: "Status pagamento"},
+    { id: "1", nome: "Todos"},
     { id: "1", nome: "Aguardando pagamento"},
     { id: "2", nome: "Pago"},
     { id: "3", nome: "Parcial"},
@@ -62,7 +62,7 @@ var estado = [
 ];
 
 var mes = [
-    { id: '00', nome: "Mês" },
+    { id: '0', nome: "Todos" },
     { id: '01', nome: "Janeiro" },
     { id: '02', nome: "Fevereiro" },
     { id: '03', nome: "Março" },
@@ -77,14 +77,22 @@ var mes = [
     { id: '12', nome: "Dezembro" }
 ];
 
+var anos = [
+    { id: '0', nome: "Todos" }
+];
+for (let i = 2019; i < 2030; i++) {
+    anos.push( { id: i, nome: i } )
+
+}
+
 var site_sistema = [
-    { id: 1, nome: "Origem " },
+    { id: 0, nome: "Todos " },
     { id: 1, nome: "Site" },
     { id: 2, nome: "Sistema" },    
 ];
 
 var mensal_avulso = [
-    { id: "1", nome: "Tipo" },
+    { id: "1", nome: "Todos" },
     { id: "1", nome: "Avulso" },
     { id: "0", nome: "Mensal" },    
 ];
