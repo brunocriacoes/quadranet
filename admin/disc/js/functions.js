@@ -696,30 +696,68 @@ function set_quadra_contratar( id ) {
 
 var _csv = [];
 function busca_os_contratante() {
-    let ano      = query('#busca-os-ano').value;
+
+    let ano        = query('#busca-os-ano').value;
     let termo      = query('#termo-os-status').value;
     let status     = query('#busca-os-status').value;
     let mes        = query('#busca-os-mes').value;
     let origem     = query('#busca-os-origen').value;
     let contatacao = query('#busca-os-tipo-contratacao').value;
 
+    calc_balanco( ano, mes )
+
     let lista = vio.reservas || [];
     _csv      = lista;
     
-    let arr   = lista.filter( x => { 
+    let arr   = lista.filter( x => {
+
+        let if_mes           = true
+        let if_origem        = true
+        let if_contratacacao = true
+        let if_termo         = true
+        let if_ano           = true
+        let if_pago          = true
+        let busca            = `${x.contratante_nome} ${x.contratante_Id} ${x.contratante_email}`;
+
         x.tipocontratacao    = x.tipocontratacao || 0;
         x.site               = x.site || 2;
-        let busca            = `${x.contratante_nome} ${x.contratante_Id} ${x.contratante_email}`;
-        let if_mes           = mes == "00" ? true : x.id.indexOf(`-${mes}-`) != -1;
-        let if_origem        = x.site == origem;
-        let if_pago          = x.status_compra == status;
-        let if_contratacacao = x.tipocontratacao == contatacao;
-        let if_termo         = termo.length > 1 ? true : busca.indexOf(termo) != -1;
-        return if_pago && if_mes && if_origem && if_contratacacao && if_termo;
+        if( mes != "0" ) {
+            if_mes           = mes == "0" ? true : x.id.indexOf(`-${mes}-`) != -1;
+        }
+        if( ano != "0" ) {
+            if_ano           = ano == "0"  ? true : x.id.indexOf(`${ano}-`)  != -1;
+        }
+        if( origem != "0" ) {
+            if_origem        = x.site == origem;
+        }
+        if( status != "0" ) {
+            if_pago          = x.status_compra == status;
+        }
+        if( contatacao != "0" ) {
+            if_contratacacao = x.tipocontratacao == contatacao;
+        }
+        if( termo.length > 0 ) {
+            if_termo         = termo.length > 1 ? true : busca.indexOf(termo) != -1;
+        }
+        return if_pago && if_mes && if_origem && if_contratacacao && if_termo && if_ano;
     } );
 
     _csv = arr;
     query( '#historico__table_body' ).innerHTML = tpl_array( arr, '#tpl_historico' );
+}
+
+function calc_balanco( ano, mes ) {
+    let { reservas } = vio
+    Balanco.itens = reservas
+    Balanco.ano( ano )
+    Balanco.ano( mes )
+    Balanco.render()
+    let resultado = Balanco.val()
+    $("#b_total_gerado").html(resultado.total)
+    $("#b_total_mensalidade").html(resultado.mensalidade)
+    $("#b_total_avulso").html(resultado.avulso)
+    $("#b_total_devido").html(resultado.devido)
+    $("#b_total_pago").html(resultado.pago)
 }
 
 function query_cep( elemento, seletor = null ) {
@@ -892,6 +930,9 @@ function baixar_balanco() {
         valor: cs.valor
     } ) );
 
+    let data = new Date( _csv[0].id.substr(0, 10) )
+    let meses_anos = mes.map( el => el.nome )
+    
     csvFiltrado = [ {
         contratante: "CONTRATANTE",
         contratanteEmail: "EMAIL",
@@ -903,8 +944,8 @@ function baixar_balanco() {
     { pulo: ''},
     { pulo: ''},
     {
-        ano: "2019",
-        mes: "Janeiro",
+        ano: _csv[0].id.substr(0,4),
+        mes: meses_anos[data.getMonth()],
         total: "Total R$ 500,00",
         mensalidade: "Mensalista R$ 200,00",
         avulso:"Avulso R$ 700,00",

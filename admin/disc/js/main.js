@@ -24,12 +24,15 @@ fetch( `${app}` )
     x.site   = x.site   || [];
     x.pagina = x.pagina || [];
     let info =  x.site;
+    
     preencher( 'visual__form__info', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__social', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__contato', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__pag', x.site.find( y => y.id == 'pagseguro' ) || { id: 'pagseguro' } );
     preencher( 'servicos_form__quem-somos', x.pagina.find( y => y.id == 'sobre' ) || { id: 'sobre' } );
     preencher( 'servicos_form', x.pagina.find( y => y.id == 'servico' ) || { id: 'servico' } );
+
+    calc_balanco( '0', '0' )
 
     router( 'os', () => {
 

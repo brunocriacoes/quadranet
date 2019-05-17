@@ -17,14 +17,14 @@ var is_admin = [
     { id: "2", nome: "Administrador"}
 ];
 var status_pagamento = [
-    { id: "1", nome: "Todos"},
+    { id: "0", nome: "Todos"},
     { id: "1", nome: "Aguardando pagamento"},
     { id: "2", nome: "Pago"},
     { id: "3", nome: "Parcial"},
     { id: "4", nome: "Cancelado"},
 ];
 var status_compra = [
-    { id: "1", nome: "Todos"},
+    { id: "0", nome: "Todos"},
     { id: "1", nome: "Aguardando pagamento"},
     { id: "2", nome: "Pago"},
     { id: "3", nome: "Parcial"},
@@ -86,13 +86,13 @@ for (let i = 2019; i < 2030; i++) {
 }
 
 var site_sistema = [
-    { id: 0, nome: "Todos " },
+    { id: "0", nome: "Todos " },
     { id: 1, nome: "Site" },
     { id: 2, nome: "Sistema" },    
 ];
 
 var mensal_avulso = [
-    { id: "1", nome: "Todos" },
+    { id: "0", nome: "Todos" },
     { id: "1", nome: "Avulso" },
     { id: "0", nome: "Mensal" },    
 ];
