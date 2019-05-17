@@ -926,19 +926,21 @@ function baixar_balanco() {
         contratanteEmail: cs.contratante_email,
         data: cs.data,
         tipoContratacao: cs.tipo_contatacao == "1" ? "Avulso" : "mensal",
-        statusCompra : cs.status_compra == "2" ? "Pago" : "Não pago",
+        statusCompra : cs.status_compra == "2" ? "Pago" : "Nao pago",
         valor: cs.valor
     } ) );
 
     let data = new Date( _csv[0].id.substr(0, 10) )
     let meses_anos = mes.map( el => el.nome )
+
+    let somas = Balanco.val()
     
     csvFiltrado = [ {
         contratante: "CONTRATANTE",
         contratanteEmail: "EMAIL",
         data: "DATA",
         tipoContratacao: "MENSAL/AVULSO",
-        statusCompra : "PAGO/NÃO PAGO",
+        statusCompra : "PAGO/NAO PAGO",
         valor: "VALOR R$"
     },...csvFiltrado, 
     { pulo: ''},
@@ -946,11 +948,11 @@ function baixar_balanco() {
     {
         ano: _csv[0].id.substr(0,4),
         mes: meses_anos[data.getMonth()],
-        total: "Total R$ 500,00",
-        mensalidade: "Mensalista R$ 200,00",
-        avulso:"Avulso R$ 700,00",
-        valorDevido: "Valor Devido R$ 200,00",
-        valorPago: "Valor Pago R$ 500,00"
+        total: `Total ${somas.total}`,
+        mensalidade: `Mensalista ${somas.mensalidade}`,
+        avulso:`Avulso ${somas.avulso}`,
+        valorDevido: `Valor Devido ${somas.devido}`,
+        valorPago: `Valor Pago ${somas.pago}`
     } ]
 
     dowload_csv(  csvFiltrado, 'lista.csv' )
