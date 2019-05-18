@@ -71,7 +71,6 @@ var vio = {
     get agenda() { return _vio.agenda; },
     set historico(el) {
         _vio.historico = el;
-        log(el);
         if (query('#vio_historico')) {
             query('#vio_historico').innerHTML = el.map(x => {
                 let img = `<img onclick="gerarPagamento( '${x.id}' )" src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
@@ -103,6 +102,7 @@ var vio = {
             query('#vio_cart').innerHTML = el.map(x => {
                 let modalidade = vio.modalidade;
                 modalidade = modalidade.find(f => f.id == x.modalidade);
+                log(x);
                 return `
                     <tr>
                         <td><img src="${url_storage}/${x.foto_1}" class="cart__img"></td>

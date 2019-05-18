@@ -6,10 +6,10 @@ if (localStorage.profile === undefined) {
 }
 var _profile = {};
 function privado() {
-    let url = `auth2/?token=${window.localStorage.token_site || 1}`;
+    let url = `auth2/?token=${window.sessionStorage.token_site || 1}`;
     get_api(encodeURI(url), x => {
         if (!x.token) {
-            window.localStorage.removeItem('token_site');
+            window.sessionStorage.removeItem('token_site');
             to(`${base}/entrar`);
         }
     });
@@ -20,12 +20,12 @@ function login(MAIL, PASS, HOF) {
         .then(x => {
             HOF(x);
             if (!x.login) {
-                localStorage.token_site = "";
+                sessionStorage.token_site = "";
                 localStorage.profile = "";
                 _profile = {};
                 msgAlerta('Senha ou E-mail Errados!');
             } else {
-                localStorage.token_site = x.token;
+                sessionStorage.token_site = x.token;
                 if (sessionStorage.cart.length > 10) {
                     window.location.href = `${base}/finalizar`;
                 } else {
@@ -35,17 +35,17 @@ function login(MAIL, PASS, HOF) {
         });
 }
 function logout() {
-    fetch(`${app}/auth2?logout=${localStorage.token_site}`)
+    fetch(`${app}/auth2?logout=${sessionStorage.token_site}`)
         .then(j => j.json())
         .then(x => {
-            localStorage.token_site = "";
+            sessionStorage.token_site = "";
             localStorage.profile = "";
             _profile = {};
         });
 }
 
 function profile() {
-    fetch(`${app}/auth2?profile=${localStorage.token_site}`)
+    fetch(`${app}/auth2?profile=${sessionStorage.token_site}`)
         .then(j => j.json())
         .then(x => {
             preencher('atualizar_perfil', x);

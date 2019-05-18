@@ -140,8 +140,8 @@ if (document.querySelector('#historico__pagamento_jogador')) {
         });
 }
 
-if( localStorage.token_site == undefined || window.location.pathname.split('/')[1] == 'perfil' || window.location.pathname.split('/')[1] == 'trocar-senha' ) {
-    fetch(`${app}/auth2?profile=${localStorage.token_site}`)
+if( sessionStorage.token_site == undefined || window.location.pathname.split('/')[1] == 'perfil' || window.location.pathname.split('/')[1] == 'trocar-senha' ) {
+    fetch(`${app}/auth2?profile=${sessionStorage.token_site}`)
         .then(j => j.json())
         .then(x => {
             fetch(`${app}/time`)

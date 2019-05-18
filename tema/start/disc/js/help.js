@@ -786,6 +786,7 @@ function setHorario(x) {
     let inicio = `${tempHorario[3]}:${tempHorario[4]}`;
     let final = `${tempHorario[5]}:${tempHorario[6]}`;
     tempHorario = { ...temp_quadra, inicio, final, id: x };
+    log(tempHorario);
 
     document.querySelector('#btn__reserva_mensal').setAttribute('onclick', `addCart( ${JSON.stringify({ ...tempHorario, tipocontratacao: 0 })} )`);
     document.querySelector('#btn__reserva_diaria').setAttribute('onclick', `addCart( ${JSON.stringify({ ...tempHorario, tipocontratacao: 1 })} )`);
