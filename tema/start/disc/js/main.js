@@ -98,12 +98,12 @@ window.onpopstate = function () {
 marcar();
 
 router('detalhe', z => {
-    fetch(url_api)
+    fetch(app)
         .then(x => x.json())
         .then(y => {
             let quadra = y.quadra;
             let para = parametros();
-            let conjunto = Object.values(quadra.results);
+            let conjunto = Object.values(y.quadra);
             let conjquadra = conjunto.find(p => p.ID == para.id);
             vio.detalhe = { title: conjquadra.title, text: conjquadra.resumo, img_1: conjquadra.foto, img_2: conjquadra.foto1, img_3: conjquadra.foto2, img_4: conjquadra.foto3, img_5: conjquadra.foto4, ID: conjquadra.ID };
         });
@@ -141,7 +141,7 @@ if (document.querySelector('#historico__pagamento_jogador')) {
 }
 
 if( sessionStorage.token_site == undefined || window.location.pathname.split('/')[1] == 'perfil' || window.location.pathname.split('/')[1] == 'trocar-senha' ) {
-    fetch(`${app}/auth2?profile=${sessionStorage.token_site}`)
+    fetch(`${app}/auth2?profile=${sessionStorage.token_site || []}`)
         .then(j => j.json())
         .then(x => {
             fetch(`${app}/time`)

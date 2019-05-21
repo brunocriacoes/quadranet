@@ -102,7 +102,6 @@ var vio = {
             query('#vio_cart').innerHTML = el.map(x => {
                 let modalidade = vio.modalidade;
                 modalidade = modalidade.find(f => f.id == x.modalidade);
-                log(x);
                 return `
                     <tr>
                         <td><img src="${url_storage}/${x.foto_1}" class="cart__img"></td>
@@ -221,19 +220,20 @@ var vio = {
         query('#vio_contact_map').innerHTML = e.map;
     },
     get contato() { return _vio.contato; },
-    set detalhe(e) {
-        _vio.detalhe = e;
-        query("#detalhe__title").innerHTML = e.title || '';
-        query("#detalhe__info").innerHTML = e.text || '';
-        query("#galeria-detalhe").src = url_storage + '/' + e.img_1;
-        query("#galeria_img-1").src = url_storage + '/' + e.img_1;
-        query("#galeria_img-2").src = url_storage + '/' + e.img_2;
-        query("#galeria_img-3").src = url_storage + '/' + e.img_3;
-        query("#galeria_img-4").src = url_storage + '/' + e.img_4;
-        query("#galeria_img-5").src = url_storage + '/' + e.img_5;
-        query("#detalhe_btn").href = `?id=${e.ID || 42}#agenda`;
-    },
-    get detalhe() { return _vio.detalhe; },
+    // set detalhe(e) {
+    //     log(e);
+    //     _vio.detalhe = e;
+    //     query("#detalhe__title").innerHTML = e.title || '';
+    //     query("#detalhe__info").innerHTML = e.text || '';
+    //     query("#galeria-detalhe").src = url_storage + '/' + e.img_1;
+    //     query("#galeria_img-1").src = url_storage + '/' + e.img_1;
+    //     query("#galeria_img-2").src = url_storage + '/' + e.img_2;
+    //     query("#galeria_img-3").src = url_storage + '/' + e.img_3;
+    //     query("#galeria_img-4").src = url_storage + '/' + e.img_4;
+    //     query("#galeria_img-5").src = url_storage + '/' + e.img_5;
+    //     query("#detalhe_btn").href = `?id=${e.ID || 42}#agenda`;
+    // },
+    // get detalhe() { return _vio.detalhe; },
     set finalizar(el) {
         _vio.finalizar = el;
         let soma_total = el.reduce((acc, iten) => {

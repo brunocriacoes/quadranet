@@ -529,7 +529,7 @@ const trash = (url, id_no) => {
 };
 
 function setReserva(ID) {
-    fetch(url_api + bug + chache)
+    fetch(app + bug + chache)
         .then(x => x.json())
         .then(y => {
             let q = Object.values(y.quadra.results);
