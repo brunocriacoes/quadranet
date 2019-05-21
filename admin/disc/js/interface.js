@@ -263,7 +263,7 @@ var vio = {
         edita_quadra( quadra_sisten );
         arr.forEach( x => {
             if ( !x.status_compra ) {
-                x.status_compra = 0;
+                x.status_compra = 1;
             }
             let tipo_pagamento = status_pagamento.find( y => y.id == x.status_compra  ) || {};
             x.pagamento        = tipo_pagamento.nome || 'aguardando pagamento';

@@ -957,3 +957,22 @@ function baixar_balanco() {
 
     dowload_csv(  csvFiltrado, 'lista.csv' )
 }
+
+function masc( el, pattern ) {
+    let value   = el.value
+    let misterX = pattern.replace(/9/g, 'x')
+    let max     = pattern.replace( /\D/gi, '' )
+    value       = value.replace( /\D/gi, '' )
+    if( value.length <= max.length && value.length > 0) {
+        value.split('').forEach( x => {
+            let index      = misterX.indexOf('x')
+            misterX        = misterX.split('')
+            misterX[index] = x
+            misterX        = misterX.join('')
+        } )
+        let ultimo         = misterX.split('').reverse().join('').search(/\d/)
+        ultimo             = misterX.length - ultimo
+        value              = misterX.substr(0,ultimo)
+    }
+    el.value = value
+}

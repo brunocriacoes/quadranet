@@ -3,13 +3,12 @@ if (sessionStorage.cart == undefined) {
 }
 
 function addCart(obj) {
-    let items = get_cart();
-    log(items);
-    items.push(obj);
-    log(items);
-
+    let items   = get_cart();
+    let idsCart = items.map( x => x.id )
+    if( idsCart.indexOf( obj.id ) == -1 ) {
+        items.push(obj);
+    }
     vio.cart = items;
-
     save_cart(items);
     alerta('Item adicionado ao Carrinho');
 }

@@ -108,7 +108,7 @@ var vio = {
                         <td><img src="${url_storage}/${x.foto_1}" class="cart__img"></td>
                         <td>${ modalidade.nome || '---'}</td>
                         <td>${ x.nome || '---'}</td>
-                        <td>${ x.data || '--/--/----'}</td>
+                        <td>${ x.id.substr(0,10).split('-').reverse().join('/') || '--/--/----'}</td>
                         <td>${ x.inicio || '--:--'} ás ${x.final || '--:--'}</td>
                         <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
                         <td>R$${(x.tipocontratacao == 0) ? x.mensalidade : x.diaria}</td>
