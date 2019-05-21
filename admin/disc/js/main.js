@@ -166,11 +166,19 @@ if( dataAtual ) {
 }
 removerReserva()
 
-document.querySelectorAll( `[name*=tel], [name*=whats], [name*=phon]` )
+document.querySelectorAll( `[name*=whats]` )
 .forEach( campo => {
     campo
     .addEventListener( 'input', function() {
         masc( this, '(99) 9 9999-9999' )
+    } )
+} )
+
+document.querySelectorAll( `[name*=tel], [name*=phon]` )
+.forEach( campo => {
+    campo
+    .addEventListener( 'input', function() {
+        masc( this, '(99) 9999-9999' )
     } )
 } )
 
