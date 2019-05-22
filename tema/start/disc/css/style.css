@@ -617,6 +617,12 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     font-size: 12px;
     margin-bottom: 10px;
+    color: #CCC;
+}
+.label {
+    color: #777;
+    font-size: 11px;
+    margin-bottom: 5px;
 }
 .field {
     display: block;

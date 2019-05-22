@@ -19,7 +19,8 @@ function login(MAIL, PASS, HOF) {
         .then(j => j.json())
         .then(x => {
             HOF(x);
-            if (!x.login) {
+            log( x.error )
+            if (x.error) {
                 sessionStorage.token_site = "";
                 localStorage.profile = "";
                 _profile = {};

@@ -963,6 +963,7 @@ function masc( el, pattern ) {
     let misterX = pattern.replace(/9/g, 'x')
     let max     = pattern.replace( /\D/gi, '' )
     value       = value.replace( /\D/gi, '' )
+    el.setAttribute( 'maxlength', misterX.length )
     if( value.length <= max.length && value.length > 0) {
         value.split('').forEach( x => {
             let index      = misterX.indexOf('x')

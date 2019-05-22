@@ -20,6 +20,7 @@ fetch(app)
         });
 
         router('agenda', x => {
+            y.reservas = y.reservas || []
             if (y.reservas != undefined) {
                 let quadra = y.quadra.find(y => {
                     let quadraFiltrada = window.location.pathname.split('/');
@@ -216,3 +217,39 @@ if (linkAtivo) {
         e.setAttribute('class', 'link-menu ativo');
     });
 }
+
+document.querySelectorAll( `[name*=whats]` )
+.forEach( campo => {
+    campo
+    .addEventListener( 'input', function() {
+        masc( this, '(99) 9 9999-9999' )
+    } )
+} )
+
+document.querySelectorAll( `[name*=tel], [name*=phon]` )
+.forEach( campo => {
+    campo
+    .addEventListener( 'input', function() {
+        masc( this, '(99) 9999-9999' )
+    } )
+} )
+
+document.querySelectorAll( `[name*=cep]` )
+.forEach( campo => {
+    campo
+    .addEventListener( 'input', function() {
+        masc( this, '99999-999' )
+    } )
+} )
+
+document.querySelectorAll( `[name*=cpf], [name*=cnpj]` )
+.forEach( campo => {
+    campo
+    .addEventListener( 'input', function() {
+        if( this.value.length < 14 ) {
+            masc( this, '999.999.999-99' )
+        } else {
+            masc( this, '99.999.999/9999-99' )
+        }        
+    } )
+} )

@@ -6,17 +6,8 @@
     $token_dir = __DIR__ . "/../data/token/";
     maker_dir( $token_dir );
 
-    file_put_contents( $user_dir . sha1( 'user@gmail.com' ) . ".json", json_encode( [
-        "nome"        => 'usuario',
-        "telephone"   => '+55 (00) 0 0000-0000',
-        "pass"        => sha1( '123' ),
-        "email"        => 'user@gmail.com',
-        "id"          => sha1( 'user@gmail.com' ),
-        "admin"       => 2,
-        "domain"      => 1,
-        "ativo"       => 1,
-        "status"      => true,
-    ] ) );
+    $user_default = require __DIR__ . "/user_default.php";
+    file_put_contents( $user_dir . sha1( 'user@gmail.com' ) . ".json", json_encode( $user_default ) );;
 
     if( ! empty( request['update'] ) ):
         $id        = sha1( request['email'] );

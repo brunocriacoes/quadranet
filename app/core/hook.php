@@ -17,10 +17,7 @@
     if( ! empty( $_REQUEST['password'] ) ):
         $_REQUEST['password'] = sha1( $_REQUEST['password'] );
     endif;
-    if( ! empty( $_REQUEST['status'] ) ):
-        $_REQUEST['status'] = ( $_REQUEST['status'] == '1' ) ? true : false;
-    endif;
-
+   
     $_REQUEST['data'] = Date('d/m/Y');
 
     define( 'dominio', str_replace( 'www.','', $_SERVER['SERVER_NAME'] ) ) ;

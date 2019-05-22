@@ -3,27 +3,67 @@
 <br>
 <section id="me-cadastrar">
     <form action="javascript:void(0)" method="POST" onsubmit="meCadastrar()" id="formulario_me-cadastrar">
-        <h2 class="text-center">Cadastro</h2>
+
+        <h3>Dados Pessoais</h3>
+        <label for="" class="label">Nome Completo (obrigatório)</label>
+        <input type="text" class="field" name="nome" required>
         <div class="grid-2">
-            <select class="field" name="pessoa">
-                <option value="0">Pessoa Fisica</option>
-                <option value="1">Pessoa Jurídica</option>
-            </select>
-            <input type="text" class="field field__cadastro_nome" placeholder="Nome Completo" name="nome" required>
+            <div>
+                <label for="" class="label">CPF/CNPJ (obrigatório) </label>
+                <input type="text" class="field" name="cpf_cnpj" required>
+            </div>
+            <div>
+                <label for="" class="label">Razão Social</label>
+                <input type="text" class="field" name="razao_social">
+            </div>
+            <div>
+                <label for="" class="label">Telefone fixo (obrigatório)</label>
+                <input type="text" class="field" name="telefone" required>
+            </div>
+            <div>
+                <label for="" class="label">WhatsApp (obrigatório)</label>
+                <input type="text" class="field" name="whatsapp" required>
+            </div>
         </div>
-        <div class="grid-3">
-            <input type="email" class="field" placeholder="Email" name="email" required>
-            <input type="text" class="field" placeholder="CPF/CNPJ" name="cpf_cnpj" required>
-            <input type="text" class="field" placeholder="CEP" onblur="query_cep( this, 'formulario_me-cadastrar' )"
-                name="cep" required>
-            <input type="text" class="field" placeholder="Estado" name="estado" disabled required>
-            <input type="text" class="field" placeholder="Cidade" name="cidade" disabled required>
-            <input type="text" class="field" placeholder="Bairro" name="bairro" required>
-            <input type="text" class="field" placeholder="Rua" name="rua" required>
-            <input type="text" class="field" placeholder="Número" name="numero" required>
-            <input type="tel" class="field" name="whatsapp" placeholder="Celular (WhatsApp)" required>
-            <input type="password" class="field" placeholder="Senha" name="password" required>
-            <input type="password" class="field" placeholder="Confirmar Senha" name="pass" required>
+        <h3>Endereço</h3>
+        <div class="grid-2">
+            <div>
+                <label for="" class="label">Cep (obrigatório)</label>
+                <input type="text" class="field" placeholder="00000-000" onblur="query_cep( this, 'formulario_me-cadastrar' )" name="cep" required>
+            </div>
+            <div>
+                <label for="" class="label">Endereço (obrigatório)</label>
+                <input type="text" class="field" name="endereco" required>
+            </div>
+            <div>
+                <label for="" class="label">Número (obrigatório)</label>
+                <input type="text" class="field"  name="numero" required>            
+            </div>
+            <div>
+                <label for="" class="label">Bairro (obrigatório)</label>
+                <input type="text" class="field" placeholder="Bairro" name="bairro" required>
+            </div>
+            <div>
+                <label for="" class="label">Cidade (obrigatório)</label>
+                <input type="text" class="field"" name="cidade" required>
+            </div>
+            <div>
+                <label for="" class="label">Estado (obrigatório)</label>
+                <input type="text" class="field" name="estado" required>
+            </div>
+        </div>
+        <h3>Dados de Acesso</h3>
+        <label for="" class="label">Email (obrigatório)</label>
+        <input type="email" class="field" placeholder="Email" name="email" required>
+        <div class="grid-2">
+            <div>
+                <Label >Senha (obrigatório)</Label>
+                <input type="password" class="field" name="password" required>
+            </div>
+            <div>
+                <label for="" class="label">Confirmar Senha (obrigatório)</label>
+                <input type="password" class="field" name="pass" required>
+            </div>
         </div>
         <div>
             <input type="submit" value="Enviar Cadastro" class="btn__bombom btn__sucesso_cadastro">
