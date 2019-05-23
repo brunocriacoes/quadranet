@@ -14,7 +14,7 @@ fetch(app)
 
         router('historico-compras', p => {
             let loop = _vio.reservas;
-            loop = loop.filter(f => f.contratante == _profile.id);
+            loop = loop.filter(f => f.usuario_id == _profile.id);
             vio.historico = loop;
             dataCompra({ value: hoje().mes });
         });
@@ -141,23 +141,23 @@ if (document.querySelector('#historico__pagamento_jogador')) {
         });
 }
 
-    fetch(`${app}/auth2?profile=${sessionStorage.token_site || []}`)
-        .then(j => j.json())
-        .then(x => {
-            fetch(`${app}/time`)
-                .then(p => p.json())
-                .then(b => {
-                    log( b )
-                    let meuTime = b.filter( jogador => jogador.id_contratante == _profile.email )
-                    vio.time = meuTime;
-                    _time    = meuTime;
-                });
-            x.pass = '';
-            x.password = '';
-            _profile = x;
-            preencher('atualizar_perfil', x);
-            preencher('mudar_senha', x);
-        });
+fetch(`${app}/auth2?profile=${sessionStorage.token_site || []}`)
+    .then(j => j.json())
+    .then(x => {
+        fetch(`${app}/time`)
+            .then(p => p.json())
+            .then(b => {
+                log(b)
+                let meuTime = b.filter(jogador => jogador.id_contratante == _profile.email)
+                vio.time = meuTime;
+                _time = meuTime;
+            });
+        x.pass = '';
+        x.password = '';
+        _profile = x;
+        preencher('atualizar_perfil', x);
+        preencher('mudar_senha', x);
+    });
 
 
 if (document.querySelector(`#mes__compras`)) {
@@ -219,38 +219,38 @@ if (linkAtivo) {
     });
 }
 
-document.querySelectorAll( `[name*=whats]` )
-.forEach( campo => {
-    campo
-    .addEventListener( 'input', function() {
-        masc( this, '(99) 9 9999-9999' )
-    } )
-} )
+document.querySelectorAll(`[name*=whats]`)
+    .forEach(campo => {
+        campo
+            .addEventListener('input', function () {
+                masc(this, '(99) 9 9999-9999')
+            })
+    })
 
-document.querySelectorAll( `[name*=tel], [name*=phon]` )
-.forEach( campo => {
-    campo
-    .addEventListener( 'input', function() {
-        masc( this, '(99) 9999-9999' )
-    } )
-} )
+document.querySelectorAll(`[name*=tel], [name*=phon]`)
+    .forEach(campo => {
+        campo
+            .addEventListener('input', function () {
+                masc(this, '(99) 9999-9999')
+            })
+    })
 
-document.querySelectorAll( `[name*=cep]` )
-.forEach( campo => {
-    campo
-    .addEventListener( 'input', function() {
-        masc( this, '99999-999' )
-    } )
-} )
+document.querySelectorAll(`[name*=cep]`)
+    .forEach(campo => {
+        campo
+            .addEventListener('input', function () {
+                masc(this, '99999-999')
+            })
+    })
 
-document.querySelectorAll( `[name*=cpf], [name*=cnpj]` )
-.forEach( campo => {
-    campo
-    .addEventListener( 'input', function() {
-        if( this.value.length < 15 ) {
-            masc( this, '999.999.999-99' )
-        } else {
-            masc( this, '99.999.999/9999-99' )
-        }        
-    } )
-} )
+document.querySelectorAll(`[name*=cpf], [name*=cnpj]`)
+    .forEach(campo => {
+        campo
+            .addEventListener('input', function () {
+                if (this.value.length < 15) {
+                    masc(this, '999.999.999-99')
+                } else {
+                    masc(this, '99.999.999/9999-99')
+                }
+            })
+    })

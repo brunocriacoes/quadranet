@@ -473,9 +473,10 @@ async function buy() {
     carrinho.forEach(x => {
         if (x.tipocontratacao == 0) {
             let bombom = x.id.split('-');
-            let loop = agendarMensal(bombom[7], bombom[8], x.inicio, x.final);
+            let loop = agendarMensal(bombom[7], bombom[8], x.inicio, x.final, x.id.substr(0,10));            
             for (let index = 0; index < loop.length; index++) {
                 let obj = {
+                    dia_compra: x.id.substr(8,2),
                     _dominio: dominio,
                     id: loop[index],
                     quadra_nome: x.nome,
@@ -806,6 +807,7 @@ function dataCompra(data) {
         .then(x => x.json())
         .then(y => {
             let reservas = y.reservas.filter(r => +r.id.substr(0, 10).indexOf('-' + duasCasas(data.value) + '-') != -1);
+            reservas = reservas.filter(f => f.usuario_id == _profile.id);
             let combo = [];
             reservas.forEach(e => {
                 if (combo.find(y => y.os == e.os) == undefined) {
@@ -818,7 +820,7 @@ function dataCompra(data) {
                 let imgAvulso = '';
                 return `
                     <tr>
-                        <td>${ t.id.substr(0,10).split('-').reverse().join('/') || '--/--/----'}</td>
+                        <td>${ t.dia_compra || '01' }${ t.id.substr(0,8).split('-').reverse().join('/') || '--/--/----'}</td>
                         <td>${t.quadra_nome}</td>
                         <td>R$ ${ t.preco || '00,00'}</td>
                         <td>${ (t.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
@@ -841,8 +843,8 @@ function contribuiu(idOS, idJogador) {
     post_api('reservas', obj, x => { });
 }
 
-function mensalidadeMensal(diaSemana) {
-    let data = new Date();
+function mensalidadeMensal(diaSemana, diaCompra) {
+    let data = new Date(diaCompra);
     let quantidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30];
     let mes = data.getMonth() + 1;
     let ano = data.getFullYear();
@@ -862,8 +864,8 @@ function mensalidadeMensal(diaSemana) {
     });
 }
 
-function agendarMensal(diaSemana, idQuadra, horarioInicial, horarioFinal) {
-    let idBase = mensalidadeMensal(diaSemana);
+function agendarMensal(diaSemana, idQuadra, horarioInicial, horarioFinal, diaCompra) {
+    let idBase = mensalidadeMensal(diaSemana, diaCompra);
 
     return idBase.map(x => `${x}-${horarioInicial.replace(':', '-')}-${horarioFinal.replace(':', '-')}-${diaSemana}-${idQuadra}`);
 }
