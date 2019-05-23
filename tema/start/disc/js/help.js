@@ -473,10 +473,10 @@ async function buy() {
     carrinho.forEach(x => {
         if (x.tipocontratacao == 0) {
             let bombom = x.id.split('-');
-            let loop = agendarMensal(bombom[7], bombom[8], x.inicio, x.final, x.id.substr(0,10));            
+            let loop = agendarMensal(bombom[7], bombom[8], x.inicio, x.final, x.id.substr(0, 10));
             for (let index = 0; index < loop.length; index++) {
                 let obj = {
-                    dia_compra: x.id.substr(8,2),
+                    dia_compra: x.id.substr(8, 2),
                     _dominio: dominio,
                     id: loop[index],
                     quadra_nome: x.nome,
@@ -485,6 +485,10 @@ async function buy() {
                     final: x.final,
                     preco: (x.tipocontratacao == 0) ? x.mensalidade : x.diaria,
                     site: 1,
+                    contratante: _profile.id,
+                    contratante_email: _profile.email,
+                    contratante_nome: _profile.nome,
+                    contratante_telefone: _profile.telefone,
                     ...cart
                 };
 
@@ -500,6 +504,10 @@ async function buy() {
                 final: x.final,
                 preco: (x.tipocontratacao == 0) ? x.mensalidade : x.diaria,
                 site: 1,
+                contratante: _profile.id,
+                contratante_email: _profile.email,
+                contratante_nome: _profile.nome,
+                contratante_telefone: _profile.telefone,
                 ...cart
             };
 
@@ -820,7 +828,7 @@ function dataCompra(data) {
                 let imgAvulso = '';
                 return `
                     <tr>
-                        <td>${ t.dia_compra || '01' }${ t.id.substr(0,8).split('-').reverse().join('/') || '--/--/----'}</td>
+                        <td>${ t.dia_compra || '01'}${t.id.substr(0, 8).split('-').reverse().join('/') || '--/--/----'}</td>
                         <td>${t.quadra_nome}</td>
                         <td>R$ ${ t.preco || '00,00'}</td>
                         <td>${ (t.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
@@ -919,22 +927,22 @@ function diasAnteriores(data) {
     }
 }
 
-function masc( el, pattern ) {
-    let value   = el.value
+function masc(el, pattern) {
+    let value = el.value
     let misterX = pattern.replace(/9/g, 'x')
-    let max     = pattern.replace( /\D/gi, '' )
-    value       = value.replace( /\D/gi, '' )
-    el.setAttribute( 'maxlength', misterX.length )
-    if( value.length <= max.length && value.length > 0) {
-        value.split('').forEach( x => {
-            let index      = misterX.indexOf('x')
-            misterX        = misterX.split('')
+    let max = pattern.replace(/\D/gi, '')
+    value = value.replace(/\D/gi, '')
+    el.setAttribute('maxlength', misterX.length)
+    if (value.length <= max.length && value.length > 0) {
+        value.split('').forEach(x => {
+            let index = misterX.indexOf('x')
+            misterX = misterX.split('')
             misterX[index] = x
-            misterX        = misterX.join('')
-        } )
-        let ultimo         = misterX.split('').reverse().join('').search(/\d/)
-        ultimo             = misterX.length - ultimo
-        value              = misterX.substr(0,ultimo)
+            misterX = misterX.join('')
+        })
+        let ultimo = misterX.split('').reverse().join('').search(/\d/)
+        ultimo = misterX.length - ultimo
+        value = misterX.substr(0, ultimo)
     }
     el.value = value
 }
