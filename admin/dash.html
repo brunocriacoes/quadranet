@@ -939,7 +939,7 @@
                         </div>
                         <div>                            
                             <label for="" class="input-label">Rua</label>
-                            <input type="text" class="input-field" name="rua" disabled required>
+                            <input type="text" class="input-field" name="endereco" disabled required>
                         </div>
                         <div>                            
                             <label for="" class="input-label">numero</label>
@@ -1213,7 +1213,7 @@
                     <template id="tpl_historico">
                         <tr>
                             <td>{{contratante_nome}}</td>
-                            <td>{{contratante_Id}}</td>
+                            <td>{{contratante_telefone}}</td>
                             <td>{{pagamento}}</td>
                             <td>{{site_print}}</td>
                             <td>{{tipocontratacao_print}}</td>
@@ -1377,9 +1377,10 @@
                 <form action="javascript:click( 'pop-agenda-livre', 'cad-change' )" id="form-reservas" method="POST" onsubmit="post_api_form( 'reservas', 'form-reservas', 'dash.html#agenda')" class="cad cad-finalizar">
                     <input type="hidden" name="contratante" id="contratante-id-locacao">
                     <input type="text" name="contratante_nome" id="contratante-nome-locacao" class="input-field" disabled>
-                    <input type="hidden" name="contratante_Id" id="contratante-telefone-locacao">
+                    <input type="hidden" name="contratante_telefone" id="contratante-telefone-locacao">
                     <input type="hidden" name="contratante_email" id="contratante-email-locacao">
                     <input type="hidden" name="id" id="id_quadra_contratar">
+                    <input type="hidden" name="dia_compra" id="dia_compra">
                     <label for="" class="input-label">Tipo locação</label>
                     <select name="tipo_contatacao" class="input-field">
                         <option value="1">Diária</option>

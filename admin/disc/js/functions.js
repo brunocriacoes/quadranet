@@ -341,7 +341,7 @@ function pop_ocupado( id ) {
     query("#ocupado_horario").innerHTML = horario;
     let reserva = vio.reservas.find( x => x.id == id );
     query("#v-ocupado-nome").innerHTML = reserva.contratante_nome;
-    query("#v-ocupado-telefone").innerHTML = reserva.contratante_Id;
+    query("#v-ocupado-telefone").innerHTML = reserva.contratante_telefone;
     query("#v-ocupado-contratacao").innerHTML = reserva.tipocontratacao == "1" ? "Avulso" : "mensal"; 
     query("#v-ocupado-pagamento").innerHTML = reserva.pagamento;
     query("#v-ocupado-link").setAttribute('href',`${uri}/admin/dash.html?id=${id}#os` );
@@ -689,6 +689,7 @@ function set_user_locacao( id, nome, telefone, email ) {
 
 function set_quadra_contratar( id ) {
     query('#id_quadra_contratar').value = id;
+    query('#dia_compra').value = id.substr(8,2);
     let horario = id.substr(11,5).replace('-', ':') + " - " + id.substr(17,5).replace('-', ':');
     query("#reserva_horario").innerHTML = horario;
     query("#ocupado_horario").innerHTML = horario;
@@ -719,7 +720,7 @@ function busca_os_contratante() {
         let if_termo         = true
         let if_ano           = true
         let if_pago          = true
-        let busca            = `${x.contratante_nome} ${x.contratante_Id} ${x.contratante_email}`;
+        let busca            = `${x.contratante_nome} ${x.contratante_telefone} ${x.contratante_email}`;
 
         x.tipocontratacao    = x.tipocontratacao || 0;
         x.site               = x.site || 2;
@@ -771,12 +772,12 @@ function query_cep( elemento, seletor = null ) {
         fetch( `https://viacep.com.br/ws/${cep}/json/` )
         .then( x => x.json() )
         .then( x => {
-            let obj = x;
-            obj.id = 'endereco';
-            obj.rua = x.logradouro || '';
-            obj.bairro = x.bairro || '';
-            obj.cidade = x.localidade || '';
-            obj.estado = x.uf || '';
+            let obj      = x;
+            obj.id       = 'endereco';
+            obj.endereco = x.logradouro || '';
+            obj.bairro   = x.bairro || '';
+            obj.cidade   = x.localidade || '';
+            obj.estado   = x.uf || '';
             if( seletor == null ) {
                 preencher( 'form-endereco', { ...edit, ...obj, id: edit.id } );
             } else {
