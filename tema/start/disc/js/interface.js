@@ -69,26 +69,26 @@ var vio = {
         }).join('');
     },
     get agenda() { return _vio.agenda; },
-    set historico(el) {
-        _vio.historico = el;
-        if (query('#vio_historico')) {
-            query('#vio_historico').innerHTML = el.map(x => {
-                let img = `<img onclick="gerarPagamento( '${x.id}' )" src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
-                let imgAvulso = ``;
-                return `
-            <tr>
-                <td>${ x.data || '--/--/----'}</td>
-                <td>R$ ${ x.preco || '00,00'}</td>
-                <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
-                <td>${ (x.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
-                <td>${(x.tipocontratacao == 0 && x.status_compra == 1) ? img : imgAvulso}</td>
-                <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${x.id}">Pagamento Jogadores</a></td>
-            </tr>
-            `;
-            }).join('');
-        }
-    },
-    get historico() { return _vio.historico; },
+    // set historico(el) {
+    //     _vio.historico = el;
+    //     if (query('#vio_historico')) {
+    //         query('#vio_historico').innerHTML = el.map(x => {
+    //             let img = `<img onclick="gerarPagamento( '${x.id}' )" src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
+    //             let imgAvulso = ``;
+    //             return `
+    //         <tr>
+    //             <td>${ x.data || '--/--/----'}</td>
+    //             <td>R$ ${ x.preco || '00,00'}</td>
+    //             <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
+    //             <td>${ (x.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
+    //             <td>${(x.tipocontratacao == 0 && x.status_compra == 1) ? img : imgAvulso}</td>
+    //             <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${x.id}">Pagamento Jogadores</a></td>
+    //         </tr>
+    //         `;
+    //         }).join('');
+    //     }
+    // },
+    // get historico() { return _vio.historico; },
     set cart(el) {
         _vio.cart = el;
         vio.finalizar = el;
@@ -247,7 +247,7 @@ var vio = {
                 return `
                     <tr>
                         <td>${ x.nome || '---'}</td>
-                        <td>${ x.data || '--/--/----'}</td>
+                        <td>${ x.id.substr(0,10).split('-').reverse().join('/') || '--/--/----'}</td>
                         <td>${ x.inicio || '--:--'} ás ${x.final || '--:--'}</td>
                         <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
                         <td>R$${(x.tipocontratacao == 0) ? x.mensalidade : x.diaria}</td>
