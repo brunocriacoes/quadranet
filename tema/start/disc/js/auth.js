@@ -2,7 +2,7 @@ if (localStorage.token === undefined) {
     localStorage.setItem('token', '');
 }
 if (localStorage.profile === undefined) {
-    localStorage.setItem('profile', {});
+    localStorage.setItem('profile', '{}');
 }
 var _profile = {};
 function privado() {
@@ -19,7 +19,6 @@ function login(MAIL, PASS, HOF) {
         .then(j => j.json())
         .then(x => {
             HOF(x);
-            log( x.error )
             if (x.error) {
                 sessionStorage.token_site = "";
                 localStorage.profile = "";

@@ -72,8 +72,13 @@ var vio = {
     set horario(arr) {
         _vio.horario = arr || [];
     },
+    set auth2( arr ) {
+        _vio.auth2 = arr || [];
+    },
+
 
     set _user( arr ) {
+        vio.auth2  = arr
         _vio._user = arr || [];
         query('#capitao__table_body').innerHTML = arr.map( x => `
             <tr>                

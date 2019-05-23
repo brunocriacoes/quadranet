@@ -14,7 +14,7 @@ fetch(app)
 
         router('historico-compras', p => {
             let loop = _vio.reservas;
-            loop = loop.filter(f => f.usuario_id == _profile.id);
+            loop = loop.filter(f => f.contratante == _profile.id);
             vio.historico = loop;
             dataCompra({ value: hoje().mes });
         });
@@ -141,15 +141,16 @@ if (document.querySelector('#historico__pagamento_jogador')) {
         });
 }
 
-if( sessionStorage.token_site == undefined || window.location.pathname.split('/')[1] == 'perfil' || window.location.pathname.split('/')[1] == 'trocar-senha' ) {
     fetch(`${app}/auth2?profile=${sessionStorage.token_site || []}`)
         .then(j => j.json())
         .then(x => {
             fetch(`${app}/time`)
                 .then(p => p.json())
                 .then(b => {
-                    vio.time = b;
-                    _time = b;
+                    log( b )
+                    let meuTime = b.filter( jogador => jogador.id_contratante == _profile.email )
+                    vio.time = meuTime;
+                    _time    = meuTime;
                 });
             x.pass = '';
             x.password = '';
@@ -157,7 +158,7 @@ if( sessionStorage.token_site == undefined || window.location.pathname.split('/'
             preencher('atualizar_perfil', x);
             preencher('mudar_senha', x);
         });
-}
+
 
 if (document.querySelector(`#mes__compras`)) {
     let diaCompra = hoje();
@@ -246,7 +247,7 @@ document.querySelectorAll( `[name*=cpf], [name*=cnpj]` )
 .forEach( campo => {
     campo
     .addEventListener( 'input', function() {
-        if( this.value.length < 14 ) {
+        if( this.value.length < 15 ) {
             masc( this, '999.999.999-99' )
         } else {
             masc( this, '99.999.999/9999-99' )

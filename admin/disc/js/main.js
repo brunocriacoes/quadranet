@@ -4,6 +4,15 @@ window.onpopstate = function() {
     // search = params();
     // page   = window.location.hash.replace('#', '');
     evidenciaSession()
+
+    fetch( `${app}` )
+    .then( j => j.json() )
+    .then( x => {
+        let lista =  Object.keys( x );
+        lista.forEach( e => {
+            vio[e] = x[e];
+        } );
+    } )
 }
 
 evidenciaSession()
@@ -194,7 +203,7 @@ document.querySelectorAll( `[name*=cpf], [name*=cnpj]` )
 .forEach( campo => {
     campo
     .addEventListener( 'input', function() {
-        if( this.value.length < 14 ) {
+        if( this.value.length < 15 ) {
             masc( this, '999.999.999-99' )
         } else {
             masc( this, '99.999.999/9999-99' )

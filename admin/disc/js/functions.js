@@ -139,6 +139,7 @@ const editar = ( url, id, formulario, redirect = null ) => {
     objeto.id            = id;
     edit                 = objeto;    
     objeto.update        = 1;
+    objeto.create        = 1;
     objeto.pass          = '';
     objeto.password      = '';
     editar_horarios( objeto.id );
@@ -618,6 +619,7 @@ function save_horario( elemento, id ) {
 }
 
 function gravar_horario( id ) {
+    id = id || '1'
     if( id.length < 36 ) {
         horario.forEach( x => {
             let obj = {

@@ -135,7 +135,7 @@
                         </div>
                         <div>
                             <label for="" class="input-label">CPF / CNPJ</label>
-                            <input type="text" name="user_cpf_cnpj" value="" class="input-field" disabled>
+                            <input type="text" name="cpf_cnpj" value="" class="input-field" disabled>
                         </div>
                         <div>
                             <label for="" class="input-label">OBS</label>
@@ -895,8 +895,9 @@
                  <header class="gap-bottom"> 
                     <h5>Contratante</h5>
                 </header>
-                <form action="javascript:void(0)" id="form-contratante" onsubmit="post_api_form( '_user', 'form-contratante', 'dash.html#contratantes' )" method="POST">
+                <form action="javascript:void(0)" id="form-contratante" onsubmit="post_api_form( 'auth2', 'form-contratante', 'dash.html#contratantes' )" method="POST">
                     <input type="hidden" name="id">
+                    <input type="hidden" name="create" value="1">
                     <div>
                         <label for="" class="input-label">Nome completo*</label>
                         <input type="text" class="input-field" name="nome" required>
@@ -1355,7 +1356,8 @@
                     </table>
                 </span>
                 <span class="cad cad-create">
-                    <form action="javascript:click('cad-search')" id="pop-cadastrar-contratante" onsubmit="post_api_form( '_user', 'pop-cadastrar-contratante', 'dash.html#agenda')" method="POST">
+                    <form action="javascript:click('cad-change')" id="pop-cadastrar-contratante" onsubmit="post_api_form( 'auth2', 'pop-cadastrar-contratante', 'dash.html#agenda')" method="POST">
+                        <input type="hidden" name="create" value="1" required>
                         <label for="" class="input-label">Nome</label>
                         <input type="text" class="input-field" name="nome" required>
                         <label for="" class="input-label">Telefone</label>
