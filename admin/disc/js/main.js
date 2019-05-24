@@ -69,7 +69,7 @@ fetch( `${app}` )
         
         preencher( 'form-locacao', reserva );
         let meu_time = vio.time
-        meu_time = meu_time.filter( player => player.id_contratante == _profile.email )
+        meu_time = meu_time.filter( player => player.id_contratante == reserva.contratante_email )
         query( "#table_iten_os" ).innerHTML = tpl_array( reservas, "#tpl_iten_os" );
         query( "#table_time_os" ).innerHTML = tpl_array( meu_time, "#tpl_time_os" );   
 
@@ -218,6 +218,15 @@ setInterval( () => {
     fetch( `${app}` )
     .then( j => j.json() )
     .then( x => {
+
+        let reservas = x.reservas 
+        reservas         = reservas.map( x => {
+            x.site_print            = x.site == "1"? "Site" : "sistema"
+            x.tipocontratacao_print = x.tipocontratacao == "1" ? "Avulso" : "Mensal"
+            return x;
+        } );
+        x.reservas = reservas
+
         let lista =  Object.keys( x );
         lista.forEach( e => {
             vio[e] = x[e];

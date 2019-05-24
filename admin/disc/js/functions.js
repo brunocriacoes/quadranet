@@ -693,7 +693,9 @@ function set_user_locacao( json ) {
 }
 
 function set_quadra_contratar( id ) {
+    let quadra = vio.quadra.find( x => x.id == id.split('-').reverse()[0] )
     query('#id_quadra_contratar').value = id;
+    query('#quadra_nome').value = quadra.nome;
     query('#dia_compra').value = id.substr(8,2);
     let horario = id.substr(11,5).replace('-', ':') + " - " + id.substr(17,5).replace('-', ':');
     query("#reserva_horario").innerHTML = horario;

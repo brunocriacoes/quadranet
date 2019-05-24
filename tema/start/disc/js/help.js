@@ -481,6 +481,7 @@ async function buy() {
                     id: loop[index],
                     quadra_nome: x.nome,
                     tipocontratacao: x.tipocontratacao,
+                    tipo_contatacao: x.tipocontratacao,
                     inicio: x.inicio,
                     final: x.final,
                     preco: (x.tipocontratacao == 0) ? x.mensalidade : x.diaria,
@@ -489,17 +490,20 @@ async function buy() {
                     contratante_email: _profile.email,
                     contratante_nome: _profile.nome,
                     contratante_telefone: _profile.telefone,
+                    cpf_cnpj: _profile.cpf_cnpj,
+                    whatsapp: _profile.whatsapp,
                     ...cart
                 };
-
                 post_api('reservas', obj, o => { });
             }
         } else {
             let obj = {
+                dia_compra: x.id.substr(8, 2),
                 _dominio: dominio,
                 id: x.id,
                 quadra_nome: x.nome,
                 tipocontratacao: x.tipocontratacao,
+                tipo_contatacao: x.tipocontratacao,
                 inicio: x.inicio,
                 final: x.final,
                 preco: (x.tipocontratacao == 0) ? x.mensalidade : x.diaria,
@@ -508,9 +512,10 @@ async function buy() {
                 contratante_email: _profile.email,
                 contratante_nome: _profile.nome,
                 contratante_telefone: _profile.telefone,
+                cpf_cnpj: _profile.cpf_cnpj,
+                whatsapp: _profile.whatsapp,
                 ...cart
             };
-
             post_api('reservas', obj, o => { })
         }
     });
@@ -605,7 +610,6 @@ async function post_api_form(url, id_formulario, redirect = null, reset = 0) {
             query(`#${id_formulario}`).reset();
             alerta('Enviado com sucesso')
         }
-
     });
     return true;
 }
@@ -796,7 +800,7 @@ function setHorario(x) {
     let final = `${tempHorario[5]}:${tempHorario[6]}`;
     tempHorario = { ...temp_quadra, inicio, final, id: x };
 
-    document.querySelector('#btn__reserva_mensal').setAttribute('onclick', `addCart( ${JSON.stringify({ ...tempHorario, tipocontratacao: 0 })} )`);
+    document.querySelector('#btn__reserva_mensal').setAttribute('onclick', `addCart( ${JSON.stringify({ ...tempHorario, tipocontratacao: 2 })} )`);
     document.querySelector('#btn__reserva_diaria').setAttribute('onclick', `addCart( ${JSON.stringify({ ...tempHorario, tipocontratacao: 1 })} )`);
     document.querySelector('#agenda_hor').innerHTML = `Horários: ${inicio}hrs ás ${final}hrs`;
 }
@@ -815,7 +819,7 @@ function dataCompra(data) {
         .then(x => x.json())
         .then(y => {
             let reservas = y.reservas.filter(r => +r.id.substr(0, 10).indexOf('-' + duasCasas(data.value) + '-') != -1);
-            reservas = reservas.filter(f => f.usuario_id == _profile.id);
+            reservas = reservas.filter(f => f.contratante_email == _profile.email);
             let combo = [];
             reservas.forEach(e => {
                 if (combo.find(y => y.os == e.os) == undefined) {
@@ -825,15 +829,14 @@ function dataCompra(data) {
             document.querySelector('#vio_historico').innerHTML = combo.map(t => {
                 t.datacontratacao = t.id.substr(0, 10).split('-').reverse().join('/');
                 let img = `<img onclick="gerarPagamento( '${t.id}' )" src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
-                let imgAvulso = '';
                 return `
                     <tr>
                         <td>${ t.dia_compra || '01'}${t.id.substr(0, 8).split('-').reverse().join('/') || '--/--/----'}</td>
                         <td>${t.quadra_nome}</td>
                         <td>R$ ${ t.preco || '00,00'}</td>
-                        <td>${ (t.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
-                        <td>${ status_compra[ t.status_compra ||0 ]}</td>
-                        <td>${(t.tipocontratacao == 0 && t.status_compra == 1) ? img : imgAvulso}</td>
+                        <td>${ t.tipo_contratacao == "2" ? 'Mensal' : 'Avulso'}</td>
+                        <td>${ status_compra[ t.status_compra || 1 ]}</td>
+                        <td>${(t.status_compra == 2 || t.status_compra == 4) ? '' : img}</td>
                         <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Pagamento Jogadores</a></td>
                     </tr>
                 `;
@@ -866,9 +869,12 @@ function mensalidadeMensal(diaSemana, diaCompra) {
             dias.push(`${ano}-${duasCasas(e)}-${duasCasas(index)}`);
         }
     });
-    return dias.filter(x => {
+    return dias.filter(x => {         
         let d = new Date(x);
-        return d.getDay() + 1 == diaSemana;
+        if ( d.getTime() >= data.getTime() ) {
+            return d.getDay() + 1 == diaSemana;
+        }
+        return false
     });
 }
 

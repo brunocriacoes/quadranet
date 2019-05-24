@@ -283,7 +283,7 @@ var vio = {
         } );
         arr = arr.map( item => ( {
             ...item,
-            tipocontratacao_print: item.tipocontratacao == "1" ? "Avulço" : "Mensal",
+            tipocontratacao_print: item.tipocontratacao == "1" ? "Avulso" : "Mensal",
             site_print: item.site == 1 ? "Site" : "Sistema"
         } ) )
         query('#historico__table_body').innerHTML = tpl_array( arr, '#tpl_historico' );

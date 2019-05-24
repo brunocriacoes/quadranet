@@ -94,5 +94,5 @@ var site_sistema = [
 var mensal_avulso = [
     { id: "0", nome: "Todos" },
     { id: "1", nome: "Avulso" },
-    { id: "0", nome: "Mensal" },    
+    { id: "2", nome: "Mensal" },    
 ];
