@@ -68,8 +68,10 @@ fetch( `${app}` )
         
         
         preencher( 'form-locacao', reserva );
+        let meu_time = vio.time
+        meu_time = meu_time.filter( player => player.id_contratante == _profile.email )
         query( "#table_iten_os" ).innerHTML = tpl_array( reservas, "#tpl_iten_os" );
-        query( "#table_time_os" ).innerHTML = tpl_array( vio.time, "#tpl_time_os" );   
+        query( "#table_time_os" ).innerHTML = tpl_array( meu_time, "#tpl_time_os" );   
 
         parcial();        
         
@@ -100,11 +102,12 @@ draw_select( anos, 'anos' );
 draw_select( site_sistema, 'site_sistema' );
 draw_select( mensal_avulso, 'mensal_avulso' );
 
-
+var _profile = {}
 fetch( `${app}/auth/?profile=${window.localStorage.token_painel||''}` )
 .then( x => x.json() )
 .then( x => {
     x.update = 1;
+    _profile = x
     preencher( 'form-perfil', x );
     preencher( 'form-mudar', x );
     if( x.admin == "2" ) {
@@ -204,9 +207,25 @@ document.querySelectorAll( `[name*=cpf], [name*=cnpj]` )
     campo
     .addEventListener( 'input', function() {
         if( this.value.length < 15 ) {
-            masc( this, '999.999.999-99' )
+            masc( this, '999.999.999-99', false )
         } else {
             masc( this, '99.999.999/9999-99' )
         }        
     } )
 } )
+
+setInterval( () => {
+    fetch( `${app}` )
+    .then( j => j.json() )
+    .then( x => {
+        let lista =  Object.keys( x );
+        lista.forEach( e => {
+            vio[e] = x[e];
+        } );
+        if( quadraAtivaId != '' ) {
+            edita_quadra( quadraAtivaId )
+        }
+        busca_os_contratante()
+        localizar_contratante()
+    } )
+}, 3000 )

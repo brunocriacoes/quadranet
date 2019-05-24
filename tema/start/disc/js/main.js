@@ -1,4 +1,13 @@
 'use strict';
+
+var status_compra = [
+    "Todos",
+    "Aguardando pagamento",
+    "Pago",
+    "Parcial",
+    "Cancelado"
+];
+
 let bug = debug ? '?bug=true' : '';
 var dataSemana = hoje().data_sisten;
 
@@ -116,6 +125,7 @@ if (document.querySelector('#historico__pagamento_jogador')) {
         .then(x => x.json())
         .then(y => {
             let time = y.time;
+            time = time.filter( player => player.id_contratante == _profile.email  )
             let parametro = parametros();
             let reservas = y.reservas || [];
             let os = reservas.find(x => x.id == parametro.id || '');

@@ -4,23 +4,58 @@
 <section id="servicos" class="container">
     {{menu_lateral}}
     <form action="javascript:void(0)" method="POST" class="" id="atualizar_perfil">
-        <h2 class="text-center">Perfil</h2>
+        <h3>Dados Pessoais</h3>
+        <label for="" class="label">Nome Completo (obrigatório)</label>
+        <input type="text" class="field" name="nome" required>
         <div class="grid-2">
-            <select class="field" name="pessoa">
-                <option value="0">Pessoa Fisica</option>
-                <option value="1">Pessoa Jurídica</option>
-            </select>
-            <input type="text" class="field" placeholder="Nome Completo" name="nome" required>
-            <input type="email" class="field" placeholder="Email" name="email" required>
-            <input type="text" class="field" placeholder="CPF/CNPJ" name="cpf_cnpj" required>
-            <input type="text" class="field" placeholder="CEP" onblur="query_cep( this, 'formulario_me-cadastrar' )" name="cep" required>
-            <input type="text" class="field" placeholder="Estado" name="estado" disabled required>
-            <input type="text" class="field" placeholder="Cidade" name="cidade" disabled required>
-            <input type="text" class="field" placeholder="Bairro" name="bairro" required>
-            <input type="text" class="field" placeholder="Rua" name="endereco" required>
-            <input type="text" class="field" placeholder="Número" name="numero" required>
-            <input type="tel" class="field" name="whatsapp" placeholder="Whatsapp" required>
+            <div>
+                <label for="" class="label">CPF/CNPJ (obrigatório) </label>
+                <input type="text" class="field" name="cpf_cnpj" required>
+            </div>
+            <div>
+                <label for="" class="label">Razão Social</label>
+                <input type="text" class="field" name="razao_social">
+            </div>
+            <div>
+                <label for="" class="label">Telefone fixo (obrigatório)</label>
+                <input type="text" class="field" name="telefone" required>
+            </div>
+            <div>
+                <label for="" class="label">WhatsApp (obrigatório)</label>
+                <input type="text" class="field" name="whatsapp" required>
+            </div>
         </div>
+        <h3>Endereço</h3>
+        <div class="grid-2">
+            <div>
+                <label for="" class="label">Cep (obrigatório)</label>
+                <input type="text" class="field" placeholder="00000-000" onblur="query_cep( this, 'formulario_me-cadastrar' )" name="cep" required>
+            </div>
+            <div>
+                <label for="" class="label">Endereço (obrigatório)</label>
+                <input type="text" class="field" name="endereco" required>
+            </div>
+            <div>
+                <label for="" class="label">Número (obrigatório)</label>
+                <input type="text" class="field"  name="numero" required>            
+            </div>
+            <div>
+                <label for="" class="label">Bairro (obrigatório)</label>
+                <input type="text" class="field" placeholder="Bairro" name="bairro" required>
+            </div>
+            <div>
+                <label for="" class="label">Cidade (obrigatório)</label>
+                <input type="text" class="field"" name="cidade" required>
+            </div>
+            <div>
+                <label for="" class="label">Estado (obrigatório)</label>
+                <input type="text" class="field" name="estado" required>
+            </div>
+        </div>
+        <h3>Dados de Acesso</h3>
+        <label for="" class="label">Email (obrigatório)</label>
+        <input type="email" class="field" placeholder="Email" name="email" disabled required>
+        
         <input onclick="atualizarPerfil()" type="submit" value="salvar" class="btn btn-sucess btn-center">
     </form>
 </section>

@@ -131,7 +131,7 @@
                         </div>
                         <div>
                             <label for="" class="input-label">Celular</label>
-                            <input type="text" name="contratante_Id" value="" class="input-field" disabled>
+                            <input type="text" name="contratante_telefone" value="" class="input-field" disabled>
                         </div>
                         <div>
                             <label for="" class="input-label">CPF / CNPJ</label>
@@ -870,8 +870,16 @@
             </section>           
             
             <section id="contratantes" class="gap box">
-                 <header class="gap-bottom grid-2"> 
+                 <header class="gap-bottom grid-localizar-contratante"> 
                     <h5>Contratantes</h5>
+                    <form action="javascript:void(0)" method="POST" onsubmit="localizar_contratante()" class="search">
+                        <input type="search" name="s" id="localizar_contratante_termo" placeholder="Contratante" onkeyup="localizar_contratante()">
+                        <label for="busca-capitao">
+                            <img src="./disc/ico/search.png">
+                        </label>
+                        <input type="submit" onkeyup="localizar_contratante()" hidden>
+                        <input type="reset" hidden>
+                    </form>
                     <div class="text-right">
                         <a href="#contratante" class="ico ico-plus theme circle"></a>
                     </div>
@@ -1165,7 +1173,7 @@
                                 <label for="busca-capitao">
                                     <img src="./disc/ico/search.png">
                                 </label>
-                                <input type="submit" id="busca-capitao" onkeyup="busca_os_contratante()" hidden>
+                                <input type="submit"  id="busca-capitao" onkeyup="busca_os_contratante()" hidden>
                                 <input type="reset" hidden>
                             </form>
                         </div>
@@ -1381,6 +1389,8 @@
                     <input type="hidden" name="contratante_email" id="contratante-email-locacao">
                     <input type="hidden" name="id" id="id_quadra_contratar">
                     <input type="hidden" name="dia_compra" id="dia_compra">
+                    <input type="hidden" name="cpf_cnpj" id="contratante-cpf-cnpj-locacao">
+                    <input type="hidden" name="whatsapp" id="contratante-whatsapp-locacao">
                     <label for="" class="input-label">Tipo locação</label>
                     <select name="tipo_contatacao" class="input-field">
                         <option value="1">Diária</option>

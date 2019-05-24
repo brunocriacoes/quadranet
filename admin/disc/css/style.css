@@ -937,3 +937,8 @@ label img {
 .grid-os table {
     width: 100%;
 }
+.grid-localizar-contratante {
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: 1fr 1fr 50px;
+}

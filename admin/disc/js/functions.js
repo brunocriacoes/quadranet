@@ -220,7 +220,9 @@ function quadra_em_edicao( id ) {
         quadra_a_ativar.classList.add('ativa');
     }
 }
+var quadraAtivaId = ''
 function edita_quadra( id ) {
+    quadraAtivaId = id
     query('#agenda_contador span').innerHTML = 0;   
     horario = [];
     let tmp_quadra  = vio.quadra || []
@@ -671,7 +673,7 @@ function busca_capiao( e ) {
             <td>${x.nome}</td>
             <td>${x.telefone}</td>
             <td>
-                <label for="cad-finalizar" onclick="set_user_locacao('${x.id}','${x.nome}', '${x.telefone}', '${x.email}')">
+                <label for="cad-finalizar" onclick='set_user_locacao("${JSON.stringify(x).replace(/\"/gi, "\\\"")}")'>
                     <img src="./disc/ico/check.png" class="ico-table">
                 </label>
             </td>
@@ -680,11 +682,14 @@ function busca_capiao( e ) {
     query('#lista-de-capitao').innerHTML = html;
 }
 
-function set_user_locacao( id, nome, telefone, email ) {
+function set_user_locacao( json ) {
+    let {id, nome, telefone, email, cpf_cnpj, whatsapp} = JSON.parse( json )
     query('#contratante-id-locacao').value = id;
     query('#contratante-nome-locacao').value = nome;
     query('#contratante-telefone-locacao').value = telefone;
     query('#contratante-email-locacao').value = email;
+    query('#contratante-cpf-cnpj-locacao').value = cpf_cnpj;
+    query('#contratante-whatsapp-locacao').value = whatsapp;
 }
 
 function set_quadra_contratar( id ) {
@@ -720,7 +725,7 @@ function busca_os_contratante() {
         let if_termo         = true
         let if_ano           = true
         let if_pago          = true
-        let busca            = `${x.contratante_nome} ${x.contratante_telefone} ${x.contratante_email}`;
+        let busca            = `${x.contratante_nome} ${x.contratante_telefone} ${x.contratante_email} ${x.cpf_cnpj}`;
 
         x.tipocontratacao    = x.tipocontratacao || 0;
         x.site               = x.site || 2;
@@ -739,8 +744,8 @@ function busca_os_contratante() {
         if( contatacao != "0" ) {
             if_contratacacao = x.tipocontratacao == contatacao;
         }
-        if( termo.length > 0 ) {
-            if_termo         = termo.length > 1 ? true : busca.indexOf(termo) != -1;
+        if( termo.length > 3 ) {
+            if_termo         = busca.indexOf(termo) != -1 ? true : false
         }
         return if_pago && if_mes && if_origem && if_contratacacao && if_termo && if_ano;
     } );
@@ -961,12 +966,14 @@ function baixar_balanco() {
     dowload_csv(  csvFiltrado, 'lista.csv' )
 }
 
-function masc( el, pattern ) {
+function masc( el, pattern, limit = true ) {
     let value   = el.value
     let misterX = pattern.replace(/9/g, 'x')
     let max     = pattern.replace( /\D/gi, '' )
     value       = value.replace( /\D/gi, '' )
-    el.setAttribute( 'maxlength', misterX.length )
+    if( limit ) {
+        el.setAttribute( 'maxlength', misterX.length )
+    }
     if( value.length <= max.length && value.length > 0) {
         value.split('').forEach( x => {
             let index      = misterX.indexOf('x')
@@ -979,4 +986,28 @@ function masc( el, pattern ) {
         value              = misterX.substr(0,ultimo)
     }
     el.value = value
+}
+
+function localizar_contratante() {
+    let termo = query("#localizar_contratante_termo").value
+    if( termo.length > 3 ) {
+        fetch( `${app}/_user` )
+        .then( x => x.json() )
+        .then( contratantes => {
+            let filtrado = contratantes.filter( usuario => {
+                let frase = `${usuario.nome} ${usuario.cpf_cnpj} ${usuario.telefone} ${usuario.whatsapp}`
+                return frase.indexOf( termo ) != -1 ? true : false
+            } )
+            query('#capitao__table_body').innerHTML = filtrado.map( x => `
+                <tr>                
+                    <td>${x.nome}</td>
+                    <td>${x.telefone}</td>
+                    <td>
+                        <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html#contratante' )" src="./disc/ico/edit.png" class="ico-table">
+                    </td>
+                    <td><img onclick="trash( '_user', '${x.id}' )" src="./disc/ico/trash.png" class="ico-table"></td>
+                </tr>
+            ` ).join( '' );
+        } )
+    }
 }

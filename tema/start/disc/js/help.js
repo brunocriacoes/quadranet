@@ -832,7 +832,7 @@ function dataCompra(data) {
                         <td>${t.quadra_nome}</td>
                         <td>R$ ${ t.preco || '00,00'}</td>
                         <td>${ (t.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
-                        <td>${ (t.status) ? 'Aguardando Pagamento' : 'Pago'}</td>
+                        <td>${ status_compra[ t.status_compra ||0 ]}</td>
                         <td>${(t.tipocontratacao == 0 && t.status_compra == 1) ? img : imgAvulso}</td>
                         <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Pagamento Jogadores</a></td>
                     </tr>
@@ -927,22 +927,24 @@ function diasAnteriores(data) {
     }
 }
 
-function masc(el, pattern) {
-    let value = el.value
+function masc( el, pattern, limit = true ) {
+    let value   = el.value
     let misterX = pattern.replace(/9/g, 'x')
-    let max = pattern.replace(/\D/gi, '')
-    value = value.replace(/\D/gi, '')
-    el.setAttribute('maxlength', misterX.length)
-    if (value.length <= max.length && value.length > 0) {
-        value.split('').forEach(x => {
-            let index = misterX.indexOf('x')
-            misterX = misterX.split('')
+    let max     = pattern.replace( /\D/gi, '' )
+    value       = value.replace( /\D/gi, '' )
+    if( limit ) {
+        el.setAttribute( 'maxlength', misterX.length )
+    }
+    if( value.length <= max.length && value.length > 0) {
+        value.split('').forEach( x => {
+            let index      = misterX.indexOf('x')
+            misterX        = misterX.split('')
             misterX[index] = x
-            misterX = misterX.join('')
-        })
-        let ultimo = misterX.split('').reverse().join('').search(/\d/)
-        ultimo = misterX.length - ultimo
-        value = misterX.substr(0, ultimo)
+            misterX        = misterX.join('')
+        } )
+        let ultimo         = misterX.split('').reverse().join('').search(/\d/)
+        ultimo             = misterX.length - ultimo
+        value              = misterX.substr(0,ultimo)
     }
     el.value = value
 }
