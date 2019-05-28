@@ -79,7 +79,7 @@ async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
         let pegaData           = new Date(dataLocacao)
         let tradaDia           = pegaData.getDay() + 1;
         tradaDia               = tradaDia < 7 ? tradaDia : 0        
-        let ListaReservaMensal = agendarMensal( tradaDia, idQuadra, inicioHs, finalHs )
+        let ListaReservaMensal = agendarMensal( tradaDia, idQuadra, inicioHs, finalHs, formulario.id.substr(0,10)  )
         ListaReservaMensal.forEach( idReserva => {
             post_api( url, {...formulario, id: idReserva}, () =>{} )
         } )
@@ -224,7 +224,7 @@ var quadraAtivaId = ''
 function edita_quadra( id ) {
     quadraAtivaId = id
     query('#agenda_contador span').innerHTML = 0;   
-    horario = [];
+    // horario = [];
     let tmp_quadra  = vio.quadra || []
     tmp_quadra      = tmp_quadra.find( q => q.id == id );
     // tmp_quadra      = tmp_quadra || vio.quadra[0] || [];
@@ -644,6 +644,7 @@ function gravar_horario( id ) {
 function editar_horarios( id ) {
     let times =  vio.horario || [];
     horario = times.filter( x => x.quadra == id );
+    log( horario )
 }
 function editar_agenda( id ) {
     let times =  vio.horario || [];
@@ -897,8 +898,8 @@ function removerReserva() {
     }
 }
 
-function mensalidadeMensal(diaSemana) {
-    let data = new Date();
+function mensalidadeMensal(diaSemana, diaCompra) {
+    let data = new Date( diaCompra );
     let quantidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30];
     let mes = data.getMonth() + 1;
     let ano = data.getFullYear();
@@ -914,12 +915,15 @@ function mensalidadeMensal(diaSemana) {
     });
     return dias.filter(x => {
         let d = new Date(x);
-        return d.getDay() + 1 == diaSemana;
+        if ( d.getTime() >= data.getTime() ) {
+            return d.getDay() + 1 == diaSemana;
+        }
+        return false;
     });
 }
 
-function agendarMensal(diaSemana, idQuadra, horarioInicial, horarioFinal) {
-    let idBase = mensalidadeMensal(diaSemana);
+function agendarMensal(diaSemana, idQuadra, horarioInicial, horarioFinal, diaCompra ) {
+    let idBase = mensalidadeMensal(diaSemana, diaCompra);
 
     return idBase.map(x => `${x}-${horarioInicial.replace(':', '-')}-${horarioFinal.replace(':', '-')}-${diaSemana}-${idQuadra}`);
 }

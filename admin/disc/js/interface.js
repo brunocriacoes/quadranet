@@ -284,7 +284,8 @@ var vio = {
         arr = arr.map( item => ( {
             ...item,
             tipocontratacao_print: item.tipo_contatacao == "1" ? "Avulso" : "Mensal",
-            site_print: item.site == 1 ? "Site" : "Sistema"
+            site_print: item.site == 1 ? "Site" : "Sistema",
+            data_print:  item.id.substr(0,10).split('-').reverse().join('/')
         } ) )
         _vio.reservas = arr;
         query('#historico__table_body').innerHTML = tpl_array( arr, '#tpl_historico' );
