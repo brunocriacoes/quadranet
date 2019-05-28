@@ -1209,11 +1209,11 @@
                     <thead>
                         <tr>
                             <th>nome</th>
-                            <th>Telefone</th>
-                            <th>Status compra</th>
                             <th>Origem</th>
                             <th>Contratação</th>
+                            <th>Data</th>
                             <th width="50">Valor</th>
+                            <th>Status</th>
                             <th width="50"></th>
                         </tr>
                     </thead>
@@ -1221,11 +1221,11 @@
                     <template id="tpl_historico">
                         <tr>
                             <td>{{contratante_nome}}</td>
-                            <td>{{contratante_telefone}}</td>
-                            <td>{{pagamento}}</td>
                             <td>{{site_print}}</td>
                             <td>{{tipocontratacao_print}}</td>
+                            <td>{{data_print}}</td>
                             <td>{{valor}}</td>
+                            <td>{{pagamento}}</td>
                             <td>
                                 <a href="?id={{id}}#os" title="Editar" target="_blank">
                                     <img  src="./disc/ico/edit.png" class="ico-table">
@@ -1368,8 +1368,8 @@
                         <input type="hidden" name="create" value="1" required>
                         <label for="" class="input-label">Nome</label>
                         <input type="text" class="input-field" name="nome" required>
-                        <label for="" class="input-label">Telefone</label>
-                        <input type="text" class="input-field" name="telefone" required>
+                        <label for="" class="input-label">Celular</label>
+                        <input type="text" class="input-field" name="whatsapp" required>
                         <label for="" class="input-label">Email</label>
                         <input type="email" class="input-field" name="email" required>
                         <label for="" class="input-label">Senha</label>
