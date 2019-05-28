@@ -1610,3 +1610,14 @@ iframe {
     display: grid;
     justify-items: center
 }
+
+.title_table_historico {
+    font-weight: bolder;
+}
+
+.img__table__form {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

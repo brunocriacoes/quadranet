@@ -827,17 +827,18 @@ function dataCompra(data) {
                 }
             });
             document.querySelector('#vio_historico').innerHTML = combo.map(t => {
+                log(t);
                 t.datacontratacao = t.id.substr(0, 10).split('-').reverse().join('/');
                 let img = `<img onclick="gerarPagamento( '${t.id}' )" src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
                 return `
                     <tr>
-                        <td>${ t.dia_compra || '01'}${t.id.substr(0, 8).split('-').reverse().join('/') || '--/--/----'}</td>
-                        <td>${t.quadra_nome}</td>
-                        <td>R$ ${ t.preco || '00,00'}</td>
+                        <td><span class="title_table_historico">${t.quadra_nome}</span> <br>${ t.dia_compra || '01'}${t.id.substr(0, 8).split('-').reverse().join('/') || '--/--/----'}</td>
+                        <td>${t.inicio} - ${t.final}</td>
                         <td>${ t.tipo_contratacao == "2" ? 'Mensal' : 'Avulso'}</td>
+                        <td>R$ ${ t.preco || '00,00'}</td>
                         <td>${ status_compra[ t.status_compra || 1 ]}</td>
+                        <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Jogadores</a></td>
                         <td>${(t.status_compra == 2 || t.status_compra == 4) ? '' : img}</td>
-                        <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Pagamento Jogadores</a></td>
                     </tr>
                 `;
             }).join('');
