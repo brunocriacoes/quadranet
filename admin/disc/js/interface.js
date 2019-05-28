@@ -263,7 +263,7 @@ var vio = {
         query('#horarios').innerHTML = tpl_array( horario, '#tpl-horas' );
     },
     set reservas( arr ) {
-        _vio.reservas = arr;
+        
         _csv          = arr;
         edita_quadra( quadra_sisten );
         arr.forEach( x => {
@@ -283,9 +283,10 @@ var vio = {
         } );
         arr = arr.map( item => ( {
             ...item,
-            tipocontratacao_print: item.tipocontratacao == "1" ? "Avulso" : "Mensal",
+            tipocontratacao_print: item.tipo_contatacao == "1" ? "Avulso" : "Mensal",
             site_print: item.site == 1 ? "Site" : "Sistema"
         } ) )
+        _vio.reservas = arr;
         query('#historico__table_body').innerHTML = tpl_array( arr, '#tpl_historico' );
     },
     set espera( arr ) {

@@ -237,4 +237,4 @@ setInterval( () => {
         busca_os_contratante()
         localizar_contratante()
     } )
-}, 3000 )
+}, 60 * 1000 )

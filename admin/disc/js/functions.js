@@ -344,7 +344,7 @@ function pop_ocupado( id ) {
     let reserva = vio.reservas.find( x => x.id == id );
     query("#v-ocupado-nome").innerHTML = reserva.contratante_nome;
     query("#v-ocupado-telefone").innerHTML = reserva.contratante_telefone;
-    query("#v-ocupado-contratacao").innerHTML = reserva.tipocontratacao == "1" ? "Avulso" : "mensal"; 
+    query("#v-ocupado-contratacao").innerHTML = reserva.tipo_contatacao == "1" ? "Avulso" : "mensal"; 
     query("#v-ocupado-pagamento").innerHTML = reserva.pagamento;
     query("#v-ocupado-link").setAttribute('href',`${uri}/admin/dash.html?id=${id}#os` );
 }
@@ -728,8 +728,8 @@ function busca_os_contratante() {
         let if_ano           = true
         let if_pago          = true
         let busca            = `${x.contratante_nome} ${x.contratante_telefone} ${x.contratante_email} ${x.cpf_cnpj}`;
-
-        x.tipocontratacao    = x.tipocontratacao || 0;
+        
+        x.tipocontratacao    = x.tipo_contratacao || 1;
         x.site               = x.site || 2;
         if( mes != "0" ) {
             if_mes           = mes == "0" ? true : x.id.indexOf(`-${mes}-`) != -1;
@@ -744,7 +744,7 @@ function busca_os_contratante() {
             if_pago          = x.status_compra == status;
         }
         if( contatacao != "0" ) {
-            if_contratacacao = x.tipocontratacao == contatacao;
+            if_contratacacao = x.tipo_contatacao == contatacao ? true : false;
         }
         if( termo.length > 3 ) {
             if_termo         = busca.indexOf(termo) != -1 ? true : false
