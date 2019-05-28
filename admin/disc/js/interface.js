@@ -84,6 +84,7 @@ var vio = {
             <tr>                
                 <td>${x.nome}</td>
                 <td>${x.telefone}</td>
+                <td>${x.cpf_cnpj}</td>
                 <td>
                     <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html#contratante' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>

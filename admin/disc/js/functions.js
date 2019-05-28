@@ -86,6 +86,7 @@ async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
     }
     
     formulario        = { ... formulario, ... send };
+    formulario.os     = new Date().getTime()
     vio.aside_quadra  = 1;
     post_api( url, formulario, x => {
         gravar_horario( x.id );        
@@ -331,7 +332,7 @@ function edita_quadra( id ) {
             elementor.innerHTML = `
                 <span class="descktop" onclick="pop_ocupado('${x.id}')">
                     <b>${x.user_nome || ''}</b>
-                    <i>${x.tipo_contatacao == 1 ? 'Diaria' : 'Mensal'}</i>
+                    <i>${x.tipo_contatacao == 1 ? 'Avulso' : 'Mensal'}</i>
                 </span> 
             `;            
         }
@@ -343,7 +344,7 @@ function pop_ocupado( id ) {
     query("#ocupado_horario").innerHTML = horario;
     let reserva = vio.reservas.find( x => x.id == id );
     query("#v-ocupado-nome").innerHTML = reserva.contratante_nome;
-    query("#v-ocupado-telefone").innerHTML = reserva.contratante_telefone;
+    query("#v-ocupado-telefone").innerHTML = reserva.contratante_telefone || reserva.whatsapp;
     query("#v-ocupado-contratacao").innerHTML = reserva.tipo_contatacao == "1" ? "Avulso" : "mensal"; 
     query("#v-ocupado-pagamento").innerHTML = reserva.pagamento;
     query("#v-ocupado-link").setAttribute('href',`${uri}/admin/dash.html?id=${id}#os` );
@@ -644,7 +645,6 @@ function gravar_horario( id ) {
 function editar_horarios( id ) {
     let times =  vio.horario || [];
     horario = times.filter( x => x.quadra == id );
-    log( horario )
 }
 function editar_agenda( id ) {
     let times =  vio.horario || [];
@@ -672,7 +672,7 @@ function busca_capiao( e ) {
     let html = arr.map( x => `
         <tr>
             <td>${x.nome}</td>
-            <td>${x.telefone}</td>
+            <td>${x.whatsapp}</td>
             <td>
                 <label for="cad-finalizar" onclick='set_user_locacao("${JSON.stringify(x).replace(/\"/gi, "\\\"")}")'>
                     <img src="./disc/ico/check.png" class="ico-table">
@@ -699,7 +699,8 @@ function set_quadra_contratar( id ) {
     query('#quadra_nome').value = quadra.nome;
     query('#dia_compra').value = id.substr(8,2);
     let horario = id.substr(11,5).replace('-', ':') + " - " + id.substr(17,5).replace('-', ':');
-    query("#reserva_horario").innerHTML = horario;
+    query("#contratante-inicio").value = id.substr(11,5).replace('-', ':');
+    query("#contratante-final").value  = id.substr(17,5).replace('-', ':'); 
     query("#ocupado_horario").innerHTML = horario;
     query("#reserva_data").innerHTML = id.substr( 0,10 ).split('-').reverse().join('/');
     query("#ocupado_data").innerHTML = id.substr( 0,10 ).split('-').reverse().join('/');
@@ -996,7 +997,7 @@ function masc( el, pattern, limit = true ) {
 
 function localizar_contratante() {
     let termo = query("#localizar_contratante_termo").value
-    if( termo.length > 3 ) {
+    // if( termo.length > 3 ) {
         fetch( `${app}/_user` )
         .then( x => x.json() )
         .then( contratantes => {
@@ -1008,6 +1009,7 @@ function localizar_contratante() {
                 <tr>                
                     <td>${x.nome}</td>
                     <td>${x.telefone}</td>
+                    <td>${x.cpf_cnpj}</td>
                     <td>
                         <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html#contratante' )" src="./disc/ico/edit.png" class="ico-table">
                     </td>
@@ -1015,5 +1017,5 @@ function localizar_contratante() {
                 </tr>
             ` ).join( '' );
         } )
-    }
+    // }
 }

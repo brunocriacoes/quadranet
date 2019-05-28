@@ -83,8 +83,8 @@
                     "email"  => request['email']
                 ] );
                 echo json_encode( [ "error" => false, "token" => $tokenId, "mensagem" => "Logado com sucesso" ] );
+                die;
             endif;
-            die;
         endif;
         echo json_encode( [ "error" => true, "token" => '', "mensagem" => "Usuário ou senha esta errado" ] );
         die;
@@ -123,8 +123,8 @@
     if( !empty( request['alter-pass'] ) && !empty( request['pass'] ) ):
         $request               = request;
         $request['id']         = request['alter-pass'];
-        $request['pass']       = sha1( request['pass'] );
-        $request['password']   = sha1( request['pass'] );
+        $request['pass']       = request['pass'];
+        $request['password']   = request['pass'];
         $user_file             = "{$user_dir}{$request['id']}.json";
         unset( $request['alter-pass'] );
         if( file_exists( $user_file ) ) setJson( $user_file, $request );       

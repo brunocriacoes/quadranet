@@ -15,9 +15,9 @@ function privado() {
     });
 }
 function login(MAIL, PASS, HOF) {
-    fetch(`${app}/auth2?login=1&pass=${PASS}&email=${MAIL}${trol}`)
+    fetch(`${app}/auth2?login=1&pass=${PASS}&email=${MAIL}`)
         .then(j => j.json())
-        .then(x => {
+        .then( x => {
             HOF(x);
             if (x.error) {
                 sessionStorage.token_site = "";

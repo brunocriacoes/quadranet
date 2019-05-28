@@ -407,7 +407,7 @@ function atualizarPerfil() {
 
 function mudarSenha() {
     let form = get_form('#mudar_senha');
-    fetch(`${app}/auth2/?alter-pass=${form.email},${form.pass}${trol}`)
+    fetch(`${app}/auth2/?alter-pass=${form.id}&pass=${form.pass}`)
         .then(j => j.json())
         .then(x => {
             msgAlerta('Senha Alterada com Sucesso!');
@@ -827,14 +827,13 @@ function dataCompra(data) {
                 }
             });
             document.querySelector('#vio_historico').innerHTML = combo.map(t => {
-                log(t);
                 t.datacontratacao = t.id.substr(0, 10).split('-').reverse().join('/');
                 let img = `<img onclick="gerarPagamento( '${t.id}' )" src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
                 return `
                     <tr>
                         <td><span class="title_table_historico">${t.quadra_nome}</span> <br>${ t.dia_compra || '01'}${t.id.substr(0, 8).split('-').reverse().join('/') || '--/--/----'}</td>
                         <td>${t.inicio} - ${t.final}</td>
-                        <td>${ t.tipo_contratacao == "2" ? 'Mensal' : 'Avulso'}</td>
+                        <td>${ t.tipocontratacao == "2" ? 'Mensal' : 'Avulso'}</td>
                         <td>R$ ${ t.preco || '00,00'}</td>
                         <td>${ status_compra[ t.status_compra || 1 ]}</td>
                         <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Jogadores</a></td>
