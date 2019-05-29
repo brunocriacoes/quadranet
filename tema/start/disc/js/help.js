@@ -402,7 +402,9 @@ function meCadastrar() {
 
 function atualizarPerfil() {
     let form = get_form('#atualizar_perfil');
-    post_api('/auth2/?update=1', form, x => { });
+    post_api(`/auth2/?update=${form.id}`, form, x => {
+        alerta( 'Salvo com Sucesso' )
+     });
 }
 
 function mudarSenha() {
@@ -833,7 +835,7 @@ function dataCompra(data) {
                     <tr>
                         <td><span class="title_table_historico">${t.quadra_nome}</span> <br>${ t.dia_compra || '01'}${t.id.substr(0, 8).split('-').reverse().join('/') || '--/--/----'}</td>
                         <td>${t.inicio} - ${t.final}</td>
-                        <td>${ t.tipocontratacao == "2" ? 'Mensal' : 'Avulso'}</td>
+                        <td>${ t.tipo_contatacao == "2" ? 'Mensal' : 'Avulso'}</td>
                         <td>R$ ${ t.preco || '00,00'}</td>
                         <td>${ status_compra[ t.status_compra || 1 ]}</td>
                         <td><a class="btn btn-sucess" href="${base}/historico-jogador?id=${t.id}">Jogadores</a></td>

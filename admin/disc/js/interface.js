@@ -101,7 +101,7 @@ var vio = {
                     <td>${x.nome}</td>
                     <td>${x.idade}</td>
                     <td>${x.posicao}</td>
-                    <td>${x.celular}</td>
+                    <td>${x.celular || x.whatsapp}</td>
                     <td>${x.email}</td>
                     <td><img onclick="trash( 'espera', '${x.id}' )" src="./disc/ico/trash.png" class="ico-table"></td>
                 </tr>

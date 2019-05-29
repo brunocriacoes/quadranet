@@ -157,7 +157,6 @@ fetch(`${app}/auth2?profile=${sessionStorage.token_site || []}`)
         fetch(`${app}/time`)
             .then(p => p.json())
             .then(b => {
-                log(b)
                 let meuTime = b.filter(jogador => jogador.id_contratante == _profile.email)
                 vio.time = meuTime;
                 _time = meuTime;

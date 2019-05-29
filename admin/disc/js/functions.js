@@ -68,7 +68,7 @@ async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
 {
     let formulario    = form_data( id_formulario );
     let send          = await sendImage();
-
+    formulario.os     = new Date().getTime()
     let tipoContrataca = formulario.tipo_contatacao || 1
     if( tipoContrataca == "2" ) {
         let ID                 = formulario.id
@@ -86,7 +86,7 @@ async function post_api_form( url, id_formulario, redirect = null, reset = 0 )
     }
     
     formulario        = { ... formulario, ... send };
-    formulario.os     = new Date().getTime()
+    
     vio.aside_quadra  = 1;
     post_api( url, formulario, x => {
         gravar_horario( x.id );        
@@ -692,7 +692,13 @@ function set_user_locacao( json ) {
     query('#contratante-cpf-cnpj-locacao').value = cpf_cnpj;
     query('#contratante-whatsapp-locacao').value = whatsapp;
 }
-
+function setValorReserva() {
+    let idQuadra =  query('#id_quadra_contratar').value.split('-').reverse()[0]
+    let quadra   = _vio.quadra.find( arena => arena.id == idQuadra )
+    let tipo     =  query('#contratante-mensal-avulso').value
+    let indice   = tipo == "1" ? 'diaria' : 'mensalidade'
+    query('#contratante-preco').value = quadra[indice]
+}
 function set_quadra_contratar( id ) {
     let quadra = vio.quadra.find( x => x.id == id.split('-').reverse()[0] )
     query('#id_quadra_contratar').value = id;
