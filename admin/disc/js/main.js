@@ -37,6 +37,7 @@ fetch( `${app}` )
     preencher( 'visual__form__info', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__social', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__contato', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
+    preencher( 'visual__form__termo', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__pag', x.site.find( y => y.id == 'pagseguro' ) || { id: 'pagseguro' } );
     preencher( 'servicos_form__quem-somos', x.pagina.find( y => y.id == 'sobre' ) || { id: 'sobre' } );
     preencher( 'servicos_form', x.pagina.find( y => y.id == 'servico' ) || { id: 'servico' } );
@@ -68,6 +69,7 @@ fetch( `${app}` )
         
         
         preencher( 'form-locacao', reserva );
+        preencher( 'form-locacao-mocado', reserva );
         let meu_time = vio.time
         meu_time = meu_time.filter( player => player.id_contratante == reserva.contratante_email )
         query( "#table_iten_os" ).innerHTML = tpl_array( reservas, "#tpl_iten_os" );

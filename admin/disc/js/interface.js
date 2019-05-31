@@ -56,9 +56,9 @@ var vio = {
         query('#quadra__table_body').innerHTML = arr
             .map( x => `
                 <tr>                    
-                    <td>${x.nome}</td>
-                    <td>R$ ${x.mensalidade}</td>
-                    <td>R$ ${x.diaria}</td>
+                    <td>${x.nome || ''}</td>
+                    <td>R$ ${x.mensalidade || ''}</td>
+                    <td>R$ ${x.diaria || ''}</td>
                     <td>                        
                         <img onclick="editar( 'quadra', '${x.id}', 'quadra_nova__form', 'dash.html#quadra-nova' )" src="./disc/ico/edit.png" class="ico-table">
                     </td>
@@ -82,9 +82,9 @@ var vio = {
         _vio._user = arr || [];
         query('#capitao__table_body').innerHTML = arr.map( x => `
             <tr>                
-                <td>${x.nome}</td>
-                <td>${x.telefone}</td>
-                <td>${x.cpf_cnpj}</td>
+                <td>${x.nome || ''}</td>
+                <td>${x.whatsapp || x.celular || ''}</td>
+                <td>${x.cpf_cnpj || ''}</td>
                 <td>
                     <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html#contratante' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
@@ -98,11 +98,11 @@ var vio = {
         query('#jogadores__table_body').innerHTML = cont
             .map( x => `
                 <tr>
-                    <td>${x.nome}</td>
-                    <td>${x.idade}</td>
-                    <td>${x.posicao}</td>
+                    <td>${x.nome || ''}</td>
+                    <td>${x.idade || ''}</td>
+                    <td>${x.posicao || ''}</td>
                     <td>${x.celular || x.whatsapp}</td>
-                    <td>${x.email}</td>
+                    <td>${x.email || ''}</td>
                     <td><img onclick="trash( 'espera', '${x.id}' )" src="./disc/ico/trash.png" class="ico-table"></td>
                 </tr>
             ` ).join( '' );

@@ -341,12 +341,12 @@ function edita_quadra( id ) {
 
 function pop_ocupado( id ) {
     let horario = id.substr(11,5).replace('-', ':') + " - " + id.substr(17,5).replace('-', ':');
-    query("#ocupado_horario").innerHTML = horario;
+    query("#ocupado_horario").innerHTML = horario || '';
     let reserva = vio.reservas.find( x => x.id == id );
-    query("#v-ocupado-nome").innerHTML = reserva.contratante_nome;
-    query("#v-ocupado-telefone").innerHTML = reserva.contratante_telefone || reserva.whatsapp;
+    query("#v-ocupado-nome").innerHTML = reserva.contratante_nome || '';
+    query("#v-ocupado-telefone").innerHTML = reserva.whatsapp || reserva.contratante_telefone || '' ;
     query("#v-ocupado-contratacao").innerHTML = reserva.tipo_contatacao == "1" ? "Avulso" : "mensal"; 
-    query("#v-ocupado-pagamento").innerHTML = reserva.pagamento;
+    query("#v-ocupado-pagamento").innerHTML = reserva.pagamento || '';
     query("#v-ocupado-link").setAttribute('href',`${uri}/admin/dash.html?id=${id}#os` );
 }
 
@@ -726,9 +726,9 @@ function busca_os_contratante() {
 
     let lista = vio.reservas || [];
     _csv      = lista;
-    
+    let combo = []
     let arr   = lista.filter( x => {
-
+        combo.push( x )
         let if_mes           = true
         let if_origem        = true
         let if_contratacacao = true
@@ -736,7 +736,6 @@ function busca_os_contratante() {
         let if_ano           = true
         let if_pago          = true
         let busca            = `${x.contratante_nome} ${x.contratante_telefone} ${x.contratante_email} ${x.cpf_cnpj}`;
-        
         x.tipocontratacao    = x.tipo_contratacao || 1;
         x.site               = x.site || 2;
         if( mes != "0" ) {
@@ -828,6 +827,7 @@ function delete_usuario( id, mail ) {
 
 function parcial() 
 {
+    _parcial = _parcial.map( payment => ( {...payment, dia_print: payment.dia.split('-').reverse().join('/') } ) )
     query("#table_os_parcial").innerHTML = tpl_array( _parcial, "#tpl_os_parcial");
     total_parcial();
     query("#ui-falta").innerHTML = _parcial_data.sub;
@@ -840,7 +840,7 @@ function add_parcial()
     obj     = {...obj, id: time_stemp(), quadra: request.id, status: 1 };
     _parcial.push(obj);
     
-    query("#form-parcial").reset();
+    query("#form-parcial input[type=text]").value = '';
     alerta('Adicionado com sucesso');
     parcial();
     post_api('parcial', obj, x => {} );
@@ -1013,9 +1013,9 @@ function localizar_contratante() {
             } )
             query('#capitao__table_body').innerHTML = filtrado.map( x => `
                 <tr>                
-                    <td>${x.nome}</td>
-                    <td>${x.telefone}</td>
-                    <td>${x.cpf_cnpj}</td>
+                    <td>${x.nome || ''}</td>
+                    <td>${x.whatsapp || x.celular || x.telefone || ''}</td>
+                    <td>${x.cpf_cnpj || ''}</td>
                     <td>
                         <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html#contratante' )" src="./disc/ico/edit.png" class="ico-table">
                     </td>
@@ -1024,4 +1024,10 @@ function localizar_contratante() {
             ` ).join( '' );
         } )
     // }
+}
+function clone( el, id ) {
+    query( id ).innerHTML = el.value
+}
+function cloneChange( el, id ) {
+    query( `${id} option[value='${el.value}']` ).selected = true
 }

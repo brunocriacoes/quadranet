@@ -138,14 +138,14 @@
                             <input type="text" name="cpf_cnpj" value="" class="input-field" disabled>
                         </div>
                         <div>
-                            <label for="" class="input-label">OBS</label>
-                            <textarea  name="obs" rows="3" class="input-field"></textarea>     
-                        </div>
-                        <div>
                             <label for="" class="input-label">Data</label>
                             <input type="text" name="data" value="" class="input-field" disabled>
-                            <label for="" class="input-label">Status de Pagamento</label>
-                            <select name="status_compra" class="input-field"></select>        
+                            <label for="" class="input-label" hidden>OBS</label>
+                            <textarea  name="obs" rows="3" id="origem-obs" class="input-field" hidden></textarea>     
+                        </div>
+                        <div>
+                            <label for="" class="input-label" hidden>Status de Pagamento</label>
+                            <select name="status_compra" class="input-field" id="clone-select" hidden></select>        
                         </div>
                         <div>
                             <input type="submit" id="salvar_detalhes_reserva" value="salvar" hidden>
@@ -232,7 +232,7 @@
                                 <tbody id="table_os_parcial"></tbody>
                                 <template id="tpl_os_parcial">
                                     <tr>
-                                        <td>{{dia}}</td>
+                                        <td>{{dia_print}}</td>
                                         <td>R$ {{valor}}</td>
                                         <td><img onclick="remove_parcial('{{id}}')" class="ico-trash" src="{{uri}}/admin/disc/ico/trash.png"></td>
                                     </tr>
@@ -240,7 +240,7 @@
                                 <tfooter>
                                     <tr>
                                         <td>Faltando</td>
-                                        <td>R$ <small id="ui-falta">-00,00</small> </td>
+                                        <td><small id="ui-falta">-00,00</small> </td>
                                         <td></td>
                                     </tr>
                                     <tr>
@@ -250,6 +250,18 @@
                                     </tr>
                                 </tfooter>                            
                             </table>
+                        </div>
+                        <div>
+                            <form action="javascript:void(0)" id="form-locacao-mocado" class="grid-2 gap-top">
+                                <div>
+                                    <label for="" class="input-label">OBS</label>
+                                    <textarea  name="obs" rows="3" class="input-field" onkeyup="clone(this, '#origem-obs')"></textarea>     
+                                </div>
+                                <div>
+                                    <label for="" class="input-label">Status de Pagamento</label>
+                                    <select name="status_compra" class="input-field" onchange="cloneChange( this, '#clone-select' )"></select>        
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -397,11 +409,13 @@
                     <label for="m-rede-social" class="link_menu-tab">Rede Social</label>
                     <label for="m-info" class="link_menu-tab">Infomações de contato</label>
                     <label for="m-pagseguro" class="link_menu-tab">Pagseguro</label>
+                    <label for="m-termo" class="link_menu-tab">Termos</label>
                 </div>
                 <input type="radio" name="menu-visual" id="m-site" checked hidden>
                 <input type="radio" name="menu-visual" id="m-rede-social" hidden>
                 <input type="radio" name="menu-visual" id="m-info" hidden>
                 <input type="radio" name="menu-visual" id="m-pagseguro" hidden>
+                <input type="radio" name="menu-visual" id="m-termo" hidden>
                 <div class="m-inicial m-site">
                     <form action="javascript:void(0)" id="visual__form__info" onsubmit="post_api_form( 'site', 'visual__form__info', 'dash.html#visual', 1 )" method="POST">
                         <div class="grid-2 grid-gap">
@@ -462,6 +476,15 @@
                         <input type="url" name="twitter" class="input-field" placeholder="http://">
                         <label for="" class="input-label">Youtube</label>
                         <input type="url" name="youtube" class="input-field" placeholder="http://">
+                        <input type="submit" value="salvar" class="btn btn-sucess">
+                        <input type="reset" hidden>
+                    </form>
+                </div>
+                <div class="m-inicial m-termo">
+                    <form action="javascript:void(0)" id="visual__form__termo" onsubmit="post_api_form( 'site', 'visual__form__termo', 'dash.html#visual', 1 )" method="POST">
+                        <input type="hidden" name="id" value="info">
+                        <label for="" class="input-label">Termos</label>
+                        <textarea name="termos" rows="12" class="input-field"></textarea>
                         <input type="submit" value="salvar" class="btn btn-sucess">
                         <input type="reset" hidden>
                     </form>
@@ -888,7 +911,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th width="200">Telefone</th>
+                            <th width="200">Celular</th>
                             <th width="200">CPF/CNPJ</th>
                             <th width="30"></th>
                             <th width="30"></th>
@@ -1420,7 +1443,7 @@
                     <span id="ocupado_horario">14:00 - 15:00</span>
                 </span>
                 <p><b>Nome/Contrante</b>: <span id="v-ocupado-nome"></span></p>
-                <p><b>Telefone</b>: <span id="v-ocupado-telefone"></span></p>
+                <p><b>Celular</b>: <span id="v-ocupado-telefone"></span></p>
                 <p><b>Tipo</b>: <span id="v-ocupado-contratacao"></span></p>
                 <p><b>Status pagamento</b>: <span id="v-ocupado-pagamento"></span></p>                              
                 <a class="btn gap-top" target="_blank" id="v-ocupado-link" href="">Mais Informações</a>

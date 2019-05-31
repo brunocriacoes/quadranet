@@ -249,7 +249,7 @@ function set_date(now) {
                 });
             });
             let cont = 0;
-            document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horarios / Dia da Semana</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).join('');
+            document.querySelector('#reserva__horarios').innerHTML = '<div>Data</div><div>Horários/Dias</div>' + horario.map(h => `<div>${h.inicio} - ${h.final}</div>`).join('');
             document.querySelector('#agenda_reserva').innerHTML = agenda.map(a => {
                 let onclick = '';
                 let classe = '';

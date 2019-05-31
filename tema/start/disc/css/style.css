@@ -1182,6 +1182,7 @@ iframe {
 }
 .pop-box div {
     display: block;
+    min-width: 500px;
     max-width: 90vw;
     background: #FFF;
     margin: 0 auto;
@@ -1191,6 +1192,12 @@ iframe {
     cursor: pointer;
     margin: 10px !important;
 }
+.pop-close img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    padding: 7px;
+}
 
 .pop-close:hover {
     filter: brightness(150%)
@@ -1198,9 +1205,10 @@ iframe {
 
 .header__pop {
     display: grid !important;
-    grid-template-columns: 1fr 52px;
+    grid-template-columns: 1fr 30px;
     align-items: center;
     background-color: #CCC !important;
+    padding: 0 20px;
 }
 
 .body_pop {
