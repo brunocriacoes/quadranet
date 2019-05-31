@@ -434,7 +434,7 @@ function dowload_csv(  array_de_array, file_name )
 {
     let elemento      = document.querySelector( "#link_baixar" );
     let content_type  = `data:text/csv;charset=utf-8,`;
-    let data          = array_de_array.map( x => Object.values(x).join(';') ).join("\n");
+    let data          = array_de_array.join("\n");
     data              = encodeURI( data );
     elemento.href     = content_type + data; 
     elemento.download = file_name;

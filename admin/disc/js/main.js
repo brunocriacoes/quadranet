@@ -35,6 +35,7 @@ fetch( `${app}` )
     let info =  x.site;
 
     BalancoFiltro.itens                       = x.reservas
+    BalancoFiltro.ano                         = Number( new Date().getFullYear() )
     BalancoFiltro.init()
     query('#historico__table_body').innerHTML = tpl_array( BalancoFiltro.print, '#tpl_historico' );
     _csv                                      = BalancoFiltro.csv;
