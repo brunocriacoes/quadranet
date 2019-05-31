@@ -715,66 +715,26 @@ function set_quadra_contratar( id ) {
 var _csv = [];
 function busca_os_contratante() {
 
-    let ano        = query('#busca-os-ano').value;
-    let termo      = query('#termo-os-status').value;
-    let status     = query('#busca-os-status').value;
-    let mes        = query('#busca-os-mes').value;
-    let origem     = query('#busca-os-origen').value;
-    let contatacao = query('#busca-os-tipo-contratacao').value;
+    BalancoFiltro.ano               = Number( query('#busca-os-ano').value )
+    BalancoFiltro.mes               = Number( query('#busca-os-mes').value )
+    BalancoFiltro.statusPagamento   = Number( query('#busca-os-status').value )
+    BalancoFiltro.site              = Number( query('#busca-os-origen').value )
+    BalancoFiltro.tipoContratacao   = Number( query('#busca-os-tipo-contratacao').value )
+    BalancoFiltro.termo             = query('#termo-os-status').value
+    BalancoFiltro.init()
+    _csv                            = BalancoFiltro.csv;
 
-    calc_balanco( ano, mes )
+    calc_balanco()
 
-    let lista = vio.reservas || [];
-    _csv      = lista;
-    let combo = []
-    let arr   = lista.filter( x => {
-        combo.push( x )
-        let if_mes           = true
-        let if_origem        = true
-        let if_contratacacao = true
-        let if_termo         = true
-        let if_ano           = true
-        let if_pago          = true
-        let busca            = `${x.contratante_nome} ${x.contratante_telefone} ${x.contratante_email} ${x.cpf_cnpj}`;
-        x.tipocontratacao    = x.tipo_contratacao || 1;
-        x.site               = x.site || 2;
-        if( mes != "0" ) {
-            if_mes           = mes == "0" ? true : x.id.indexOf(`-${mes}-`) != -1;
-        }
-        if( ano != "0" ) {
-            if_ano           = ano == "0"  ? true : x.id.indexOf(`${ano}-`)  != -1;
-        }
-        if( origem != "0" ) {
-            if_origem        = x.site == origem;
-        }
-        if( status != "0" ) {
-            if_pago          = x.status_compra == status;
-        }
-        if( contatacao != "0" ) {
-            if_contratacacao = x.tipo_contatacao == contatacao ? true : false;
-        }
-        if( termo.length > 3 ) {
-            if_termo         = busca.indexOf(termo) != -1 ? true : false
-        }
-        return if_pago && if_mes && if_origem && if_contratacacao && if_termo && if_ano;
-    } );
-
-    _csv = arr;
-    query( '#historico__table_body' ).innerHTML = tpl_array( arr, '#tpl_historico' );
+    query( '#historico__table_body' ).innerHTML = tpl_array( BalancoFiltro.print, '#tpl_historico' );
 }
 
-function calc_balanco( ano, mes ) {
-    let { reservas } = vio
-    Balanco.itens = reservas
-    Balanco.ano( ano )
-    Balanco.ano( mes )
-    Balanco.render()
-    let resultado = Balanco.val()
-    $("#b_total_gerado").html(resultado.total)
-    $("#b_total_mensalidade").html(resultado.mensalidade)
-    $("#b_total_avulso").html(resultado.avulso)
-    $("#b_total_devido").html(resultado.devido)
-    $("#b_total_pago").html(resultado.pago)
+function calc_balanco() {
+    $("#b_total_gerado").html(BalancoFiltro.resultado.total.toFixed(2).toString().replace('.',','))
+    $("#b_total_mensalidade").html(BalancoFiltro.resultado.mensal.toFixed(2).toString().replace('.',','))
+    $("#b_total_avulso").html(BalancoFiltro.resultado.avulso.toFixed(2).toString().replace('.',','))
+    $("#b_total_devido").html(BalancoFiltro.resultado.devido.toFixed(2).toString().replace('.',','))
+    $("#b_total_pago").html(BalancoFiltro.resultado.pago.toFixed(2).toString().replace('.',','))    
 }
 
 function query_cep( elemento, seletor = null ) {
@@ -941,42 +901,7 @@ function duasCasas(data) {
 }
 
 function baixar_balanco() {
-
-    let csvFiltrado = _csv.map( cs => ( {
-        contratante: cs.contratante_nome,
-        contratanteEmail: cs.contratante_email,
-        data: cs.data,
-        tipoContratacao: cs.tipo_contatacao == "1" ? "Avulso" : "mensal",
-        statusCompra : cs.status_compra == "2" ? "Pago" : "Nao pago",
-        valor: cs.valor
-    } ) );
-
-    let data = new Date( _csv[0].id.substr(0, 10) )
-    let meses_anos = mes.map( el => el.nome )
-
-    let somas = Balanco.val()
-    
-    csvFiltrado = [ {
-        contratante: "CONTRATANTE",
-        contratanteEmail: "EMAIL",
-        data: "DATA",
-        tipoContratacao: "MENSAL/AVULSO",
-        statusCompra : "PAGO/NAO PAGO",
-        valor: "VALOR R$"
-    },...csvFiltrado, 
-    { pulo: ''},
-    { pulo: ''},
-    {
-        ano: _csv[0].id.substr(0,4),
-        mes: meses_anos[data.getMonth()],
-        total: `Total ${somas.total}`,
-        mensalidade: `Mensalista ${somas.mensalidade}`,
-        avulso:`Avulso ${somas.avulso}`,
-        valorDevido: `Valor Devido ${somas.devido}`,
-        valorPago: `Valor Pago ${somas.pago}`
-    } ]
-
-    dowload_csv(  csvFiltrado, 'lista.csv' )
+    dowload_csv(  _csv, 'lista.csv' )
 }
 
 function masc( el, pattern, limit = true ) {

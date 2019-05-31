@@ -1244,12 +1244,12 @@
                     <tbody id="historico__table_body"></tbody>
                     <template id="tpl_historico">
                         <tr>
-                            <td>{{contratante_nome}}</td>
-                            <td>{{site_print}}</td>
-                            <td>{{tipocontratacao_print}}</td>
-                            <td>{{data_print}}</td>
+                            <td>{{usuario}}</td>
+                            <td>{{site}}</td>
+                            <td>{{tipoContratacao}}</td>
+                            <td>{{data}}</td>
                             <td>{{valor}}</td>
-                            <td>{{pagamento}}</td>
+                            <td>{{statusPagamento}}</td>
                             <td>
                                 <a href="?id={{id}}#os" title="Editar" target="_blank">
                                     <img  src="./disc/ico/edit.png" class="ico-table">
@@ -1523,6 +1523,7 @@
         <script src="./disc/js/data.js"></script>
         <script src="./disc/js/config.js"></script>
         <script src="./disc/js/library/Balanco.js"></script>
+        <script src="./disc/js/library/BalancoFiltro.js"></script>
         <script src="./disc/js/library/Dom.js"></script>
         <script src="./disc/js/functions.js"></script>
         <script src="./disc/js/interface.js"></script>

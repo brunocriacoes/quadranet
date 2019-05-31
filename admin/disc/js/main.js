@@ -33,6 +33,11 @@ fetch( `${app}` )
     x.site   = x.site   || [];
     x.pagina = x.pagina || [];
     let info =  x.site;
+
+    BalancoFiltro.itens                       = x.reservas
+    BalancoFiltro.init()
+    query('#historico__table_body').innerHTML = tpl_array( BalancoFiltro.print, '#tpl_historico' );
+    _csv                                      = BalancoFiltro.csv;
     
     preencher( 'visual__form__info', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__social', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
@@ -228,6 +233,9 @@ setInterval( () => {
             return x;
         } );
         x.reservas = reservas
+
+        BalancoFiltro.itens             = x.reservas
+        BalancoFiltro.init()
 
         let lista =  Object.keys( x );
         lista.forEach( e => {

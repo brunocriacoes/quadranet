@@ -289,7 +289,7 @@ var vio = {
             data_print:  item.id.substr(0,10).split('-').reverse().join('/')
         } ) )
         _vio.reservas = arr;
-        query('#historico__table_body').innerHTML = tpl_array( arr, '#tpl_historico' );
+        
     },
     set espera( arr ) {
         _vio.espera = arr;
