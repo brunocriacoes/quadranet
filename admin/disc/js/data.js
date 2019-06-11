@@ -31,6 +31,13 @@ var status_compra = [
     { id: "4", nome: "Cancelado"},
 ];
 
+var status_compra2 = [
+    { id: "1", nome: "Aguardando pagamento"},
+    { id: "2", nome: "Pago"},
+    { id: "3", nome: "Parcial"},
+    { id: "4", nome: "Cancelado"},
+];
+
 var estado = [
     { id: "AC", nome: "Acre"},
     { id: "AL", nome: "Alagoas"},

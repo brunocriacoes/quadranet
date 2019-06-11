@@ -2,7 +2,7 @@
         origem: ["Sistema", "Site", "Sistema"],
         planos: ["Avulso", "Avulso", "Mensal"],
         meses: ["Ano Completo", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-        statusCompra: ["Aguardando Pagamento","Aguardando Pagamento","Pago","Aguardando Pagamento","Aguardando Pagamento"],
+        statusCompra: ["Aguardando Pagamento","Aguardando Pagamento","Pago","Parcial","Cancelado"],
         itens: [],
         itensModificados: [],
         combo: [],
@@ -40,6 +40,7 @@
                 site: this.origem[ ordem.os.site ],
                 tipoContratacao: this.planos[ ordem.os.tipoContratacao ],
                 statusPagamento: this.statusCompra[ ordem.os.statusCompra ],
+                // statusPagamento: this.statusCompra[ ordem.os.status_compra ],
                 data: ordem.os.data,
                 valor: ordem.os.valor.toFixed(2).toString().replace('.',','),
             } ) )
@@ -65,7 +66,7 @@
             
             if ( this.tipoContratacao != 0 ) this.combo = this.combo.filter( orden => orden.os.tipoContratacao == this.tipoContratacao )
             
-            if ( this.termo.length >  0 ) this.combo = this.combo.filter( orden => Object.values( orden.usuario ).join(' ').indexOf( this.termo ) != -1 )
+            if ( this.termo.length >  0 ) this.combo = this.combo.filter( orden => Object.values( orden.usuario ).join(' ').toLowerCase().indexOf( this.termo.toLowerCase() ) != -1 )
             
             this.relatorio()
 
@@ -133,7 +134,7 @@
                         data: `${pedido.dia_compra}/${pedido.id.substr(5,2)}/${pedido.id.substr(0,4)}`,
                         inicioHS: Number(pedido.id.substr(11,5).replace('-','.')),
                         finalHS: Number(pedido.id.substr(17,5).replace('-','.')),
-                        statusCompra: Number( pedido.status_compra || 0 ),
+                        statusCompra: Number(pedido.status_compra),
                         tipoContratacao: Number( pedido.tipo_contatacao ),
                         site: Number( pedido.site || '0' ),
                         valor:Number( pedido.preco.replace( ',','.' ) ),

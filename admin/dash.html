@@ -122,7 +122,7 @@
                     <form action="javascript:void(0)" id="form-locacao" onsubmit="post_api_form( 'reservas', 'form-locacao', 'dash.html#historico')" class="grid-2 grid-gap" method="POST">
                         <input type="hidden" name="id" value="">
                         <div>
-                            <label for="" class="input-label">Usuario</label>
+                            <label for="" class="input-label">Nome</label>
                             <input type="text" name="contratante_nome" value="" class="input-field" disabled>
                         </div>
                         <div>
@@ -223,6 +223,11 @@
                         <div>
                             <table class="table" style="width:100%">
                                 <thead>
+                                        <tr>
+                                                <td>Total a ser Pago</td>
+                                                <td>R$ <b id="ui-total">00,00</b> </td>
+                                                <td></td>
+                                            </tr>
                                     <tr>
                                         <th>data</th>
                                         <th>valor recebido</th>
@@ -241,11 +246,6 @@
                                     <tr>
                                         <td>Faltando</td>
                                         <td><small id="ui-falta">-00,00</small> </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total</td>
-                                        <td>R$ <b id="ui-total">00,00</b> </td>
                                         <td></td>
                                     </tr>
                                 </tfooter>                            
@@ -789,7 +789,7 @@
                         <tr>
                             <th>Nome</th>
                             <th width="100">Mensalidade</th>
-                            <th width="100">Diária</th>
+                            <th width="100">Avulso</th>
                             <th width="30"></th>
                             <th width="30"></th>
                             <th width="30"></th>
@@ -1354,7 +1354,7 @@
                 <img src="./disc/ico/x.png">
             </label>
             <div>     
-                <span class="grid-3 header_reserva">
+                <span class="grid-4 header_reserva">
                     <span id="reserva_quadra">Nome quadra</span>
                     <span id="reserva_modalidade"><i>futebol</i></span>
                     <span id="reserva_data">00/00/000</span>
@@ -1419,10 +1419,11 @@
                     <input type="hidden" name="inicio" id="contratante-inicio">
                     <input type="hidden" name="final" id="contratante-final">
                     <input type="hidden" name="preco" id="contratante-preco">
+                    <input type="hidden" name="site" value="2">
                     <label for="" class="input-label">Tipo locação</label>
                     <select  name="tipo_contatacao" id="contratante-mensal-avulso" class="input-field" onchange="setValorReserva()" required>
                         <option value="1">Escolha</option>
-                        <option value="1">Diária</option>
+                        <option value="1">Avulso</option>
                         <option value="2">Mensal</option>
                     </select>
                     <label for="cad-change">Voltar</label>

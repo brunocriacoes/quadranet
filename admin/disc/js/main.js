@@ -52,6 +52,7 @@ fetch( `${app}` )
 
     router( 'os', () => {
 
+        draw_select( status_compra2, 'status_compra' );
         let { reservas }    = vio;
         let parciais        = vio.parcial || [];
         let id              = request.id || '';

@@ -2,6 +2,24 @@
 
     $uri          = "https://ws.pagseguro.uol.com.br/v2/checkout";
     $uri_checkout = "https://pagseguro.uol.com.br/v2/checkout/payment.html?code=";
+    $file         = __DIR__."/../../data/".dominio."/site/pagseguro.json";
+
+    function getJson( $file ) {
+        if( ! file_exists( $file ) ) file_put_contents( $file, '{}' );
+        return json_decode( file_get_contents( $file ) );
+    }
+
+    function setJson( $file, $json ) {
+        if( ! file_exists( $file ) ) file_put_contents( $file, '{}' );
+        $item = json_decode( file_get_contents( $file ) );
+        foreach( $json as $indice => $valor ) {
+            $item->{$indice} = $valor;
+        }
+        file_put_contents( $file, json_encode( $item ) );
+        return $item;
+    }
+
+    $credencial = getJson($file);
 
     function post( $url, $arr ) {
         $postdata = http_build_query($arr);
@@ -18,8 +36,8 @@
     }
 
     $arr = [
-        "email" => "br.rafael@hotmail.com",
-        "token" => "1E6B06B81C5B493A81218C1D522C229F",
+        "email" => $credencial->email ?? '',
+        "token" => $credencial->token ?? '',
         "currency" => "BRL",
         "reference" => "REF1234", 
         "shippingType" => "1",        
@@ -53,6 +71,10 @@
 
     $arr               =  array_merge( $arr, request );
     $query             = post( $uri, $arr );
+    if($query == 'Unauthorized') {
+        echo('{"error": true}');
+        die;
+    }
     $xml               = simplexml_load_string( $query );
     $xml->uri_checkout = $uri_checkout . $xml->code ?? '';
     $json              = json_encode( $xml );

@@ -804,7 +804,7 @@ function setHorario(x) {
 
     document.querySelector('#btn__reserva_mensal').setAttribute('onclick', `addCart( ${JSON.stringify({ ...tempHorario, tipocontratacao: 2 })} )`);
     document.querySelector('#btn__reserva_diaria').setAttribute('onclick', `addCart( ${JSON.stringify({ ...tempHorario, tipocontratacao: 1 })} )`);
-    document.querySelector('#agenda_hor').innerHTML = `Horários: ${inicio}hrs ás ${final}hrs`;
+    document.querySelector('#agenda_hor').innerHTML = `Horário: ${inicio}h ás ${final}h`;
 }
 
 function termos() {
