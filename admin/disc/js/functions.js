@@ -956,3 +956,13 @@ function clone( el, id ) {
 function cloneChange( el, id ) {
     query( `${id} option[value='${el.value}']` ).selected = true
 }
+
+function contribuiu(idOS, idJogador) {
+    if (_pagos.indexOf(`${idJogador}`) == -1) {
+        _pagos = _pagos + `,${idJogador}`;
+    } else {
+        _pagos = _pagos.replace(`,${idJogador}`, '');
+    }
+    let obj = { id: idOS, pagos: _pagos };
+    post_api('reservas', obj, x => { });
+}

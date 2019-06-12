@@ -24,6 +24,7 @@
     $site = jsFind( $site, function($x) { return $x->id == 'info' ; } );
     $site = $site ?? (object) [];
     $site->map = str_replace('\\','', $site->map ?? [] );
+    $site->termos = str_replace("\n", "<br>", $site->termos);
 
     $site->whatsapp_print = "+55". str_replace( ['(',')','-', ' '], ['','','', ''], $site->whatsapp );
     $site->telefone_print = "+55". str_replace( ['(',')','-', ' '], ['','','', ''], $site->telefone );
