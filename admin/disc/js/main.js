@@ -49,7 +49,6 @@ fetch( `${app}` )
     preencher( 'servicos_form', x.pagina.find( y => y.id == 'servico' ) || { id: 'servico' } );
 
     calc_balanco( '0', '0' )
-
     router( 'os', () => {
 
         draw_select( status_compra2, 'status_compra' );
@@ -58,6 +57,10 @@ fetch( `${app}` )
         let id              = request.id || '';
         let ia              = id.split('-') || '';
         let reserva         = reservas.find( x => x.id == id ) || {};
+        
+        _pagos       = reserva.pagos
+        let pagantes = reserva.pagos.split(',').filter( x => x.length > 7 )
+
         _parcial_data.total = reserva.valor || '';
 
         reservas         = reservas.map( x => {
@@ -79,6 +82,17 @@ fetch( `${app}` )
         preencher( 'form-locacao-mocado', reserva );
         let meu_time = vio.time
         meu_time = meu_time.filter( player => player.id_contratante == reserva.contratante_email )
+        meu_time = meu_time.map( x => {
+            let check = ""
+            if( pagantes.indexOf( x.id ) != -1 ) {
+                check = "checked"
+            }
+            return {
+                ...x,
+                check,
+                reserva: reserva.id
+            }
+        } )
         query( "#table_iten_os" ).innerHTML = tpl_array( reservas, "#tpl_iten_os" );
         query( "#table_time_os" ).innerHTML = tpl_array( meu_time, "#tpl_time_os" );   
 
