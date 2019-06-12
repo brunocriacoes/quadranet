@@ -58,8 +58,10 @@ fetch( `${app}` )
         let ia              = id.split('-') || '';
         let reserva         = reservas.find( x => x.id == id ) || {};
         
-        _pagos       = reserva.pagos
-        let pagantes = reserva.pagos.split(',').filter( x => x.length > 7 )
+        _pagos       = reserva.pagos || ''
+        let pagantes = reserva.pagos || ''
+        pagantes     = pagantes.split(',') || [] 
+        pagantes     = pagantes.filter( x => x.length > 7 ) || []
 
         _parcial_data.total = reserva.valor || '';
 
