@@ -79,7 +79,6 @@ fetch( `${app}` )
             return x.id.search( rx ) != -1 ? true : false; 
         } );
         
-        
         preencher( 'form-locacao', reserva );
         preencher( 'form-locacao-mocado', reserva );
         let meu_time = vio.time

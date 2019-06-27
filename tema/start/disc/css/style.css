@@ -817,12 +817,12 @@ p {
     bottom: 10px;
     left: 10px;
     color: #666;
-    font-size: 12px;
+    font-size: 14px;
 }
 .share img {
     display: block;
     cursor: pointer;
-    height: 17px;
+    height: 20px;
     margin-left: 20px;
     filter: opacity( .5 );
 }

@@ -803,8 +803,6 @@ label img {
     background-repeat: no-repeat;
     background-size: 16px;
 }
-#ocupado_modalidade,
-#reserva_modalidade {}
 #ocupado_modalidade i,
 #reserva_modalidade i {
     background: var(--theme);
