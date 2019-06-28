@@ -81,3 +81,16 @@ function completaTitulo() {
     $titulo = ucwords($titulo);
     return $titulo;
 }
+
+function getRedes( $arr ) 
+{
+    $acc = [];
+    foreach( $arr as $key => $val ) 
+    {
+        if( $key == 'facebook' or $key == 'twitter' or $key == 'youtube' or $key == 'instagram'  ) {
+            if( !empty( $val ) )
+                $acc[] = [ "ico" => $key, "link" => $val ];
+        }
+    }
+   return $acc;
+}

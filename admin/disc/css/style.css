@@ -291,6 +291,7 @@ option {
 #m-rede-social:checked ~ .m-rede-social,
 #m-info:checked ~ .m-info,
 #m-termo:checked ~ .m-termo,
+#m-chat:checked ~ .m-chat,
 #m-pagseguro:checked ~ .m-pagseguro{
     display: block;
 }
@@ -784,16 +785,19 @@ label img {
     cursor: pointer;
 }
 .header_reserva {
-    border-bottom: 2px solid #DDD;
     margin-bottom: 25px;
     padding-bottom: 25px;
-    grid-template-columns:  200px repeat(2, 1fr) 120px;
+    grid-template-columns: repeat(3, 1fr);
     font-size: 13px;
     font-weight: bold;
     align-items: center;
+    grid-gap: 0px;
 }
 .header_reserva span {
-    height: 20px;
+    display: flex;
+    border-bottom: 2px solid #DDD;
+    align-items: center;
+    height: 50px;
 }
 #ocupado_quadra,
 #reserva_quadra {

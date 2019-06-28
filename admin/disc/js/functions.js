@@ -23,9 +23,9 @@ function form_data( id )
     let nome  = '';
     let valor = '';
     for( let i = 0; i < formulario.length; i++ ) {
-        nome  = formulario[i].name || formulario[i].id || -1;
+        nome  = formulario[i].name || formulario[i].id || false;
         valor = formulario[i].value || formulario[i].innerHTML || '';
-        if( nome != -1 && valor.length > 0 ) {
+        if( nome ) {
             data[nome] = valor;
         }
     }
@@ -248,6 +248,7 @@ function edita_quadra( id ) {
     query('#agenda__modalidade').innerHTML = modalidade.nome || '';
     query("#reserva_modalidade i").innerHTML = modalidade.nome || '';
     query("#ocupado_modalidade i").innerHTML = modalidade.nome || '';
+    log( id )
     agenda = [];
     let id_base = horario_temp.map( x => {
         let hora = `${x.inicio}-${x.final}`;
@@ -348,6 +349,8 @@ function pop_ocupado( id ) {
     query("#v-ocupado-contratacao").innerHTML = reserva.tipo_contatacao == "1" ? "Avulso" : "mensal"; 
     query("#v-ocupado-pagamento").innerHTML = reserva.pagamento || '';
     query("#v-ocupado-link").setAttribute('href',`${uri}/admin/dash.html?id=${id}#os` );
+    query("#reserva_dia").innerHTML = semana_print[ id.substr(23,1) ];
+    query("#ocupado_dia").innerHTML = semana_print[ id.substr(23,1) ];
 }
 
 const trash = ( url, id, fnc = null  ) => {

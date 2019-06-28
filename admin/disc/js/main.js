@@ -44,6 +44,7 @@ fetch( `${app}` )
     preencher( 'visual__form__social', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__contato', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__termo', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
+    preencher( 'visual__form__chat', x.site.find( y => y.id == 'info' ) || { id: 'info' } );
     preencher( 'visual__form__pag', x.site.find( y => y.id == 'pagseguro' ) || { id: 'pagseguro' } );
     preencher( 'servicos_form__quem-somos', x.pagina.find( y => y.id == 'sobre' ) || { id: 'sobre' } );
     preencher( 'servicos_form', x.pagina.find( y => y.id == 'servico' ) || { id: 'servico' } );
@@ -94,7 +95,7 @@ fetch( `${app}` )
                 reserva: reserva.id
             }
         } )
-        query( "#table_iten_os" ).innerHTML = tpl_array( reservas, "#tpl_iten_os" );
+        query( "#table_iten_os" ).innerHTML = tpl_array( reservas, "#tpl_iten_os" ); //aqui tipocontratacao
         query( "#table_time_os" ).innerHTML = tpl_array( meu_time, "#tpl_time_os" );   
 
         parcial();        

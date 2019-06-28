@@ -103,3 +103,5 @@ var mensal_avulso = [
     { id: "1", nome: "Avulso" },
     { id: "2", nome: "Mensal" },    
 ];
+
+var semana_print  =  [ "DOMINGO", "SEGUNDA-FEIRA", "TERÇA-FEIRA", "QUARTA-FEIRA", "QUINTA-FEIRA", "SEXTA-FEIRA", "SABADO"  ];
