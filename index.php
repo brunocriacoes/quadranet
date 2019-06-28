@@ -112,3 +112,5 @@
     // $html = preg_replace( '/\{\{.*\}\}/', '', $html );
 
     echo $html;
+
+    forcar();

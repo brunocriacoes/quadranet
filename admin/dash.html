@@ -1448,7 +1448,7 @@
         </div>
         <input type="checkbox" id="pop-agenda-ocupado" hidden>
         <div class="pop-box pop-agenda-ocupado">
-            <label for="pop-agenda-ocupado" class="pop-close">
+            <label for="pop-agenda-ocupado" class="pop-close" onclick="reset_pop_ocupado()">
                 <img src="./disc/ico/x.png">
             </label>
             <div>
@@ -1481,7 +1481,7 @@
             <tr>
                 <td>{{nome}}</td>
                 <td>{{telefone}}</td>
-                <td>{{ativo}}</td>
+                <td>{{ativo_print}}</td>
                 <td>
                     <img onclick="editar( 'usuario', '{{id}}', 'form-usuario', 'dash.html#usuario-novo' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
@@ -1501,7 +1501,7 @@
         <template id="tr_default">
             <tr>
                 <td>{{nome}}</td>
-                <td>{{ativo}}</td>
+                <td>{{ativo_print}}</td>
                 <td>
                     <img onclick="editar( 'dominio', '{{id}}', 'form-dominio-novo', 'dash.html#dominio-novo' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>

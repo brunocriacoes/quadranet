@@ -264,7 +264,11 @@ var vio = {
         query('#horarios').innerHTML = tpl_array( horario, '#tpl-horas' );
     },
     set reservas( arr ) {        
-        _csv          = arr;
+        _csv                  = arr;
+        BalancoFiltro.itens   = arr
+        BalancoFiltro.init()
+        busca_os_contratante()
+
         edita_quadra( quadra_sisten );
         arr.forEach( x => {
             if ( !x.status_compra ) {

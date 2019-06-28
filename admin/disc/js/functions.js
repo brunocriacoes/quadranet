@@ -248,7 +248,6 @@ function edita_quadra( id ) {
     query('#agenda__modalidade').innerHTML = modalidade.nome || '';
     query("#reserva_modalidade i").innerHTML = modalidade.nome || '';
     query("#ocupado_modalidade i").innerHTML = modalidade.nome || '';
-    log( id )
     agenda = [];
     let id_base = horario_temp.map( x => {
         let hora = `${x.inicio}-${x.final}`;
@@ -340,10 +339,13 @@ function edita_quadra( id ) {
     } );
 }
 
-function pop_ocupado( id ) {
+function reset_pop_ocupado() {}
+
+async function pop_ocupado( id ) {
     let horario = id.substr(11,5).replace('-', ':') + " - " + id.substr(17,5).replace('-', ':');
     query("#ocupado_horario").innerHTML = horario || '';
-    let reserva = vio.reservas.find( x => x.id == id );
+    let chamda  = await fetch( `${app}/reservas?id=${id}` )
+    let reserva = await chamda.json()
     query("#v-ocupado-nome").innerHTML = reserva.contratante_nome || '';
     query("#v-ocupado-telefone").innerHTML = reserva.whatsapp || reserva.contratante_telefone || '' ;
     query("#v-ocupado-contratacao").innerHTML = reserva.tipo_contatacao == "1" ? "Avulso" : "mensal"; 
@@ -589,11 +591,11 @@ function tpl_array( arr, seletor, prefix = '' )
     if (query( seletor )) {
         let tpl = query( seletor ).innerHTML;
         let html = arr.map( x => {
-            x.prefix     = prefix;
-            x.uri        = uri;
-            x.ativo      = x.ativo == "1" ? 'Sim' : 'Não';
-            let tpl_temp = tpl;
-            let list     = Object.keys(x);
+            x.prefix      = prefix;
+            x.uri         = uri;
+            x.ativo_print = x.ativo == "1" ? 'Sim' : 'Não';
+            let tpl_temp  = tpl;
+            let list      = Object.keys(x);
             for( let i = 0; i < list.length; i++) {
                 tpl_temp = tpl_temp.replace( RegExp(`{{${list[i]}}}`,'gi'), x[list[i]]  );
             }

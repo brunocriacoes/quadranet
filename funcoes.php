@@ -94,3 +94,9 @@ function getRedes( $arr )
     }
    return $acc;
 }
+
+function forcar() 
+{
+    if( http != "https" AND !stripos( dominio, '.con' ) ) 
+        header('Location: https://'. dominio );
+}
