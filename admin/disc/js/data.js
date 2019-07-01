@@ -30,6 +30,13 @@ var status_compra = [
     { id: "3", nome: "Parcial"},
     { id: "4", nome: "Cancelado"},
 ];
+var statusCompra = [
+    "",
+    "Aguardando pagamento",
+    "Pago",
+    "Parcial",
+    "Cancelado",
+];
 
 var status_compra2 = [
     { id: "1", nome: "Aguardando pagamento"},

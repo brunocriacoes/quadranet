@@ -97,6 +97,6 @@ function getRedes( $arr )
 
 function forcar() 
 {
-    if( http != "https" AND !stripos( dominio, '.con' ) ) 
-        header('Location: https://'. dominio );
+    if( http == "http" AND !stripos( dominio, '.con' ) ) 
+        echo "<script>window.location.href= 'https://". dominio ."';</script>";
 }

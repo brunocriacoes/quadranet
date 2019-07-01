@@ -309,32 +309,60 @@ function edita_quadra( id ) {
         let elementor = query(`#b${x.id}`);
         
         if( elementor ) {
-            elementor.removeAttribute('onclick');
-            elementor.removeAttribute('for');
-            elementor.setAttribute('for',"pop-agenda-ocupado");
-           
-            elementor.for = "pop-agenda-ocupado";
-            elementor.classList.add('agenda-ocupado');
-            let is_jogando = id_jogando.indexOf( x.id );
-            if( is_jogando > -1 ) {
-                let id          = x.id;
-                let init_hora   = +id.substr( 11, 2 );
-                let end_hora    = +id.substr( 17, 2 );
-                let total_hs    = end_hora - hora;
-                let init_minuto = +id.substr( 14, 2 );
-                let end_minuto  = +id.substr( 20, 2 );
-                let total_mm    = init_minuto + end_minuto;
-                total_mm        = total_mm - minutos;
-                let total       = ( total_hs * 60 ) + total_mm;
-                query('#agenda_contador span').innerHTML = total;
-                elementor.classList.add('agenda-jogando');
+            if( !elementor.classList.contains( 'agenda-ocupado' ) ) {
+
+                elementor.removeAttribute('onclick');
+                elementor.removeAttribute('for');
+                elementor.setAttribute('for',"pop-agenda-ocupado");
+               
+                elementor.for = "pop-agenda-ocupado";
+                elementor.classList.add('agenda-ocupado');
+                let is_jogando = id_jogando.indexOf( x.id );
+                if( is_jogando > -1 ) {
+                    let id          = x.id;
+                    let init_hora   = +id.substr( 11, 2 );
+                    let end_hora    = +id.substr( 17, 2 );
+                    let total_hs    = end_hora - hora;
+                    let init_minuto = +id.substr( 14, 2 );
+                    let end_minuto  = +id.substr( 20, 2 );
+                    let total_mm    = init_minuto + end_minuto;
+                    total_mm        = total_mm - minutos;
+                    let total       = ( total_hs * 60 ) + total_mm;
+                    query('#agenda_contador span').innerHTML = total;
+                    elementor.classList.add('agenda-jogando');
+                }
+                elementor.innerHTML = `
+                    <span class="descktop" onclick="pop_ocupado('${x.id}')">
+                        <b>${x.user_nome || ''}</b>
+                        <i>${x.tipo_contatacao == 1 ? 'Avulso' : 'Mensal'}</i>
+                    </span> 
+                `;            
             }
-            elementor.innerHTML = `
-                <span class="descktop" onclick="pop_ocupado('${x.id}')">
-                    <b>${x.user_nome || ''}</b>
-                    <i>${x.tipo_contatacao == 1 ? 'Avulso' : 'Mensal'}</i>
-                </span> 
-            `;            
+        }
+    } );
+}
+
+async function atualizaAgenda( id ) {
+    
+
+    let chamaHttp = await fetch( `${app}/reservas` )
+    let reservas  = await chamaHttp.json()
+    reservas      = reservas.filter( re => re.id.indexOf( id ) != -1 )
+
+    
+    reservas.forEach( x => {
+        let elementor = query(`#b${x.id}`);        
+        if( elementor ) {
+            if( !elementor.classList.contains( 'agenda-ocupado' ) ) {
+                elementor.setAttribute('for',"pop-agenda-ocupado");           
+                elementor.classList.add('agenda-ocupado');
+                elementor.innerHTML = `
+                    <span class="descktop" onclick="pop_ocupado('${x.id}')">
+                        <b></b>
+                        <i>${x.tipo_contatacao == 1 ? 'Avulso' : 'Mensal'}</i>
+                    </span> 
+                `;            
+            }
         }
     } );
 }
@@ -349,7 +377,7 @@ async function pop_ocupado( id ) {
     query("#v-ocupado-nome").innerHTML = reserva.contratante_nome || '';
     query("#v-ocupado-telefone").innerHTML = reserva.whatsapp || reserva.contratante_telefone || '' ;
     query("#v-ocupado-contratacao").innerHTML = reserva.tipo_contatacao == "1" ? "Avulso" : "mensal"; 
-    query("#v-ocupado-pagamento").innerHTML = reserva.pagamento || '';
+    query("#v-ocupado-pagamento").innerHTML = statusCompra[ reserva.status_compra || 1 ];
     query("#v-ocupado-link").setAttribute('href',`${uri}/admin/dash.html?id=${id}#os` );
     query("#reserva_dia").innerHTML = semana_print[ id.substr(23,1) ];
     query("#ocupado_dia").innerHTML = semana_print[ id.substr(23,1) ];

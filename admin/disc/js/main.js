@@ -260,7 +260,7 @@ setInterval( () => {
             vio[e] = x[e];
         } );
         if( quadraAtivaId != '' ) {
-            edita_quadra( quadraAtivaId )
+            atualizaAgenda( quadraAtivaId )
         }
         busca_os_contratante()
         localizar_contratante()
