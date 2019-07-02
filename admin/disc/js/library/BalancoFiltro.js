@@ -134,7 +134,7 @@
                         data: `${pedido.dia_compra}/${pedido.id.substr(5,2)}/${pedido.id.substr(0,4)}`,
                         inicioHS: Number(pedido.id.substr(11,5).replace('-','.')),
                         finalHS: Number(pedido.id.substr(17,5).replace('-','.')),
-                        statusCompra: Number(pedido.status_compra),
+                        statusCompra: Number(pedido.status_compra || '1' ),
                         tipoContratacao: Number( pedido.tipo_contatacao ),
                         site: Number( pedido.site || '0' ),
                         valor:Number( pedido.preco.replace( ',','.' ) ),

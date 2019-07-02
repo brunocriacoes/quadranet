@@ -208,7 +208,6 @@ function semana( diat, data )
     }
 
     result[dia] = data;
-    log( result )
     return result;
 
     // let data_arr            = data.split('-');
