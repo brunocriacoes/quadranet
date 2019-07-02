@@ -103,6 +103,7 @@
     }
     
     $html  = str_replace( '{{uri}}', uri, $html );
+    $html  = str_replace( '{{uri_all}}', $_SERVER['REQUEST_URI'], $html );
     $html  = str_replace( '{{QuadraNet}}', $QuadraNet ?? '', $html );
     $html  = str_replace( '{{completaTitulo}}', completaTitulo(), $html );
     $html  = preg_replace( '/link .*href="(?!h)/', "link rel=\"stylesheet\" href=\"{$pasta}", $html );
