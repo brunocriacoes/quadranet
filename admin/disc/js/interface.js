@@ -304,7 +304,7 @@ var vio = {
     },
     set time( arr ) {
         _vio.time = arr;
-    },   
+    },
 
 }
 
