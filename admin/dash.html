@@ -179,6 +179,12 @@
                 </div>
                 <div class="gap box">
                     <h3>Lista de Jogadores</h3>
+                    <form action="javascript:void(0)" method="POST" class="form__whatever" id="add-jogador" onsubmit="add_player()">
+                        <input type="text" class="input-field" id="player_name" placeholder="Nome ou Apelido">
+                        <input type="text" class="input-field" id="player_tel" name="whatsapp" placeholder="Whatsapp">
+                        <input type="text" class="input-field" id="player_mail" placeholder="E-mail">
+                        <input type="submit" class="btn btn-sucess btn_meu_time" value="adicionar jogador">
+                    </form>
                     <table class="table">
                         <thead>
                             <tr>
@@ -190,12 +196,12 @@
                         </thead>
                         <tbody id="table_time_os"></tbody>
                         <template id="tpl_time_os">
-                                <tr>
-                                    <td>{{nome}}</td>
-                                    <td>{{email}}</td>
-                                    <td>{{tel}}</td>
-                                    <td><input type="checkbox" onclick="contribuiu( '{{reserva}}', '{{id}}' )" {{check}} > </td>
-                                </tr>
+                            <tr>
+                                <td>{{nome}}</td>
+                                <td>{{email}}</td>
+                                <td>{{tel}}</td>
+                                <td><input type="checkbox" onclick="contribuiu( '{{reserva}}', '{{id}}' )" {{check}} > </td>
+                            </tr>
                         </template>
                     </table>
                 </div>

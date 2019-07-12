@@ -17,6 +17,7 @@ window.onpopstate = function() {
 
 evidenciaSession()
 
+var _reservas = [];
 fetch( `${app}` )
 .then( j => j.json() )
 .then( x => {
@@ -34,7 +35,7 @@ fetch( `${app}` )
     x.pagina = x.pagina || [];
     let info =  x.site;
 
-    BalancoFiltro.itens                       = x.reservas
+    BalancoFiltro.itens                       = x.reservas || []
     BalancoFiltro.ano                         = Number( new Date().getFullYear() )
     BalancoFiltro.init()
     query('#historico__table_body').innerHTML = tpl_array( BalancoFiltro.print, '#tpl_historico' );
@@ -57,6 +58,7 @@ fetch( `${app}` )
         let id              = request.id || '';
         let ia              = id.split('-') || '';
         let reserva         = reservas.find( x => x.id == id ) || {};
+        _reservas = reserva;
         
         _pagos       = reserva.pagos || ''
         let pagantes = reserva.pagos || ''
@@ -95,9 +97,9 @@ fetch( `${app}` )
             }
         } )
         query( "#table_iten_os" ).innerHTML = tpl_array( reservas, "#tpl_iten_os" );
-        query( "#table_time_os" ).innerHTML = tpl_array( meu_time, "#tpl_time_os" );   
+        query( "#table_time_os" ).innerHTML = tpl_array( meu_time, "#tpl_time_os" );
 
-        parcial();        
+        parcial();
         
     } );
 
@@ -127,7 +129,7 @@ draw_select( site_sistema, 'site_sistema' );
 draw_select( mensal_avulso, 'mensal_avulso' );
 
 var _profile = {}
-fetch( `${app}/auth/?profile=${window.localStorage.token_painel||''}` )
+fetch( `${app}/auth/?profile=${window.localStorage.token_painel || '' }` )
 .then( x => x.json() )
 .then( x => {
     x.update = 1;
@@ -243,7 +245,7 @@ setInterval( () => {
     .then( j => j.json() )
     .then( x => {
 
-        let reservas = x.reservas 
+        let reservas = x.reservas || []
         reservas         = reservas.map( x => {
             x.site_print            = x.site == "1"? "Site" : "sistema"
             x.tipocontratacao_print = x.tipocontratacao == "1" ? "Avulso" : "Mensal"

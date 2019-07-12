@@ -944,3 +944,11 @@ label img {
     grid-gap: 30px;
     grid-template-columns: 1fr 1fr 50px;
 }
+
+.form__whatever {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-column-gap: 10px;
+    justify-items: center;
+    align-items: center;
+}

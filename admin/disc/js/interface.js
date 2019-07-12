@@ -297,6 +297,9 @@ var vio = {
     },   
     set site( arr ) {
         _vio.site = arr;
+    },
+    set time( arr ) {
+        _vio.time = arr;
     },   
 
 }
