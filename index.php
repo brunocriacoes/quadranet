@@ -29,6 +29,9 @@
     $site->whatsapp_print = "+55". str_replace( ['(',')','-', ' '], ['','','', ''], $site->whatsapp );
     $site->telefone_print = "+55". str_replace( ['(',')','-', ' '], ['','','', ''], $site->telefone );
 
+
+    $redes = getRedes( $site );
+
     $sobre = $data->pagina ?? [];
     $sobre = jsFind( $sobre, function($x) { return $x->id == 'sobre' ; } );
 
@@ -88,6 +91,7 @@
         [ "is_array" => false,  "flag" => "single_blog",  "data" => $single_blog ?? [],  "tpl" => "single_blog"  ],
         [ "is_array" => false,  "flag" => "coment_facebook",  "data" => [],  "tpl" => "coment_facebook"  ],
         [ "is_array" => false,  "flag" => "share",  "data" => [],  "tpl" => "share"  ],
+        [ "is_array" => true,  "flag" => "link_sociais",  "data" => $redes,  "tpl" => "link_sociais"  ],
     ];
 
     foreach( $componente as $e ) {
@@ -98,13 +102,16 @@
         }
     }
     
-
     $html  = str_replace( '{{uri}}', uri, $html );
+    $html  = str_replace( '{{uri_all}}', $_SERVER['REQUEST_URI'], $html );
     $html  = str_replace( '{{QuadraNet}}', $QuadraNet ?? '', $html );
     $html  = str_replace( '{{completaTitulo}}', completaTitulo(), $html );
     $html  = preg_replace( '/link .*href="(?!h)/', "link rel=\"stylesheet\" href=\"{$pasta}", $html );
     $html  = preg_replace( '/src="(?!h)/', "src=\"{$pasta}", $html );
     $html  = single_print_content( $site, '', $html );
+    $html  = str_replace( '\\"', '"', $html );
     // $html = preg_replace( '/\{\{.*\}\}/', '', $html );
 
     echo $html;
+
+    forcar();

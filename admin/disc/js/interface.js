@@ -263,9 +263,12 @@ var vio = {
     set mostrar_horarios( catilho ) {
         query('#horarios').innerHTML = tpl_array( horario, '#tpl-horas' );
     },
-    set reservas( arr ) {
-        
-        _csv          = arr;
+    set reservas( arr ) {        
+        _csv                  = arr;
+        BalancoFiltro.itens   = arr
+        BalancoFiltro.init()
+        busca_os_contratante()
+
         edita_quadra( quadra_sisten );
         arr.forEach( x => {
             if ( !x.status_compra ) {
@@ -285,6 +288,7 @@ var vio = {
         arr = arr.map( item => ( {
             ...item,
             tipocontratacao_print: item.tipo_contatacao == "1" ? "Avulso" : "Mensal",
+            dia_print: semana_print[ item.id.substr(23,1) ],
             site_print: item.site == 1 ? "Site" : "Sistema",
             data_print:  item.id.substr(0,10).split('-').reverse().join('/')
         } ) )

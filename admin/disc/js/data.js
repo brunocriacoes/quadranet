@@ -30,6 +30,13 @@ var status_compra = [
     { id: "3", nome: "Parcial"},
     { id: "4", nome: "Cancelado"},
 ];
+var statusCompra = [
+    "",
+    "Aguardando pagamento",
+    "Pago",
+    "Parcial",
+    "Cancelado",
+];
 
 var status_compra2 = [
     { id: "1", nome: "Aguardando pagamento"},
@@ -103,3 +110,5 @@ var mensal_avulso = [
     { id: "1", nome: "Avulso" },
     { id: "2", nome: "Mensal" },    
 ];
+
+var semana_print  =  [ "DOMINGO", "SEGUNDA-FEIRA", "TERÇA-FEIRA", "QUARTA-FEIRA", "QUINTA-FEIRA", "SEXTA-FEIRA", "SABADO"  ];

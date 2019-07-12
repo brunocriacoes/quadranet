@@ -196,17 +196,55 @@ function semana(dia, data) {
     for (let f = dia; f < 7; f++) {
         if (futuro > max) {
             futuro = 1;
-            data_arr[1] = +data_arr[1] + 1;
-            data_arr[1] = data_arr[1] < 13 ? data_arr[1] : 1;
-            data_arr[1] = `${data_arr[1]}`;
-            data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
+            mes = +mes + 1;
         }
-        let atemporal = `${futuro++}`;
-        atemporal = atemporal.length == 1 ? `0${atemporal}` : atemporal;
-        semana[f] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
+        if (mes > 12) {
+            mes = 1;
+            ano++;
+        }
+        result[index] = `${ano}-${duasCasas(mes)}-${duasCasas(futuro)}`;
+        futuro++;
     }
-    semana[dia] = data;
-    return semana;
+
+    result[dia] = data;
+    return result;
+
+    // let data_arr            = data.split('-');
+    // let quandidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30 ];
+    // let mes                 = +data_arr[1];
+    // let max                 = quandidade_dias_mes[mes];
+    // let semana              =  [ "DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB",  ];
+    // let futuro              = +data_arr[2];
+    // let passado             = +data_arr[2] - +dia;
+    
+    // for( let p = 0; p < dia; p++ ) {
+    //     if( passado <= 0 ) {
+    //         passado = max - +dia;
+    //         data_arr[1] = +data_arr[1] - 1;
+    //         data_arr[0] = data_arr[1] > 0 ? data_arr[0] : +data_arr[0] - 1;
+    //         data_arr[1] = data_arr[1] > 0 ? data_arr[1] : 12;
+    //         data_arr[1] = `${data_arr[1]}`;
+    //         data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
+    //     }
+    //     let atemporal = passado++;
+    //     atemporal     = atemporal < 10 ? `0${atemporal}` : atemporal; 
+    //     semana[p] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
+    // }
+    // for( let f = dia; f < 7; f++ ) {
+    //     if( futuro > max ) {
+    //         futuro = 1;
+    //         data_arr[1] = +data_arr[1] + 1;
+    //         data_arr[1] = data_arr[1] < 13 ? data_arr[1] : 1;
+    //         data_arr[1] = `${data_arr[1]}`;
+    //         data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
+    //     }
+    //     let atemporal = `${futuro++}`;
+    //     atemporal = atemporal.length == 1 ? `0${atemporal}` : atemporal;
+    //     semana[f] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
+    // }
+    // semana[dia] = data;
+    // log( semana )
+    // return semana;
 }
 function quadra_em_edicao(id) {
     queryAll(`[class*="ativa_quadra_"]`).forEach(x => x.classList.remove('ativa'));
