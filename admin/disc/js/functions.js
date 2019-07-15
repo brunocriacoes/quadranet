@@ -993,13 +993,13 @@ function masc( el, pattern, limit = true ) {
 }
 
 function localizar_contratante() {
-    let termo = query("#localizar_contratante_termo").value
+    let termo = query("#localizar_contratante_termo").value.toLowerCase()
     // if( termo.length > 3 ) {
         fetch( `${app}/_user` )
         .then( x => x.json() )
         .then( contratantes => {
             let filtrado = contratantes.filter( usuario => {
-                let frase = `${usuario.nome} ${usuario.cpf_cnpj} ${usuario.telefone} ${usuario.whatsapp}`
+                let frase = `${usuario.nome} ${usuario.cpf_cnpj} ${usuario.telefone} ${usuario.whatsapp}`.toLowerCase();
                 return frase.indexOf( termo ) != -1 ? true : false
             } )
             query('#capitao__table_body').innerHTML = filtrado.map( x => `
@@ -1044,7 +1044,6 @@ function addJogador() {
         });
         alerta('Jogador adicionado com sucesso!');
         query('#add-jogador').reset();
-
     });
 }
 
@@ -1062,8 +1061,10 @@ function add_player() {
     addJogador();
 }
 
+var _meu_time = [];
+
 function timeInner(obj) {
-    let meu_time = vio.time
+    let meu_time = vio.time;
     let pagantes = _reservas.pagos || ''
     meu_time = [...[obj], ...meu_time];
     meu_time = meu_time.filter(player => player.id_contratante == _reservas.contratante_email)
@@ -1081,4 +1082,19 @@ function timeInner(obj) {
         }
     })
     query("#table_time_os").innerHTML = tpl_array(meu_time, "#tpl_time_os");
+}
+
+const trash__bombom = (url, id_no) => {
+    post_api(url, { id: id_no, status: 0 }, x => {
+        _meu_time = _meu_time.filter(y => y.id != id_no);
+        query( "#table_time_os" ).innerHTML = tpl_array( _meu_time, "#tpl_time_os" );
+        alerta('Jogador removido com sucesso!');
+    })
+};
+
+function autoSaveBombom(url, no, valor, indice) {
+    let obj = { id: no };
+    obj[indice] = valor.value || valor.innerHTML;
+    obj[indice] = (obj[indice].length == 0) ? 'obs' : obj[indice];
+    post_api(url, obj, x => { });
 }

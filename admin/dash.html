@@ -193,7 +193,9 @@
                                 <th>Nome</th>
                                 <th>Email</th>
                                 <th>Celular</th>
-                                <th>Pagou</th>                            
+                                <th>Pagou</th>
+                                <th>Observações</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="table_time_os"></tbody>
@@ -203,6 +205,8 @@
                                 <td>{{email}}</td>
                                 <td>{{tel}}</td>
                                 <td><input type="checkbox" onclick="contribuiu( '{{reserva}}', '{{id}}' )" {{check}} > </td>
+                                <td><textarea rows="5" onblur="autoSaveBombom('time', '{{id}}', this, 'obs')" placeholder="Digite sua observação...">{{obs}}</textarea></td>
+                                <td><img onclick="trash__bombom( 'time', '{{id}}' )" src="./disc/ico/trash.png" class="ico-table"></td>
                             </tr>
                         </template>
                     </table>

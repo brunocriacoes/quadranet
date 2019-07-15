@@ -99,6 +99,7 @@ fetch( `${app}` )
         } )
         query( "#table_iten_os" ).innerHTML = tpl_array( reservas, "#tpl_iten_os" );
         query( "#table_time_os" ).innerHTML = tpl_array( meu_time, "#tpl_time_os" );
+        _meu_time = meu_time;
 
         parcial();
         
