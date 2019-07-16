@@ -58,6 +58,7 @@ var vio = {
     set agenda(el) {
         _vio.agenda = el;
         query('#vio_agenda').innerHTML = el.map(x => {
+            console.log('x');
             let data = x.idAgenda.substr(0, 10).split('-').reverse().join('/');
             return `
             <div class="hours__schedule" id="${x.idAgenda}">
@@ -109,8 +110,8 @@ var vio = {
                         <td>${ x.nome || '---'}</td>
                         <td>${ x.id.substr(0,10).split('-').reverse().join('/') || '--/--/----'}</td>
                         <td>${ x.inicio || '--:--'} ás ${x.final || '--:--'}</td>
-                        <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
-                        <td>R$${(x.tipocontratacao == 0) ? x.mensalidade : x.diaria}</td>
+                        <td>${ (x.tipocontratacao == 2) ? 'Mensal' : 'Avulso'}</td>
+                        <td>R$${(x.tipocontratacao == 2) ? x.mensalidade : x.diaria}</td>
                         <td onclick="removeItem( '${x.id}' )"><img src="${base}/tema/start/disc/ico/close.png" class="trash trash__cart"></td>
                     </tr>
                 `;
