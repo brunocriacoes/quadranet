@@ -452,7 +452,7 @@ async function buy() {
     let carEstatico = {};
 
     for (let index = 0; index < carrinho.length; index++) {
-        let preco = (carrinho[index].tipocontratacao == 0) ? carrinho[index].mensalidade : carrinho[index].diaria;
+        let preco = (carrinho[index].tipocontratacao == 2) ? carrinho[index].mensalidade : carrinho[index].diaria;
         carEstatico[`itemId${index + 1}`] = carrinho[index].id;
         carEstatico[`itemDescription${index + 1}`] = carrinho[index].nome;
         carEstatico[`itemAmount${index + 1}`] = preco.replace(',', '.');
@@ -486,7 +486,7 @@ async function buy() {
                     tipo_contatacao: x.tipocontratacao,
                     inicio: x.inicio,
                     final: x.final,
-                    preco: (x.tipocontratacao == 0) ? x.mensalidade : x.diaria,
+                    preco: (x.tipocontratacao == 2) ? x.mensalidade : x.diaria,
                     site: 1,
                     contratante: _profile.id,
                     contratante_email: _profile.email,
@@ -508,7 +508,7 @@ async function buy() {
                 tipo_contatacao: x.tipocontratacao,
                 inicio: x.inicio,
                 final: x.final,
-                preco: (x.tipocontratacao == 0) ? x.mensalidade : x.diaria,
+                preco: (x.tipocontratacao == 2) ? x.mensalidade : x.diaria,
                 site: 1,
                 contratante: _profile.id,
                 contratante_email: _profile.email,

@@ -94,7 +94,7 @@ var vio = {
         _vio.cart = el;
         vio.finalizar = el;
         let soma_total = el.reduce((acc, item) => {
-            acc = acc + to_float((item.tipocontratacao == 0) ? item.mensalidade : item.diaria || "0");
+            acc = acc + to_float((item.tipocontratacao == 2) ? item.mensalidade : item.diaria || "0");
             return acc;
         }, 0);
         this.itens_count = el.length;
@@ -250,8 +250,8 @@ var vio = {
                         <td>${ x.nome || '---'}</td>
                         <td>${ x.id.substr(0,10).split('-').reverse().join('/') || '--/--/----'}</td>
                         <td>${ x.inicio || '--:--'} ás ${x.final || '--:--'}</td>
-                        <td>${ (x.tipocontratacao == 0) ? 'Mensal' : 'Avulso'}</td>
-                        <td>R$${(x.tipocontratacao == 0) ? x.mensalidade : x.diaria}</td>
+                        <td>${ (x.tipocontratacao == 2) ? 'Mensal' : 'Avulso'}</td>
+                        <td>R$${(x.tipocontratacao == 2) ? x.mensalidade : x.diaria}</td>
                     </tr>
                 `;
             }).join('');
