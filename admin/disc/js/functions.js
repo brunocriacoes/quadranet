@@ -33,6 +33,10 @@ function form_data( id )
         html      = html.replace(/"/gi, '\"')
         data.html = html;
     }
+    data.pass     = data.pass || ''
+    data.password = data.password || ''
+    if( data.pass.length  < 3 ) delete data.pass
+    if( data.password.length  < 3 ) delete data.password
     return data;
 }
 
