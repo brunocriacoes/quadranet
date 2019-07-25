@@ -269,3 +269,29 @@ setInterval( () => {
         localizar_contratante()
     } )
 }, 60 * 1000 )
+
+queryAll('[money]').forEach( function( el ) {
+    el.addEventListener( 'input', function() {
+        let quant = this.value.length
+        switch ( quant ) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                Form('[money]').setMascara( this, '9,99', false )
+                break
+            case 5:
+                Form('[money]').setMascara( this, '99,99', false )
+                break
+            case 6:
+                Form('[money]').setMascara( this, '999,99', false )
+                break
+            case 7:
+                Form('[money]').setMascara( this, '9.999,99', true )
+                
+                break        
+            default:
+                break
+        }        
+    } )
+} )

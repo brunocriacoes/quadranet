@@ -1010,6 +1010,19 @@
                     </div>
                     <label for="" class="input-label">OBS</label>
                     <textarea name="obs" class="input-field"></textarea>
+                    <div class="grid-2 grid-gap">
+                        <div>                            
+                            <label for="" class="input-label">Desconto / Acréscimo </label>
+                            <select name="acrescimo" class="input-field">
+                                <option value="1">Desconto</option>
+                                <option value="2">Acréscimo</option>
+                            </select>
+                        </div>
+                        <div>                            
+                            <label for="" class="input-label">Valor do Desconto / Acréscimo </label>
+                            <input type="text" class="input-field" placeholder="R$ 0,00" money name="acrescimoValor">  
+                        </div>
+                    </div>
                     <input type="submit" value="salvar" class="btn btn-sucess">
                     <input type="reset" hidden>
                 </form>             
@@ -1548,6 +1561,7 @@
         <script src="./disc/js/library/Balanco.js"></script>
         <script src="./disc/js/library/BalancoFiltro.js"></script>
         <script src="./disc/js/library/Dom.js"></script>
+        <script src="./disc/js/library/Form.js"></script>
         <script src="./disc/js/functions.js"></script>
         <script src="./disc/js/interface.js"></script>
         <script src="./disc/js/main.js"></script>
