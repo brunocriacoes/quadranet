@@ -132,7 +132,7 @@ function hover_photo(EL, ID) {
 }
 
 function to_float(str) {
-    str = str.replace('.', '').replace(',', '.');
+    str = str.replace('.', '').replace(',', '.') || str;
     return +str;
 }
 
@@ -450,16 +450,21 @@ async function buy() {
     let btn = query('#pag-send');
     let carrinho = _vio.cart || [];
     let carEstatico = {};
+    let acrecismo = _profile.acrecismoValor || '0,00';
+    acrecismo = acrecismo.replace(',','.') / carrinho.length;
+
+    if(_profile.acrecismo == 1) {
+        acrecismo = -acrecismo;
+    }
 
     for (let index = 0; index < carrinho.length; index++) {
         let preco = (carrinho[index].tipocontratacao == 2) ? carrinho[index].mensalidade : carrinho[index].diaria;
-        carEstatico[`itemId${index + 1}`] = carrinho[index].id;
+        carEstatico[`itemId${index + 1}`]       = carrinho[index].id;
         carEstatico[`itemDescription${index + 1}`] = carrinho[index].nome;
-        carEstatico[`itemAmount${index + 1}`] = preco.replace(',', '.');
+        carEstatico[`itemAmount${index + 1}`]   = preco.replace(',', '.') + acrecismo;
         carEstatico[`itemQuantity${index + 1}`] = '1';
-        carEstatico[`itemWeight${index + 1}`] = '1000';
+        carEstatico[`itemWeight${index + 1}`]   = '1000';
     }
-
     let cart = {
         usuario_id: _profile.id || '',
         usuario_nome: _profile.name || '',
@@ -469,7 +474,7 @@ async function buy() {
         status_compra: 1,
         tipo_pagamento: 1
     };
-
+    
     mail({ to: cart.usuario_email, subject: 'Compra realizada', messagem: 'A sua compra foi realizada com sucesso!' });
     mail({ to: 'contato@quadranet.com.br', subject: 'Compra realizada Site', messagem: 'Mais uma compra realizada pelo site.' });
     carrinho.forEach(x => {

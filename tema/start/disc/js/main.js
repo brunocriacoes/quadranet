@@ -160,8 +160,13 @@ fetch(`${app}/auth2?profile=${sessionStorage.token_site || []}`)
                 let meuTime = b.filter(jogador => jogador.id_contratante == _profile.email)
                 vio.time = meuTime;
                 _time = meuTime;
+
             });
-        x.pass = '';
+            router('finalizar', p => {
+                document.querySelector('#finalizar__acrecismo').innerHTML = (x.acrescimo == 1) ? 'Desconto:': 'Acrécismo:';
+                document.querySelector('#finalizar__valor_acrecismo').innerHTML = `R$ ${x.acrescimoValor || '0,00'}`;
+            });
+            x.pass = '';
         x.password = '';
         _profile = x;
         preencher('atualizar_perfil', x);

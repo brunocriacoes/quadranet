@@ -58,7 +58,6 @@ var vio = {
     set agenda(el) {
         _vio.agenda = el;
         query('#vio_agenda').innerHTML = el.map(x => {
-            console.log('x');
             let data = x.idAgenda.substr(0, 10).split('-').reverse().join('/');
             return `
             <div class="hours__schedule" id="${x.idAgenda}">
@@ -123,15 +122,18 @@ var vio = {
     set modalidade(el) {
         _vio.modalidade = el;
     },
-    get modalidade() { return _vio.modalidade; },
+    get modalidade() { return _vio.modalidade; }, //.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })
 
     set total(el) {
+        let elConver = el.split('R$');
+        let acrescimo = to_float(elConver[1]) + to_float(_profile.acrescimoValor || '0,00');
+        let desconto = to_float(elConver[1]) - to_float(_profile.acrescimoValor || '0,00');
         _vio.total = el;
         if (query('#vio_total_carrinho')) {
             query('#vio_total_carrinho').innerHTML = el;
         }
         if (query('#finalizar_total')) {
-            query('#finalizar_total').innerHTML = el;
+            query('#finalizar_total').innerHTML = (_profile.acrescimo || 1 == 1) ? desconto.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' }) : acrescimo.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
         }
     },
     get total() { return _vio.total; },
