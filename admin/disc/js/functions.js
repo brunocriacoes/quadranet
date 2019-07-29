@@ -754,13 +754,15 @@ function busca_capiao( e ) {
 }
 
 function set_user_locacao( json ) {
-    let {id, nome, telefone, email, cpf_cnpj, whatsapp} = JSON.parse( json )
+    let {id, nome, telefone, email, cpf_cnpj, whatsapp ,acrescimo, acrescimoValor} = JSON.parse( json )
     query('#contratante-id-locacao').value = id;
     query('#contratante-nome-locacao').value = nome;
     query('#contratante-telefone-locacao').value = telefone;
     query('#contratante-email-locacao').value = email;
     query('#contratante-cpf-cnpj-locacao').value = cpf_cnpj;
     query('#contratante-whatsapp-locacao').value = whatsapp;
+    query('#acrescimo').value = acrescimo;
+    query('#acrescimoValor').value = acrescimoValor;
 }
 function setValorReserva() {
     let idQuadra =  query('#id_quadra_contratar').value.split('-').reverse()[0]
