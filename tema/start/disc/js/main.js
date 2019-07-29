@@ -28,6 +28,15 @@ fetch(app)
             dataCompra({ value: hoje().mes });
         });
 
+        router('finalizar', p => {
+            let loop = _vio.reservas;
+            loop = loop.filter(f => f.usuario_id == _profile.id);
+            let loopObj = loop.map(m => {return m.id});
+            document.querySelector('#img_pague').addEventListener('click', x => {
+                gerarPagamento(loopObj[0]);
+            });
+        });
+
         router('agenda', x => {
             y.reservas = y.reservas || []
             if (y.reservas != undefined) {
@@ -160,10 +169,9 @@ fetch(`${app}/auth2?profile=${sessionStorage.token_site || []}`)
                 let meuTime = b.filter(jogador => jogador.id_contratante == _profile.email)
                 vio.time = meuTime;
                 _time = meuTime;
-
             });
             router('finalizar', p => {
-                document.querySelector('#finalizar__acrecismo').innerHTML = (x.acrescimo == 1) ? 'Desconto:': 'Acrécismo:';
+                document.querySelector('#finalizar__acrecismo').innerHTML = (x.acrescimo == 1) ? 'Desconto:': 'Acréscimo:';
                 document.querySelector('#finalizar__valor_acrecismo').innerHTML = `R$ ${x.acrescimoValor || '0,00'}`;
             });
             x.pass = '';
@@ -172,7 +180,6 @@ fetch(`${app}/auth2?profile=${sessionStorage.token_site || []}`)
         preencher('atualizar_perfil', x);
         preencher('mudar_senha', x);
     });
-
 
 if (document.querySelector(`#mes__compras`)) {
     let diaCompra = hoje();

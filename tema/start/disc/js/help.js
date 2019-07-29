@@ -821,6 +821,7 @@ function termos() {
     }
 }
 
+let _combo = [];
 function dataCompra(data) {
     fetch(app)
         .then(x => x.json())
@@ -833,6 +834,7 @@ function dataCompra(data) {
                     combo.push(e);
                 }
             });
+            _combo = combo;
             document.querySelector('#vio_historico').innerHTML = combo.map(t => {
                 t.datacontratacao = t.id.substr(0, 10).split('-').reverse().join('/');
                 let img = `<img onclick="gerarPagamento( '${t.id}' )" src="${base}/tema/start/disc/ico/credit-card.png" title="Pagamento">`;
@@ -893,10 +895,17 @@ function agendarMensal(diaSemana, idQuadra, horarioInicial, horarioFinal, diaCom
 
 function objPag(arr) {
     let carEstatico = {};
+    let carrinho = _vio.cart || [];
+    let acrecismo = _profile.acrescimoValor || '0,00';
+    acrecismo = Number(acrecismo.replace(',','.')) / carrinho.length;
+    
+    if(_profile.acrecismo == 1) {
+        acrecismo = -acrecismo;
+    }
     for (let index = 0; index < arr.length; index++) {
         carEstatico[`itemId${index + 1}`] = arr[index].id;
         carEstatico[`itemDescription${index + 1}`] = arr[index].quadra_nome;
-        carEstatico[`itemAmount${index + 1}`] = arr[index].preco.replace(',', '.');
+        carEstatico[`itemAmount${index + 1}`] = Number(arr[index].preco.replace(',', '.')) + acrecismo;
         carEstatico[`itemQuantity${index + 1}`] = '1';
         carEstatico[`itemWeight${index + 1}`] = '1000';
     }
