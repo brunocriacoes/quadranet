@@ -857,13 +857,33 @@ function delete_usuario( id, mail ) {
     })
 }
 
+
 function parcial() 
 {
+    let typeTributo = Number( _reservas.acrescimo || 1 )
+    log( typeTributo )
     _parcial = _parcial.map( payment => ( {...payment, dia_print: payment.dia.split('-').reverse().join('/') } ) )
     query("#table_os_parcial").innerHTML = tpl_array( _parcial, "#tpl_os_parcial");
     total_parcial();
-    query("#ui-falta").innerHTML = _parcial_data.sub;
-    query("#ui-total").innerHTML = _parcial_data.total;
+    query("#ui-falta").innerHTML         = _parcial_data.sub;
+    query("#ui-total").innerHTML         = _parcial_data.total;
+    query("#ui-label-total").innerHTML   = typeTributo  == 1 ? 'VALOR DESCONTO' : 'VALOR ACRESCIMO';
+    query("#ui-total-tributo").innerHTML = _reservas.acrescimoValor || '0,00';
+    query("#ui-sub-total").innerHTML     = somaMoney( _parcial_data.total, _reservas.acrescimoValor || '0,00', typeTributo );
+}
+function somaMoney( a, b, n = 2 ) 
+{
+    a = toFloat( a )
+    b = toFloat( b )
+    b = n == 1 ? -b : b
+    let soma = a + b
+    return soma.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+}
+function toFloat( str ) 
+{
+    str =  str.replace( '.', '' )
+    str =  str.replace( ',', '.' )
+    return Number(str)
 }
 
 function add_parcial()
@@ -880,6 +900,9 @@ function add_parcial()
 
 function total_parcial() {
     // { sub:"00,00", total: "00,00" };
+    let typeTributo = Number( _reservas.acrescimo || 1 )
+    let init = somaMoney( '0,00', _reservas.acrescimoValor || '0,00', typeTributo )
+    init     = toFloat( init.replace( 'R$', '' ) )
     let total = _parcial_data.total.replace(',','.');
     let sub   = _parcial.reduce( (acc, e ) => { 
         let valor = e.valor.replace(',','.');
@@ -887,7 +910,7 @@ function total_parcial() {
         acc = eval( `${+acc} + ${+valor}` )
         return acc;
     }, 0 );  
-    let falta = eval(` ${sub} - ${total}`);
+    let falta = eval(` ${sub} - ${total} - ${init}`);
     _parcial_data.sub  = falta.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
 }
 
