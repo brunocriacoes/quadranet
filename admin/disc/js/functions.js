@@ -900,15 +900,16 @@ function total_parcial() {
     // { sub:"00,00", total: "00,00" };
     let typeTributo = Number( _reservas.acrescimo || 1 )
     let init = somaMoney( '0,00', _reservas.acrescimoValor || '0,00', typeTributo )
-    init     = toFloat( init.replace( '-R$', '' ) )
-    let total = _parcial_data.total.replace(',','.');
+    init     = init.replace('-','');
+    init     = toFloat( init.replace( 'R$', '' ) )
+    let total2 = _parcial_data.total.replace(',','.');
     let sub   = _parcial.reduce( (acc, e ) => { 
         let valor = e.valor.replace(',','.');
         valor = valor == "00.00" ? 0 : valor;
         acc = eval( `${+acc} + ${+valor}` )
         return acc;
-    }, 0 );  
-    let falta = eval(` ${sub} - ${total} - ${init}`);
+    }, 0 );
+    let falta = eval(` ${sub} - ${total2} - ${init}`);
     _parcial_data.sub  = falta.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
 }
 

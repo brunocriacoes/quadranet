@@ -21,7 +21,7 @@ var _reservas = [];
 fetch( `${app}` )
 .then( j => j.json() )
 .then( x => {
-
+    x._user = x._user.map(p => ({...p, acrescimo: p.acrescimo || 1, acrescimoValor: p.acrescimoValor || '0,00'}))
     let mutarReserva = x.reservas.map(a=>{
         if(a.status_compra != 2) {
             let contratante = x._user.find(p=>p.id == a.contratante);
