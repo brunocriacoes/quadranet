@@ -21,6 +21,17 @@ var _reservas = [];
 fetch( `${app}` )
 .then( j => j.json() )
 .then( x => {
+
+    let mutarReserva = x.reservas.map(a=>{
+        if(a.status_compra != 2) {
+            let contratante = x._user.find(p=>p.id == a.contratante);
+            a.acrescimo = contratante.acrescimo || 1;
+            a.acrescimoValor = contratante.acrescimoValor || '0,00';
+        }
+            return a;
+        })
+    x.reservas = mutarReserva;
+
     let lista =  Object.keys( x );
     lista.forEach( e => {
         vio[e] = x[e];
@@ -295,3 +306,12 @@ queryAll('[money]').forEach( function( el ) {
         }        
     } )
 } )
+
+if(request.editarContrante) {
+    fetch(`${app}/auth2`)
+    .then(x => x.json())
+    .then(x=>{
+        let objeto = x.find(p=> p.id == request.editarContrante);
+        preencher( 'form-contratante', objeto );
+    })
+}

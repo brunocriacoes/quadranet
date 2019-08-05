@@ -85,6 +85,7 @@ var vio = {
                 <td>${x.nome || ''}</td>
                 <td>${x.whatsapp || x.celular || ''}</td>
                 <td>${x.cpf_cnpj || ''}</td>
+                <td>${x.acrescimoValor?'Sim':'Não'}</td>
                 <td>
                     <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html#contratante' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
@@ -298,7 +299,10 @@ var vio = {
     set espera( arr ) {
         _vio.espera = arr;
         vio.jogadores = arr;
-    },   
+    },
+    set parcial( arr ) {
+        _vio.parcial = arr;
+    },
     set site( arr ) {
         _vio.site = arr;
     },

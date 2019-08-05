@@ -411,7 +411,7 @@ async function pop_ocupado( id ) {
     query("#ocupado_horario").innerHTML = horario || '';
     let chamda  = await fetch( `${app}/reservas?id=${id}` )
     let reserva = await chamda.json()
-    query("#v-ocupado-nome").innerHTML = reserva.contratante_nome || '';
+    query("#v-ocupado-nome").innerHTML = `<a href="dash.html?editarContrante=${reserva.contratante}#contratante" target="_blank">${reserva.contratante_nome || ''}</a>`;
     query("#v-ocupado-telefone").innerHTML = reserva.whatsapp || reserva.contratante_telefone || '' ;
     query("#v-ocupado-contratacao").innerHTML = reserva.tipo_contatacao == "1" ? "Avulso" : "mensal"; 
     query("#v-ocupado-pagamento").innerHTML = statusCompra[ reserva.status_compra || 1 ];
@@ -797,7 +797,6 @@ function busca_os_contratante() {
     _csv                            = BalancoFiltro.csv;
 
     calc_balanco()
-
     query( '#historico__table_body' ).innerHTML = tpl_array( BalancoFiltro.print, '#tpl_historico' );
 }
 
@@ -861,7 +860,6 @@ function delete_usuario( id, mail ) {
 function parcial() 
 {
     let typeTributo = Number( _reservas.acrescimo || 1 )
-    log( typeTributo )
     _parcial = _parcial.map( payment => ( {...payment, dia_print: payment.dia.split('-').reverse().join('/') } ) )
     query("#table_os_parcial").innerHTML = tpl_array( _parcial, "#tpl_os_parcial");
     total_parcial();
@@ -902,7 +900,7 @@ function total_parcial() {
     // { sub:"00,00", total: "00,00" };
     let typeTributo = Number( _reservas.acrescimo || 1 )
     let init = somaMoney( '0,00', _reservas.acrescimoValor || '0,00', typeTributo )
-    init     = toFloat( init.replace( 'R$', '' ) )
+    init     = toFloat( init.replace( '-R$', '' ) )
     let total = _parcial_data.total.replace(',','.');
     let sub   = _parcial.reduce( (acc, e ) => { 
         let valor = e.valor.replace(',','.');
@@ -1031,11 +1029,13 @@ function localizar_contratante() {
                 let frase = `${usuario.nome} ${usuario.cpf_cnpj} ${usuario.telefone} ${usuario.whatsapp}`.toLowerCase();
                 return frase.indexOf( termo ) != -1 ? true : false
             } )
+            filtrado = filtrado.map(q => ({...q, acrescimoPrint: q.acrescimoValor?'Sim':'Não'}));
             query('#capitao__table_body').innerHTML = filtrado.map( x => `
                 <tr>                
                     <td>${x.nome || ''}</td>
                     <td>${x.whatsapp || x.celular || x.telefone || ''}</td>
                     <td>${x.cpf_cnpj || ''}</td>
+                    <td>${x.acrescimoPrint}</td>
                     <td>
                         <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html#contratante' )" src="./disc/ico/edit.png" class="ico-table">
                     </td>

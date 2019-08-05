@@ -34,6 +34,7 @@
             this.printRender()          
         },
         printRender() {
+            
             this.print = this.combo.map( ordem => ( {
                 id: ordem.os.id,
                 usuario: ordem.usuario.nome,
@@ -126,6 +127,7 @@
                     },
                     os: {
                         id: pedido.id,
+                        acrescimo: pedido.acrescimo || '1',
                         diaCobranca: pedido.dia_compra,
                         diaSemana: Number(pedido.id.substr(23,1)),
                         ano: Number(pedido.id.substr(0,4)),
@@ -142,7 +144,7 @@
                 }
             } )
         },
-        combar() {
+        combar() {            
             this.itensModificados.forEach( orden => {
                 let valida      = this.combo.findIndex( 
                     test => 
