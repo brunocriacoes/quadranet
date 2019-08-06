@@ -909,7 +909,7 @@ function total_parcial() {
         acc = eval( `${+acc} + ${+valor}` )
         return acc;
     }, 0 );
-    let falta = eval(` ${sub} - ${total2} - ${init}`);
+    let falta = eval(`${total2} - ${init} - ${sub}`);
     _parcial_data.sub  = falta.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
 }
 
