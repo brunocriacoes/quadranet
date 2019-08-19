@@ -213,43 +213,6 @@ function semana( diat, data )
 
     result[dia] = data;
     return result;
-
-    // let data_arr            = data.split('-');
-    // let quandidade_dias_mes = [0, 31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30 ];
-    // let mes                 = +data_arr[1];
-    // let max                 = quandidade_dias_mes[mes];
-    // let semana              =  [ "DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB",  ];
-    // let futuro              = +data_arr[2];
-    // let passado             = +data_arr[2] - +dia;
-    
-    // for( let p = 0; p < dia; p++ ) {
-    //     if( passado <= 0 ) {
-    //         passado = max - +dia;
-    //         data_arr[1] = +data_arr[1] - 1;
-    //         data_arr[0] = data_arr[1] > 0 ? data_arr[0] : +data_arr[0] - 1;
-    //         data_arr[1] = data_arr[1] > 0 ? data_arr[1] : 12;
-    //         data_arr[1] = `${data_arr[1]}`;
-    //         data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
-    //     }
-    //     let atemporal = passado++;
-    //     atemporal     = atemporal < 10 ? `0${atemporal}` : atemporal; 
-    //     semana[p] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
-    // }
-    // for( let f = dia; f < 7; f++ ) {
-    //     if( futuro > max ) {
-    //         futuro = 1;
-    //         data_arr[1] = +data_arr[1] + 1;
-    //         data_arr[1] = data_arr[1] < 13 ? data_arr[1] : 1;
-    //         data_arr[1] = `${data_arr[1]}`;
-    //         data_arr[1] = data_arr[1].length == 1 ? `0${data_arr[1]}` : data_arr[1];
-    //     }
-    //     let atemporal = `${futuro++}`;
-    //     atemporal = atemporal.length == 1 ? `0${atemporal}` : atemporal;
-    //     semana[f] = `${data_arr[0]}-${data_arr[1]}-${atemporal}`;
-    // }
-    // semana[dia] = data;
-    // log( semana )
-    // return semana;
 }
 function quadra_em_edicao( id ) {
     queryAll(`[class*="ativa_quadra_"]`).forEach( x => x.classList.remove('ativa') );
@@ -899,18 +862,23 @@ function add_parcial()
 function total_parcial() {
     // { sub:"00,00", total: "00,00" };
     let typeTributo = Number( _reservas.acrescimo || 1 )
-    let init = somaMoney( '0,00', _reservas.acrescimoValor || '0,00', typeTributo )
-    init     = init.replace('-','');
-    init     = toFloat( init.replace( 'R$', '' ) )
+    let init   = somaMoney( '0,00', _reservas.acrescimoValor || '0,00', typeTributo )
+    init       = init.replace('-','');
+    init       = toFloat( init.replace( 'R$', '' ) )
     let total2 = _parcial_data.total.replace(',','.');
-    let sub   = _parcial.reduce( (acc, e ) => { 
+    let sub    = _parcial.reduce( (acc, e ) => { 
         let valor = e.valor.replace(',','.');
         valor = valor == "00.00" ? 0 : valor;
-        acc = eval( `${+acc} + ${+valor}` )
+        acc   = eval( `${+acc} + ${+valor}` )
         return acc;
     }, 0 );
-    let falta = eval(`${total2} - ${init} - ${sub}`);
-    _parcial_data.sub  = falta.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
+    if(_reservas.acrescimo == 1) {
+        let falta = eval(`${total2} - ${init} - ${sub}`);
+        _parcial_data.sub  = falta.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
+    }else{
+        let falta = eval(`${total2} + ${init} - ${sub}`);
+        _parcial_data.sub  = falta.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
+    }
 }
 
 function remove_parcial( id )
@@ -1038,7 +1006,7 @@ function localizar_contratante() {
                     <td>${x.cpf_cnpj || ''}</td>
                     <td>${x.acrescimoPrint}</td>
                     <td>
-                        <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html#contratante' )" src="./disc/ico/edit.png" class="ico-table">
+                        <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html?editarContrante=${x.id}#contratante' )" src="./disc/ico/edit.png" class="ico-table">
                     </td>
                     <td><img onclick="trash( '_user', '${x.id}' )" src="./disc/ico/trash.png" class="ico-table"></td>
                 </tr>

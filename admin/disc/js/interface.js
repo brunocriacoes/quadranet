@@ -87,7 +87,7 @@ var vio = {
                 <td>${x.cpf_cnpj || ''}</td>
                 <td>${x.acrescimoValor?'Sim':'Não'}</td>
                 <td>
-                    <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html#contratante' )" src="./disc/ico/edit.png" class="ico-table">
+                    <img onclick="editar( '_user', '${x.id}', 'form-contratante', 'dash.html?editarContrante=${x.id}#contratante' )" src="./disc/ico/edit.png" class="ico-table">
                 </td>
                 <td><img onclick="trash( '_user', '${x.id}' )" src="./disc/ico/trash.png" class="ico-table"></td>
             </tr>
