@@ -64,12 +64,9 @@ fetch(`${app}`)
         calc_balanco('0', '0')
         router('os', async () => {
 
-            let chamada = await fetch(`${app}`);
-            let json = await chamada.json();
             draw_select(status_compra2, 'status_compra');
-            let { reservas } = json;
-            log(reservas);
-            let parciais = json.parcial || [];
+            let { reservas } = vio;
+            let parciais = vio.parcial || [];
             let id = request.id || '';
             let ia = id.split('-') || '';
             let reserva = reservas.find(x => x.id == id) || {};
@@ -98,7 +95,7 @@ fetch(`${app}`)
 
             preencher('form-locacao', reserva);
             preencher('form-locacao-mocado', reserva);
-            let meu_time = json.time
+            let meu_time = vio.time
             meu_time = meu_time.filter(player => player.id_contratante == reserva.contratante_email)
             meu_time = meu_time.map(x => {
                 let check = ""
@@ -116,7 +113,6 @@ fetch(`${app}`)
             _meu_time = meu_time;
 
             parcial();
-
         });
 
         let selected_dominio = query(`#selecionar-dominio [value='${dominio}']`);
@@ -148,7 +144,6 @@ var _profile = {}
 fetch(`${app}/auth/?profile=${window.localStorage.token_painel || ''}`)
     .then(x => x.json())
     .then(x => {
-        log(x);
         x.update = 1;
         _profile = x
         preencher('form-perfil', x);
