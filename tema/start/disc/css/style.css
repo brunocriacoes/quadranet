@@ -141,23 +141,32 @@ h1, h2, h3, h4, h5, h6 {
 .footer__about p, .footer__adress__item a {
     font-weight: lighter;
 }
-.footer__adress__item {
+.footer__adress__item, .contato__info {
     margin-bottom: 15px;
     display: block;
 }
-.footer__adress__item a {
+.footer__adress__item a, .contato__info a {
     display: flex;
     color: #DDD;
     text-decoration: none;
     align-items: center;
 }
-.footer__adress__item a img {
+.footer__adress__item a img, .contato__info a img {
     filter: invert( 100% );
     margin-right: 12px;
     width: 40px;
     height: 40px;
     padding: 9px;
 }
+
+.contato__info a {
+    color: #000;
+}
+
+.contato__info a img {
+    filter: invert( 0% );
+}
+
 .card {
     display: grid;
     grid-template-columns: repeat( 3, 1fr );
@@ -814,7 +823,7 @@ p {
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: 10px;
+    bottom: -20px;
     left: 10px;
     color: #666;
     font-size: 14px;
@@ -1628,4 +1637,8 @@ iframe {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+}
+
+.contato__info {
+    
 }

@@ -95,6 +95,38 @@ function getRedes( $arr )
    return $acc;
 }
 
+function getContato( $arr ) {
+    $acc = [];
+    foreach( $arr as $key => $val ) {
+        if(!empty($val)) {
+            switch ($key) {
+                case 'telefone':
+                    $acc[] = (object)[
+                        "link" => "tel:" . $arr->telefone_print,
+                        "texto" => $arr->telefone,
+                        "ico" => "phone-call.png",
+                    ];
+                    break;
+                case 'whatsapp':
+                    $acc[] = (object)[
+                        "link" => "https://api.whatsapp.com/send?phone=" . $arr->whatsapp_print,
+                        "texto" => $arr->whatsapp,
+                        "ico" => "whatsapp.png",
+                    ];
+                    break;
+                case 'email':
+                    $acc[] = (object)[
+                        "link" => "mailto:" . $arr->email,
+                        "texto" => $arr->email,
+                        "ico" => "mail.png",
+                    ];
+                    break;
+            }
+        }
+    }
+    return $acc;
+}
+
 function forcar() 
 {
     if( http == "http" AND !stripos( dominio, '.con' ) ) 
